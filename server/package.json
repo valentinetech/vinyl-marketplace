@@ -2,10 +2,9 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "type": "module",
+  "main": "index.ts",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon index.ts"
   },
   "keywords": [],
   "author": "",
@@ -16,5 +15,9 @@
     "express": "^4.17.3",
     "mongoose": "^6.2.8",
     "nodemon": "^2.0.15"
+  },
+  "devDependencies": {
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.3"
   }
 }
