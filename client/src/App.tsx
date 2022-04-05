@@ -1,10 +1,19 @@
 import React from 'react';
-import { Container } from './components/styled/Container.styled';
+import { ThemeProvider } from 'styled-components';
+import Header from './components/Header';
+import GlobalStyles from './components/styled/Global';
+
+const theme = {
+  colors: {
+    header: '#3e3e8e',
+  },
+};
 
 const App = () => (
-  <Container>
-    <h1>Hello</h1>;
-  </Container>
+  <ThemeProvider theme={theme}>
+    <GlobalStyles></GlobalStyles>
+    <Header></Header>;
+  </ThemeProvider>
 );
 
 export default App;
