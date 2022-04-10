@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
     "module": "CommonJS",
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true
+    "moduleResolution": "Node",
+    "esModuleInterop": true
+    // "allowSyntheticDefaultImports": true
   }
 }

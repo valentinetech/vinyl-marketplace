@@ -1,16 +1,15 @@
-import React from 'react';
+import { Button } from '@/components/elements/Button';
 import { ThemeProvider } from 'styled-components';
-import Header from './components/layouts/header/Header';
-
-const theme = {
-  colors: {
-    header: '#3e3e8e',
-  },
-};
+import Header from '@/components/layouts/Header/Header';
+import { GlobalStyles, theme } from './styles/global.styles';
 
 const App = () => (
   <ThemeProvider theme={theme}>
-    <Header></Header>;
+    <GlobalStyles />
+    <Header></Header>
+    <>
+      <Button variant='primary'>Click me</Button>
+    </>
   </ThemeProvider>
 );
 

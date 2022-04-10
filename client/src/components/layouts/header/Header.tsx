@@ -1,7 +1,9 @@
-import { StyledHeader } from '../../elements/button/Header.styled';
+import { StyledHeader } from './Header.styles';
+
+interface HeaderProps {}
 
 const Header = () => (
-  <StyledHeader bg='black'>
+  <StyledHeader>
     <h1>WHatever</h1>
   </StyledHeader>
 );
