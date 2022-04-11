@@ -1,15 +1,19 @@
 import { createGlobalStyle } from 'styled-components';
 
+interface ThemeProps {
+  theme: typeof theme;
+}
+
 export const theme = {
   colors: {
     body: '#3e3e8e',
     brand: '#3e3e8e',
   },
+  breakpoints: {
+    mobile: '786px',
+    tablet: '689px',
+  },
 };
-
-interface ThemeProps {
-  theme: typeof theme;
-}
 
 export const GlobalStyles = createGlobalStyle<ThemeProps>`
  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
