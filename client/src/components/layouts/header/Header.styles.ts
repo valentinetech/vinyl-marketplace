@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-interface HeaderProps {}
-
 export const StyledHeader = styled.header`
-  background-color: blue;
+  padding: 20px 80px 20px 0;
 `;

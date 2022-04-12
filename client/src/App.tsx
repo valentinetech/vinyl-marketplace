@@ -1,14 +1,14 @@
-import { Button } from '@/components/elements/Button';
+import { Button } from './components/elements/Button/Button';
 import { ThemeProvider } from 'styled-components';
-import Header from '@/components/layouts/Header/Header';
 import { GlobalStyles, theme } from './styles/global.styles';
+import Header from './components/layouts/Header/Header';
 
 const App = () => (
   <ThemeProvider theme={theme}>
     <GlobalStyles />
-    <Header></Header>
     <>
-      <Button variant='primary'>Click me</Button>
+      <Header />
+      <Button variant='primary'>Login</Button>
     </>
   </ThemeProvider>
 );
