@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   children: ReactNode | null;
-  variant: 'primary' | 'secondary';
+  variant?: 'primary' | 'secondary';
   // type?: 'submit' | 'reset';
   // onClick?: () => void;
 }

@@ -8,7 +8,6 @@ const App = () => (
     <GlobalStyles />
     <>
       <Header />
-      <Button variant='primary'>Login</Button>
     </>
   </ThemeProvider>
 );
