@@ -1,14 +1,15 @@
-import { Button } from './components/elements/Button/Button';
 import { ThemeProvider } from 'styled-components';
-import { GlobalStyles, theme } from './styles/global.styles';
+import { GlobalStyles } from './styles/global.styles';
+import { theme } from './styles/theme';
 import Header from './components/layouts/Header/Header';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 const App = () => (
   <ThemeProvider theme={theme}>
     <GlobalStyles />
-    <>
+    <Router>
       <Header />
-    </>
+    </Router>
   </ThemeProvider>
 );
 

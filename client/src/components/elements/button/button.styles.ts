@@ -1,39 +1,32 @@
 import styled from 'styled-components';
-import { theme, ThemeProps } from '@/styles/global.styles';
+import { theme } from '../../../styles/theme';
 
-export const StyledButton = styled.button`
+export const ButtonPrimary = styled.button`
   cursor: pointer;
-  width: 170px;
+  width: 175px;
   height: 50px;
-  border: 2px solid ${({ theme }: ThemeProps) => theme.colors.brand};
-  box-sizing: border-box;
-  border-radius: 30px;
-  box-shadow: 0px 2px 15px 0px #8ec0fcb2;
-  background: linear-gradient(
-    269.59deg,
-    #3f85f6 -12.09%,
-    #468af7 5.6%,
-    #5898f9 16.65%,
-    #6fa9fa 28.83%,
-    #82b7fb 40.81%,
-    #99c8fe 52.8%,
-    #a6cffd 63.25%,
-    #b6d8fe 74.69%,
-    #c4dffd 83.98%,
-    #d0e5fd 91.6%,
-    #d8e9fe 97.7%,
-    #d9e9fe 110.64%
-  );
+  background-color: ${theme.colors.brand};
+  border-radius: 15px;
 
-  -webkit-transition: ease-out 0.4s;
-  -moz-transition: ease-out 0.4s;
-  transition: ease-out 0.4s;
+  transition: all 0.2s ease-in-out;
 
-  &:hover,
-  &focus {
-    border: 2px solid;
-    background: ${({ theme }: ThemeProps) => theme.colors.body};
-    color: ${({ theme }: ThemeProps) => theme.colors.textPrimary};
-    box-shadow: inset 0 0 0 50px ${({ theme }: ThemeProps) => theme.colors.body};
+  &:hover {
+    transition: all 0.2s ease-in-out;
+    background: ${theme.colors.brandSecondary};
+    color: #fff;
+  }
+`;
+
+export const ButtonSecondary = styled.button`
+  cursor: pointer;
+  width: 175px;
+  height: 50px;
+  background-color: ${theme.colors.brandSecondary};
+  border-radius: 15px;
+
+  &:hover {
+    transition: all 0.2s ease-in-out;
+    background: ${theme.colors.brand};
+    color: #fff;
   }
 `;
