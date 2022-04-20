@@ -1,0 +1,55 @@
+import { Button } from '../../../elements/Button/Button';
+import logo from '../../../../assets/images/logo.png';
+import { FaBars } from 'react-icons/fa';
+import { menuRoutes } from '../../../../constants/menuRoutes';
+import { btnRoutes } from '../../../../constants/buttonRoutes';
+import { ReactNode } from 'react';
+import {
+  Navigation,
+  NavContainer,
+  LogoLink,
+  Logo,
+  MobileIcon,
+  NavMenu,
+  NavItem,
+  NavLink,
+  LoginContainer,
+  NavSignUp,
+  NavButton,
+} from './Nav.styles';
+
+const Nav = ({ toggleMenu }: any) => {
+  return (
+    <Navigation>
+      <NavContainer>
+        <LogoLink to='/'>
+          <Logo src={logo} alt='logo' />
+        </LogoLink>
+        <MobileIcon onClick={toggleMenu}>
+          <FaBars size={32} />
+        </MobileIcon>
+        <NavMenu>
+          {menuRoutes.map((item, index) => {
+            return (
+              <NavItem key={index}>
+                <NavLink key={index} to={item.route}>
+                  {item.title}
+                </NavLink>
+              </NavItem>
+            );
+          })}
+        </NavMenu>
+        <LoginContainer>
+          <NavSignUp to={btnRoutes.signUp.route}>{btnRoutes.signUp.title}</NavSignUp>
+          <NavButton to={btnRoutes.login.route}>
+            <Button variant='secondary'>{btnRoutes.login.title}</Button>
+          </NavButton>
+        </LoginContainer>
+      </NavContainer>
+    </Navigation>
+  );
+};
+
+export default Nav;
+
+function handleClick() {}
