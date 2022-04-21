@@ -14,16 +14,15 @@ import {
   NavSignUp,
   ButtonContainer,
 } from './NavMobile.styles';
-import { ReactNode } from 'react';
 
 interface NavMobileProps extends React.MouseEvent<HTMLElement> {
-  toggleMenu: any;
-  isOpen: [boolean, (isOpen: boolean) => void];
+  onClick: () => void;
+  toggleMenu: boolean;
+  isOpen: [boolean, string, null, undefined, number, (isOpen: boolean) => void];
 }
 
-const NavMobile = ({ isOpen, toggleMenu }: any) => {
+const NavMobile = ({ isOpen, toggleMenu }: NavMobileProps | any) => {
   return (
-    //@ts-ignore
     <Container isOpen={isOpen} onClick={toggleMenu}>
       <LogoLink to='/'>
         <Logo src={logo} alt='logo' />
@@ -35,7 +34,7 @@ const NavMobile = ({ isOpen, toggleMenu }: any) => {
         <Menu>
           {menuRoutes.map((item, index) => {
             return (
-              <Link key={index} to={item.route}>
+              <Link key={index} to={item.route} onClick={toggleMenu}>
                 {item.title}
               </Link>
             );

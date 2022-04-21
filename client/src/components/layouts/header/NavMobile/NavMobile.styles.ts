@@ -3,7 +3,12 @@ import { FaTimes } from 'react-icons/fa';
 import { theme } from '../../../../styles/theme';
 import { Link as LinkR } from 'react-router-dom';
 import { Link as LinkS } from 'react-scroll';
-export const Container = styled.aside`
+
+interface isOpenProp {
+  isOpen: boolean;
+}
+
+export const Container = styled.aside<isOpenProp>`
   position: fixed;
   z-index: 999;
   width: 100%;
@@ -13,8 +18,8 @@ export const Container = styled.aside`
   align-items: center;
   left: 0;
   transition: 0.3s ease-in-out;
-  top: ${({ isOpen }: any) => (isOpen ? '0' : '-100%')};
-  opacity: ${({ isOpen }: any) => (isOpen ? '100%' : '0')};
+  top: ${({ isOpen }) => (isOpen ? '0' : '-100%')};
+  opacity: ${({ isOpen }) => (isOpen ? '100%' : '0')};
 `;
 
 export const CloseIcon = styled(FaTimes)`

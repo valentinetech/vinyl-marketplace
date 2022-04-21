@@ -1,18 +1,18 @@
 export const menuRoutes = [
   {
     title: 'Explore',
-    route: '/',
+    route: 'explore',
   },
   {
     title: 'Sell ',
-    route: '/',
+    route: 'sell',
   },
   {
     title: 'About',
-    route: '/',
+    route: 'about',
   },
   {
     title: 'Profile',
-    route: '/',
+    route: '/profile',
   },
 ];
