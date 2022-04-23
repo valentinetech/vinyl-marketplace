@@ -11,7 +11,7 @@ export const theme = {
     textSecondary: '#3B393C',
   },
   fontSize: {
-    h1Size: '60px',
+    h1Size: '70px',
     h2Size: '48px',
     h3Size: '32px',
     h4Size: '24px',
@@ -34,6 +34,6 @@ export const theme = {
     laptop: `(min-width: 1024px)`,
     laptopL: `(min-width: 1440px)`,
     desktop: `(min-width: 2560px)`,
-    signupMax: `(max-width: 866px)`,
+    signupMax: `(max-width: 888px)`,
   },
 };

@@ -1,9 +1,8 @@
 import { Button } from '../../../elements/Button/Button';
 import logo from '../../../../assets/images/logo.png';
 import { FaBars } from 'react-icons/fa';
-import { menuRoutes } from '../../../../constants/menuRoutes';
-import { btnRoutes } from '../../../../constants/buttonRoutes';
-import { ReactNode } from 'react';
+import { menuRoutes } from '../data/menuRoutes';
+import { btnRoutes } from '../data/buttonRoutes';
 import {
   Navigation,
   NavContainer,
