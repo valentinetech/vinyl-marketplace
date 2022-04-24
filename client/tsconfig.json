@@ -16,9 +16,14 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "types": ["react/next", "react-dom/next"],
-    "baseUrl": ".",
+    "baseUrl": "src",
     "paths": {
-      "@/*": ["./src/*"]
+      "assets": ["./assets/*"],
+      "components": ["./components/*"],
+      "features": ["./features/*"],
+      "hooks": ["./hooks/*"],
+      "routes": ["./routes/*"],
+      "styles": ["./styles/*"],
     }
   },
   "include": ["src", "next-env.d.ts", "twin.d.ts", "**/*.ts", "**/*.tsx", "webpack.config.js"],
