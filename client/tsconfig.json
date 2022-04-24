@@ -15,12 +15,12 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": ["react/next", "react-dom/next"]
-    // "baseUrl": ".",
-    // "paths": {
-    //   "@/*": ["./src/*"]
-    // }
+    "types": ["react/next", "react-dom/next"],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
-  "include": ["src", "next-env.d.ts", "twin.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["src", "next-env.d.ts", "twin.d.ts", "**/*.ts", "**/*.tsx", "webpack.config.js"],
   "exclude": ["node_modules"]
 }

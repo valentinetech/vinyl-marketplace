@@ -16,8 +16,8 @@ import {
 } from './NavMobile.styles';
 
 interface NavMobileProps extends React.MouseEvent<HTMLElement> {
-  onClick: () => void;
-  toggleMenu: boolean;
+  onClick: (toggleMenu: boolean) => void;
+  toggleMenu: (toggleMenu: boolean) => void;
   isOpen: [boolean, string, null, undefined, number, (isOpen: boolean) => void];
 }
 
