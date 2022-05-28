@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import { UserModel } from './models/Users';
+import 'dotenv/config';
 
 const app = express();
 
@@ -11,19 +12,22 @@ app.use(bodyParser.json({ limit: '30mb' }));
 app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }));
 app.use(cors());
 
-// //Mental variables for security
+declare var process: {
+  env: {
+    PORT: string;
+    MONGO_URL: string;
+  };
+};
 
-const CONNECTION_URL =
-  'mongodb+srv://vinyl:Realrecordshop3@cluster0.dsafo.mongodb.net/vinylDB?retryWrites=true&w=majority';
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 
 mongoose
-  .connect(CONNECTION_URL)
+  .connect(process.env.MONGO_URL)
   .then(() => app.listen(PORT, () => console.log(`Server running on port: ${PORT}`)))
-  .catch((error) => console.log(error.message));
+  .catch((error: any) => console.log(error.message));
 
 app.get('/getUsers', (req, res) => {
-  UserModel.find({}, (err, result) => {
+  UserModel.find({}, (err: string, result: string) => {
     if (err) {
       res.json(err);
     } else {
