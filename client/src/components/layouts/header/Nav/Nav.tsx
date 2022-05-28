@@ -28,10 +28,10 @@ const Nav = ({ toggleMenu }: any) => {
           <FaBars size={32} />
         </MobileIcon>
         <NavMenu>
-          {menuRoutes.map((item, index) => {
+          {menuRoutes.map((item) => {
             return (
-              <NavItem key={index}>
-                <NavLink key={index} to={item.route}>
+              <NavItem key={item.title}>
+                <NavLink key={item.title} to={item.route}>
                   {item.title}
                 </NavLink>
               </NavItem>

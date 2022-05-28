@@ -1,12 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Cards = () => {
+const ExploreContainer = styled.div`
+  height: auto;
+  display: flex;
+`;
+
+const Explore = () => {
   return (
     <>
-      <h1>sdasd</h1>
+      <ExploreContainer></ExploreContainer>
     </>
   );
 };
 
-export default Cards;
+export default Explore;
