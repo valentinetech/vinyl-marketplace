@@ -3,11 +3,12 @@ import Nav from './Nav/Nav';
 import { useState } from 'react';
 
 const Header = () => {
-  const [isOpen, isOpenSet] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
-    isOpenSet(!isOpen);
+    setIsOpen(!isOpen);
   };
+
   return (
     <>
       <NavMobile isOpen={isOpen} toggleMenu={toggleMenu} />

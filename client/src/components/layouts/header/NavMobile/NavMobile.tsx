@@ -1,7 +1,7 @@
 import { menuRoutes } from '../data/menuRoutes';
 import { btnRoutes } from '../data/buttonRoutes';
-import { Button } from '../../../elements/Button/Button';
-import logo from '../../../../assets/images/logo.png';
+import { Button } from 'components/elements/Button/Button';
+import logo from 'assets/images/logo.png';
 import {
   Container,
   LogoLink,
@@ -15,19 +15,18 @@ import {
   ButtonContainer,
 } from './NavMobile.styles';
 
-interface NavMobileProps extends React.MouseEvent<HTMLElement> {
-  onClick: (toggleMenu: boolean) => void;
-  toggleMenu: (toggleMenu: boolean) => void;
-  isOpen: [boolean, string, null, undefined, number, (isOpen: boolean) => void];
+interface NavMobileProps {
+  toggleMenu: () => void;
+  isOpen: boolean;
 }
 
-const NavMobile = ({ isOpen, toggleMenu }: NavMobileProps | any) => {
+const NavMobile = ({ isOpen, toggleMenu }: NavMobileProps) => {
   return (
     <Container isOpen={isOpen} onClick={toggleMenu}>
       <LogoLink to='/'>
         <Logo src={logo} alt='logo' />
       </LogoLink>
-      <Icon onClick={toggleMenu}>
+      <Icon onClick={toggleMenu} aria-label='Open or Close navigation'>
         <CloseIcon size={32} />
       </Icon>
       <MenuContainer>
@@ -42,7 +41,7 @@ const NavMobile = ({ isOpen, toggleMenu }: NavMobileProps | any) => {
         </Menu>
         <NavSignUp to={btnRoutes.signUp.route}>{btnRoutes.signUp.title}</NavSignUp>
         <ButtonContainer to={btnRoutes.login.route}>
-          <Button variant='primary'>{btnRoutes.login.title}</Button>
+          <Button>{btnRoutes.login.title}</Button>
         </ButtonContainer>
       </MenuContainer>
     </Container>
