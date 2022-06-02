@@ -8,7 +8,7 @@ module.exports = {
   ],
   resolve: {
     alias: {
-      assests: path.resolve(__dirname, './src/assets/'),
+      assets: path.resolve(__dirname, './src/assets/'),
       components: path.resolve(__dirname, './src/components/'),
       features: path.resolve(__dirname, './src/features/'),
       hooks: path.resolve(__dirname, './src/hooks/'),

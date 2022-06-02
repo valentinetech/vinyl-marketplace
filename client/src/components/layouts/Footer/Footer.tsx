@@ -12,7 +12,9 @@ const SectionContainer = styled.div`
 const Footer = () => {
   return (
     <>
-      <SectionContainer>sds</SectionContainer>
+      <SectionContainer>
+        <h2>Footer</h2>
+      </SectionContainer>
     </>
   );
 };

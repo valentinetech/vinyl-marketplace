@@ -1,4 +1,4 @@
-import heroImage from '../../../../assets/images/hero-image.png';
+import heroImage from 'assets/images/hero-image.png';
 import { heroData } from '../data/homeData';
 import { Button } from 'components/elements/Button';
 // import { Button } from '../../../elements/Button';

@@ -10,5 +10,5 @@ export const exploreData = {
 };
 export const aboutData = {
   h1: 'Discover the World of Vinyl Records!',
-  p: 'The best place to Buy and Sell your Vinyl Collection online!',
+  p: 'About section',
 };
