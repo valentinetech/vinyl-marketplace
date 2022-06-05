@@ -17,5 +17,3 @@ const Header = () => {
   );
 };
 export default Header;
-
-// Header only Nav + Mobile Nav

@@ -15,12 +15,12 @@ import {
   ButtonContainer,
 } from './NavMobile.styles';
 
-interface NavMobileProps {
+interface NavProps {
   toggleMenu: () => void;
   isOpen: boolean;
 }
 
-const NavMobile = ({ isOpen, toggleMenu }: NavMobileProps) => {
+const NavMobile = ({ isOpen, toggleMenu }: NavProps) => {
   return (
     <Container isOpen={isOpen} onClick={toggleMenu}>
       <LogoLink to='/'>

@@ -17,7 +17,11 @@ import {
   NavButton,
 } from './Nav.styles';
 
-const Nav = ({ toggleMenu }: any) => {
+interface NavProps {
+  toggleMenu: () => void;
+}
+
+const Nav = ({ toggleMenu }: NavProps) => {
   return (
     <Navigation>
       <NavContainer>

@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "rootDir": "src",
+    "baseUrl": "src",
     "target": "es6",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -16,16 +18,7 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "types": ["react/next", "react-dom/next"],
-    "baseUrl": "src",
-    "paths": {
-      "@assets": ["./assets/*"],
-      "@components": ["./components/*"],
-      "@features": ["./features/*"],
-      "@hooks": ["./hooks/*"],
-      "@routes": ["./routes/*"],
-      "@styles": ["./styles/*"],
-    }
   },
-  "include": ["src", "next-env.d.ts", "twin.d.ts", "**/*.ts", "**/*.tsx", "webpack.config.js"],
+  "include": ["src", "next-env.d.ts", "twin.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }
