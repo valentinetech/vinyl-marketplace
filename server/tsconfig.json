@@ -1,34 +1,7 @@
-// {
-//   "compilerOptions": {
-//     "target": "es6",
-//     "allowJs": true,
-//     "skipLibCheck": true,
-//     "esModuleInterop": true,
-//     "allowSyntheticDefaultImports": true,
-//     "strict": true,
-//     "forceConsistentCasingInFileNames": true,
-//     "noFallthroughCasesInSwitch": true,
-//     "module": "esnext",
-//     "moduleResolution": "node",
-//     "resolveJsonModule": true,
-//     "isolatedModules": true,
-//     "noEmit": true,
-//     "jsx": "react-jsx",
-//     "baseUrl": "src",
-//     "paths": {
-//       "assets": ["./assets/*"],
-//       "components": ["./components/*"],
-//       "features": ["./features/*"],
-//       "hooks": ["./hooks/*"],
-//       "routes": ["./routes/*"],
-//       "styles": ["./styles/*"],
-//     }
-//   },
-//   "include": ["src", "next-env.d.ts", "twin.d.ts", "**/*.ts", "**/*.tsx", "webpack.config.js"],
-//   "exclude": ["node_modules"]
-// }
 {
     "compilerOptions": {
+        "rootDir": "src",
+        "baseUrl": "src",
         "module": "commonjs",
         "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
@@ -37,15 +10,5 @@
         "moduleResolution": "node",
         "sourceMap": true,
         "outDir": "dist",
-        "baseUrl": ".",
-        "paths": {
-            "*": [
-                "node_modules/*",
-                "src/types/*"
-            ]
-        }
-    },
-    // "include": [
-    //     "src/**/*"
-    // ]
+    }
 }
