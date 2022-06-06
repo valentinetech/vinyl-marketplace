@@ -4,17 +4,17 @@ export interface useDisclosureProps {
   open: () => void;
   close: () => void;
   toggle: () => void;
-  isOpen: boolean;
+  init: boolean;
+  issOpen: boolean;
   state: boolean;
-  initial: boolean;
 }
 
-export const useDisclosure = ({ initial = false }: useDisclosureProps) => {
-  const [isOpen, setIsOpen] = React.useState(initial);
+export const useDisclosure = ({}: useDisclosureProps) => {
+  const [issOpen, setIsOpen] = React.useState(false);
 
   const open = React.useCallback(() => setIsOpen(true), []);
   const close = React.useCallback(() => setIsOpen(false), []);
   const toggle = React.useCallback(() => setIsOpen((state) => !state), []);
 
-  return { isOpen, open, close, toggle };
+  return { issOpen, open, close, toggle };
 };

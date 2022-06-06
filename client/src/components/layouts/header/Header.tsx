@@ -1,5 +1,5 @@
-import NavMobile from './NavMobile/NavMobile';
-import Nav from './Nav/Nav';
+import NavMobile from './NavMobile';
+import Nav from './Nav';
 import { useState } from 'react';
 
 const Header = () => {

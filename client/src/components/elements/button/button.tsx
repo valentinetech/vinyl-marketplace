@@ -6,7 +6,7 @@ export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary';
 }
 
-export const Button = ({ children, variant = 'primary', ...props }: ButtonProps) => {
+const Button = ({ children, variant = 'primary', ...props }: ButtonProps) => {
   return (
     <>
       {variant === 'primary' ? (
@@ -17,3 +17,5 @@ export const Button = ({ children, variant = 'primary', ...props }: ButtonProps)
     </>
   );
 };
+
+export default Button;

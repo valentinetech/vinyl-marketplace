@@ -3,7 +3,21 @@ import { theme } from '../../../../styles/theme';
 import { Link as LinkR } from 'react-router-dom';
 import { Link as LinkS } from 'react-scroll';
 
-export const Navigation = styled.nav`
+export {
+  Navigation,
+  NavContainer,
+  LogoLink,
+  Logo,
+  MobileIcon,
+  NavMenu,
+  NavLink,
+  NavItem,
+  NavButton,
+  NavSignUp,
+  LoginContainer,
+};
+
+const Navigation = styled.nav`
   height: 80px;
   background-color: ${theme.colors.body};
   display: flex;
@@ -14,7 +28,7 @@ export const Navigation = styled.nav`
   z-index: 20;
 `;
 
-export const NavContainer = styled.div`
+const NavContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -25,14 +39,14 @@ export const NavContainer = styled.div`
   width: 100%;
 `;
 
-export const LogoLink = styled(LinkR)`
+const LogoLink = styled(LinkR)`
   justify-content: flex-start;
 `;
-export const Logo = styled.img`
+const Logo = styled.img`
   width: 200px;
 `;
 
-export const MobileIcon = styled.div`
+const MobileIcon = styled.div`
   display: none;
 
   @media ${theme.device.tabletMax} {
@@ -48,7 +62,7 @@ export const MobileIcon = styled.div`
   }
 `;
 
-export const NavMenu = styled.ul`
+const NavMenu = styled.ul`
   display: flex;
   align-items: center;
   text-align: center;
@@ -59,11 +73,11 @@ export const NavMenu = styled.ul`
   }
 `;
 
-export const NavItem = styled.li`
+const NavItem = styled.li`
   height: 80px;
 `;
 
-export const NavLink = styled(LinkS)`
+const NavLink = styled(LinkS)`
   color: ${theme.colors.textPrimary};
   display: flex;
   align-items: center;
@@ -82,7 +96,7 @@ export const NavLink = styled(LinkS)`
   }
 `;
 
-export const NavButton = styled(LinkR)`
+const NavButton = styled(LinkR)`
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -92,7 +106,7 @@ export const NavButton = styled(LinkR)`
   } ;
 `;
 
-export const NavSignUp = styled(LinkR)`
+const NavSignUp = styled(LinkR)`
   display: flex;
   align-items: flex-end;
   color: ${theme.colors.brandSecondary};
@@ -108,7 +122,7 @@ export const NavSignUp = styled(LinkR)`
   } ;
 `;
 
-export const LoginContainer = styled.div`
+const LoginContainer = styled.div`
   display: flex;
   align-items: center;
 `;

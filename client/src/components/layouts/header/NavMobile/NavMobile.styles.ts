@@ -8,7 +8,9 @@ interface isOpenProp {
   isOpen: boolean;
 }
 
-export const Container = styled.aside<isOpenProp>`
+export { Container, LogoLink, Logo, Icon, CloseIcon, MenuContainer, Menu, Link, NavSignUp, ButtonContainer };
+
+const Container = styled.aside<isOpenProp>`
   position: fixed;
   z-index: 999;
   width: 100%;
@@ -22,10 +24,10 @@ export const Container = styled.aside<isOpenProp>`
   opacity: ${({ isOpen }) => (isOpen ? '100%' : '0')};
 `;
 
-export const CloseIcon = styled(FaTimes)`
+const CloseIcon = styled(FaTimes)`
   color: #fff;
 `;
-export const Icon = styled.div`
+const Icon = styled.div`
   position: absolute;
   top: 20px;
   right: 32px;
@@ -33,11 +35,11 @@ export const Icon = styled.div`
   outline: none;
 `;
 
-export const MenuContainer = styled.div`
+const MenuContainer = styled.div`
   color: #fff;
 `;
 
-export const Menu = styled.ul`
+const Menu = styled.ul`
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: repeat(6, 80px);
@@ -48,7 +50,7 @@ export const Menu = styled.ul`
   }
 `;
 
-export const Link = styled(LinkS)`
+const Link = styled(LinkS)`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -65,13 +67,13 @@ export const Link = styled(LinkS)`
   }
 `;
 
-export const ButtonContainer = styled(LinkR)`
+const ButtonContainer = styled(LinkR)`
   display: flex;
   justify-content: center;
   text-decoration: none;
 `;
 
-export const LogoLink = styled(LinkR)`
+const LogoLink = styled(LinkR)`
   position: absolute;
   top: 20px;
   margin-left: auto;
@@ -82,11 +84,11 @@ export const LogoLink = styled(LinkR)`
   cursor: pointer;
   outline: none;
 `;
-export const Logo = styled.img`
+const Logo = styled.img`
   width: 200px;
 `;
 
-export const NavSignUp = styled(LinkR)`
+const NavSignUp = styled(LinkR)`
   display: flex;
   align-items: center;
   justify-content: center;

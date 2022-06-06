@@ -1,7 +1,7 @@
-import { menuRoutes } from '../data/menuRoutes';
-import { btnRoutes } from '../data/buttonRoutes';
-import { Button } from 'components/elements/Button/Button';
+import { menuRoutes } from 'components/layouts/data/menuRoutes';
+import { btnRoutes } from 'components/layouts/data/buttonRoutes';
 import logo from 'assets/images/logo.png';
+import Button from 'components/elements/Button';
 import {
   Container,
   LogoLink,

@@ -1,6 +1,13 @@
 export interface ThemeProps {
-  theme: typeof theme;
+  theme: {
+    colors: string;
+    fontSize: string;
+    fontWeight: string;
+    device: string;
+  };
 }
+
+// theme typeof theme
 
 export const theme = {
   colors: {
@@ -9,6 +16,8 @@ export const theme = {
     brandSecondary: '#BFAFF2',
     textPrimary: '#FDFDFD',
     textSecondary: '#3B393C',
+    white: '#ffff',
+    blue: '#0A122A',
   },
   fontSize: {
     h1Size: '70px',
@@ -35,5 +44,6 @@ export const theme = {
     laptopL: `(min-width: 1440px)`,
     desktop: `(min-width: 2560px)`,
     signupMax: `(max-width: 888px)`,
+    default: `(max-width: 1100px)`,
   },
 };

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { theme } from '../../../../styles/theme';
+import { theme } from '../../../styles/theme';
 import { Link as LinkS } from 'react-scroll';
 
 export const HeroContainer = styled.div`
@@ -73,9 +73,10 @@ export const HeroImageContainer = styled.div`
 export const HeroImage = styled.img`
   max-width: 460px;
   max-height: 460px;
-  padding: 5px;
+
   box-shadow: inset 0px 0px 40px 40px ${theme.colors.brand};
   border: 4px outset ${theme.colors.brand};
+  border-radius: 10%;
   -webkit-box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.4);
   -moz-box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.4);
 

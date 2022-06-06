@@ -1,8 +1,8 @@
-import { Button } from '../../../elements/Button/Button';
-import logo from '../../../../assets/images/logo.png';
+import Button from 'components/elements/Button';
+import logo from 'assets/images/logo.png';
 import { FaBars } from 'react-icons/fa';
-import { menuRoutes } from '../data/menuRoutes';
-import { btnRoutes } from '../data/buttonRoutes';
+import { menuRoutes } from 'components/layouts/data/menuRoutes';
+import { btnRoutes } from 'components/layouts/data/buttonRoutes';
 import {
   Navigation,
   NavContainer,
@@ -28,7 +28,7 @@ const Nav = ({ toggleMenu }: NavProps) => {
         <LogoLink to='/'>
           <Logo src={logo} alt='logo' />
         </LogoLink>
-        <MobileIcon onClick={toggleMenu}>
+        <MobileIcon onClick={toggleMenu} aria-label='Open / Close navigation menu'>
           <FaBars size={32} />
         </MobileIcon>
         <NavMenu>
