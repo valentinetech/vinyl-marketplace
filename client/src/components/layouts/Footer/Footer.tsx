@@ -1,19 +1,11 @@
-import React from 'react';
-import styled from 'styled-components';
-
-const SectionContainer = styled.div`
-  display: flex;
-  width: 100%;
-  max-width: 1100px;
-  margin: 0 auto;
-  justify-content: flex-start;
-`;
+import { SectionContainer, CopyrightText } from './Footer.styles';
 
 const Footer = () => {
+  const year = new Date().getFullYear();
   return (
     <>
       <SectionContainer>
-        <h2>Footer</h2>
+        <CopyrightText>&copy; {year} Vinyl Auction. All Rights Reserved.</CopyrightText>
       </SectionContainer>
     </>
   );
