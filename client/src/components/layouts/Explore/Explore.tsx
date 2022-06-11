@@ -6,7 +6,7 @@ import { SectionContainer, SectionName, ExploreContainer, LoadMore } from './Exp
 const Explore = () => {
   return (
     <>
-      <SectionContainer>
+      <SectionContainer id='explore'>
         <SectionName>Explore</SectionName>
       </SectionContainer>
       <ExploreContainer>

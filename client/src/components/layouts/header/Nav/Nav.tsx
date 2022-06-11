@@ -3,6 +3,7 @@ import logo from 'assets/images/logo.png';
 import { FaBars } from 'react-icons/fa';
 import { menuRoutes } from 'components/layouts/data/menuRoutes';
 import { btnRoutes } from 'components/layouts/data/buttonRoutes';
+import { animateScroll } from 'react-scroll';
 import {
   Navigation,
   NavContainer,
@@ -17,15 +18,15 @@ import {
   NavButton,
 } from './Nav.styles';
 
-interface NavProps {
-  toggleMenu: () => void;
-}
+const Nav = ({ toggleMenu }: { toggleMenu: () => void }) => {
+  const toggleHome = () => {
+    animateScroll.scrollToTop({ duration: 500 });
+  };
 
-const Nav = ({ toggleMenu }: NavProps) => {
   return (
     <Navigation>
       <NavContainer>
-        <LogoLink to='/'>
+        <LogoLink to='/' onClick={toggleHome}>
           <Logo src={logo} alt='logo' />
         </LogoLink>
         <MobileIcon onClick={toggleMenu} aria-label='Open / Close navigation menu'>
@@ -35,7 +36,12 @@ const Nav = ({ toggleMenu }: NavProps) => {
           {menuRoutes.map((item) => {
             return (
               <NavItem key={item.title}>
-                <NavLink key={item.title} to={item.route}>
+                <NavLink
+                  key={item.title}
+                  to={item.route}
+                  smooth={item.smooth}
+                  duration={item.duration}
+                  offset={item.offset}>
                   {item.title}
                 </NavLink>
               </NavItem>

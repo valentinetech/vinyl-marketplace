@@ -1,10 +1,10 @@
 export const btnRoutes = {
   signUp: {
     title: 'Sign Up',
-    route: '/',
+    route: '/sign-up',
   },
   login: {
     title: 'Login',
-    route: '/',
+    route: '/login',
   },
 };

@@ -19,7 +19,7 @@ const Hero = () => {
         <HeroH1>{heroData.h1}</HeroH1>
         <HeroText>{heroData.p}</HeroText>
         <HeroImageMobile src={heroImage} alt='hero-image' />
-        <HeroButtonContainer to={heroData.route}>
+        <HeroButtonContainer to={heroData.route} duration={500} smooth={true} offset={-80}>
           <Button variant='primary'>{heroData.cta}</Button>
         </HeroButtonContainer>
       </HeroTextContainer>

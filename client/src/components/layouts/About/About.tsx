@@ -5,7 +5,7 @@ import { SectionContainer, SectionName, AboutText } from './About.styles';
 const About = () => {
   return (
     <>
-      <SectionContainer>
+      <SectionContainer id='about'>
         <SectionName>About</SectionName>
         <AboutText>{aboutData.p}</AboutText>
       </SectionContainer>

@@ -2,6 +2,7 @@ import { menuRoutes } from 'components/layouts/data/menuRoutes';
 import { btnRoutes } from 'components/layouts/data/buttonRoutes';
 import logo from 'assets/images/logo.png';
 import Button from 'components/elements/Button';
+import { animateTopScroll } from 'react-scroll/modules/mixins/animate-scroll';
 import {
   Container,
   LogoLink,
@@ -33,7 +34,13 @@ const NavMobile = ({ isOpen, toggleMenu }: NavProps) => {
         <Menu>
           {menuRoutes.map((item, index) => {
             return (
-              <Link key={index} to={item.route} onClick={toggleMenu}>
+              <Link
+                key={item.title}
+                to={item.route}
+                onClick={toggleMenu}
+                smooth={item.smooth}
+                duration={item.duration}
+                offset={item.offset}>
                 {item.title}
               </Link>
             );

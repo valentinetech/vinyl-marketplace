@@ -1,23 +1,24 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-interface useSpotifyProps {
+export interface SpotifyApi {
+  id: string;
   url: string;
   song: string;
   loading: boolean;
   error: string;
-  setSong: () => void;
-  setLoading: () => void;
-  setError: () => void;
 }
 
-const useSpotify = (url: useSpotifyProps) => {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+export function useSpotify<Payload>(url: string): {
+  data: Payload | null;
+  done: boolean;
+  error: string | null;
+} {
+  const [data, setData] = useState<Payload | null>(null);
+  const [done, setDone] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    setLoading(true);
     axios
       .get('url')
       .then((response) => {
@@ -27,26 +28,16 @@ const useSpotify = (url: useSpotifyProps) => {
         setError(err);
       })
       .finally(() => {
-        setLoading(false);
+        setDone(false);
       });
   }, [url]);
 
-  const refetch = () => {
-    setLoading(true);
-    axios
-      .get('url')
-      .then((response) => {
-        setData(response.data);
-      })
-      .catch((err) => {
-        setError(err);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
+  // const getSong = (id: string) => {
+  //   return id + 1;
+  // };
+  // function playSong({ id }: { id: string }) {}
 
-  return { data, loading, error, refetch };
-};
+  return { data, done, error };
+}
 
 export default useSpotify;

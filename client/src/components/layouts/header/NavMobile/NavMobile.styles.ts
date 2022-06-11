@@ -61,7 +61,7 @@ const Link = styled(LinkS)`
   cursor: pointer;
   font-size: 18px;
 
-  &:hover {
+  &:active {
     color: ${theme.colors.brand};
     transition: 0.2s ease-in-out;
   }
