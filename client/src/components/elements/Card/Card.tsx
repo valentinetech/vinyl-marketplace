@@ -1,6 +1,5 @@
-import albumCover from 'assets/images/kendrick-lamar_damn.jpeg';
 import Button from 'components/elements/Button';
-import { useSpotify } from 'hooks/useSpotify';
+// import useSpotify from 'hooks/useSpotify';
 import {
   CardContainer,
   CardImg,
@@ -14,27 +13,37 @@ import {
   Bid,
 } from './Card.styles';
 
-interface getSongProps {
-  song: string;
-  getSong: () => void;
-  playSong: () => void;
-}
-
-const Card = () => {
-  const { data, done, error } = useSpotify<getSongProps[]>('url');
-
+const Card = ({
+  albumCover,
+  albumName,
+  artistName,
+  spotifyButton,
+  countdownTitle,
+  countdown,
+  bidLast,
+  buttonText,
+}: {
+  albumCover: string;
+  albumName: string;
+  artistName: string;
+  spotifyButton: string;
+  countdownTitle: string;
+  countdown: string;
+  bidLast: string;
+  buttonText: string;
+}) => {
   return (
     <CardContainer>
       <CardImg src={albumCover}></CardImg>
-      <AlbumName>DAMN</AlbumName>
-      <ArtistName>Kendrick Lamar</ArtistName>
-      <SpotifyIconButton>{done ? '▶' : '⏹'}</SpotifyIconButton>
-      <CountdownTitle>Time Remaining</CountdownTitle>
-      <Countdown>00:10:00</Countdown>
+      <AlbumName>{albumName}</AlbumName>
+      <ArtistName>{artistName}</ArtistName>
+      <SpotifyIconButton>{spotifyButton}</SpotifyIconButton>
+      <CountdownTitle>{countdownTitle}</CountdownTitle>
+      <Countdown>{countdown}</Countdown>
       <BidContainer>
-        <BidLast>Last Bid $50</BidLast>
+        <BidLast>{bidLast} </BidLast>
         <Bid>
-          <Button variant='secondary'>Place Bid</Button>
+          <Button variant='secondary'>{buttonText}</Button>
         </Bid>
       </BidContainer>
     </CardContainer>
@@ -42,3 +51,8 @@ const Card = () => {
 };
 
 export default Card;
+
+// interface getSongProps {
+//   song: string;
+//   getSong: () => void;
+//   playSong: () => void;}

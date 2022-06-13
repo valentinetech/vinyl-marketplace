@@ -11,11 +11,13 @@
     "@types/react": "^17.0.43",
     "@types/react-dom": "^17.0.14",
     "axios": "^0.26.1",
+    "buffer": "^6.0.3",
+    "qs-stringify": "^1.2.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-icons": "^4.3.1",
     "react-router-dom": "^6.3.0",
-    "react-scripts": "5.0.0",
+    "react-scripts": "^5.0.0",
     "react-scroll": "^1.8.7",
     "styled-components": "^5.3.5",
     "typescript": "^4.6.3",
@@ -34,8 +36,11 @@
     ],
     "overrides": [
       {
-      "files": ["bin/*.js", "lib/*.js"],
-      "excludedFiles": "*.test.js",
+        "files": [
+          "bin/*.js",
+          "lib/*.js"
+        ],
+        "excludedFiles": "*.test.js",
         "rules": {
           "import/no-anonymous-default-export": "off"
         }
