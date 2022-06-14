@@ -19,12 +19,14 @@ interface SpotifyProps {
   getToken?: () => void;
   albums: string[] | Object;
 }
-//Get token
 export function useSpotify(): SpotifyProps {
+  //States
   const [access, setAccess] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loaded, setLoaded] = useState(false);
+  const [albums, setAlbums] = useState<string[]>([]);
 
+  //Get Spotify Authentication
   function getToken() {
     const SPOTIFY_ID = process.env.REACT_APP_SPOTIFY_ID;
     const SPOTIFY_SECRET = process.env.REACT_APP_SPOTIFY_SECRET;
@@ -52,7 +54,6 @@ export function useSpotify(): SpotifyProps {
       });
   }
   // Get album names
-  const [albums, setAlbums] = useState<Object>({});
   const getAlbum = () => {
     let token = window.localStorage.getItem('token');
 
@@ -65,13 +66,11 @@ export function useSpotify(): SpotifyProps {
       })
       .then((resp) => {
         console.table(resp);
-        setAlbums(resp.data);
+        setAlbums([resp.data.label, resp.data.name]);
       });
   };
 
-  let albumOne = window.localStorage.getItem('albumOne');
-
-  console.log(albumOne);
+  //Call functions onLoad
   useEffect(() => {
     getToken();
     getAlbum();
@@ -81,3 +80,5 @@ export function useSpotify(): SpotifyProps {
 }
 
 export default useSpotify;
+
+// Load top albums into arrays to map over

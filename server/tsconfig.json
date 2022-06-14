@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
-        "rootDir": "src",
-        "baseUrl": "src",
+        "rootDir": "",
+        "baseUrl": "",
         "module": "commonjs",
         "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,

@@ -6,14 +6,20 @@ import useSpotify from 'hooks/useSpotify';
 import { SectionContainer, SectionName, ExploreContainer, LoadMore } from './Explore.styles';
 
 const Explore = () => {
-  const { access, albums } = useSpotify();
-  console.log('thsi  ' + albums);
+  const { access, getToken, albums } = useSpotify();
+  console.log(albums);
   return (
     <>
       <SectionContainer id='explore'>
         <SectionName>Explore</SectionName>
-        {/* <h6>{albums.name}</h6> */}
+        <h6>
+          {JSON.parse(JSON.stringify(albums)).map((album: string, i: number) => {
+            return <h3 key={album}> {album}</h3>;
+          })}
+        </h6>
+        <h6>{albums[1]}</h6>
       </SectionContainer>
+      <Button onClick={getToken}>sdasd</Button>
       <ExploreContainer>
         {cardData.map((item) => {
           return (
