@@ -1,84 +1,69 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import qs from 'qs';
-import { process } from 'types/envTypes';
-const Buffer = require('buffer/').Buffer;
+import useSpotifyToken from './useSpotifyToken';
 
-export interface SpotifyApi {
-  id: string;
-  url: string;
-  song: string;
-  loading: boolean;
-  error: string;
+interface ISpotify {
+  albums?: { name: string; artist: string }[];
 }
 
-interface SpotifyProps {
-  access: string | null;
-  loaded: boolean;
-  error: string | null;
-  getToken?: () => void;
-  albums: string[] | Object;
+interface Payload {
+  albums?: {
+    name: string;
+    artists: [{ name: string }];
+  };
 }
-export function useSpotify(): SpotifyProps {
-  //States
-  const [access, setAccess] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [loaded, setLoaded] = useState(false);
-  const [albums, setAlbums] = useState<string[]>([]);
 
-  //Get Spotify Authentication
-  function getToken() {
-    const SPOTIFY_ID = process.env.REACT_APP_SPOTIFY_ID;
-    const SPOTIFY_SECRET = process.env.REACT_APP_SPOTIFY_SECRET;
-    const SPOTIFY_TOKEN = Buffer.from(`${SPOTIFY_ID}:${SPOTIFY_SECRET}`).toString('base64');
-    const ACCESS_URL = 'https:accounts.spotify.com/api/token';
-    const GRANT_TYPE = qs.stringify({ grant_type: 'client_credentials' });
+export function useSpotify() {
+  const { token, loaded, error } = useSpotifyToken();
 
-    axios
-      .post(ACCESS_URL, GRANT_TYPE, {
-        headers: {
-          Authorization: `Basic ${SPOTIFY_TOKEN}`,
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-      })
-      .then((response) => {
-        const token = response.data.access_token;
-        window.localStorage.setItem('token', token);
-        setAccess(response.data.access_token);
-      })
-      .catch((error) => {
-        setError(error.message);
-      })
-      .finally(() => {
-        setLoaded(true);
-      });
-  }
+  // const [albums, setAlbums] = useState<Payload>();
+  const [albums, setAlbums] = useState<
+    {
+      name: string;
+      id: string;
+      artists: [{ name: string }];
+      images: [{ url: string }];
+    }[]
+  >();
+
   // Get album names
-  const getAlbum = () => {
-    let token = window.localStorage.getItem('token');
 
-    const id = '1atjqOZTCdrjxjMyCPZc2g?si=REc5N11SSPehWtwEKo-6XA';
+  //Call functions onLoad
+  const getAlbum = (token: string | null) => {
+    if (token === null) return;
+    if (loaded === false) return;
+    if (error) return console.log(error);
+
+    const COUNTRY = 'LT';
+    const LIMIT = 50;
+    const OFFSET_QUERY = 5;
+
     axios
-      .get(`https://api.spotify.com/v1/albums/${id}`, {
+      .get(`https://api.spotify.com/v1/browse/new-releases?country=${COUNTRY}&limit=${LIMIT}&offset=${OFFSET_QUERY}`, {
         headers: {
+          Accept: 'application/json',
           Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
         },
       })
       .then((resp) => {
-        console.table(resp);
-        setAlbums([resp.data.label, resp.data.name]);
+        console.log(resp.data.albums.items);
+
+        const albumArray = resp.data.albums.items
+          .filter((album: { album_type: string; available_markets: boolean }) => {
+            return album.album_type === 'album';
+          })
+          .slice(0, 6);
+        console.log(albumArray);
+        setAlbums(albumArray);
       });
   };
-
-  //Call functions onLoad
   useEffect(() => {
-    getToken();
-    getAlbum();
-  }, []);
+    getAlbum(token);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token]);
 
-  return { access, error, loaded, getToken, albums };
+  return { albums };
 }
 
 export default useSpotify;
-
-// Load top albums into arrays to map over

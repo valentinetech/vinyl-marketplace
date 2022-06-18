@@ -1,6 +1,9 @@
 import Button from 'components/elements/Button';
 import logo from 'assets/images/logo.png';
 import { FaBars } from 'react-icons/fa';
+
+import Search from 'components/elements/Search';
+
 import { menuRoutes } from 'components/layouts/data/menuRoutes';
 import { btnRoutes } from 'components/layouts/data/buttonRoutes';
 import { animateScroll } from 'react-scroll';
@@ -32,6 +35,7 @@ const Nav = ({ toggleMenu }: { toggleMenu: () => void }) => {
         <MobileIcon onClick={toggleMenu} aria-label='Open / Close navigation menu'>
           <FaBars size={32} />
         </MobileIcon>
+        <Search></Search>
         <NavMenu>
           {menuRoutes.map((item) => {
             return (

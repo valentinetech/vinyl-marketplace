@@ -7,6 +7,7 @@ export {
   CardImg,
   AlbumName,
   ArtistName,
+  StaticContainer,
   SpotifyIconButton,
   CountdownTitle,
   Countdown,
@@ -17,13 +18,12 @@ export {
 
 const CardContainer = styled.div`
   height: auto;
-  width: auto;
-  min-width: 350px;
+  width: 350px;
   border: 1px solid #fff;
   padding: 24px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   border-radius: 1%;
 `;
@@ -42,6 +42,11 @@ const ArtistName = styled.h4`
   font-weight: 300;
 `;
 
+const StaticContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 const SpotifyIconButton = styled.button`
   margin-top: 20px;
   height: 50px;

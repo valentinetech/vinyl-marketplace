@@ -1,10 +1,11 @@
 import Button from 'components/elements/Button';
-// import useSpotify from 'hooks/useSpotify';
+
 import {
   CardContainer,
   CardImg,
   AlbumName,
   ArtistName,
+  StaticContainer,
   SpotifyIconButton,
   CountdownTitle,
   Countdown,
@@ -26,26 +27,28 @@ const Card = ({
   albumCover: string;
   albumName: string;
   artistName: string;
-  spotifyButton: string;
-  countdownTitle: string;
-  countdown: string;
-  bidLast: string;
-  buttonText: string;
+  spotifyButton?: string;
+  countdownTitle?: string;
+  countdown?: string;
+  bidLast?: string;
+  buttonText?: string;
 }) => {
   return (
     <CardContainer>
       <CardImg src={albumCover}></CardImg>
       <AlbumName>{albumName}</AlbumName>
       <ArtistName>{artistName}</ArtistName>
-      <SpotifyIconButton>{spotifyButton}</SpotifyIconButton>
-      <CountdownTitle>{countdownTitle}</CountdownTitle>
-      <Countdown>{countdown}</Countdown>
-      <BidContainer>
-        <BidLast>{bidLast} </BidLast>
-        <Bid>
-          <Button variant='secondary'>{buttonText}</Button>
-        </Bid>
-      </BidContainer>
+      <StaticContainer>
+        <SpotifyIconButton>{(spotifyButton = '▶')}</SpotifyIconButton>
+        <CountdownTitle>{(countdownTitle = 'Time Remaining')}</CountdownTitle>
+        <Countdown>{(countdown = '00:10:00')}</Countdown>
+        <BidContainer>
+          <BidLast>{(bidLast = 'Last Bid $50')}</BidLast>
+          <Bid>
+            <Button variant='secondary'>{(buttonText = 'Place Bid')}</Button>
+          </Bid>
+        </BidContainer>
+      </StaticContainer>
     </CardContainer>
   );
 };

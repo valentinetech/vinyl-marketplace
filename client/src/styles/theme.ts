@@ -22,8 +22,8 @@ export const theme = {
   fontSize: {
     h1Size: '70px',
     h2Size: '48px',
-    h3Size: '32px',
-    h4Size: '24px',
+    h3Size: '28px',
+    h4Size: '20px',
     h5Size: '18px',
     pSize: '16px',
     buttonSize: '18px',
