@@ -4,6 +4,7 @@ import { ButtonPrimary, ButtonSecondary } from './Button.styles';
 export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   variant?: 'primary' | 'secondary';
+  onClick?: () => void;
 }
 
 const Button = ({ children, variant = 'primary', ...props }: ButtonProps) => {

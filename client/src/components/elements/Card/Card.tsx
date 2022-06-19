@@ -23,6 +23,7 @@ const Card = ({
   countdown,
   bidLast,
   buttonText,
+  handler,
 }: {
   albumCover: string;
   albumName: string;
@@ -32,6 +33,7 @@ const Card = ({
   countdown?: string;
   bidLast?: string;
   buttonText?: string;
+  handler?: { handler: string };
 }) => {
   return (
     <CardContainer>
@@ -54,8 +56,3 @@ const Card = ({
 };
 
 export default Card;
-
-// interface getSongProps {
-//   song: string;
-//   getSong: () => void;
-//   playSong: () => void;}

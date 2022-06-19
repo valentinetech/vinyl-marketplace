@@ -27,7 +27,6 @@ export function useSpotifyToken() {
       })
       .then((response) => {
         setToken(response.data.access_token);
-        console.log(token);
       })
       .catch((error) => {
         setError(error.message);
