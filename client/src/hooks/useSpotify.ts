@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import useSpotifyToken from './useSpotifyToken';
-import { IndexType } from 'typescript';
 
 interface Albums {
   name: string;
@@ -9,25 +8,27 @@ interface Albums {
   artists: [{ name: string }];
   images: [{ url: string }];
 }
-interface PreviewURl {
-  data: {
-    items: {
-      preview_url: string;
-    }[];
+
+interface TopAlbums {
+  preview_url: string;
+  album: {
+    images: [{ url: string }];
+    name: string;
+    artists: [{ name: string; id: string }];
   };
 }
 
 const COUNTRY = 'US';
 const LIMIT = 50;
-const OFFSET_QUERY = 5;
+const OFFSET_QUERY = 0;
 const MODIFIERS = `?country=${COUNTRY}&limit=${LIMIT}&offset=${OFFSET_QUERY}`;
 
 export function useSpotify() {
   const { token, loaded, error } = useSpotifyToken();
-  const [albums, setAlbums] = useState<Albums[]>();
+  const [topAlbums, setTopAlbums] = useState<TopAlbums[]>();
   const [albumIds, setAlbumIds] = useState<string[]>();
 
-  const [previewUrl, setPreviewUrl] = useState<PreviewURl[]>();
+  // const [previewUrl, setPreviewUrl] = useState<PreviewURl[]>();
 
   const getAlbum = (token: string | null) => {
     if (token === null) return;
@@ -43,28 +44,22 @@ export function useSpotify() {
         },
       })
       .then((resp) => {
-        const albumArray = resp.data.albums.items
-          .filter((album: { album_type: string }) => {
-            return album.album_type === 'album';
-          })
-          .slice(0, 6);
-        // console.log(albumArray);
-        setAlbums(albumArray);
-
-        const albumArrayIds = albumArray.map((item: string, index: number) => albumArray[index].id);
+        const albumArray = resp.data.albums.items.filter((album: { album_type: string }) => {
+          return album.album_type === 'album';
+        });
+        const albumArrayIds = albumArray.map((item: string, index: number) => albumArray[index].artists[0].id);
         setAlbumIds(albumArrayIds);
-
-        // console.log(albumArrayIds);
       });
   };
 
-  const getPreview = (albumIds: string[] | null | undefined) => {
+  const getTopAlbums = (albumIds: string[] | null | undefined) => {
     if (!albumIds || albumIds === undefined) return;
-    console.log(albumIds);
 
+    console.log(albumIds);
+    const getAlbumIds = albumIds;
     Promise.all(
-      albumIds.map((id) =>
-        axios.get(`https://api.spotify.com/v1/albums/${id}/tracks/${MODIFIERS}`, {
+      getAlbumIds.map((id) =>
+        axios.get(`https://api.spotify.com/v1/artists/${id}/top-tracks?market=${COUNTRY}`, {
           headers: {
             Accept: 'application/json',
             Authorization: `Bearer ${token}`,
@@ -74,31 +69,19 @@ export function useSpotify() {
       )
     )
       .then((resp) => {
-        console.log(resp);
-
-        // const previewUrlArray = resp[0].data.items[0].preview_url;
-        const previewUrlArray = resp
-          .map((item, index, array) => {
-            return array[index].data.items;
-          })
-          .filter((item, index) => {
-            return item[index].preview_url !== null;
-          });
-        // const previewUrlArray2 = resp.map((data: string[])? => {});
-
-        console.table(previewUrlArray);
+        const topAlbumArray = resp.map((item, index, array) => array[index].data.tracks[0]);
+        setTopAlbums(topAlbumArray);
       })
-      .catch((err: any) => console.log(err.message));
+      .catch((err: { err: unknown; message: unknown }) => console.log(err.message));
   };
 
   useEffect(() => {
     getAlbum(token);
-    getPreview(albumIds);
-    console.log(token);
+    getTopAlbums(albumIds);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
-  return { albums, getPreview, previewUrl };
+  return { getTopAlbums, topAlbums };
 }
 
 export default useSpotify;

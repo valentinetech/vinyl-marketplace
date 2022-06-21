@@ -6,27 +6,28 @@ import useSpotify from 'hooks/useSpotify';
 import { SectionContainer, SectionName, ExploreContainer, LoadMore } from './Explore.styles';
 
 const Explore = () => {
-  const { albums, getPreview, previewUrl } = useSpotify();
+  const { topAlbums } = useSpotify();
   return (
     <>
       <SectionContainer id='explore'>
         <SectionName>Explore</SectionName>
-        <h6>{previewUrl}</h6>
       </SectionContainer>
       <ExploreContainer>
-        {albums?.map((album) => {
-          return (
-            <Card
-              key={album.id}
-              albumName={album.name}
-              albumCover={album.images[0].url}
-              artistName={album.artists[0].name}
-            />
-          );
-        })}
+        {topAlbums
+          ?.map((item) => {
+            return (
+              <Card
+                key={item.album.artists[0].id}
+                albumName={item.album.name}
+                albumCover={item.album.images[0].url}
+                artistName={item.album.artists[0].name}
+              />
+            );
+          })
+          .slice(0, 6)}
       </ExploreContainer>
       <LoadMore>
-        <Button onClick={() => console.log('spotify')}>Load More...</Button>
+        <Button onClick={() => console.log()}>Load More...</Button>
       </LoadMore>
     </>
   );
