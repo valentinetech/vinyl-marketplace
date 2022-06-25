@@ -25,7 +25,6 @@ const Nav = ({ toggleMenu }: { toggleMenu: () => void }) => {
   const toggleHome = () => {
     animateScroll.scrollToTop({ duration: 500 });
   };
-
   return (
     <Navigation>
       <NavContainer>
@@ -64,5 +63,3 @@ const Nav = ({ toggleMenu }: { toggleMenu: () => void }) => {
 };
 
 export default Nav;
-
-function handleClick() {}

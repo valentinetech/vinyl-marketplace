@@ -1,4 +1,5 @@
 import Button from 'components/elements/Button';
+import { useState } from 'react';
 
 import {
   CardContainer,
@@ -23,7 +24,6 @@ const Card = ({
   countdown,
   bidLast,
   buttonText,
-  handler,
 }: {
   albumCover: string;
   albumName: string;
@@ -33,15 +33,25 @@ const Card = ({
   countdown?: string;
   bidLast?: string;
   buttonText?: string;
-  handler?: { handler: string };
 }) => {
+  function handleClick(url?: string) {
+    const audio = new Audio(url);
+
+    if (url !== null) {
+      audio.play();
+      setTimeout(() => audio.pause(), 10000);
+    } else {
+      return alert('No preview available for this album...');
+    }
+  }
+
   return (
     <CardContainer>
       <CardImg src={albumCover}></CardImg>
       <AlbumName>{albumName}</AlbumName>
       <ArtistName>{artistName}</ArtistName>
       <StaticContainer>
-        <SpotifyIconButton>{(spotifyButton = '▶')}</SpotifyIconButton>
+        <SpotifyIconButton onClick={() => handleClick(spotifyButton)}>▶</SpotifyIconButton>
         <CountdownTitle>{(countdownTitle = 'Time Remaining')}</CountdownTitle>
         <Countdown>{(countdown = '00:10:00')}</Countdown>
         <BidContainer>
@@ -56,3 +66,5 @@ const Card = ({
 };
 
 export default Card;
+
+// onClick={() => handleClick(spotifyButton)}

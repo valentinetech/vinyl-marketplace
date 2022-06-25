@@ -11,13 +11,13 @@ export function useSpotifyToken() {
 
   //Get Spotify Authentication
 
-  useEffect(() => {
-    const SPOTIFY_ID: string = process.env.REACT_APP_SPOTIFY_ID;
-    const SPOTIFY_SECRET: string = process.env.REACT_APP_SPOTIFY_SECRET;
-    const SPOTIFY_TOKEN: string = Buffer.from(`${SPOTIFY_ID}:${SPOTIFY_SECRET}`).toString('base64');
-    const ACCESS_URL: string = 'https:accounts.spotify.com/api/token';
-    const GRANT_TYPE: string = qs.stringify({ grant_type: 'client_credentials' });
+  const SPOTIFY_ID: string = process.env.REACT_APP_SPOTIFY_ID;
+  const SPOTIFY_SECRET: string = process.env.REACT_APP_SPOTIFY_SECRET;
+  const SPOTIFY_TOKEN: string = Buffer.from(`${SPOTIFY_ID}:${SPOTIFY_SECRET}`).toString('base64');
+  const ACCESS_URL: string = 'https:accounts.spotify.com/api/token';
+  const GRANT_TYPE: string = qs.stringify({ grant_type: 'client_credentials' });
 
+  useEffect(() => {
     axios
       .post(ACCESS_URL, GRANT_TYPE, {
         headers: {
@@ -34,8 +34,7 @@ export function useSpotifyToken() {
       .finally(() => {
         setLoaded(true);
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [GRANT_TYPE, SPOTIFY_TOKEN]);
 
   return { token, error, loaded };
 }

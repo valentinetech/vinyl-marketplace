@@ -1,59 +1,121 @@
+import axios from 'axios';
 import { useState, useEffect } from 'react';
-// import axios from 'axios';
-// import useSpotifyToken from './useSpotifyToken';
-// import useSpotify from './useSpotify';
+import qs from 'qs';
+import { process } from 'types/envTypes';
+const Buffer = require('buffer/').Buffer;
 
-// interface Tracks {
-//   name: string;
-//   id: string;
-//   artists: [{ name: string }];
-//   images: [{ url: string }];
-// }
+interface TopAlbums {
+  preview_url: string;
+  album: {
+    images: [{ url: string }];
+    name: string;
+    artists: [{ name: string; id: string }];
+  };
+}
 
-// export function useSpotify() {
-//   const { token, loaded, error } = useSpotifyToken();
-// const { albumIds } = useSpotify();
+export function useSpotifyPreview() {
+  const COUNTRY = 'US';
+  const LIMIT = 50;
+  const OFFSET_QUERY = 0;
+  const MODIFIERS = `?country=${COUNTRY}&limit=${LIMIT}&offset=${OFFSET_QUERY}`;
 
-//   const [, setAlbums] = useState<Tracks[]>();
+  const SPOTIFY_ID: string = process.env.REACT_APP_SPOTIFY_ID;
+  const SPOTIFY_SECRET: string = process.env.REACT_APP_SPOTIFY_SECRET;
+  const SPOTIFY_TOKEN: string = Buffer.from(`${SPOTIFY_ID}:${SPOTIFY_SECRET}`).toString('base64');
+  const ACCESS_URL: string = 'https:accounts.spotify.com/api/token';
+  const GRANT_TYPE: string = qs.stringify({ grant_type: 'client_credentials' });
 
-//   const getPreview = (token: string | null) => {
-//     if (token === null) return;
-//     if (loaded === false) return;
-//     if (error) return console.log(error);
+  const [topAlbums, setTopAlbums] = useState<TopAlbums[] | undefined>();
+  const [topAlbumsLoaded, setTopAlbumsLoaded] = useState<boolean>(false);
+  const [albumIds, setAlbumIds] = useState<string[]>();
+  const [token, setToken] = useState<string | null>(null);
+  const [loaded, setLoaded] = useState(false);
 
-//     const id = '11dFghVXANMlKmJXsNCbNl';
-//     const COUNTRY = 'LT';
-//     const LIMIT = 50;
-//     const OFFSET_QUERY = 5;
-//     const MODIFIERS = `?country=${COUNTRY}&limit=${LIMIT}&offset=${OFFSET_QUERY}`;
+  useEffect(() => {
+    const controller = new AbortController();
+    axios
+      .post(ACCESS_URL, GRANT_TYPE, {
+        signal: controller.signal,
+        headers: {
+          Authorization: `Basic ${SPOTIFY_TOKEN}`,
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      })
+      .then((response) => {
+        setToken(response.data.access_token);
+      })
+      .catch((err: { err: unknown; message: unknown }) => console.log(err.message))
+      .finally(() => {
+        setLoaded(true);
+      });
 
-//     axios
-//       .get(`https://api.spotify.com/v1/albums/${id}/tracks/${MODIFIERS}`, {
-//         headers: {
-//           Accept: 'application/json',
-//           Authorization: `Bearer ${token}`,
-//           'Content-Type': 'application/json',
-//         },
-//       })
-//       .then((resp) => {
-//         console.log(resp.data.albums.items);
+    return () => {
+      controller.abort();
+    };
+  }, [GRANT_TYPE, SPOTIFY_TOKEN]);
 
-//         const albumArray = resp.data.albums.items
-//           .filter((album: { album_type: string; available_markets: boolean }) => {
-//             return album.album_type === 'album';
-//           })
-//           .slice(0, 6);
-//         console.log(albumArray);
-//         setAlbums(albumArray);
-//       });
-//   };
-//   useEffect(() => {
-//     getPreview(token);
-//     console.log(token);
-//     // eslint-disable-next-line react-hooks/exhaustive-deps
-//   }, [token]);
+  useEffect(() => {
+    const controller = new AbortController();
+    if (token === null || loaded === false) return;
+    axios
+      .get(`https://api.spotify.com/v1/browse/new-releases${MODIFIERS}`, {
+        signal: controller.signal,
+        headers: {
+          Accept: 'application/json',
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((resp) => {
+        const albumArray = resp.data.albums.items.filter((album: { album_type: string }) => {
+          return album.album_type === 'album';
+        });
+        const albumArrayIds = albumArray.map((item: string, index: number) => albumArray[index].artists[0].id);
 
-//   return { track };
-// }
+        setAlbumIds(albumArrayIds);
+      })
+      .catch((err: { err: unknown; message: unknown }) => console.log(err.message));
 
-// export default useSpotify;
+    return () => {
+      controller.abort();
+    };
+  }, [token, loaded, MODIFIERS]);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    if (token === null || loaded === false) return;
+    if (!albumIds || albumIds === undefined) return;
+
+    Promise.all(
+      albumIds.map((id) =>
+        axios.get(`https://api.spotify.com/v1/artists/${id}/top-tracks?market=${COUNTRY}`, {
+          signal: controller.signal,
+          headers: {
+            Accept: 'application/json',
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        })
+      )
+    )
+      .then((resp) => {
+        const topAlbumArray = resp
+          .map((item, index, array) => array[index].data.tracks[0])
+          .filter((item) => {
+            return item !== undefined;
+          });
+
+        setTopAlbums(topAlbumArray);
+        setTopAlbumsLoaded(true);
+      })
+      .catch((err: { err: unknown; message: unknown }) => console.log(err.message));
+
+    return () => {
+      controller.abort();
+    };
+  }, [albumIds, token, loaded]);
+
+  return { topAlbums, topAlbumsLoaded, albumIds };
+}
+
+export default useSpotifyPreview;
