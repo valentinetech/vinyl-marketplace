@@ -1,13 +1,18 @@
 import Button from 'components/elements/Button';
 import Card from 'components/elements/Card';
 import useSpotifyPreview from 'hooks/useSpotifyPreview';
+import { useState } from 'react';
 
 import { SectionContainer, SectionName, ExploreContainer, LoadMore } from './Explore.styles';
 
 const Explore = () => {
   const { topAlbums, topAlbumsLoaded } = useSpotifyPreview();
-  console.log(topAlbums);
+  const [loadMore, setLoadMore] = useState(6);
 
+  console.log(topAlbums);
+  // const slice = () => {
+  //   topAlbums[-1]? loadMore :
+  // }
   return (
     <>
       <SectionContainer id='explore'>
@@ -29,11 +34,11 @@ const Explore = () => {
                 />
               );
             })
-            .slice(0, 6)
+            .slice(0, loadMore)
         )}
       </ExploreContainer>
       <LoadMore>
-        <Button onClick={() => console.log()}>Load More...</Button>
+        <Button onClick={() => setLoadMore((curr) => curr + 3)}>Load More...</Button>
       </LoadMore>
     </>
   );

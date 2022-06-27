@@ -1,5 +1,5 @@
 import Button from 'components/elements/Button';
-import { useState } from 'react';
+import { Howl, Howler } from 'howler';
 
 import {
   CardContainer,
@@ -34,16 +34,27 @@ const Card = ({
   bidLast?: string;
   buttonText?: string;
 }) => {
-  function handleClick(url?: string) {
+  function playPreview(url: string | undefined) {
     const audio = new Audio(url);
 
-    if (url !== null) {
+    if (url === null) return;
+    if (audio.paused !== true) {
+      audio.pause();
       audio.play();
-      setTimeout(() => audio.pause(), 10000);
     } else {
-      return alert('No preview available for this album...');
+      audio.play();
     }
+    setTimeout(() => {
+      audio.pause();
+    }, 3000);
   }
+  // function playPreview(url: string | undefined) {
+  //   const audio = new Howl({
+  //     s,
+  //   });
+
+  //   audio.play();
+  // }
 
   return (
     <CardContainer>
@@ -51,7 +62,7 @@ const Card = ({
       <AlbumName>{albumName}</AlbumName>
       <ArtistName>{artistName}</ArtistName>
       <StaticContainer>
-        <SpotifyIconButton onClick={() => handleClick(spotifyButton)}>▶</SpotifyIconButton>
+        <SpotifyIconButton onClick={() => playPreview(spotifyButton)}>▶</SpotifyIconButton>
         <CountdownTitle>{(countdownTitle = 'Time Remaining')}</CountdownTitle>
         <Countdown>{(countdown = '00:10:00')}</Countdown>
         <BidContainer>
@@ -66,5 +77,3 @@ const Card = ({
 };
 
 export default Card;
-
-// onClick={() => handleClick(spotifyButton)}

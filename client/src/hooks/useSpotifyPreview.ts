@@ -41,8 +41,8 @@ export function useSpotifyPreview() {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
       })
-      .then((response) => {
-        setToken(response.data.access_token);
+      .then((resp) => {
+        setToken(resp.data.access_token);
       })
       .catch((err: { err: unknown; message: unknown }) => console.log(err.message))
       .finally(() => {
@@ -102,7 +102,7 @@ export function useSpotifyPreview() {
         const topAlbumArray = resp
           .map((item, index, array) => array[index].data.tracks[0])
           .filter((item) => {
-            return item !== undefined;
+            return item !== undefined && item.preview_url !== null;
           });
 
         setTopAlbums(topAlbumArray);
