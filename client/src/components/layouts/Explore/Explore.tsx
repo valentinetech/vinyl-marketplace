@@ -1,7 +1,7 @@
 import Button from 'components/elements/Button';
 import Card from 'components/elements/Card';
 import useSpotifyPreview from 'hooks/useSpotifyPreview';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { SectionContainer, SectionName, ExploreContainer, LoadMore } from './Explore.styles';
 
@@ -9,6 +9,25 @@ const Explore = () => {
   const { topAlbums, topAlbumsLoaded } = useSpotifyPreview();
   const [loadMore, setLoadMore] = useState(6);
 
+  const [previewUrl, setPreviewUrl] = useState<string>();
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  useEffect(() => {
+    const audio = new Audio(previewUrl);
+
+    if (audio.paused) {
+      audio.play();
+    } else {
+      audio.pause();
+    }
+    setIsPlaying(!audio.paused);
+    return () => {
+      audio.pause();
+      setIsPlaying(audio.paused);
+    };
+  }, [previewUrl]);
+
+  console.log(isPlaying);
   console.log(topAlbums);
   // const slice = () => {
   //   topAlbums[-1]? loadMore :
@@ -23,14 +42,14 @@ const Explore = () => {
           <h2>Loading...</h2>
         ) : (
           topAlbums
-            ?.map((item) => {
+            ?.map(({ album, preview_url }) => {
               return (
                 <Card
-                  key={item.album.artists[0].id}
-                  albumName={item.album.name}
-                  albumCover={item.album.images[0].url}
-                  artistName={item.album.artists[0].name}
-                  spotifyButton={item.preview_url}
+                  key={album.artists[0].id}
+                  albumName={album.name}
+                  albumCover={album.images[0].url}
+                  artistName={album.artists[0].name}
+                  setPreviewUrl={() => setPreviewUrl(previewUrl === preview_url ? undefined : preview_url)}
                 />
               );
             })

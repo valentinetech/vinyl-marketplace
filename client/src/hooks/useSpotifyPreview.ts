@@ -4,7 +4,7 @@ import qs from 'qs';
 import { process } from 'types/envTypes';
 const Buffer = require('buffer/').Buffer;
 
-interface TopAlbums {
+interface TopAlbum {
   preview_url: string;
   album: {
     images: [{ url: string }];
@@ -25,7 +25,7 @@ export function useSpotifyPreview() {
   const ACCESS_URL: string = 'https:accounts.spotify.com/api/token';
   const GRANT_TYPE: string = qs.stringify({ grant_type: 'client_credentials' });
 
-  const [topAlbums, setTopAlbums] = useState<TopAlbums[] | undefined>();
+  const [topAlbums, setTopAlbums] = useState<TopAlbum[] | undefined>();
   const [topAlbumsLoaded, setTopAlbumsLoaded] = useState<boolean>(false);
   const [albumIds, setAlbumIds] = useState<string[]>();
   const [token, setToken] = useState<string | null>(null);
@@ -99,7 +99,7 @@ export function useSpotifyPreview() {
       )
     )
       .then((resp) => {
-        const topAlbumArray = resp
+        const topAlbumArray: TopAlbum[] = resp
           .map((item, index, array) => array[index].data.tracks[0])
           .filter((item) => {
             return item !== undefined && item.preview_url !== null;
