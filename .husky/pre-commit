@@ -2,4 +2,3 @@
 . "$(dirname -- "$0")/husky.sh"
 
 cd ./client && npm run lint
-cd ./client && npm run lint
