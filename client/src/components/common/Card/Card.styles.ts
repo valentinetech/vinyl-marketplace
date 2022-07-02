@@ -60,7 +60,7 @@ const SpotifyIconButton = styled.button`
   cursor: pointer;
 
   &:hover {
-    color: ${theme.colors.brandSecondary};
+    color: ${theme.colors.white};
     font-size: 30px;
     transition: all 0.3s;
   }

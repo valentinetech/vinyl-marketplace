@@ -1,5 +1,5 @@
-import Button from 'components/elements/Button';
-import Card from 'components/elements/Card';
+import Button from 'components/common/Button';
+import Card from 'components/common/Card';
 import useSpotifyPreview from 'hooks/useSpotifyPreview';
 import { useState, useEffect } from 'react';
 
@@ -7,31 +7,28 @@ import { SectionContainer, SectionName, ExploreContainer, LoadMore } from './Exp
 
 const Explore = () => {
   const { topAlbums, topAlbumsLoaded } = useSpotifyPreview();
-  const [loadMore, setLoadMore] = useState(6);
+  const [loadMore, setLoadMore] = useState<number>(6);
 
   const [previewUrl, setPreviewUrl] = useState<string>();
   const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
     const audio = new Audio(previewUrl);
+    setIsPlaying(audio.paused);
 
     if (audio.paused) {
       audio.play();
     } else {
       audio.pause();
     }
-    setIsPlaying(!audio.paused);
+
     return () => {
       audio.pause();
-      setIsPlaying(audio.paused);
     };
   }, [previewUrl]);
 
   console.log(isPlaying);
   console.log(topAlbums);
-  // const slice = () => {
-  //   topAlbums[-1]? loadMore :
-  // }
   return (
     <>
       <SectionContainer id='explore'>
@@ -50,6 +47,7 @@ const Explore = () => {
                   albumCover={album.images[0].url}
                   artistName={album.artists[0].name}
                   setPreviewUrl={() => setPreviewUrl(previewUrl === preview_url ? undefined : preview_url)}
+                  spotifyButtonText={previewUrl ? 'II' : '▶'}
                 />
               );
             })
@@ -64,3 +62,5 @@ const Explore = () => {
 };
 
 export default Explore;
+
+// () => setPreviewUrl(previewUrl === preview_url ? undefined : preview_url);

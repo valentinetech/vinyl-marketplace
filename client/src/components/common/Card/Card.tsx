@@ -1,5 +1,4 @@
-import Button from 'components/elements/Button';
-import { Howl, Howler } from 'howler';
+import Button from 'components/common/Button';
 
 import {
   CardContainer,
@@ -15,6 +14,18 @@ import {
   Bid,
 } from './Card.styles';
 
+interface CardProps {
+  albumCover: string;
+  albumName: string;
+  artistName: string;
+  countdownTitle?: string;
+  countdown?: string;
+  bidLast?: string;
+  buttonText?: string;
+  setPreviewUrl: () => void;
+  spotifyButtonText: string;
+}
+
 const Card = ({
   albumCover,
   albumName,
@@ -24,23 +35,15 @@ const Card = ({
   countdown,
   bidLast,
   buttonText,
-}: {
-  albumCover: string;
-  albumName: string;
-  artistName: string;
-  countdownTitle?: string;
-  countdown?: string;
-  bidLast?: string;
-  buttonText?: string;
-  setPreviewUrl: () => void;
-}) => {
+  spotifyButtonText,
+}: CardProps) => {
   return (
     <CardContainer>
       <CardImg src={albumCover}></CardImg>
       <AlbumName>{albumName}</AlbumName>
       <ArtistName>{artistName}</ArtistName>
       <StaticContainer>
-        <SpotifyIconButton onClick={setPreviewUrl}>▶ II</SpotifyIconButton>
+        <SpotifyIconButton onClick={setPreviewUrl}>{spotifyButtonText}</SpotifyIconButton>
         <CountdownTitle>{(countdownTitle = 'Time Remaining')}</CountdownTitle>
         <Countdown>{(countdown = '00:10:00')}</Countdown>
         <BidContainer>

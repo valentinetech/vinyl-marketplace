@@ -1,8 +1,7 @@
 import { menuRoutes } from 'components/layouts/data/menuRoutes';
 import { btnRoutes } from 'components/layouts/data/buttonRoutes';
 import logo from 'assets/images/logo.png';
-import Button from 'components/elements/Button';
-import { animateTopScroll } from 'react-scroll/modules/mixins/animate-scroll';
+import Button from 'components/common/Button';
 import {
   Container,
   LogoLink,

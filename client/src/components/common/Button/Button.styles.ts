@@ -13,7 +13,7 @@ export const ButtonPrimary = styled.button`
   &:hover {
     transition: all 0.2s ease-in-out;
     background: ${theme.colors.brandSecondary};
-    color: #fff;
+    color: ${theme.colors.blue};
   }
 `;
 
@@ -27,6 +27,6 @@ export const ButtonSecondary = styled.button`
   &:hover {
     transition: all 0.2s ease-in-out;
     background: ${theme.colors.brand};
-    color: #fff;
+    color: ${theme.colors.blue};
   }
 `;

@@ -1,8 +1,8 @@
-import Button from 'components/elements/Button';
+import Button from 'components/common/Button';
 import logo from 'assets/images/logo.png';
 import { FaBars } from 'react-icons/fa';
 
-import Search from 'components/elements/Search';
+import Search from 'components/common/Search';
 
 import { menuRoutes } from 'components/layouts/data/menuRoutes';
 import { btnRoutes } from 'components/layouts/data/buttonRoutes';
