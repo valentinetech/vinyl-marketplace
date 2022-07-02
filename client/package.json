@@ -12,6 +12,7 @@
     "@types/react-dom": "^17.0.14",
     "axios": "^0.26.1",
     "buffer": "^6.0.3",
+    "eslint-config-airbnb-base": "^15.0.0",
     "qs-stringify": "^1.2.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
@@ -27,12 +28,15 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
+      
     ],
     "overrides": [
       {

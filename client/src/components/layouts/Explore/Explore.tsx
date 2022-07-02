@@ -8,27 +8,19 @@ import { SectionContainer, SectionName, ExploreContainer, LoadMore } from './Exp
 const Explore = () => {
   const { topAlbums, topAlbumsLoaded } = useSpotifyPreview();
   const [loadMore, setLoadMore] = useState<number>(6);
-
   const [previewUrl, setPreviewUrl] = useState<string>();
-  const [isPlaying, setIsPlaying] = useState(false);
+  // const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
     const audio = new Audio(previewUrl);
-    setIsPlaying(audio.paused);
 
-    if (audio.paused) {
-      audio.play();
-    } else {
-      audio.pause();
-    }
+    audio.play();
 
     return () => {
       audio.pause();
     };
   }, [previewUrl]);
 
-  console.log(isPlaying);
-  console.log(topAlbums);
   return (
     <>
       <SectionContainer id='explore'>
@@ -47,7 +39,7 @@ const Explore = () => {
                   albumCover={album.images[0].url}
                   artistName={album.artists[0].name}
                   setPreviewUrl={() => setPreviewUrl(previewUrl === preview_url ? undefined : preview_url)}
-                  spotifyButtonText={previewUrl ? 'II' : '▶'}
+                  spotifyButtonText={previewUrl ? '❚❚' : '▶'}
                 />
               );
             })
@@ -62,5 +54,3 @@ const Explore = () => {
 };
 
 export default Explore;
-
-// () => setPreviewUrl(previewUrl === preview_url ? undefined : preview_url);

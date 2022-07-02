@@ -70,7 +70,9 @@ export function useSpotifyPreview() {
         const albumArray = resp.data.albums.items.filter((album: { album_type: string }) => {
           return album.album_type === 'album';
         });
-        const albumArrayIds = albumArray.map((item: string, index: number) => albumArray[index].artists[0].id);
+        const albumArrayIds: string[] = albumArray.map(
+          (item: string, index: number) => albumArray[index].artists[0].id
+        );
 
         setAlbumIds(albumArrayIds);
       })
