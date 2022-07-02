@@ -13,11 +13,32 @@ interface TopAlbum {
   };
 }
 
+interface PostToken {
+  ACCESS_URL: string;
+  GRANT_TYPE: string;
+  access_token: string;
+}
+
+interface GetIds {
+  albums: {
+    items: [
+      {
+        album_type: string;
+        artists: [
+          {
+            id: string;
+          }
+        ];
+      }
+    ];
+  };
+}
+
 export function useSpotifyPreview() {
-  const COUNTRY = 'US';
-  const LIMIT = 50;
-  const OFFSET_QUERY = 0;
-  const MODIFIERS = `?country=${COUNTRY}&limit=${LIMIT}&offset=${OFFSET_QUERY}`;
+  const COUNTRY: string = 'US';
+  const LIMIT: number = 50;
+  const OFFSET_QUERY: number = 0;
+  const MODIFIERS: string = `?country=${COUNTRY}&limit=${LIMIT}&offset=${OFFSET_QUERY}`;
 
   const SPOTIFY_ID: string = process.env.REACT_APP_SPOTIFY_ID;
   const SPOTIFY_SECRET: string = process.env.REACT_APP_SPOTIFY_SECRET;
@@ -34,7 +55,7 @@ export function useSpotifyPreview() {
   useEffect(() => {
     const controller = new AbortController();
     axios
-      .post(ACCESS_URL, GRANT_TYPE, {
+      .post<PostToken>(ACCESS_URL, GRANT_TYPE, {
         signal: controller.signal,
         headers: {
           Authorization: `Basic ${SPOTIFY_TOKEN}`,
@@ -58,7 +79,7 @@ export function useSpotifyPreview() {
     const controller = new AbortController();
     if (token === null || loaded === false) return;
     axios
-      .get(`https://api.spotify.com/v1/browse/new-releases${MODIFIERS}`, {
+      .get<GetIds>(`https://api.spotify.com/v1/browse/new-releases${MODIFIERS}`, {
         signal: controller.signal,
         headers: {
           Accept: 'application/json',
@@ -67,12 +88,10 @@ export function useSpotifyPreview() {
         },
       })
       .then((resp) => {
-        const albumArray = resp.data.albums.items.filter((album: { album_type: string }) => {
+        const albumArray = resp.data.albums.items.filter((album) => {
           return album.album_type === 'album';
         });
-        const albumArrayIds: string[] = albumArray.map(
-          (item: string, index: number) => albumArray[index].artists[0].id
-        );
+        const albumArrayIds = albumArray.map((item, index) => albumArray[index].artists[0].id);
 
         setAlbumIds(albumArrayIds);
       })
@@ -101,6 +120,7 @@ export function useSpotifyPreview() {
       )
     )
       .then((resp) => {
+        console.log(resp);
         const topAlbumArray: TopAlbum[] = resp
           .map((item, index, array) => array[index].data.tracks[0])
           .filter((item) => {
