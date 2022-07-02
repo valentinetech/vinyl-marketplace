@@ -29,7 +29,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint .",
     "lint:fix": "eslint --fix",
-    "prepare": "cd .. && husky install client/.husky"
+    "prepare": "cd .. && husky install .config/husky"
   },
   "eslintConfig": {
     "extends": [
