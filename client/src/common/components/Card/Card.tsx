@@ -1,4 +1,4 @@
-import Button from 'components/common/Button';
+import Button from 'common/components/Button';
 
 import {
   CardContainer,

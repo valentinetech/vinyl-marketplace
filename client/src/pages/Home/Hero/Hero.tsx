@@ -1,6 +1,5 @@
 import heroImage from 'assets/images/hero-image.png';
-import { heroData } from '../data/homeData';
-import Button from 'components/common/Button';
+import Button from 'common/components/Button';
 import {
   HeroContainer,
   HeroTextContainer,
@@ -13,14 +12,20 @@ import {
 } from './Hero.styles';
 
 const Hero = () => {
+  const hero = {
+    h1: 'Discover the World of Vinyl Records!',
+    p: 'The best place to Buy and Sell your Vinyl Collection online!',
+    cta: 'Explore!',
+    route: 'explore',
+  };
   return (
     <HeroContainer>
       <HeroTextContainer>
-        <HeroH1>{heroData.h1}</HeroH1>
-        <HeroText>{heroData.p}</HeroText>
+        <HeroH1>{hero.h1}</HeroH1>
+        <HeroText>{hero.p}</HeroText>
         <HeroImageMobile src={heroImage} alt='hero-image' />
-        <HeroButtonContainer to={heroData.route} duration={500} smooth={true} offset={-80}>
-          <Button variant='primary'>{heroData.cta}</Button>
+        <HeroButtonContainer to={hero.route} duration={500} smooth={true} offset={-80}>
+          <Button variant='primary'>{hero.cta}</Button>
         </HeroButtonContainer>
       </HeroTextContainer>
       <HeroImageContainer>

@@ -1,12 +1,12 @@
-import Button from 'components/common/Button';
+import Button from 'common/components/Button';
+import Search from 'common/components/Search';
+import { menuRoutes, btnRoutes } from 'common/layouts/Header/routes';
+
 import logo from 'assets/images/logo.png';
 import { FaBars } from 'react-icons/fa';
 
-import Search from 'components/common/Search';
-
-import { menuRoutes } from 'components/layouts/data/menuRoutes';
-import { btnRoutes } from 'components/layouts/data/buttonRoutes';
 import { animateScroll } from 'react-scroll';
+
 import {
   Navigation,
   NavContainer,

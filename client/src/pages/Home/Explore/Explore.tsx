@@ -1,5 +1,5 @@
-import Button from 'components/common/Button';
-import Card from 'components/common/Card';
+import Button from 'common/components/Button';
+import Card from 'common/components/Card';
 import useSpotifyPreview from 'hooks/useSpotifyPreview';
 import { useState, useEffect } from 'react';
 
