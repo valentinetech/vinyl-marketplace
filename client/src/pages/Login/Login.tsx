@@ -1,12 +1,12 @@
 import Header from 'common/layouts/Header';
 
-const Profile = () => {
+const Login = () => {
   return (
     <>
       <Header />
-      <div>Profile</div>;
+      <div>Login</div>
     </>
   );
 };
 
-export default Profile;
+export default Login;

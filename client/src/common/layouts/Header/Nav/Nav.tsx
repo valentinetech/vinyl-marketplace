@@ -1,9 +1,9 @@
+import logo from 'assets/images/logo.png';
+import { FaBars } from 'react-icons/fa';
+
 import Button from 'common/components/Button';
 import Search from 'common/components/Search';
 import { menuRoutes, btnRoutes } from 'common/layouts/Header/routes';
-
-import logo from 'assets/images/logo.png';
-import { FaBars } from 'react-icons/fa';
 
 import { animateScroll } from 'react-scroll';
 

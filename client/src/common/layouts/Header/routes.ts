@@ -19,11 +19,15 @@ export const menuRoutes = [
 
 export const btnRoutes = {
   signUp: {
-    title: 'Sign Up',
-    route: '/sign-up',
+    title: 'Register',
+    route: '/register',
   },
   login: {
     title: 'Login',
     route: '/login',
+  },
+  profile: {
+    title: 'Profile',
+    route: '/profile',
   },
 };
