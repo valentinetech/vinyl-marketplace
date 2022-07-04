@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import spotifyImage from 'assets/images/spotify.png';
-import { theme } from 'styles/theme';
+import { theme } from 'common/styles/theme';
 
 export {
   CardContainer,

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import qs from 'qs';
-import { process } from 'types/envTypes';
+import { process } from 'common/types/envTypes';
 const Buffer = require('buffer/').Buffer;
 
 interface TopAlbum {

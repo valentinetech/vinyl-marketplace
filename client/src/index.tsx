@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import App from './app/App';
+import reportWebVitals from './common/utils/reportWebVitals';
 // import { store } from 'store';
 // import { provider } from '@reduxjs/toolkit';
 

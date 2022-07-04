@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { FaTimes } from 'react-icons/fa';
-import { theme } from '../../../../styles/theme';
+import { theme } from '../../../styles/theme';
 import { Link as LinkR } from 'react-router-dom';
 import { Link as LinkS } from 'react-scroll';
 

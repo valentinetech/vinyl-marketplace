@@ -2,10 +2,10 @@ import Login from 'pages/Login/Login';
 import Profile from 'pages/Profile/Profile';
 import Register from 'pages/Register/Register';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Home from './pages/Home/Home';
+import Home from '../pages/Home/Home';
 import { ThemeProvider } from 'styled-components';
-import { theme } from './styles/theme';
-import { GlobalStyles } from './styles/global.styles';
+import { theme } from '../common/styles/theme';
+import { GlobalStyles } from '../common/styles/global.styles';
 
 const App = () => (
   <ThemeProvider theme={theme}>

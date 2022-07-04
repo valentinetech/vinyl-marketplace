@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { theme } from '../../../styles/theme';
+import { theme } from '../../../common/styles/theme';
 import { Link as LinkS } from 'react-scroll';
 
 export const HeroContainer = styled.div`
