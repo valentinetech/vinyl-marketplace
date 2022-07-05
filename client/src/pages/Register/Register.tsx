@@ -39,8 +39,15 @@ const Input = styled.input`
   margin-bottom: 10px;
 `;
 
+interface RegisterProps {
+  name: string;
+  email: string;
+  password: string;
+  passwordConfirm: string;
+}
+
 const Register = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<RegisterProps>({
     name: '',
     email: '',
     password: '',
@@ -48,14 +55,13 @@ const Register = () => {
   });
   const { name, email, password, passwordConfirm } = formData;
 
-  const onChange = (e: React.FormEvent<HTMLInputElement>): void => {
-    const target = e.target as HTMLInputElement;
-
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setFormData((prevState) => ({
       ...prevState,
-      [target.name]: target.value,
+      [e.target.name]: e.target.value,
     }));
   };
+
   const onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
   };

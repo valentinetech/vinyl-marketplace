@@ -1,15 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './app/App';
-import reportWebVitals from './common/utils/reportWebVitals';
-// import { store } from 'store';
-// import { provider } from '@reduxjs/toolkit';
+import AppWrapper from 'app/App';
 
-const root = ReactDOM.createRoot(document.getElementById('root')!);
+import reportWebVitals from 'common/utils/reportWebVitals';
+
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
 root.render(
   <React.StrictMode>
-    <App />
+    <AppWrapper />
   </React.StrictMode>
 );
 

@@ -47,16 +47,14 @@ const Login = () => {
   });
   const { email, password } = formData;
 
-  const onChange = (e: React.FormEvent<HTMLInputElement>) => {
-    const target = e.target as HTMLInputElement;
-
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setFormData((prevState) => ({
       ...prevState,
-      [target.name]: target.value,
+      [e.target.name]: e.target.value,
     }));
   };
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
   };
   return (

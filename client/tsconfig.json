@@ -18,8 +18,6 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "types": ["react/next", "react-dom/next", "react-dom/experimental"],
-    // "suppressImplicitAnyIndexErrors": true,
-    //"react/next",
   },
   "include": ["src", "next-env.d.ts", "twin.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
