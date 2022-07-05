@@ -1,5 +1,5 @@
 import { menuRoutes, btnRoutes } from 'common/layouts/Header/routes';
-import logo from 'assets/images/logo.png';
+import logo from 'assets/logo.png';
 import Button from 'common/components/Button';
 import {
   Container,

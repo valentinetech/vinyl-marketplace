@@ -1,4 +1,4 @@
-import logo from 'assets/images/logo.png';
+import logo from 'assets/logo.png';
 import { FaBars } from 'react-icons/fa';
 
 import Button from 'common/components/Button';

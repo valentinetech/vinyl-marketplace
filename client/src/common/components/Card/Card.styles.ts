@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import spotifyImage from 'assets/images/spotify.png';
+import spotifyImage from 'assets/spotify.png';
 import { theme } from 'common/styles/theme';
 
 export {
