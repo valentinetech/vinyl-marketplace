@@ -5,13 +5,14 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 const user = localStorage.getItem('user');
 
 interface StateProps {
+  user: string | null;
   isLoading: boolean;
   isSucces: boolean;
   isError: boolean;
   message: string;
 }
 
-const initialState = {
+const initialState: StateProps = {
   user: null,
   isError: false,
   isSucces: false,
@@ -25,12 +26,7 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    reset: (state: StateProps) => {
-      state.isLoading = false;
-      state.isSucces = false;
-      state.isError = false;
-      state.message = '';
-    },
+    reset: () => initialState,
   },
   extraReducers: () => {},
 });

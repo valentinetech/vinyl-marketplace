@@ -9,12 +9,13 @@ const Explore = () => {
   const { topAlbums, topAlbumsLoaded } = useSpotifyPreview();
   const [loadMore, setLoadMore] = useState<number>(6);
   const [previewUrl, setPreviewUrl] = useState<string>();
-  // const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
     const audio = new Audio(previewUrl);
 
     audio.play();
+
+    setTimeout(() => setPreviewUrl(undefined), 30000);
 
     return () => {
       audio.pause();
@@ -39,7 +40,7 @@ const Explore = () => {
                   albumCover={album.images[0].url}
                   artistName={album.artists[0].name}
                   setPreviewUrl={() => setPreviewUrl(previewUrl === preview_url ? undefined : preview_url)}
-                  spotifyButtonText={previewUrl ? '❚❚' : '▶'}
+                  spotifyButtonText={previewUrl === preview_url ? '❚❚' : '▶'}
                 />
               );
             })
