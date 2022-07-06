@@ -7,14 +7,14 @@ import { SectionContainer, SectionName, ExploreContainer, LoadMore } from './Exp
 
 const Explore = () => {
   const { topAlbums, topAlbumsLoaded } = useSpotifyPreview();
-  const [loadMore, setLoadMore] = useState<number>(6);
+  const [displayedAlbumCount, setDisplayedAlbumCount] = useState<number>(6);
   const [previewUrl, setPreviewUrl] = useState<string>();
+
+  const canLoadMore = topAlbums && topAlbums.length > displayedAlbumCount;
 
   useEffect(() => {
     const audio = new Audio(previewUrl);
-
     audio.play();
-
     setTimeout(() => setPreviewUrl(undefined), 30000);
 
     return () => {
@@ -28,9 +28,7 @@ const Explore = () => {
         <SectionName>Explore</SectionName>
       </SectionContainer>
       <ExploreContainer>
-        {topAlbumsLoaded === false ? (
-          <h2>Loading...</h2>
-        ) : (
+        {topAlbumsLoaded ? (
           topAlbums
             ?.map(({ album, preview_url }) => {
               return (
@@ -44,12 +42,17 @@ const Explore = () => {
                 />
               );
             })
-            .slice(0, loadMore)
+            .slice(0, displayedAlbumCount)
+        ) : (
+          <h2>Loading...</h2>
         )}
       </ExploreContainer>
-      <LoadMore>
-        <Button onClick={() => setLoadMore((curr) => curr + 3)}>Load More...</Button>
-      </LoadMore>
+
+      {canLoadMore && (
+        <LoadMore>
+          <Button onClick={() => setDisplayedAlbumCount((curr) => curr + 3)}>Load More...</Button>
+        </LoadMore>
+      )}
     </>
   );
 };
