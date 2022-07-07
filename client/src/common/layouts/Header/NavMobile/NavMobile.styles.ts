@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { FaTimes } from 'react-icons/fa';
-import { theme } from '../../../styles/theme';
+import { theme } from 'common/styles/theme';
 import { Link as LinkR } from 'react-router-dom';
 import { Link as LinkS } from 'react-scroll';
 
@@ -8,9 +8,9 @@ interface isOpenProp {
   isOpen: boolean;
 }
 
-export { Container, LogoLink, Logo, Icon, CloseIcon, MenuContainer, Menu, Link, NavSignUp, ButtonContainer };
+export { Nav, LogoLink, Logo, Icon, CloseIcon, MenuContainer, Menu, MenuItem, RegisterButton, LoginButtonContainer };
 
-const Container = styled.aside<isOpenProp>`
+const Nav = styled.aside<isOpenProp>`
   position: fixed;
   z-index: 999;
   width: 100%;
@@ -50,7 +50,7 @@ const Menu = styled.ul`
   }
 `;
 
-const Link = styled(LinkS)`
+const MenuItem = styled(LinkS)`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -67,7 +67,7 @@ const Link = styled(LinkS)`
   }
 `;
 
-const ButtonContainer = styled(LinkR)`
+const LoginButtonContainer = styled(LinkR)`
   display: flex;
   justify-content: center;
   text-decoration: none;
@@ -88,7 +88,7 @@ const Logo = styled.img`
   width: 200px;
 `;
 
-const NavSignUp = styled(LinkR)`
+const RegisterButton = styled(LinkR)`
   display: flex;
   align-items: center;
   justify-content: center;

@@ -18,7 +18,7 @@ export const menuRoutes = [
 ];
 
 export const btnRoutes = {
-  signUp: {
+  register: {
     title: 'Register',
     route: '/register',
   },

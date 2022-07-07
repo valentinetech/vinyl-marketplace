@@ -1,23 +1,22 @@
 import styled from 'styled-components';
-import { theme } from '../../../styles/theme';
+import { theme } from 'common/styles/theme';
 import { Link as LinkR } from 'react-router-dom';
 import { Link as LinkS } from 'react-scroll';
 
 export {
-  Navigation,
   NavContainer,
+  Nav,
   LogoLink,
   Logo,
   MobileIcon,
-  NavMenu,
-  NavLink,
-  NavItem,
-  NavButton,
-  NavSignUp,
-  LoginContainer,
+  Menu,
+  MenuItem,
+  LoginButtonContainer,
+  RegisterButton,
+  AuthContainer,
 };
 
-const Navigation = styled.nav`
+const NavContainer = styled.nav`
   height: 80px;
   background-color: ${theme.colors.body};
   display: flex;
@@ -28,7 +27,7 @@ const Navigation = styled.nav`
   z-index: 20;
 `;
 
-const NavContainer = styled.div`
+const Nav = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -62,7 +61,7 @@ const MobileIcon = styled.div`
   }
 `;
 
-const NavMenu = styled.ul`
+const Menu = styled.ul`
   display: flex;
   align-items: center;
   text-align: center;
@@ -73,11 +72,7 @@ const NavMenu = styled.ul`
   }
 `;
 
-const NavItem = styled.li`
-  height: 80px;
-`;
-
-const NavLink = styled(LinkS)`
+const MenuItem = styled(LinkS)`
   color: ${theme.colors.textPrimary};
   display: flex;
   align-items: center;
@@ -96,7 +91,7 @@ const NavLink = styled(LinkS)`
   }
 `;
 
-const NavButton = styled(LinkR)`
+const LoginButtonContainer = styled(LinkR)`
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -106,7 +101,7 @@ const NavButton = styled(LinkR)`
   } ;
 `;
 
-const NavSignUp = styled(LinkR)`
+const RegisterButton = styled(LinkR)`
   display: flex;
   align-items: flex-end;
   color: ${theme.colors.brandSecondary};
@@ -122,7 +117,7 @@ const NavSignUp = styled(LinkR)`
   } ;
 `;
 
-const LoginContainer = styled.div`
+const AuthContainer = styled.div`
   display: flex;
   align-items: center;
 `;

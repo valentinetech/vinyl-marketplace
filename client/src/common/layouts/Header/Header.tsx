@@ -1,5 +1,5 @@
 import NavMobile from './NavMobile';
-import Nav from './Nav';
+import NavDesktop from './NavDesktop';
 import { useState } from 'react';
 
 const Header = () => {
@@ -12,7 +12,7 @@ const Header = () => {
   return (
     <>
       <NavMobile isOpen={isOpen} toggleMenu={toggleMenu} isAuthorized={isAuthorized} />
-      <Nav toggleMenu={toggleMenu} isAuthorized={isAuthorized} />
+      <NavDesktop toggleMenu={toggleMenu} isAuthorized={isAuthorized} />
     </>
   );
 };

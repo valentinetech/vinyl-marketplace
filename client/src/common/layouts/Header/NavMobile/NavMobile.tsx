@@ -1,17 +1,18 @@
 import { menuRoutes, btnRoutes } from 'common/layouts/Header/routes';
 import logo from 'assets/logo.png';
 import Button from 'common/components/Button';
+import Avatar from 'common/components/Avatar';
 import {
-  Container,
+  Nav,
   LogoLink,
   Logo,
   Icon,
   CloseIcon,
   MenuContainer,
   Menu,
-  Link,
-  NavSignUp,
-  ButtonContainer,
+  MenuItem,
+  RegisterButton,
+  LoginButtonContainer,
 } from './NavMobile.styles';
 
 interface NavProps {
@@ -21,7 +22,7 @@ interface NavProps {
 }
 const NavMobile = ({ isOpen, toggleMenu, isAuthorized }: NavProps) => {
   return (
-    <Container isOpen={isOpen} onClick={toggleMenu}>
+    <Nav isOpen={isOpen} onClick={toggleMenu}>
       <LogoLink to='/'>
         <Logo src={logo} alt='logo' />
       </LogoLink>
@@ -32,7 +33,7 @@ const NavMobile = ({ isOpen, toggleMenu, isAuthorized }: NavProps) => {
         <Menu>
           {menuRoutes.map((item) => {
             return (
-              <Link
+              <MenuItem
                 key={item.title}
                 to={item.route}
                 onClick={toggleMenu}
@@ -40,20 +41,22 @@ const NavMobile = ({ isOpen, toggleMenu, isAuthorized }: NavProps) => {
                 duration={item.duration}
                 offset={item.offset}>
                 {item.title}
-              </Link>
+              </MenuItem>
             );
           })}
         </Menu>
-        {isAuthorized ? null : (
+        {isAuthorized ? (
+          <Avatar />
+        ) : (
           <>
-            <NavSignUp to={btnRoutes.signUp.route}>{btnRoutes.signUp.title}</NavSignUp>
-            <ButtonContainer to={btnRoutes.login.route}>
+            <RegisterButton to={btnRoutes.register.route}>{btnRoutes.register.title}</RegisterButton>
+            <LoginButtonContainer to={btnRoutes.login.route}>
               <Button>{btnRoutes.login.title}</Button>
-            </ButtonContainer>
+            </LoginButtonContainer>
           </>
         )}
       </MenuContainer>
-    </Container>
+    </Nav>
   );
 };
 
