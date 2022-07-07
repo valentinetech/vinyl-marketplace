@@ -17,9 +17,9 @@ import {
 interface NavProps {
   toggleMenu: () => void;
   isOpen: boolean;
+  isAuthorized: boolean;
 }
-
-const NavMobile = ({ isOpen, toggleMenu }: NavProps) => {
+const NavMobile = ({ isOpen, toggleMenu, isAuthorized }: NavProps) => {
   return (
     <Container isOpen={isOpen} onClick={toggleMenu}>
       <LogoLink to='/'>
@@ -30,7 +30,7 @@ const NavMobile = ({ isOpen, toggleMenu }: NavProps) => {
       </Icon>
       <MenuContainer>
         <Menu>
-          {menuRoutes.map((item, index) => {
+          {menuRoutes.map((item) => {
             return (
               <Link
                 key={item.title}
@@ -44,10 +44,14 @@ const NavMobile = ({ isOpen, toggleMenu }: NavProps) => {
             );
           })}
         </Menu>
-        <NavSignUp to={btnRoutes.signUp.route}>{btnRoutes.signUp.title}</NavSignUp>
-        <ButtonContainer to={btnRoutes.login.route}>
-          <Button>{btnRoutes.login.title}</Button>
-        </ButtonContainer>
+        {isAuthorized ? null : (
+          <>
+            <NavSignUp to={btnRoutes.signUp.route}>{btnRoutes.signUp.title}</NavSignUp>
+            <ButtonContainer to={btnRoutes.login.route}>
+              <Button>{btnRoutes.login.title}</Button>
+            </ButtonContainer>
+          </>
+        )}
       </MenuContainer>
     </Container>
   );

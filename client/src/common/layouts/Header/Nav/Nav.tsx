@@ -21,7 +21,12 @@ import {
   NavButton,
 } from './Nav.styles';
 
-const Nav = ({ toggleMenu }: { toggleMenu: () => void }) => {
+interface NavProps {
+  toggleMenu: () => void;
+  isAuthorized: boolean;
+}
+
+const Nav = ({ toggleMenu, isAuthorized }: NavProps) => {
   const toggleHome = () => {
     animateScroll.scrollToTop({ duration: 500 });
   };
@@ -51,12 +56,16 @@ const Nav = ({ toggleMenu }: { toggleMenu: () => void }) => {
             );
           })}
         </NavMenu>
-        <LoginContainer>
-          <NavSignUp to={btnRoutes.signUp.route}>{btnRoutes.signUp.title}</NavSignUp>
-          <NavButton to={btnRoutes.login.route}>
-            <Button variant='secondary'>{btnRoutes.login.title}</Button>
-          </NavButton>
-        </LoginContainer>
+        {isAuthorized ? null : (
+          <>
+            <LoginContainer>
+              <NavSignUp to={btnRoutes.signUp.route}>{btnRoutes.signUp.title}</NavSignUp>
+              <NavButton to={btnRoutes.login.route}>
+                <Button variant='secondary'>{btnRoutes.login.title}</Button>
+              </NavButton>
+            </LoginContainer>
+          </>
+        )}
       </NavContainer>
     </Navigation>
   );
