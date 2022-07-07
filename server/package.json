@@ -16,7 +16,7 @@
     "express": "^4.18.1",
     "got": "^12.1.0",
     "mongoose": "^6.4.2",
-    "nodemon": "^2.0.18"
+    "nodemon": "^2.0.19"
   },
   "devDependencies": {
     "@types/body-parser": "^1.19.2",

@@ -5,6 +5,8 @@ import { useState, useEffect } from 'react';
 
 import { SectionContainer, SectionName, ExploreContainer, LoadMore } from './Explore.styles';
 
+const SONG_LENGTH = 30000;
+
 const Explore = () => {
   const { topAlbums, topAlbumsLoaded } = useSpotifyPreview();
   const [displayedAlbumCount, setDisplayedAlbumCount] = useState<number>(6);
@@ -15,7 +17,7 @@ const Explore = () => {
   useEffect(() => {
     const audio = new Audio(previewUrl);
     audio.play();
-    setTimeout(() => setPreviewUrl(undefined), 30000);
+    setTimeout(() => setPreviewUrl(undefined), SONG_LENGTH);
 
     return () => {
       audio.pause();
