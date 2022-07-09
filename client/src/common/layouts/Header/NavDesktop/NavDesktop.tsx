@@ -1,11 +1,12 @@
+// Images & icons
 import logo from 'assets/logo.png';
 import { FaBars } from 'react-icons/fa';
-
+// Common components
 import Button from 'common/components/Button';
-import Search from 'common/components/Search';
+import Avatar from 'common/components/Avatar';
+// Routes
 import { menuRoutes, btnRoutes } from 'common/layouts/Header/routes';
-
-import { animateScroll } from 'react-scroll';
+// Styles
 import {
   NavContainer,
   Nav,
@@ -18,36 +19,25 @@ import {
   RegisterButton,
   AuthContainer,
 } from './NavDesktop.styles';
-import Avatar from 'common/components/Avatar';
 
 interface NavDesktopProps {
   toggleMenu: () => void;
   isAuthorized: boolean;
 }
-
 const NavDesktop = ({ toggleMenu, isAuthorized }: NavDesktopProps) => {
-  const toggleHome = () => {
-    animateScroll.scrollToTop({ duration: 500 });
-  };
   return (
     <NavContainer>
       <Nav>
-        <LogoLink to='/' onClick={toggleHome}>
+        <LogoLink to='/#'>
           <Logo src={logo} alt='logo' />
         </LogoLink>
         <MobileIcon onClick={toggleMenu} aria-label='Open / Close navigation menu'>
           <FaBars size={32} />
         </MobileIcon>
-        {/* <Search></Search> */}
         <Menu>
           {menuRoutes.map((item) => {
             return (
-              <MenuItem
-                key={item.title}
-                to={item.route}
-                smooth={item.smooth}
-                duration={item.duration}
-                offset={item.offset}>
+              <MenuItem key={item.title} smooth to={item.route}>
                 {item.title}
               </MenuItem>
             );

@@ -2,13 +2,13 @@ import styled from 'styled-components';
 import { FaTimes } from 'react-icons/fa';
 import { theme } from 'common/styles/theme';
 import { Link as LinkR } from 'react-router-dom';
-import { Link as LinkS } from 'react-scroll';
+import { HashLink } from 'react-router-hash-link';
 
 interface isOpenProp {
   isOpen: boolean;
 }
 
-export { Nav, LogoLink, Logo, Icon, CloseIcon, MenuContainer, Menu, MenuItem, RegisterButton, LoginButtonContainer };
+export { Nav, LogoLink, Logo, NavIcon, CloseIcon, MenuContainer, Menu, MenuItem, RegisterButton, LoginButtonContainer };
 
 const Nav = styled.aside<isOpenProp>`
   position: fixed;
@@ -27,7 +27,7 @@ const Nav = styled.aside<isOpenProp>`
 const CloseIcon = styled(FaTimes)`
   color: #fff;
 `;
-const Icon = styled.div`
+const NavIcon = styled.div`
   position: absolute;
   top: 20px;
   right: 32px;
@@ -50,7 +50,7 @@ const Menu = styled.ul`
   }
 `;
 
-const MenuItem = styled(LinkS)`
+const MenuItem = styled(HashLink)`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -73,7 +73,7 @@ const LoginButtonContainer = styled(LinkR)`
   text-decoration: none;
 `;
 
-const LogoLink = styled(LinkR)`
+const LogoLink = styled(HashLink)`
   position: absolute;
   top: 20px;
   margin-left: auto;

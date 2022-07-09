@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { theme } from '../../../common/styles/theme';
-import { Link as LinkS } from 'react-scroll';
+import { HashLink } from 'react-router-hash-link';
 
 export const HeroContainer = styled.div`
   display: flex;
@@ -52,10 +52,11 @@ export const HeroText = styled.p`
   } ;
 `;
 
-export const HeroButtonContainer = styled(LinkS)`
+export const HeroButtonContainer = styled(HashLink)`
   display: flex;
   margin-top: 50px;
   justify-content: flex-end;
+  text-decoration: none;
 
   @media ${theme.device.tabletMax} {
     justify-content: center;

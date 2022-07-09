@@ -13,7 +13,9 @@ body{
   letter-spacing: 0;
 }
 //Default Fonts
-
+html {
+  scroll-behavior: smooth;
+}
 link,
 li,
 ul

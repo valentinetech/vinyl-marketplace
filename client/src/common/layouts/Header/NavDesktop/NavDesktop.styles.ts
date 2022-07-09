@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { theme } from 'common/styles/theme';
 import { Link as LinkR } from 'react-router-dom';
-import { Link as LinkS } from 'react-scroll';
+import { HashLink } from 'react-router-hash-link';
 
 export {
   NavContainer,
@@ -38,7 +38,7 @@ const Nav = styled.div`
   width: 100%;
 `;
 
-const LogoLink = styled(LinkR)`
+const LogoLink = styled(HashLink)`
   justify-content: flex-start;
 `;
 const Logo = styled.img`
@@ -72,7 +72,7 @@ const Menu = styled.ul`
   }
 `;
 
-const MenuItem = styled(LinkS)`
+const MenuItem = styled(HashLink)`
   color: ${theme.colors.textPrimary};
   display: flex;
   align-items: center;
@@ -82,12 +82,9 @@ const MenuItem = styled(LinkS)`
   height: 100%;
   cursor: pointer;
 
-  &:active {
-    border-bottom: 3px solid ${theme.colors.brand};
-  }
-
   &:hover {
     color: ${theme.colors.brand};
+    border-bottom: 3px solid ${theme.colors.brand};
   }
 `;
 

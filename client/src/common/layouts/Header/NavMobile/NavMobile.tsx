@@ -6,7 +6,7 @@ import {
   Nav,
   LogoLink,
   Logo,
-  Icon,
+  NavIcon,
   CloseIcon,
   MenuContainer,
   Menu,
@@ -20,26 +20,21 @@ interface NavProps {
   isOpen: boolean;
   isAuthorized: boolean;
 }
+
 const NavMobile = ({ isOpen, toggleMenu, isAuthorized }: NavProps) => {
   return (
     <Nav isOpen={isOpen} onClick={toggleMenu}>
-      <LogoLink to='/'>
+      <LogoLink to='/#'>
         <Logo src={logo} alt='logo' />
       </LogoLink>
-      <Icon onClick={toggleMenu} aria-label='Open or Close navigation'>
+      <NavIcon onClick={toggleMenu} aria-label='Open or Close navigation'>
         <CloseIcon size={32} />
-      </Icon>
+      </NavIcon>
       <MenuContainer>
         <Menu>
           {menuRoutes.map((item) => {
             return (
-              <MenuItem
-                key={item.title}
-                to={item.route}
-                onClick={toggleMenu}
-                smooth={item.smooth}
-                duration={item.duration}
-                offset={item.offset}>
+              <MenuItem key={item.title} to={item.route} onClick={toggleMenu}>
                 {item.title}
               </MenuItem>
             );

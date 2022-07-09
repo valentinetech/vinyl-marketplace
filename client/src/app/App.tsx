@@ -13,20 +13,22 @@ import { theme } from 'common/styles/theme';
 import { Provider } from 'react-redux';
 import { store } from './store';
 
-const App = () => (
-  <ThemeProvider theme={theme}>
-    <GlobalStyles />
-    <Router>
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/register' element={<Register />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/profile' element={<Profile />} />
-      </Routes>
-    </Router>
-  </ThemeProvider>
-);
-
+const App = () => {
+  return (
+    <ThemeProvider theme={theme}>
+      <GlobalStyles />
+      <Router>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/login' element={<Login />} />
+          <Route path=':userId' element={<Profile />} />
+        </Routes>
+      </Router>
+    </ThemeProvider>
+  );
+};
+// Wrapp redux store
 const AppWrapper = () => (
   <Provider store={store}>
     <App />

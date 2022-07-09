@@ -1,19 +1,11 @@
 export const menuRoutes = [
   {
     title: 'Explore',
-    route: 'explore',
-    smooth: true,
-    duration: 500,
-    spy: true,
-    offset: -80,
+    route: '/#explore',
   },
   {
     title: 'About',
-    route: 'about',
-    smooth: true,
-    duration: 500,
-    spy: true,
-    offset: -80,
+    route: '/#about',
   },
 ];
 

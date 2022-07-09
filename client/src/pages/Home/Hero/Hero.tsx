@@ -16,7 +16,7 @@ const Hero = () => {
     h1: 'Discover the World of Vinyl Records!',
     p: 'The best place to Buy and Sell your Vinyl Collection online!',
     cta: 'Explore!',
-    route: 'explore',
+    route: '/#explore',
   };
   return (
     <HeroContainer>
@@ -24,7 +24,7 @@ const Hero = () => {
         <HeroH1>{hero.h1}</HeroH1>
         <HeroText>{hero.p}</HeroText>
         <HeroImageMobile src={heroImage} alt='hero-image' />
-        <HeroButtonContainer to={hero.route} duration={500} smooth={true} offset={-80}>
+        <HeroButtonContainer smooth to={hero.route}>
           <Button variant='primary'>{hero.cta}</Button>
         </HeroButtonContainer>
       </HeroTextContainer>
