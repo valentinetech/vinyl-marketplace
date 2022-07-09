@@ -31,9 +31,9 @@ export const deleteAuction = (req: Express.Request, res: Express.Response) => {
   res.status(200).json({ message: `Delete auction ${req.params.id}` });
 };
 
-module.exports = {
-  getAuction,
-  setAuction,
-  updateAuction,
-  deleteAuction,
-};
+// module.exports = {
+//   getAuction,
+//   setAuction,
+//   updateAuction,
+//   deleteAuction,
+// };
