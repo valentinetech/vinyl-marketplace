@@ -4,22 +4,27 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import 'dotenv/config';
 
-import { UserModel } from './models/Users';
 import process from './types/types';
+import { errorHandler } from './middleware/errorMiddleware';
 
 const app = express();
 const PORT = process.env.PORT;
+const MONGO_TOKEN = process.env.MONGO_URL;
 
 app.use(express.json());
-app.use(bodyParser.json({ limit: '30mb' }));
-app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }));
-app.use(cors());
+app.use(express.urlencoded({ extended: false }));
+
 app.use('/api/auction', require('./routes/auctionRoutes'));
+app.use(errorHandler);
+
+// app.use(bodyParser.json({ limit: '30mb' }));
+// app.use(bodyParser.urlencoded({ limit: '30mb', extended: false }));
+app.use(cors());
 
 mongoose
-  .connect(process.env.MONGO_URL)
+  .connect(MONGO_TOKEN)
   .then(() => app.listen(PORT, () => console.log(`Server running on port: ${PORT}`)))
-  .catch((error: any) => console.log(error.message));
+  .catch((error: Error) => console.log(error.message));
 
 // app.get('/getUsers', (req, res) => {
 //   UserModel.find({}, (err: string, result: string) => {
