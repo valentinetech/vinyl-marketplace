@@ -6,6 +6,7 @@ import process from './types/types';
 import { errorHandler } from './middleware/errorMiddleware';
 import connectDB from './config/db';
 import bodyParser from 'body-parser';
+import Logging from './lib/Logging';
 
 connectDB();
 const app = express();
@@ -17,4 +18,4 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/auction', require('./routes/auctionRoutes'));
 app.use(errorHandler);
 
-app.listen(PORT, () => console.log(`Server running on port: ${PORT}`));
+app.listen(PORT, () => Logging.info(`Server running on port: ${PORT}`));
