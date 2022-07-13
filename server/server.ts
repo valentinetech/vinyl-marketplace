@@ -15,7 +15,8 @@ const PORT = process.env.PORT;
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
-app.use('/api/auction', require('./routes/auction.routes'));
+app.use('/api/auctions', require('./routes/auctions.routes'));
+app.use('/api/users', require('./routes/users.routes'));
 app.use(errorHandler);
 
 app.listen(PORT, () => Logging.info(`Server running on port: ${PORT}`));
