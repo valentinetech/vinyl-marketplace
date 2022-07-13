@@ -1,5 +1,5 @@
 import Express from 'express';
-import { getAuction, setAuction, updateAuction, deleteAuction } from '../controllers/auctionController';
+import { getAuction, setAuction, updateAuction, deleteAuction } from '../controllers/auction.controller';
 
 const router = Express.Router();
 
