@@ -10,12 +10,12 @@ export default class Logging {
     );
   public static warn = (args: any) =>
     console.log(
-      chalk.yellow(`[${new Date().toLocaleDateString()}][INFO] `),
+      chalk.yellow(`[${new Date().toLocaleDateString()}][WARN] `),
       typeof args === 'string' ? chalk.yellowBright(args) : args
     );
   public static error = (args: any) =>
     console.log(
-      chalk.red(`[${new Date().toLocaleDateString()}][INFO] `),
+      chalk.red(`[${new Date().toLocaleDateString()}][ERROR] `),
       typeof args === 'string' ? chalk.redBright(args) : args
     );
 }

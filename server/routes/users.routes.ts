@@ -1,15 +1,10 @@
 import Express from 'express';
 import { getMe, loginUser, registerUser } from '../controllers/user.controller';
-
+import Protect from '../middleware/authMiddleware';
 const router = Express.Router();
-
-// router.get('/', getAuction);
-// router.post('/', setAuction);
-// router.put('/:id', updateAuction);
-// router.delete('/:id', deleteAuction);
 
 router.post('/', registerUser);
 router.post('/login', loginUser);
-router.get('/me', getMe);
+router.get('/me', Protect, getMe);
 
 module.exports = router;

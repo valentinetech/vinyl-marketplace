@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import 'dotenv/config';
 
-import process from './types/types';
+import process from './types/process.types';
 import { errorHandler } from './middleware/ErrorMiddleware';
 import connectDB from './config/db';
 import bodyParser from 'body-parser';
