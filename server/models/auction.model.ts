@@ -8,25 +8,25 @@ export interface IAuction {
   minBid: number;
   lastBid?: number;
   timeLeft?: number;
-  user: Types.ObjectId;
+  // user: Types.ObjectId;
 }
 
 export interface IAuctionModel extends Document, IAuction {}
 
-const TIME_LEFT_15MIN = 60 * 15 * 1000;
-const PRICE_STARTING = 0;
-const PRICE_MIN = 5;
+const TIME_LEFT_15MIN: Number = 60 * 15 * 1000;
+const PRICE_STARTING: Number = 0;
+const PRICE_MIN: Number = 5;
 
 const AuctionSchema: Schema = new Schema(
   {
-    user: {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
-      required: true,
-    },
+    // user: {
+    //   type: Schema.Types.ObjectId,
+    //   ref: 'User',
+    //   required: true,
+    // },
     albumCover: {
       type: String,
-      required: true,
+      required: [true, 'Please add album Cover'],
     },
     album: {
       type: String,
@@ -42,12 +42,12 @@ const AuctionSchema: Schema = new Schema(
     },
     minBid: {
       type: Number,
-      default: PRICE_STARTING,
+      default: PRICE_MIN,
       required: [true, 'What is the minimum Bid price?'],
     },
     lastBid: {
       type: Number,
-      default: PRICE_MIN,
+      default: PRICE_STARTING,
     },
     timeLeft: {
       type: Number,

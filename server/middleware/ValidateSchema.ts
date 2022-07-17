@@ -1,7 +1,7 @@
 import Joi, { ObjectSchema } from 'joi';
 import { NextFunction, Request, Response } from 'express';
 import { IUser } from '../models/user.model';
-import { IAuction } from '../models/auction.model';
+import { IAuction } from '../models/Auction.model';
 import Logging from '../lib/Logging';
 
 export const ValidateJoi = (schema: ObjectSchema) => {

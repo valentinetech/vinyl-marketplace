@@ -1,4 +1,4 @@
-// import Express from 'express';
+import Express from 'express';
 // import { getMe, loginUser, registerUser } from '../controllers/user.controller';
 // import Protect from '../middleware/authMiddleware';
 // const router = Express.Router();

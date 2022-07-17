@@ -3,8 +3,8 @@ import http from 'http';
 import mongoose from 'mongoose';
 import { config } from './config/config';
 import Logging from './lib/Logging';
-// import authorRoutes from './routes/Author';
-// import bookRoutes from './routes/Book';
+import auctionRoutes from './routes/Auction.routes';
+// import userRoutes from './routes/User.routes';
 
 const router = express();
 
@@ -51,8 +51,8 @@ const StartServer = () => {
   });
 
   /** Routes */
-  //   router.use('/authors', authorRoutes);
-  //   router.use('/books', bookRoutes);
+  router.use('/auctions', auctionRoutes);
+  // router.use('/users', userRoutes);
 
   /** Healthcheck */
   router.get('/ping', (req, res, next) => res.status(200).json({ ping: 'pong' }));

@@ -1,12 +1,13 @@
 import { NextFunction, Request, Response } from 'express';
 import mongoose from 'mongoose';
-import Auction from '../models/auction.model';
+import Auction from '../models/Auction.model';
 
 const createAuction = (req: Request, res: Response, next: NextFunction) => {
-  const { album, artist, buyNowPrice, minBid, lastBid, timeLeft } = req.body;
+  const { albumCover, album, artist, buyNowPrice, minBid, lastBid, timeLeft } = req.body;
 
   const auction = new Auction({
     _id: new mongoose.Types.ObjectId(),
+    albumCover,
     album,
     artist,
     buyNowPrice,
@@ -22,7 +23,7 @@ const createAuction = (req: Request, res: Response, next: NextFunction) => {
 };
 
 const readAuction = (req: Request, res: Response, next: NextFunction) => {
-  const auctionId = req.params.authorId;
+  const auctionId = req.params.auctionId;
 
   return Auction.findById(auctionId)
     .then((auction) =>
@@ -50,19 +51,19 @@ const updateAuction = (req: Request, res: Response, next: NextFunction) => {
           .then((auction) => res.status(201).json({ auction }))
           .catch((error) => res.status(500).json({ error }));
       } else {
-        return res.status(404).json({ message: 'not found' });
+        return res.status(404).json({ message: 'Auction not found' });
       }
     })
     .catch((error) => res.status(500).json({ error }));
 };
 
 const deleteAuction = (req: Request, res: Response, next: NextFunction) => {
-  const auctionId = req.params.authorId;
+  const auctionId = req.params.auctionId;
 
   return Auction.findByIdAndDelete(auctionId)
     .then((auction) =>
       auction
-        ? res.status(201).json({ author: auction, message: 'Deleted' })
+        ? res.status(201).json({ auction: auction, message: 'Deleted' })
         : res.status(404).json({ message: 'Auction not found' })
     )
     .catch((error) => res.status(500).json({ error }));
