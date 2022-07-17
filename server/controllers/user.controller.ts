@@ -1,96 +1,112 @@
-import { Request, Response } from 'express';
-import asyncHandler from 'express-async-handler';
-import User from '../models/users.model';
-import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
-import mongoose, { Types } from 'mongoose';
+// import { NextFunction, Request, Response } from 'express';
+// import mongoose from 'mongoose';
+// import bcryptjs from 'bcrypt';
+// import logging from '../lib/Logging';
+// import User from '../models/user.model';
+// import signJWT from '../functions/signJTW';
 
-// @desc     Register new user
-// @route    POST /api/users
-// @access   Public
-export const registerUser = asyncHandler(async (req: Request, res: Response) => {
-  const { name, email, password } = req.body;
+// const NAMESPACE = 'User';
 
-  if (!name || !email || !password) {
-    res.status(400);
-    throw new Error('Please add all fields');
-  }
+// const validateToken = (req: Request, res: Response, next: NextFunction) => {
+//   logging.info(NAMESPACE, 'Token validated, user authorized.');
 
-  //Check if user exist
-  const userExists = await User.findOne({ email });
+//   return res.status(200).json({
+//     message: 'Token(s) validated',
+//   });
+// };
 
-  if (userExists) {
-    res.status(400);
-    throw new Error('User already exists');
-  }
+// const register = (req: Request, res: Response, next: NextFunction) => {
+//   let { username, password } = req.body;
 
-  //Hash password
-  const salt = await bcrypt.genSalt(10);
-  const hashedPassword = await bcrypt.hash(password, salt);
+//   bcryptjs.hash(password, 10, (hashError, hash) => {
+//     if (hashError) {
+//       return res.status(401).json({
+//         message: hashError.message,
+//         error: hashError,
+//       });
+//     }
 
-  // Create user
-  const user = await User.create({
-    name,
-    email,
-    password: hashedPassword,
-  });
+//     const _user = new User({
+//       _id: new mongoose.Types.ObjectId(),
+//       username,
+//       password: hash,
+//     });
 
-  if (user) {
-    res.status(201).json({
-      _id: user.id,
-      name: user.name,
-      email: user.email,
-      token: generateToken(user._id),
-    });
-  } else {
-    res.status(400);
-    throw new Error('Invalid user data');
-  }
-});
+//     return _user
+//       .save()
+//       .then((user) => {
+//         return res.status(201).json({
+//           user,
+//         });
+//       })
+//       .catch((error) => {
+//         return res.status(500).json({
+//           message: error.message,
+//           error,
+//         });
+//       });
+//   });
+// };
 
-// @desc     Authenticate user
-// @route    POST /api/users/login
-// @access   Public
-export const loginUser = asyncHandler(async (req: Request, res: Response) => {
-  const { email, password } = req.body;
+// const login = (req: Request, res: Response, next: NextFunction) => {
+//   let { username, password } = req.body;
 
-  // Check for user email
-  const user = await User.findOne({ email });
+//   User.find({ username })
+//     .exec()
+//     .then((users) => {
+//       if (users.length !== 1) {
+//         return res.status(401).json({
+//           message: 'Unauthorized',
+//         });
+//       }
 
-  if (user && (await bcrypt.compare(password, user.password))) {
-    res.status(201).json({
-      _id: user.id,
-      name: user.name,
-      email: user.email,
-      token: generateToken(user._id),
-    });
-  } else {
-    res.status(400);
-    throw new Error('Invalid credentials');
-  }
-});
+//       bcryptjs.compare(password, users[0].password, (error, result) => {
+//         if (error) {
+//           return res.status(401).json({
+//             message: 'Password Mismatch',
+//           });
+//         } else if (result) {
+//           signJWT(users[0], (_error, token) => {
+//             if (_error) {
+//               return res.status(500).json({
+//                 message: _error.message,
+//                 error: _error,
+//               });
+//             } else if (token) {
+//               return res.status(200).json({
+//                 message: 'Auth successful',
+//                 token: token,
+//                 user: users[0],
+//               });
+//             }
+//           });
+//         }
+//       });
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//       res.status(500).json({
+//         error: err,
+//       });
+//     });
+// };
 
-// @desc     Get user data
-// @route    POST /api/users/me
-// @access   Private
-// interface UserRequest extends Request {
-//   user: {
-//     id: Types.ObjectId;
-//   };
-// }
-export const getMe = asyncHandler(async (req: Request, res: Response) => {
-  const { _id, name, email } = await User.findById(req.user.id);
+// const getAllUsers = (req: Request, res: Response, next: NextFunction) => {
+//   User.find()
+//     .select('-password')
+//     .exec()
+//     .then((users) => {
+//       return res.status(200).json({
+//         users: users,
+//         count: users.length,
+//       });
+//     })
+//     .catch((error) => {
+//       return res.status(500).json({
+//         message: error.message,
+//         error,
+//       });
+//     });
+// };
 
-  res.status(200).json({
-    id: _id,
-    name,
-    email,
-  });
-});
-
-// Generate JWT
-const generateToken = (id: Types.ObjectId) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: '30d',
-  });
-};
+// export default { validateToken, register, login, getAllUsers };

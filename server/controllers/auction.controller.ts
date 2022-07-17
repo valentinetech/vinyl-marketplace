@@ -1,108 +1,77 @@
-import { Request, Response } from 'express';
-import asyncHandler from 'express-async-handler';
+import { NextFunction, Request, Response } from 'express';
+import mongoose from 'mongoose';
 import Auction from '../models/auction.model';
-import User from '../models/users.model';
-import mongoose, { Types } from 'mongoose';
-import Logging from '../lib/Logging';
 
-interface CustomRequest extends Request {
-  user?: {
-    id?: Types.ObjectId;
-    _id?: Types.ObjectId;
-  };
-}
+const createAuction = (req: Request, res: Response, next: NextFunction) => {
+  const { album, artist, buyNowPrice, minBid, lastBid, timeLeft } = req.body;
 
-//   body: {
-//     name: string;
-//     id: string;
-//   };
-// }
-
-// @desc     Get auction
-// @route    GET /api/auction
-// @access   Private
-export const getAuction = asyncHandler(async (req: CustomRequest, res: Response) => {
-  const auctions = await Auction.find({
-    user: req.user.id,
+  const auction = new Auction({
+    _id: new mongoose.Types.ObjectId(),
+    album,
+    artist,
+    buyNowPrice,
+    minBid,
+    lastBid,
+    timeLeft,
   });
 
-  res.status(200).json(auctions);
-});
+  return auction
+    .save()
+    .then((auction) => res.status(201).json({ auction: auction }))
+    .catch((error) => res.status(500).json({ error }));
+};
 
-// @desc     Set auction
-// @route    POST /api/auction
-// @access   Private
-export const setAuction = asyncHandler(async (req: CustomRequest, res: Response) => {
-  if (!req.body.name) {
-    res.status(400);
-    throw new Error('Please add NAME');
-  }
+const readAuction = (req: Request, res: Response, next: NextFunction) => {
+  const auctionId = req.params.authorId;
 
-  const auction = await Auction.create({
-    name: req.body.name,
-    user: req.user.id,
-  });
-  res.status(200).json(auction);
-});
+  return Auction.findById(auctionId)
+    .then((auction) =>
+      auction ? res.status(200).json({ auction: auction }) : res.status(404).json({ message: 'Auction not found' })
+    )
+    .catch((error) => res.status(500).json({ error }));
+};
 
-// @desc     Update auction
-// @route    PUT /api/auction
-// @access   Private
-export const updateAuction = asyncHandler(async (req: CustomRequest, res: Response) => {
-  const auction = await Auction.findById(req.params.id);
+const readAll = (req: Request, res: Response, next: NextFunction) => {
+  return Auction.find()
+    .then((auction) => res.status(200).json({ auction }))
+    .catch((error) => res.status(500).json({ error }));
+};
 
-  if (!auction) {
-    res.status(400);
-    throw new Error('Auction not found');
-  }
+const updateAuction = (req: Request, res: Response, next: NextFunction) => {
+  const auctionId = req.params.auctionId;
 
-  const user = await User.find(req.user.id);
-  console.log(user);
+  return Auction.findById(auctionId)
+    .then((auction) => {
+      if (auction) {
+        auction.set(req.body);
 
-  if (!req.user) {
-    res.status(401);
-    throw new Error('User not found');
-  }
+        return auction
+          .save()
+          .then((auction) => res.status(201).json({ auction }))
+          .catch((error) => res.status(500).json({ error }));
+      } else {
+        return res.status(404).json({ message: 'not found' });
+      }
+    })
+    .catch((error) => res.status(500).json({ error }));
+};
 
-  // Check if logged in user matches auction user
+const deleteAuction = (req: Request, res: Response, next: NextFunction) => {
+  const auctionId = req.params.authorId;
 
-  // if (auction.user.toString() !== req.user.id) {
-  //   res.status(401);
-  //   throw new Error('User not authorized');
-  // }
-  const updatedAuction = await Auction.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-  });
+  return Auction.findByIdAndDelete(auctionId)
+    .then((auction) =>
+      auction
+        ? res.status(201).json({ author: auction, message: 'Deleted' })
+        : res.status(404).json({ message: 'Auction not found' })
+    )
+    .catch((error) => res.status(500).json({ error }));
+};
 
-  res.status(200).json(updatedAuction);
-});
-
-// @desc     Delete auction
-// @route    DELETE /api/auction
-// @access   Private
-export const deleteAuction = asyncHandler(async (req: CustomRequest, res: Response) => {
-  const auction = await Auction.findById(req.params.id);
-
-  if (!auction) {
-    res.status(400);
-    throw new Error('Auction not found');
-  }
-
-  const user = await User.findOne(req.user.id);
-
-  if (!user) {
-    res.status(401);
-    throw new Error('User not found');
-  }
-
-  // Check if logged in user matches auction user
-
-  if (auction.user.toString() !== user.id) {
-    res.status(401);
-    throw new Error('User not authorized');
-  }
-
-  await auction.deleteOne();
-
-  res.status(200).json({ id: req.params.id });
-});
+export default {
+  createAuction,
+  readAuction,
+  readAll,
+  updateAuction,
+  deleteAuction,
+};
