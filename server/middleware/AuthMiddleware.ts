@@ -1,24 +1,29 @@
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import asyncHandler from 'express-async-handler';
 import User from '../models/users.model';
-import { Request, RequestParamHandler, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import Logging from '../lib/Logging';
+import { Types } from 'mongoose';
 
-const Protect = asyncHandler(async (req: any, res: Response, next: NextFunction) => {
+interface CustomRequest extends Request {
+  // user: { _id: Types.ObjectId };
+}
+
+const SECRET_KEY = process.env.JWT_SECRET;
+
+const Protect = asyncHandler(async (req: CustomRequest, res: Response, next: NextFunction) => {
   let token: string;
 
   if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
     try {
       // Get token from header Bearer(space)token
-      token = req.headers.authorization.split(' ')[1];
+      const token = req.headers.authorization.split(' ')[1];
 
       // Verify token
-      const decoded: any = jwt.verify(token, process.env.JWT_SECRET);
+      const decoded: any = jwt.verify(token, SECRET_KEY);
 
       // Get user from token
       req.user = await User.findById(decoded.id).select('-password');
-
-      next();
     } catch {
       Logging.error(401);
       throw new Error('Not authorized');

@@ -1,21 +1,19 @@
-import mongoose, { Schema, model, Document } from 'mongoose';
+import mongoose, { Schema, model, Document, Types } from 'mongoose';
 
-export interface IAuction {
+export interface IAuctionModel extends Document {
   name: string;
-  user: mongoose.Schema.Types.ObjectId;
+  user: Types.ObjectId;
 }
-
-export interface IAuctionModel extends IAuction, Document {}
 
 const AuctionSchema = new Schema<IAuctionModel>({
   user: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
+    type: Schema.Types.ObjectId,
     ref: 'User',
+    required: true,
   },
   name: {
     type: String,
-    required: [true, 'Please enter name'],
+    required: [true, 'Please enter name for Album'],
   },
 });
 

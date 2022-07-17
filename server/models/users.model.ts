@@ -1,12 +1,10 @@
-import { Schema, model, Document, ObjectId } from 'mongoose';
+import mongoose, { Schema, model, Document, ObjectId, Model } from 'mongoose';
 
-export interface IUser {
+export interface IUserModel extends Document {
   name: string;
   email: string;
   password: string;
 }
-
-export interface IUserModel extends IUser, Document {}
 
 const UserSchema = new Schema<IUserModel>(
   {

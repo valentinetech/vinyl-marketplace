@@ -3,6 +3,7 @@ import asyncHandler from 'express-async-handler';
 import User from '../models/users.model';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
+import mongoose, { Types } from 'mongoose';
 
 // @desc     Register new user
 // @route    POST /api/users
@@ -39,7 +40,7 @@ export const registerUser = asyncHandler(async (req: Request, res: Response) => 
       _id: user.id,
       name: user.name,
       email: user.email,
-      token: generateToken(user.id),
+      token: generateToken(user._id),
     });
   } else {
     res.status(400);
@@ -61,7 +62,7 @@ export const loginUser = asyncHandler(async (req: Request, res: Response) => {
       _id: user.id,
       name: user.name,
       email: user.email,
-      token: generateToken(user.id),
+      token: generateToken(user._id),
     });
   } else {
     res.status(400);
@@ -72,7 +73,12 @@ export const loginUser = asyncHandler(async (req: Request, res: Response) => {
 // @desc     Get user data
 // @route    POST /api/users/me
 // @access   Private
-export const getMe = asyncHandler(async (req: any, res: Response) => {
+// interface UserRequest extends Request {
+//   user: {
+//     id: Types.ObjectId;
+//   };
+// }
+export const getMe = asyncHandler(async (req: Request, res: Response) => {
   const { _id, name, email } = await User.findById(req.user.id);
 
   res.status(200).json({
@@ -83,7 +89,7 @@ export const getMe = asyncHandler(async (req: any, res: Response) => {
 });
 
 // Generate JWT
-const generateToken = (id: string) => {
+const generateToken = (id: Types.ObjectId) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: '30d',
   });
