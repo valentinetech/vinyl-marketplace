@@ -51,8 +51,8 @@ const StartServer = () => {
   });
 
   /** Routes */
-  router.use('/auctions', auctionRoutes);
-  router.use('/users', userRoutes);
+  router.use('/api/auctions', auctionRoutes);
+  router.use('/api/users', userRoutes);
 
   /** Healthcheck */
   router.get('/ping', (req, res, next) => res.status(200).json({ ping: 'pong' }));
