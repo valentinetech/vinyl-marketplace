@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 import { config } from './config/config';
 import Logging from './lib/Logging';
 import auctionRoutes from './routes/Auction.routes';
-// import userRoutes from './routes/User.routes';
+import userRoutes from './routes/User.routes';
 
 const router = express();
 
@@ -52,7 +52,7 @@ const StartServer = () => {
 
   /** Routes */
   router.use('/auctions', auctionRoutes);
-  // router.use('/users', userRoutes);
+  router.use('/users', userRoutes);
 
   /** Healthcheck */
   router.get('/ping', (req, res, next) => res.status(200).json({ ping: 'pong' }));

@@ -1,13 +1,14 @@
 import express from 'express';
 import controller from '../controllers/Auction.controller';
+import Protect from '../middleware/validateToken';
 // import { Schemas, ValidateJoi } from '../middleware/ValidateSchema';
 
 const router = express.Router();
 
-router.post('/create', controller.createAuction);
-router.get('/get/:auctionId', controller.readAuction);
-router.get('/get', controller.readAll);
-router.patch('/update/:auctionId', controller.updateAuction);
-router.delete('/delete/:auctionId', controller.deleteAuction);
+router.post('/create', Protect, controller.createAuction);
+router.get('/read/:auctionId', Protect, controller.readAuctionById);
+router.get('/read_all/:userId', Protect, controller.readAllUserAuctions);
+router.patch('/update/:auctionId', Protect, controller.updateAuction);
+router.delete('/delete/:auctionId', Protect, controller.deleteAuction);
 
 export = router;

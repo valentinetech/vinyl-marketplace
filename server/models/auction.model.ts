@@ -1,4 +1,4 @@
-import mongoose, { Schema, model, Document, Types } from 'mongoose';
+import mongoose, { Schema, Document } from 'mongoose';
 
 export interface IAuction {
   albumCover: string;
@@ -8,7 +8,7 @@ export interface IAuction {
   minBid: number;
   lastBid?: number;
   timeLeft?: number;
-  // user: Types.ObjectId;
+  user?: string;
 }
 
 export interface IAuctionModel extends Document, IAuction {}
@@ -19,11 +19,11 @@ const PRICE_MIN: Number = 5;
 
 const AuctionSchema: Schema = new Schema(
   {
-    // user: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: 'User',
-    //   required: true,
-    // },
+    user: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: 'User',
+    },
     albumCover: {
       type: String,
       required: [true, 'Please add album Cover'],

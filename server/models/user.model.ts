@@ -1,32 +1,29 @@
-import mongoose, { Schema, model, Document, ObjectId, Model } from 'mongoose';
+import mongoose, { Schema, Document } from 'mongoose';
 
 export interface IUser {
-  name: string;
-  email: string;
+  [x: string]: any;
+  username: string;
   password: string;
 }
 
 export interface IUserModel extends Document, IUser {}
 
-const UserSchema = new Schema<IUserModel>(
+const UserSchema: Schema = new Schema(
   {
-    name: {
+    username: {
       type: String,
-      required: [true, 'Please enter Your name.'],
-    },
-    email: {
-      type: String,
-      required: [true, 'Please enter Your email.'],
+      required: [true, 'Enter Your Username'],
       unique: true,
     },
     password: {
       type: String,
-      required: [true, 'Please enter Your name.'],
+      required: [true, 'Enter Your Password'],
     },
   },
   {
     timestamps: true,
+    versionKey: false,
   }
 );
 
-export default model<IUserModel>('User', UserSchema);
+export default mongoose.model<IUserModel>('User', UserSchema);

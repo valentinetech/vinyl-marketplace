@@ -3,10 +3,11 @@ import mongoose from 'mongoose';
 import Auction from '../models/Auction.model';
 
 const createAuction = (req: Request, res: Response, next: NextFunction) => {
-  const { albumCover, album, artist, buyNowPrice, minBid, lastBid, timeLeft } = req.body;
+  const { albumCover, album, artist, buyNowPrice, minBid, lastBid, timeLeft, user } = req.body;
 
   const auction = new Auction({
     _id: new mongoose.Types.ObjectId(),
+    user,
     albumCover,
     album,
     artist,
@@ -22,7 +23,7 @@ const createAuction = (req: Request, res: Response, next: NextFunction) => {
     .catch((error) => res.status(500).json({ error }));
 };
 
-const readAuction = (req: Request, res: Response, next: NextFunction) => {
+const readAuctionById = (req: Request, res: Response, next: NextFunction) => {
   const auctionId = req.params.auctionId;
 
   return Auction.findById(auctionId)
@@ -32,8 +33,10 @@ const readAuction = (req: Request, res: Response, next: NextFunction) => {
     .catch((error) => res.status(500).json({ error }));
 };
 
-const readAll = (req: Request, res: Response, next: NextFunction) => {
-  return Auction.find()
+const readAllUserAuctions = (req: Request, res: Response, next: NextFunction) => {
+  const userId = req.params.userId;
+
+  return Auction.find({ user: userId })
     .then((auction) => res.status(200).json({ auction }))
     .catch((error) => res.status(500).json({ error }));
 };
@@ -71,8 +74,8 @@ const deleteAuction = (req: Request, res: Response, next: NextFunction) => {
 
 export default {
   createAuction,
-  readAuction,
-  readAll,
+  readAuctionById,
+  readAllUserAuctions,
   updateAuction,
   deleteAuction,
 };
