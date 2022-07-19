@@ -10,7 +10,6 @@ const Section = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 20px 0;
 `;
 
 const Form = styled.form`
@@ -40,12 +39,21 @@ const Input = styled.input`
   margin-bottom: 10px;
 `;
 
-const Login = () => {
-  const [formData, setFormData] = useState({
+interface RegisterProps {
+  username: string;
+  email: string;
+  password: string;
+  passwordConfirm: string;
+}
+
+const Register = () => {
+  const [formData, setFormData] = useState<RegisterProps>({
+    username: '',
     email: '',
     password: '',
+    passwordConfirm: '',
   });
-  const { email, password } = formData;
+  const { username, email, password, passwordConfirm } = formData;
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setFormData((prevState) => ({
@@ -61,14 +69,20 @@ const Login = () => {
     <>
       <Header />
       <Section>
-        <h3>Please Login</h3>
-      </Section>
-      <Section>
         <Form onSubmit={onSubmit}>
+          <h3>Please Register</h3>
           <FormGroup>
+            <Input type='text' id='name' value={username} placeholder='Enter Your Name' onChange={onChange} />
             <Input type='text' id='email' value={email} placeholder='Enter Your Email' onChange={onChange} />
             <Input type='password' id='password' value={password} placeholder='Enter Password' onChange={onChange} />
-            <Button variant='primary'>Login</Button>
+            <Input
+              type='password'
+              id='passwordRepeat'
+              value={passwordConfirm}
+              placeholder='Confirm Password'
+              onChange={onChange}
+            />
+            <Button variant='primary'>Register</Button>
           </FormGroup>
         </Form>
       </Section>
@@ -77,6 +91,4 @@ const Login = () => {
   );
 };
 
-export default Login;
-
-//Edit header - remove Home links - make header more generic
+export default Register;

@@ -1,8 +1,8 @@
 //Components
-import Home from 'pages/Home/Home';
-import Login from 'pages/Login/Login';
-import Profile from 'pages/Profile/Profile';
-import Register from 'pages/Register/Register';
+import Home from 'features/Home/Home';
+import Login from 'features/Auth/Login/Login';
+import Profile from 'features/Profile/Profile';
+import Register from 'features/Auth/Register/Register';
 //Router
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 //Theme styled-components

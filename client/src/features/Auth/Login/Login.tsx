@@ -10,6 +10,7 @@ const Section = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 20px 0;
 `;
 
 const Form = styled.form`
@@ -39,21 +40,12 @@ const Input = styled.input`
   margin-bottom: 10px;
 `;
 
-interface RegisterProps {
-  name: string;
-  email: string;
-  password: string;
-  passwordConfirm: string;
-}
-
-const Register = () => {
-  const [formData, setFormData] = useState<RegisterProps>({
-    name: '',
-    email: '',
+const Login = () => {
+  const [formData, setFormData] = useState({
+    username: '',
     password: '',
-    passwordConfirm: '',
   });
-  const { name, email, password, passwordConfirm } = formData;
+  const { username, password } = formData;
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setFormData((prevState) => ({
@@ -69,20 +61,20 @@ const Register = () => {
     <>
       <Header />
       <Section>
+        <h3>Please Login</h3>
+      </Section>
+      <Section>
         <Form onSubmit={onSubmit}>
-          <h3>Please Register</h3>
           <FormGroup>
-            <Input type='text' id='name' value={name} placeholder='Enter Your Name' onChange={onChange} />
-            <Input type='text' id='email' value={email} placeholder='Enter Your Email' onChange={onChange} />
-            <Input type='password' id='password' value={password} placeholder='Enter Password' onChange={onChange} />
+            <Input type='text' id='username' value={username} placeholder='Enter Your Username' onChange={onChange} />
             <Input
               type='password'
-              id='passwordRepeat'
-              value={passwordConfirm}
-              placeholder='Confirm Password'
+              id='password'
+              value={password}
+              placeholder='Enter Your Password'
               onChange={onChange}
             />
-            <Button variant='primary'>Register</Button>
+            <Button variant='primary'>Login</Button>
           </FormGroup>
         </Form>
       </Section>
@@ -91,6 +83,6 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;
 
 //Edit header - remove Home links - make header more generic
