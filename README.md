@@ -3,6 +3,7 @@
 ## CREATE
 
 #### Register User
+POST
 http://localhost:9090/api/users/register
 
 Example JSON Request body:
@@ -26,6 +27,7 @@ Example JSON Response:
 }
 
 #### Login User
+POST
 http://localhost:9090/api/users/login
 
 Example JSON Request body:
@@ -50,7 +52,7 @@ Example JSON Response:
 }
 
 #### Create an Auction with UserId
-
+POST
 http://localhost:9090/api/auctions/create
 
 Example JSON Request body:
@@ -86,21 +88,21 @@ Example JSON Response:
 ## READ
 
 #### Validate Token
-
+GET
 http://localhost:9090/api/users/validate
 
 Header*
 Bearer 'token'
 
 #### Get All Users
-
+GET
 http://localhost:9090/api/users/get_all
 
 Header*
 Bearer 'token'
 
 #### Get Auction by Auction Id
-
+GET
 http://localhost:9090/api/auctions/read/${auctionId}
 
 Header*
@@ -109,7 +111,7 @@ Bearer 'token'
 ////////////////////////////////////////////////////
 
 #### Get Auctions by User Id
-
+GET
 http://localhost:9090/api/auctions/read_all/${userId}
 
 Header*
@@ -118,7 +120,7 @@ Bearer 'token'
 ## UPDATE
 
 #### Update auction by Auction Id
-
+PATCH
 http://localhost:9090/api/auctions/update/${auctionId}
 
 Header*
@@ -127,7 +129,7 @@ Bearer 'token'
 ## DELETE
 
 #### Delete auction by Auction Id
-
+DELETE
 http://localhost:9090/api/auctions/delete/${auctionId}
 
 Header*
