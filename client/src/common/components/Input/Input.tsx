@@ -1,4 +1,4 @@
-import { HTMLAttributes, InputHTMLAttributes, ReactNode } from 'react';
+import { InputHTMLAttributes, ReactNode } from 'react';
 import InputStyles from './Input.styles';
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {

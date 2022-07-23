@@ -1,4 +1,3 @@
-import { theme } from 'common/styles/theme';
 import styled from 'styled-components';
 
 export const Section = styled.section`
@@ -25,13 +24,4 @@ export const FormGroup = styled.div`
   border-radius: 5px;
   margin-bottom: 10px;
   font-family: inherit;
-`;
-
-export const Input = styled.input`
-  border: 1px solid white;
-  border-radius: 10px;
-  padding: 5px;
-  background-color: ${theme.colors.body};
-  color: ${theme.colors.white};
-  margin-bottom: 10px;
 `;

@@ -1,9 +1,10 @@
 import Button from 'common/components/Button';
+import Input from 'common/components/Input';
 import Footer from 'common/layouts/Footer';
 import Header from 'common/layouts/Header';
 
 import { useState } from 'react';
-import { Form, FormGroup, Input, Section } from './Login.styles';
+import { Form, FormGroup, Section } from './Login.styles';
 
 const Login = () => {
   const [formData, setFormData] = useState({

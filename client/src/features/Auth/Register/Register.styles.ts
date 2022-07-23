@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { theme } from 'common/styles/theme';
 
 export const Section = styled.section`
   display: flex;
