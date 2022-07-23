@@ -1,43 +1,13 @@
 import Button from 'common/components/Button';
+import Input from 'common/components/Input';
 import Footer from 'common/layouts/Footer';
 import Header from 'common/layouts/Header';
-import { theme } from 'common/styles/theme';
 import { useState } from 'react';
-import styled from 'styled-components';
-
-const Section = styled.section`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const Form = styled.form`
-  width: 100%;
-  max-width: 1120px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-const FormGroup = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 10px;
-  border: 1px solid #e6e6e6;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  font-family: inherit;
-`;
-
-const Input = styled.input`
-  border: 1px solid white;
-  border-radius: 10px;
-  padding: 5px;
-  background-color: ${theme.colors.body};
-  color: ${theme.colors.white};
-  margin-bottom: 10px;
-`;
+import { Section, Form, FormGroup } from './Register.styles';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import { register, reset } from '../authSlice';
+import { useAppDispatch, useAppSelector } from 'app/store';
 
 interface RegisterProps {
   username: string;
@@ -53,7 +23,13 @@ const Register = () => {
     password: '',
     passwordConfirm: '',
   });
+
   const { username, email, password, passwordConfirm } = formData;
+
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  const { user, isLoading, isError, isSuccess, message } = useAppSelector((state) => state.auth);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setFormData((prevState) => ({
@@ -64,6 +40,17 @@ const Register = () => {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
+
+    if (password !== passwordConfirm) {
+      toast.error('Passwords does not match, please re-enter');
+    } else {
+      const userData = {
+        username,
+        email,
+        password,
+      };
+      dispatch(register(userData));
+    }
   };
   return (
     <>

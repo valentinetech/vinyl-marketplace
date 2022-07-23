@@ -1,6 +1,6 @@
 import Button from 'common/components/Button';
 import Card from 'common/components/Card';
-import useSpotifyPreview from 'common/hooks/useSpotifyPreview';
+import useSpotifyPreview from 'features/Home/Hooks/useSpotifyPreview';
 import { useState, useEffect } from 'react';
 
 import { SectionContainer, SectionName, ExploreContainer, LoadMore } from './Explore.styles';

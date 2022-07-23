@@ -12,6 +12,9 @@ import { theme } from 'common/styles/theme';
 //Redux Toolkit
 import { Provider } from 'react-redux';
 import { store } from './store';
+//Toast
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   return (
@@ -22,9 +25,11 @@ const App = () => {
           <Route path='/' element={<Home />} />
           <Route path='/register' element={<Register />} />
           <Route path='/login' element={<Login />} />
-          <Route path=':userId' element={<Profile />} />
+          <Route path='/login' element={<Profile />} />
+          <Route path='/profile/:userId' element={<Profile />} />
         </Routes>
       </Router>
+      <ToastContainer />
     </ThemeProvider>
   );
 };
