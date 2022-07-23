@@ -1,13 +1,15 @@
 import Button from 'common/components/Button';
 import Input from 'common/components/Input';
+import Spinner from 'common/components/Spinner';
 import Footer from 'common/layouts/Footer';
 import Header from 'common/layouts/Header';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Section, Form, FormGroup } from './Register.styles';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { register, reset } from '../authSlice';
 import { useAppDispatch, useAppSelector } from 'app/store';
+import { Toast, ToastContent } from 'react-toastify/dist/types';
 
 interface RegisterProps {
   username: string;
@@ -31,10 +33,17 @@ const Register = () => {
 
   const { user, isLoading, isError, isSuccess, message } = useAppSelector((state) => state.auth);
 
+  useEffect(() => {
+    if (isError) toast.error(message);
+    if (isSuccess || user) navigate('/');
+
+    dispatch(reset);
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
+
   const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setFormData((prevState) => ({
       ...prevState,
-      [e.target.name]: e.target.value,
+      [e.target.id]: e.target.value,
     }));
   };
 
@@ -52,6 +61,9 @@ const Register = () => {
       dispatch(register(userData));
     }
   };
+
+  if (isLoading) return <Spinner />;
+
   return (
     <>
       <Header />
@@ -59,12 +71,12 @@ const Register = () => {
         <Form onSubmit={onSubmit}>
           <h3>Please Register</h3>
           <FormGroup>
-            <Input type='text' id='name' value={username} placeholder='Enter Your Name' onChange={onChange} />
+            <Input type='text' id='username' value={username} placeholder='Enter Your Name' onChange={onChange} />
             <Input type='text' id='email' value={email} placeholder='Enter Your Email' onChange={onChange} />
             <Input type='password' id='password' value={password} placeholder='Enter Password' onChange={onChange} />
             <Input
               type='password'
-              id='passwordRepeat'
+              id='passwordConfirm'
               value={passwordConfirm}
               placeholder='Confirm Password'
               onChange={onChange}

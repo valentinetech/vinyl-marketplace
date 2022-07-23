@@ -1,9 +1,11 @@
+import { IUser } from './../models/User.model';
 import { NextFunction, Request, Response } from 'express';
 import mongoose from 'mongoose';
 import bcryptjs from 'bcrypt';
 import Logging from '../lib/Logging';
 import User from '../models/User.model';
 import signToken from '../utils/signToken';
+import { string } from 'joi';
 
 const validateToken = (req: Request, res: Response, next: NextFunction) => {
   Logging.info('Token validated, user authorized.');
@@ -14,7 +16,7 @@ const validateToken = (req: Request, res: Response, next: NextFunction) => {
 };
 
 const register = (req: Request, res: Response, next: NextFunction) => {
-  let { username, email, password } = req.body;
+  const { username, email, password } = req.body as IUser;
 
   bcryptjs.hash(password, 10, (hashError, hash) => {
     if (hashError) {
@@ -24,7 +26,7 @@ const register = (req: Request, res: Response, next: NextFunction) => {
       });
     }
 
-    const _user = new User({
+    const _user: IUser = new User<IUser>({
       _id: new mongoose.Types.ObjectId(),
       email,
       username,
@@ -33,12 +35,23 @@ const register = (req: Request, res: Response, next: NextFunction) => {
 
     return _user
       .save()
-      .then((user) => {
-        return res.status(201).json({
-          user,
+      .then((user: IUser) => {
+        signToken(user, (_error, token) => {
+          if (_error) {
+            return res.status(500).json({
+              message: _error.message,
+              error: _error,
+            });
+          } else if (token) {
+            return res.status(200).json({
+              message: 'Register successful',
+              token: token,
+              user: user,
+            });
+          }
         });
       })
-      .catch((error) => {
+      .catch((error: { message: string }) => {
         return res.status(500).json({
           message: error.message,
           error,
@@ -48,7 +61,7 @@ const register = (req: Request, res: Response, next: NextFunction) => {
 };
 
 const login = (req: Request, res: Response, next: NextFunction) => {
-  let { username, password } = req.body;
+  const { username, password } = req.body as IUser;
 
   User.find({ username })
     .exec()
@@ -82,7 +95,7 @@ const login = (req: Request, res: Response, next: NextFunction) => {
         }
       });
     })
-    .catch((err) => {
+    .catch((err: unknown) => {
       console.log(err);
       res.status(500).json({
         error: err,

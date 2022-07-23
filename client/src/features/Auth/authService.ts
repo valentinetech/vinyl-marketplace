@@ -13,8 +13,9 @@ export interface LoginProps {
   username: string;
   password: string;
 }
+
 const register = async (userData: RegisterProps) => {
-  const response = await axios.post(API_URL, userData);
+  const response = await axios.post(API_URL + 'register', userData);
 
   if (response.data) {
     localStorage.setItem('user', JSON.stringify(response.data));

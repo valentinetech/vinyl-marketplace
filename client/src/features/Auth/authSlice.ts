@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import authService, { LoginProps, RegisterProps } from './authService';
+import { ToastContent } from 'react-toastify/dist/types';
+import { ReactNode } from 'react';
 
 //Get user from localStorage
 const user = localStorage.getItem('user');
@@ -9,7 +11,7 @@ interface AuthState {
   isLoading: boolean;
   isSuccess: boolean;
   isError: boolean;
-  message: string | unknown;
+  message: string;
 }
 
 const initialState: AuthState = {
@@ -59,7 +61,7 @@ export const authSlice = createSlice({
       .addCase(register.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
-        state.message = action.payload;
+        state.message = action.payload as string;
         state.user = null;
       })
       .addCase(login.pending, (state) => {
@@ -73,7 +75,7 @@ export const authSlice = createSlice({
       .addCase(login.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
-        state.message = action.payload;
+        state.message = action.payload as string;
         state.user = null;
       })
       .addCase(logout.fulfilled, (state) => {
