@@ -1,11 +1,12 @@
 import Button from 'common/components/Button';
 import Card from 'common/components/Card';
+import Spinner from 'common/components/Spinner';
 import useSpotifyPreview from 'features/Home/Hooks/useSpotifyPreview';
 import { useState, useEffect } from 'react';
 
 import { SectionContainer, SectionName, ExploreContainer, LoadMore } from './Explore.styles';
 
-const SONG_LENGTH = 30000;
+const PREVIEW_LENGTH = 30000;
 
 const Explore = () => {
   const { topAlbums, topAlbumsLoaded } = useSpotifyPreview();
@@ -17,7 +18,7 @@ const Explore = () => {
   useEffect(() => {
     const audio = new Audio(previewUrl);
     audio.play();
-    setTimeout(() => setPreviewUrl(undefined), SONG_LENGTH);
+    setTimeout(() => setPreviewUrl(undefined), PREVIEW_LENGTH);
 
     return () => {
       audio.pause();
@@ -46,7 +47,7 @@ const Explore = () => {
             })
             .slice(0, displayedAlbumCount)
         ) : (
-          <h2>Loading...</h2>
+          <Spinner />
         )}
       </ExploreContainer>
 

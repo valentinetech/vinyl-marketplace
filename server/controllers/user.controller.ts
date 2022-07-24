@@ -45,8 +45,8 @@ const register = (req: Request, res: Response, next: NextFunction) => {
           } else if (token) {
             return res.status(200).json({
               message: 'Register successful',
+              user: user.id,
               token: token,
-              user: user,
             });
           }
         });

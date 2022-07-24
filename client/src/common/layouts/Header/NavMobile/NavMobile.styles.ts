@@ -1,14 +1,13 @@
 import styled from 'styled-components';
 import { FaTimes } from 'react-icons/fa';
 import { theme } from 'common/styles/theme';
-import { Link as LinkR } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 
 interface isOpenProp {
   isOpen: boolean;
 }
 
-export { Nav, LogoLink, Logo, NavIcon, CloseIcon, MenuContainer, Menu, MenuItem, RegisterButton, LoginButtonContainer };
+export { Nav, LogoLink, Logo, NavIcon, CloseIcon, MenuContainer };
 
 const Nav = styled.aside<isOpenProp>`
   position: fixed;
@@ -39,40 +38,6 @@ const MenuContainer = styled.div`
   color: #fff;
 `;
 
-const Menu = styled.ul`
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: repeat(6, 80px);
-  text-align: center;
-
-  @media ${theme.device.tabletMax} {
-    grid-template-rows: repeat(6, 60px);
-  }
-`;
-
-const MenuItem = styled(HashLink)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  list-style: none;
-  transition: 0.2s ease-in-out;
-  color: #fff;
-  cursor: pointer;
-  font-size: 18px;
-
-  &:active {
-    color: ${theme.colors.brand};
-    transition: 0.2s ease-in-out;
-  }
-`;
-
-const LoginButtonContainer = styled(LinkR)`
-  display: flex;
-  justify-content: center;
-  text-decoration: none;
-`;
-
 const LogoLink = styled(HashLink)`
   position: absolute;
   top: 20px;
@@ -86,22 +51,4 @@ const LogoLink = styled(HashLink)`
 `;
 const Logo = styled.img`
   width: 200px;
-`;
-
-const RegisterButton = styled(LinkR)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  list-style: none;
-  transition: 0.2s ease-in-out;
-  cursor: pointer;
-  font-size: 18px;
-  color: ${theme.colors.brandSecondary};
-  text-decoration: none;
-  margin-bottom: 20px;
-
-  &:hover {
-    color: ${theme.colors.brand};
-  }
 `;

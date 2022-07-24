@@ -9,7 +9,6 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { register, reset } from '../authSlice';
 import { useAppDispatch, useAppSelector } from 'app/store';
-import { Toast, ToastContent } from 'react-toastify/dist/types';
 
 interface RegisterProps {
   username: string;
@@ -35,7 +34,7 @@ const Register = () => {
 
   useEffect(() => {
     if (isError) toast.error(message);
-    if (isSuccess || user) navigate('/');
+    if (isSuccess || user) navigate('/profile');
 
     dispatch(reset);
   }, [user, isError, isSuccess, message, navigate, dispatch]);

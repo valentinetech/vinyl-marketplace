@@ -1,20 +1,8 @@
 import styled from 'styled-components';
 import { theme } from 'common/styles/theme';
-import { Link as LinkR } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 
-export {
-  NavContainer,
-  Nav,
-  LogoLink,
-  Logo,
-  MobileIcon,
-  Menu,
-  MenuItem,
-  LoginButtonContainer,
-  RegisterButton,
-  AuthContainer,
-};
+export { NavContainer, Nav, LogoLink, Logo, MobileIcon };
 
 const NavContainer = styled.nav`
   height: 80px;
@@ -59,62 +47,4 @@ const MobileIcon = styled.div`
     cursor: pointer;
     color: ${theme.colors.brand};
   }
-`;
-
-const Menu = styled.ul`
-  display: flex;
-  align-items: center;
-  text-align: center;
-  list-style: none;
-
-  @media ${theme.device.tabletMax} {
-    display: none;
-  }
-`;
-
-const MenuItem = styled(HashLink)`
-  color: ${theme.colors.textPrimary};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  padding: 0 16px;
-  height: 100%;
-  cursor: pointer;
-
-  &:hover {
-    color: ${theme.colors.brand};
-    border-bottom: 3px solid ${theme.colors.brand};
-  }
-`;
-
-const LoginButtonContainer = styled(LinkR)`
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-
-  @media ${theme.device.tabletMax} {
-    display: none;
-  } ;
-`;
-
-const RegisterButton = styled(LinkR)`
-  display: flex;
-  align-items: flex-end;
-  color: ${theme.colors.brandSecondary};
-  margin-right: 20px;
-  text-decoration: none;
-
-  &:hover {
-    color: ${theme.colors.brand};
-  }
-
-  @media ${theme.device.signupMax} {
-    display: none;
-  } ;
-`;
-
-const AuthContainer = styled.div`
-  display: flex;
-  align-items: center;
 `;

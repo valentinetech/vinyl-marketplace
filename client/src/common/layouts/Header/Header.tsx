@@ -1,18 +1,14 @@
 import NavMobile from './NavMobile';
 import NavDesktop from './NavDesktop';
-import { useState } from 'react';
+import useToggle from 'common/hooks/useToggle';
 
 const Header = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [isAuthorized, setIsAuthorized] = useState<boolean>(false);
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
+  const [isOpen, toggleMenu] = useToggle();
 
   return (
     <>
-      <NavMobile toggleMenu={toggleMenu} isOpen={isOpen} isAuthorized={isAuthorized} />
-      <NavDesktop toggleMenu={toggleMenu} isAuthorized={isAuthorized} />
+      <NavMobile isOpen={isOpen} toggleMenu={toggleMenu} />
+      <NavDesktop toggleMenu={toggleMenu} />
     </>
   );
 };
