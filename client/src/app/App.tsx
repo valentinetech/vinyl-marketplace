@@ -3,6 +3,7 @@ import Home from 'features/Home/Home';
 import Login from 'features/Auth/Login/Login';
 import Profile from 'features/Profile/Profile';
 import Register from 'features/Auth/Register/Register';
+import NotFound from 'common/layouts/NotFound/NotFound';
 //Router
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 //Theme styled-components
@@ -27,6 +28,7 @@ const App = () => {
           <Route path='/login' element={<Login />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/profile/:userId' element={<Profile />} />
+          <Route path='*' element={<NotFound />} />
         </Routes>
       </Router>
       <ToastContainer />

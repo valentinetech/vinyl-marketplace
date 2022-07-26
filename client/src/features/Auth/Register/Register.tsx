@@ -36,7 +36,7 @@ const Register = () => {
     if (isError) toast.error(message);
     if (isSuccess || user) navigate('/profile');
 
-    dispatch(reset);
+    dispatch(reset());
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
