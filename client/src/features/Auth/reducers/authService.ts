@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-// Need to make it dependant on prod and dev
-const API_URL = 'http://localhost:9090/api/users/';
+const API_URL = process.env.dev ? 'http://localhost:9090/api/users/' : 'https://livewebsite.com/api/users';
 
 export interface RegisterProps {
   username: string;

@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import authService, { LoginProps, RegisterProps } from './authService';
 
-//Get user from localStorage
 const user = localStorage.getItem('user');
 
 interface AuthState {
