@@ -1,21 +1,29 @@
-// //Components
-// import Home from 'features/Home/Home';
-// import Login from 'features/Auth/Login/Login';
-// import Profile from 'features/Profile/Profile';
-// import Register from 'features/Auth/Register/Register';
-// import NotFound from 'common/layouts/NotFound/NotFound';
-// //Router
-// import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-
-// //Redux Toolkit
-// import { Provider } from 'react-redux';
-// import { store } from './store';
-// //Toast
-// import { ToastContainer } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
-// import RequireAuth from 'features/Auth/RequireAuth';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import RequireAuth from 'features/Auth/utils/RequireAuth';
+import NotFound from 'common/layouts/NotFound/NotFound';
+import Login from 'features/Auth/Login/Login';
+import Register from 'features/Auth/Register/Register';
+import Home from 'features/Home/Home';
+import Profile from 'features/Profile';
 
 const AppRoutes = () => {
-  return <div>AppRoutes</div>;
+  return (
+    <Router>
+      <Routes>
+        {/* Public Routes */}
+        <Route path='/' element={<Home />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='/login' element={<Login />} />
+        {/* Protected Routes */}
+        <Route element={<RequireAuth />}>
+          <Route path='/profile' element={<Profile />} />
+          <Route path='/profile/:userId' element={<Profile />} />
+        </Route>
+
+        <Route path='*' element={<NotFound />} />
+      </Routes>
+    </Router>
+  );
 };
+
 export default AppRoutes;

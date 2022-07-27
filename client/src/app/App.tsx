@@ -1,11 +1,3 @@
-//Components
-import Home from 'features/Home/Home';
-import Login from 'features/Auth/Login/Login';
-import Profile from 'features/Profile/Profile';
-import Register from 'features/Auth/Register/Register';
-import NotFound from 'common/layouts/NotFound/NotFound';
-//Router
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 //Theme styled-components
 import { GlobalStyles } from 'common/styles/global.styles';
 import { ThemeProvider } from 'styled-components';
@@ -16,31 +8,19 @@ import { store } from './store';
 //Toast
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import RequireAuth from 'features/Auth/utils/RequireAuth';
+//Routing
+import AppRoutes from 'routes';
 
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
-      <Router>
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/register' element={<Register />} />
-          <Route path='/login' element={<Login />} />
-
-          <Route element={<RequireAuth />}>
-            <Route path='/profile' element={<Profile />} />
-            <Route path='/profile/:userId' element={<Profile />} />
-          </Route>
-
-          <Route path='*' element={<NotFound />} />
-        </Routes>
-      </Router>
+      <AppRoutes />
       <ToastContainer />
     </ThemeProvider>
   );
 };
-// Wrapp redux store
+
 const AppWrapper = () => (
   <Provider store={store}>
     <App />
@@ -48,5 +28,3 @@ const AppWrapper = () => (
 );
 
 export default AppWrapper;
-
-// Export routes into public / protected
