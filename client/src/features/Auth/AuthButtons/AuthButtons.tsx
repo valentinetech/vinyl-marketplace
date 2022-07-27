@@ -1,9 +1,9 @@
-import { btnRoutes } from 'common/layouts/Header/routes';
+import { btnRoutes } from 'config/config';
 import Button from 'common/components/Button';
 import Avatar from 'common/components/Avatar';
 
 import { useAppSelector, useAppDispatch } from 'app/store';
-import { logout, reset } from 'features/Auth/authSlice';
+import { logout, reset } from 'features/Auth/reducers/authSlice';
 import { useNavigate } from 'react-router-dom';
 
 import {
@@ -12,6 +12,7 @@ import {
   LoginButtonContainerDesktop,
   RegisterButtonDesktop,
   AuthContainerDesktop,
+  AvatarContainer,
 } from './AuthButtons.styles';
 
 interface AuthButtonsProps {
@@ -32,13 +33,13 @@ const AuthButtons = ({ variant = 'desktop' }: AuthButtonsProps) => {
   const ButtonsMobile = () => {
     return (
       <>
-        {user ? (
-          <>
-            <Avatar />
+        {user !== null ? (
+          <AvatarContainer>
+            <Avatar variant='mobile' />
             <Button variant='secondary' onClick={onLogout}>
               Logout
             </Button>
-          </>
+          </AvatarContainer>
         ) : (
           <>
             <RegisterButtonMobile to={btnRoutes.register.route}>{btnRoutes.register.title}</RegisterButtonMobile>
@@ -56,7 +57,7 @@ const AuthButtons = ({ variant = 'desktop' }: AuthButtonsProps) => {
       <>
         {user ? (
           <>
-            <Avatar />
+            <Avatar variant='desktop' />
             <Button variant='secondary' onClick={onLogout}>
               Logout
             </Button>

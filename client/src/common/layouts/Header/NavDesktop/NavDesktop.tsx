@@ -2,7 +2,7 @@ import logo from 'assets/logo.png';
 import { FaBars } from 'react-icons/fa';
 import AuthButtons from 'features/Auth/AuthButtons';
 import Menu from '../Menu';
-import { NavContainer, Nav, LogoLink, Logo, MobileIcon } from './NavDesktop.styles';
+import { NavContainer, Nav, LogoLink, Logo, MobileIcon, AvatarContainer } from './NavDesktop.styles';
 
 interface NavProps {
   toggleMenu?: () => void;
@@ -19,7 +19,9 @@ const NavDesktop = ({ toggleMenu }: NavProps) => {
           <FaBars size={32} />
         </MobileIcon>
         <Menu variant='desktop' />
-        <AuthButtons variant='desktop' />
+        <AvatarContainer>
+          <AuthButtons variant='desktop' />
+        </AvatarContainer>
       </Nav>
     </NavContainer>
   );

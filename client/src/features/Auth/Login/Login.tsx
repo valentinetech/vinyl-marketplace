@@ -8,7 +8,7 @@ import { Form, FormGroup, Section } from './Login.styles';
 
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import { login, reset } from '../authSlice';
+import { login, reset } from '../reducers/authSlice';
 import { useAppDispatch, useAppSelector } from 'app/store';
 import Spinner from 'common/components/Spinner';
 
@@ -33,9 +33,7 @@ const Login = () => {
     if (isError) toast.error(message);
     if (isSuccess || user) navigate('/profile');
 
-    return () => {
-      dispatch(reset());
-    };
+    dispatch(reset);
   }, [user, isLoading, isError, isSuccess, message, navigate, dispatch]);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {

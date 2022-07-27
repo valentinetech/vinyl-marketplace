@@ -1,4 +1,4 @@
-import { menuRoutes } from 'common/layouts/Header/routes';
+import { menuRoutes } from 'config/config';
 import { MenuMobileContainer, MenuItemMobile, MenuDesktopContainer, MenuItemDesktop } from './Menu.styles';
 
 interface MenuProps {
@@ -34,7 +34,6 @@ const Menu = ({ variant = 'desktop', toggleMenu }: MenuProps) => {
       </MenuDesktopContainer>
     );
   };
-
   return <>{variant === 'desktop' ? <MenuDesktop /> : <MenuMobile />}</>;
 };
 export default Menu;

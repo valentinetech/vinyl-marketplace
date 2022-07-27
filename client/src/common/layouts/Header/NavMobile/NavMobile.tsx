@@ -16,7 +16,7 @@ const NavMobile = ({ isOpen, toggleMenu }: NavProps) => {
         <Logo src={logo} alt='logo' />
       </LogoLink>
       <NavIcon onClick={toggleMenu} aria-label='Open or Close navigation'>
-        <CloseIcon size={32} />
+        <CloseIcon size={32} onClick={toggleMenu} />
       </NavIcon>
       <MenuContainer>
         <Menu variant='mobile' toggleMenu={toggleMenu} />

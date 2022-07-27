@@ -1,7 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import authService, { LoginProps, RegisterProps } from './authService';
-import { ToastContent } from 'react-toastify/dist/types';
-import { ReactNode } from 'react';
 
 //Get user from localStorage
 const user = localStorage.getItem('user');

@@ -16,6 +16,7 @@ import { store } from './store';
 //Toast
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import RequireAuth from 'features/Auth/utils/RequireAuth';
 
 const App = () => {
   return (
@@ -26,8 +27,12 @@ const App = () => {
           <Route path='/' element={<Home />} />
           <Route path='/register' element={<Register />} />
           <Route path='/login' element={<Login />} />
-          <Route path='/profile' element={<Profile />} />
-          <Route path='/profile/:userId' element={<Profile />} />
+
+          <Route element={<RequireAuth />}>
+            <Route path='/profile' element={<Profile />} />
+            <Route path='/profile/:userId' element={<Profile />} />
+          </Route>
+
           <Route path='*' element={<NotFound />} />
         </Routes>
       </Router>
@@ -43,3 +48,5 @@ const AppWrapper = () => (
 );
 
 export default AppWrapper;
+
+// Export routes into public / protected

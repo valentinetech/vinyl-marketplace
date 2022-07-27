@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
 import { Section, Form, FormGroup } from './Register.styles';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import { register, reset } from '../authSlice';
+import { register, reset } from '../reducers/authSlice';
 import { useAppDispatch, useAppSelector } from 'app/store';
 
 interface RegisterProps {
@@ -36,7 +36,7 @@ const Register = () => {
     if (isError) toast.error(message);
     if (isSuccess || user) navigate('/profile');
 
-    dispatch(reset());
+    dispatch(reset);
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {

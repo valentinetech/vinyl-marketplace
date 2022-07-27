@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { theme } from 'common/styles/theme';
 import { HashLink } from 'react-router-hash-link';
 
-export { NavContainer, Nav, LogoLink, Logo, MobileIcon };
+export { NavContainer, Nav, LogoLink, Logo, MobileIcon, AvatarContainer };
 
 const NavContainer = styled.nav`
   height: 80px;
@@ -46,5 +46,14 @@ const MobileIcon = styled.div`
     font-size: 16px;
     cursor: pointer;
     color: ${theme.colors.brand};
+  }
+`;
+
+const AvatarContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  @media ${theme.device.tabletMax} {
+    display: none;
   }
 `;

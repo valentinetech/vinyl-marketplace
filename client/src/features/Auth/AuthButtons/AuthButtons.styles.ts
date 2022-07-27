@@ -8,6 +8,7 @@ export {
   LoginButtonContainerDesktop,
   RegisterButtonDesktop,
   AuthContainerDesktop,
+  AvatarContainer,
 };
 
 const LoginButtonContainerMobile = styled(LinkR)`
@@ -63,4 +64,11 @@ const RegisterButtonDesktop = styled(LinkR)`
 const AuthContainerDesktop = styled.div`
   display: flex;
   align-items: center;
+`;
+
+const AvatarContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
