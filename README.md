@@ -1,3 +1,15 @@
+TODO
+[] Profile UI
+[] Dashborad UI
+[] Cart UI
+[] Prolife logic
+[] Dashboard logic
+[] Spotify search
+[] Cart logic
+[] Stripe
+[] Testing
+[] Form validation server/client
+
 # EndPoints
 
 ## CREATE

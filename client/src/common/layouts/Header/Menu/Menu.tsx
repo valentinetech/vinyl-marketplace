@@ -1,4 +1,5 @@
-import { menuRoutes } from 'config/config';
+import { useAppSelector } from 'app/store';
+import { publicMenu, protectedMenu } from 'config/config';
 import { MenuMobileContainer, MenuItemMobile, MenuDesktopContainer, MenuItemDesktop } from './Menu.styles';
 
 interface MenuProps {
@@ -7,6 +8,10 @@ interface MenuProps {
 }
 
 const Menu = ({ variant = 'desktop', toggleMenu }: MenuProps) => {
+  const { user } = useAppSelector((state) => state.auth);
+
+  const menuRoutes = user ? protectedMenu : publicMenu;
+
   const MenuMobile = () => {
     return (
       <MenuMobileContainer>

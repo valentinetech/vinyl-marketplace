@@ -1,6 +1,5 @@
 import axios from 'axios';
-
-const API_URL = process.env.dev ? 'http://localhost:9090/api/users/' : 'https://livewebsite.com/api/users';
+import { API_URL } from 'config/config';
 
 export interface RegisterProps {
   username: string;

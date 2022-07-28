@@ -17,7 +17,7 @@ const AppRoutes = () => {
         {/* Protected Routes */}
         <Route element={<RequireAuth />}>
           <Route path='/profile' element={<Profile />} />
-          <Route path='/profile/:userId' element={<Profile />} />
+          <Route path='/dashboard' element={<Profile />} />
         </Route>
 
         <Route path='*' element={<NotFound />} />
