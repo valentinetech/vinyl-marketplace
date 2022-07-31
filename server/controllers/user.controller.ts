@@ -5,7 +5,6 @@ import bcryptjs from 'bcrypt';
 import Logging from '../lib/Logging';
 import User from '../models/User.model';
 import signToken from '../utils/signToken';
-import { string } from 'joi';
 
 const validateToken = (req: Request, res: Response, next: NextFunction) => {
   Logging.info('Token validated, user authorized.');

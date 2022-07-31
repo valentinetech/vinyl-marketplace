@@ -19,7 +19,6 @@ const AppRoutes = () => {
           <Route path='/profile' element={<Profile />} />
           <Route path='/dashboard' element={<Profile />} />
         </Route>
-
         <Route path='*' element={<NotFound />} />
       </Routes>
     </Router>

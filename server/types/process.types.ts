@@ -1,8 +1,8 @@
-declare var process: {
-  env: {
-    PORT: string;
-    MONGO_URL: string;
-  };
-};
+// declare var process: {
+//   env: {
+//     PORT: string;
+//     MONGO_URL: string;
+//   };
+// };
 
-export default process;
+// export default process;

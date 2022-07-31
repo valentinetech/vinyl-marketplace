@@ -1,7 +1,6 @@
 import express from 'express';
 import controller from '../controllers/Auction.controller';
 import Protect from '../middleware/ValidateToken';
-// import { Schemas, ValidateJoi } from '../middleware/ValidateSchema';
 
 const router = express.Router();
 
