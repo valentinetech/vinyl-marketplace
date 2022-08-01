@@ -11,7 +11,7 @@ import { login, reset } from '../reducers/authSlice';
 import { useAppDispatch, useAppSelector } from 'app/store';
 import Spinner from 'common/components/Spinner';
 
-import { Form, FormGroup, Section, LoginH3, ButtonContainer } from './Login.styles';
+import { Form, FormGroup, Section, LoginHeader, ButtonContainer } from './Login.styles';
 
 interface LoginProps {
   username: string;
@@ -63,7 +63,7 @@ const Login = () => {
       <Section>
         <Form onSubmit={onSubmit}>
           <FormGroup>
-            <LoginH3>Login...</LoginH3>
+            <LoginHeader>LOGIN</LoginHeader>
             <Input type='text' id='username' value={username} placeholder='Enter Your Username' onChange={onChange} />
             <Input
               type='password'

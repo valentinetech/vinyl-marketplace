@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { register, reset } from '../reducers/authSlice';
 import { useAppDispatch, useAppSelector } from 'app/store';
 
-import { Section, Form, FormGroup, RegisterH3, ButtonContainer } from './Register.styles';
+import { Section, Form, FormGroup, RegisterHeader, ButtonContainer } from './Register.styles';
 
 interface RegisterProps {
   username: string;
@@ -70,7 +70,7 @@ const Register = () => {
       <Section>
         <Form onSubmit={onSubmit}>
           <FormGroup>
-            <RegisterH3>Register...</RegisterH3>
+            <RegisterHeader>REGISTER</RegisterHeader>
             <Input type='text' id='username' value={username} placeholder='Enter Your Name' onChange={onChange} />
             <Input type='text' id='email' value={email} placeholder='Enter Your Email' onChange={onChange} />
             <Input

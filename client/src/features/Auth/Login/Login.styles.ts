@@ -1,7 +1,7 @@
 import { theme } from 'common/styles/theme';
 import styled from 'styled-components';
 
-export { Section, Form, FormGroup, LoginH3, ButtonContainer };
+export { Section, Form, FormGroup, LoginHeader, ButtonContainer };
 
 const Section = styled.section`
   display: flex;
@@ -30,7 +30,7 @@ const FormGroup = styled.div`
   padding: 30px 50px;
 `;
 
-const LoginH3 = styled.h3`
+const LoginHeader = styled.h2`
   margin-bottom: 20px;
   color: ${theme.colors.brandSecondary};
 `;
