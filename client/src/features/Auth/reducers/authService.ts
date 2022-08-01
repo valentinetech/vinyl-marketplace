@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import axios from 'axios';
 import { API_URL } from 'config/config';
 
@@ -33,6 +34,7 @@ const login = async (userData: LoginProps) => {
 
 const logout = () => {
   localStorage.removeItem('user');
+  toast.success('Goodbye!');
 };
 
 const authService = {

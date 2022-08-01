@@ -32,7 +32,11 @@ const Login = () => {
 
   useEffect(() => {
     if (isError) toast.error(message);
-    if (isSuccess || user) navigate('/profile');
+
+    if (isSuccess || user) {
+      toast.success(`Welcome back ${username}!`);
+      navigate('/profile');
+    }
 
     dispatch(reset);
   }, [user, isLoading, isError, isSuccess, message, navigate, dispatch]);

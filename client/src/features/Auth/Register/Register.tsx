@@ -35,10 +35,13 @@ const Register = () => {
 
   useEffect(() => {
     if (isError) toast.error(message);
-    if (isSuccess || user) navigate('/profile');
+    if (isSuccess || user) {
+      toast.success(`Welcome ${username}!`);
+      navigate('/profile');
+    }
 
     dispatch(reset);
-  }, [user, isError, isSuccess, message, navigate, dispatch]);
+  }, [user, isError, isSuccess, message, navigate, dispatch, username]);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setFormData((prevState) => ({
