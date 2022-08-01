@@ -1,14 +1,15 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
 export interface IAuction {
+  user: string;
   albumCover: string;
   album: string;
   artist: string;
   buyNowPrice: number;
   minBid: number;
+  isBought?: boolean;
   lastBid?: number;
   timeLeft?: number;
-  user?: string;
 }
 
 export interface IAuctionModel extends Document, IAuction {}
@@ -52,6 +53,10 @@ const AuctionSchema: Schema = new Schema(
     timeLeft: {
       type: Number,
       default: TIME_LEFT_15MIN,
+    },
+    isBought: {
+      type: Boolean,
+      default: false,
     },
   },
   {

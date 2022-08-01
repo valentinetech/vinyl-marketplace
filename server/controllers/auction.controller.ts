@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import Auction from '../models/Auction.model';
 
 const createAuction = (req: Request, res: Response, next: NextFunction) => {
-  const { albumCover, album, artist, buyNowPrice, minBid, lastBid, timeLeft, user } = req.body;
+  const { albumCover, album, artist, buyNowPrice, minBid, lastBid, timeLeft, isBought, user } = req.body;
 
   const auction = new Auction({
     _id: new mongoose.Types.ObjectId(),
@@ -15,6 +15,7 @@ const createAuction = (req: Request, res: Response, next: NextFunction) => {
     minBid,
     lastBid,
     timeLeft,
+    isBought,
   });
 
   return auction
