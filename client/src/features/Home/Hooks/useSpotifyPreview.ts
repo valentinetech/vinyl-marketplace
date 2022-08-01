@@ -120,11 +120,13 @@ export function useSpotifyPreview() {
       )
     )
       .then((resp) => {
-        console.log(resp);
         const topAlbumArray: TopAlbum[] = resp
           .map((item, index, array) => array[index].data.tracks[0])
           .filter((item) => {
             return item !== undefined && item.preview_url !== null;
+          })
+          .filter((item) => {
+            return item.album.album_type === 'album';
           });
 
         setTopAlbums(topAlbumArray);

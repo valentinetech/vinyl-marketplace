@@ -28,7 +28,7 @@ export const protectedMenu = [
     route: '/profile',
   },
   {
-    title: 'Profile',
+    title: 'Dashboard',
     route: '/dashboard',
   },
 ];

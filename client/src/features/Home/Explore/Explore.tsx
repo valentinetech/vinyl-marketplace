@@ -15,6 +15,7 @@ const Explore = () => {
 
   const canLoadMore = topAlbums && topAlbums.length > displayedAlbumCount;
 
+  console.log(topAlbums);
   useEffect(() => {
     const audio = new Audio(previewUrl);
     audio.play();

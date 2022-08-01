@@ -5,10 +5,13 @@ export { SectionContainer, CopyrightText };
 
 const SectionContainer = styled.div`
   display: flex;
+  align-items: flex-end;
   width: 100%;
   max-width: 1100px;
   margin: 0 auto;
   justify-content: flex-start;
+  margin-top: 50px;
+  height: auto;
 `;
 
 const CopyrightText = styled.h6`

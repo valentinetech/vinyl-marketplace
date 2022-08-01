@@ -4,11 +4,12 @@ import Spinner from 'common/components/Spinner';
 import Footer from 'common/layouts/Footer';
 import Header from 'common/layouts/Header';
 import { useState, useEffect } from 'react';
-import { Section, Form, FormGroup } from './Register.styles';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { register, reset } from '../reducers/authSlice';
 import { useAppDispatch, useAppSelector } from 'app/store';
+
+import { Section, Form, FormGroup, RegisterH3, ButtonContainer } from './Register.styles';
 
 interface RegisterProps {
   username: string;
@@ -68,19 +69,27 @@ const Register = () => {
       <Header />
       <Section>
         <Form onSubmit={onSubmit}>
-          <h3>Please Register</h3>
           <FormGroup>
+            <RegisterH3>Register...</RegisterH3>
             <Input type='text' id='username' value={username} placeholder='Enter Your Name' onChange={onChange} />
             <Input type='text' id='email' value={email} placeholder='Enter Your Email' onChange={onChange} />
-            <Input type='password' id='password' value={password} placeholder='Enter Password' onChange={onChange} />
+            <Input
+              type='password'
+              id='password'
+              value={password}
+              placeholder='Enter Your Password'
+              onChange={onChange}
+            />
             <Input
               type='password'
               id='passwordConfirm'
               value={passwordConfirm}
-              placeholder='Confirm Password'
+              placeholder='Confirm Your Password'
               onChange={onChange}
             />
-            <Button variant='primary'>Register</Button>
+            <ButtonContainer>
+              <Button variant='primary'>Register</Button>
+            </ButtonContainer>
           </FormGroup>
         </Form>
       </Section>

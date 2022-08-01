@@ -4,13 +4,14 @@ import Footer from 'common/layouts/Footer';
 import Header from 'common/layouts/Header';
 
 import { useState, useEffect } from 'react';
-import { Form, FormGroup, Section } from './Login.styles';
 
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { login, reset } from '../reducers/authSlice';
 import { useAppDispatch, useAppSelector } from 'app/store';
 import Spinner from 'common/components/Spinner';
+
+import { Form, FormGroup, Section, LoginH3, ButtonContainer } from './Login.styles';
 
 interface LoginProps {
   username: string;
@@ -60,11 +61,9 @@ const Login = () => {
     <>
       <Header />
       <Section>
-        <h3>Please Login</h3>
-      </Section>
-      <Section>
         <Form onSubmit={onSubmit}>
           <FormGroup>
+            <LoginH3>Login...</LoginH3>
             <Input type='text' id='username' value={username} placeholder='Enter Your Username' onChange={onChange} />
             <Input
               type='password'
@@ -73,7 +72,9 @@ const Login = () => {
               placeholder='Enter Your Password'
               onChange={onChange}
             />
-            <Button variant='primary'>Login</Button>
+            <ButtonContainer>
+              <Button variant='primary'>Login</Button>
+            </ButtonContainer>
           </FormGroup>
         </Form>
       </Section>
