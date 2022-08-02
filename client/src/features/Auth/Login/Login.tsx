@@ -7,11 +7,12 @@ import { useState, useEffect } from 'react';
 
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import { login, reset } from '../reducers/authSlice';
+import { login, reset } from '../slices/authSlice';
 import { useAppDispatch, useAppSelector } from 'app/store';
 import Spinner from 'common/components/Spinner';
 
 import { Form, FormGroup, Section, LoginHeader, ButtonContainer } from './Login.styles';
+import { loginSchema } from '../schema/authSchema';
 
 interface LoginProps {
   username: string;
@@ -31,15 +32,13 @@ const Login = () => {
   const { user, isLoading, isError, isSuccess, message } = useAppSelector((state) => state.auth);
 
   useEffect(() => {
-    if (isError) toast.error(message);
-
     if (isSuccess || user) {
       toast.success(`Welcome back ${username}!`);
       navigate('/profile');
     }
 
     dispatch(reset);
-  }, [user, isLoading, isError, isSuccess, message, navigate, dispatch]);
+  }, [user, isLoading, isError, isSuccess, message, navigate, dispatch, username]);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setFormData((prevState) => ({
@@ -48,15 +47,25 @@ const Login = () => {
     }));
   };
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (isError) toast.error(message, { toastId: 'toastidPassword' });
 
-    const userData = {
-      username,
-      password,
-    };
+    const isFormValid = await loginSchema.isValid(formData, {
+      abortEarly: false,
+    });
 
-    dispatch(login(userData));
+    if (isFormValid) {
+      const userData = {
+        username,
+        password,
+      };
+      dispatch(login(userData));
+    } else {
+      loginSchema.validate(formData).catch((error) => {
+        toast.error(error.message, { toastId: 'error' });
+      });
+    }
   };
 
   if (isLoading) return <Spinner />;

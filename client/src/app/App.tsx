@@ -16,7 +16,7 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <GlobalStyles />
       <AppRoutes />
-      <ToastContainer position='bottom-right' autoClose={3000} closeOnClick toastClassName='toast' />
+      <ToastContainer newestOnTop position='bottom-right' autoClose={3000} closeOnClick toastClassName='toast' />
     </ThemeProvider>
   );
 };

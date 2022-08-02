@@ -3,7 +3,7 @@ import Button from 'common/components/Button';
 import Avatar from 'common/components/Avatar';
 
 import { useAppSelector, useAppDispatch } from 'app/store';
-import { logout, reset } from 'features/Auth/reducers/authSlice';
+import { logout, reset } from 'features/Auth/slices/authSlice';
 import { useNavigate } from 'react-router-dom';
 
 import {

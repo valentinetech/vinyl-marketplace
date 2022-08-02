@@ -6,8 +6,9 @@ import Header from 'common/layouts/Header';
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import { register, reset } from '../reducers/authSlice';
+import { register, reset } from '../slices/authSlice';
 import { useAppDispatch, useAppSelector } from 'app/store';
+import { registerSchema } from '../schema/authSchema';
 
 import { Section, Form, FormGroup, RegisterHeader, ButtonContainer } from './Register.styles';
 
@@ -34,7 +35,6 @@ const Register = () => {
   const { user, isLoading, isError, isSuccess, message } = useAppSelector((state) => state.auth);
 
   useEffect(() => {
-    if (isError) toast.error(message);
     if (isSuccess || user) {
       toast.success(`Welcome ${username}!`);
       navigate('/profile');
@@ -48,21 +48,42 @@ const Register = () => {
       ...prevState,
       [e.target.id]: e.target.value,
     }));
+
+    registerSchema.validate({});
   };
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (password !== passwordConfirm) {
-      toast.error('Passwords does not match, please re-enter');
-    } else {
+    if (isError) toast.error(message, { toastId: 'toastIdRegister' });
+
+    const isFormValid = await registerSchema.isValid(formData, {
+      abortEarly: false,
+    });
+
+    if (isFormValid) {
       const userData = {
         username,
         email,
         password,
+        passwordConfirm,
       };
       dispatch(register(userData));
+    } else {
+      registerSchema.validate(formData, { abortEarly: false }).catch((error) => {
+        toast.error(error.message, { toastId: 'toastIdRegisterValidation' });
+      });
     }
+    // if (password !== passwordConfirm) {
+    //   toast.error('Passwords does not match, please re-enter');
+    // } else {
+    //   const userData = {
+    //     username,
+    //     email,
+    //     password,
+    //   };
+    //   dispatch(register(userData));
+    // }
   };
 
   if (isLoading) return <Spinner />;
@@ -75,7 +96,7 @@ const Register = () => {
           <FormGroup>
             <RegisterHeader>REGISTER</RegisterHeader>
             <Input type='text' id='username' value={username} placeholder='Enter Your Name' onChange={onChange} />
-            <Input type='text' id='email' value={email} placeholder='Enter Your Email' onChange={onChange} />
+            <Input type='email' id='email' value={email} placeholder='Enter Your Email' onChange={onChange} />
             <Input
               type='password'
               id='password'

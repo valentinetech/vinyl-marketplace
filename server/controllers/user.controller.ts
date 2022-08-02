@@ -67,14 +67,15 @@ const login = (req: Request, res: Response, next: NextFunction) => {
     .then((users) => {
       if (users.length !== 1) {
         return res.status(401).json({
-          message: 'Unauthorized',
+          message: 'User not found...',
         });
       }
 
       bcryptjs.compare(password, users[0].password, (error, result) => {
         if (error) {
+          console.log(error);
           return res.status(401).json({
-            message: 'Password Mismatch',
+            message: 'Password Mismatch...',
           });
         } else if (result) {
           signToken(users[0], (_error, token) => {
@@ -85,11 +86,15 @@ const login = (req: Request, res: Response, next: NextFunction) => {
               });
             } else if (token) {
               return res.status(200).json({
-                message: 'Auth successful',
+                message: 'Auth successful!',
                 token: token,
                 user: users[0],
               });
             }
+          });
+        } else {
+          return res.status(401).json({
+            message: 'Incorrect password...',
           });
         }
       });

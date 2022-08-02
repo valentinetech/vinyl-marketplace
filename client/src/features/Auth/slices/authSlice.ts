@@ -22,7 +22,7 @@ const initialState: AuthState = {
 export const register = createAsyncThunk('auth/register', async (user: RegisterProps, { rejectWithValue }) => {
   try {
     return await authService.register(user);
-  } catch (error: unknown) {
+  } catch (error: any) {
     return rejectWithValue(error);
   }
 });
@@ -30,8 +30,9 @@ export const register = createAsyncThunk('auth/register', async (user: RegisterP
 export const login = createAsyncThunk('auth/login', async (user: LoginProps, { rejectWithValue }) => {
   try {
     return await authService.login(user);
-  } catch (error: unknown) {
-    return rejectWithValue(error);
+  } catch (error: any) {
+    const message = error.response.data.message;
+    return rejectWithValue(message);
   }
 });
 
