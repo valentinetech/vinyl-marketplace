@@ -1,46 +1,57 @@
 import { toast } from 'react-toastify';
 import axios from 'axios';
-import { API_URL } from 'config/config';
+import { API_USER_URL } from 'config/config';
 
 export interface RegisterProps {
-  username: string;
-  email: string;
-  password: string;
+	username: string;
+	email: string;
+	password: string;
 }
 
 export interface LoginProps {
-  username: string;
-  password: string;
+	username: string;
+	password: string;
 }
 
 const register = async (userData: RegisterProps) => {
-  const response = await axios.post(API_URL + 'register', userData);
+	const { data } = await axios.post(API_USER_URL + 'register', userData);
 
-  if (response.data) {
-    localStorage.setItem('user', JSON.stringify(response.data));
-  }
-  return response.data;
+	if (data) {
+		localStorage.setItem('user', JSON.stringify(data.user));
+		localStorage.setItem('token', data.token);
+		localStorage.setItem('username', data.user.username);
+		localStorage.setItem('email', data.user.email);
+	}
+	return data.user;
 };
 
 const login = async (userData: LoginProps) => {
-  const response = await axios.post(API_URL + 'login', userData);
+	const { data } = await axios.post(API_USER_URL + 'login', userData);
 
-  if (response.data) {
-    localStorage.setItem('user', JSON.stringify(response.data));
-  }
+	if (data) {
+		localStorage.setItem('user', JSON.stringify(data.user));
+		localStorage.setItem('token', data.token);
+		localStorage.setItem('_id', data.user._id);
+		localStorage.setItem('username', data.user.username);
+		localStorage.setItem('email', data.user.email);
+	}
 
-  return response.data;
+	return data.user;
 };
 
 const logout = () => {
-  localStorage.removeItem('user');
-  toast.success('Goodbye!');
+	localStorage.removeItem('user');
+	localStorage.removeItem('_id');
+	localStorage.removeItem('token');
+	localStorage.removeItem('username');
+	localStorage.removeItem('email');
+	toast.success('Goodbye!');
 };
 
 const authService = {
-  register,
-  login,
-  logout,
+	register,
+	login,
+	logout,
 };
 
 export default authService;

@@ -15,85 +15,85 @@ import { Form, FormGroup, Section, LoginHeader, ButtonContainer } from './Login.
 import { loginSchema } from '../schema/authSchema';
 
 interface LoginProps {
-  username: string;
-  password: string;
+	username: string;
+	password: string;
 }
 
 const Login = () => {
-  const [formData, setFormData] = useState<LoginProps>({
-    username: '',
-    password: '',
-  });
-  const { username, password } = formData;
+	const [formData, setFormData] = useState<LoginProps>({
+		username: '',
+		password: '',
+	});
+	const { username, password } = formData;
 
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
+	const navigate = useNavigate();
+	const dispatch = useAppDispatch();
 
-  const { user, isLoading, isError, isSuccess, message } = useAppSelector((state) => state.auth);
+	const { userToken, isLoading, isError, isSuccess, message } = useAppSelector((state) => state.auth);
 
-  useEffect(() => {
-    if (isSuccess || user) {
-      toast.success(`Welcome back ${username}!`);
-      navigate('/profile');
-    }
+	useEffect(() => {
+		if (isSuccess || userToken) {
+			toast.success(`Welcome back ${username}!`);
+			navigate('/profile');
+		}
 
-    dispatch(reset);
-  }, [user, isLoading, isError, isSuccess, message, navigate, dispatch, username]);
+		dispatch(reset);
+	}, [userToken, isLoading, isError, isSuccess, message, navigate, dispatch, username]);
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setFormData((prevState) => ({
-      ...prevState,
-      [e.target.id]: e.target.value,
-    }));
-  };
+	const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+		setFormData((prevState) => ({
+			...prevState,
+			[e.target.id]: e.target.value,
+		}));
+	};
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (isError) toast.error(message, { toastId: 'toastidPassword' });
+	const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		if (isError) toast.error(message, { toastId: 'toastidPassword' });
 
-    const isFormValid = await loginSchema.isValid(formData, {
-      abortEarly: false,
-    });
+		const isFormValid = await loginSchema.isValid(formData, {
+			abortEarly: false,
+		});
 
-    if (isFormValid) {
-      const userData = {
-        username,
-        password,
-      };
-      dispatch(login(userData));
-    } else {
-      loginSchema.validate(formData).catch((error) => {
-        toast.error(error.message, { toastId: 'error' });
-      });
-    }
-  };
+		if (isFormValid) {
+			const userData = {
+				username,
+				password,
+			};
+			dispatch(login(userData));
+		} else {
+			loginSchema.validate(formData).catch((error) => {
+				toast.error(error.message, { toastId: 'error' });
+			});
+		}
+	};
 
-  if (isLoading) return <Spinner />;
+	if (isLoading) return <Spinner />;
 
-  return (
-    <>
-      <Header />
-      <Section>
-        <Form onSubmit={onSubmit}>
-          <FormGroup>
-            <LoginHeader>LOGIN</LoginHeader>
-            <Input type='text' id='username' value={username} placeholder='Enter Your Username' onChange={onChange} />
-            <Input
-              type='password'
-              id='password'
-              value={password}
-              placeholder='Enter Your Password'
-              onChange={onChange}
-            />
-            <ButtonContainer>
-              <Button variant='primary'>Login</Button>
-            </ButtonContainer>
-          </FormGroup>
-        </Form>
-      </Section>
-      <Footer />
-    </>
-  );
+	return (
+		<>
+			<Header />
+			<Section>
+				<Form onSubmit={onSubmit}>
+					<FormGroup>
+						<LoginHeader>LOGIN</LoginHeader>
+						<Input type='text' id='username' value={username} placeholder='Enter Your Username' onChange={onChange} />
+						<Input
+							type='password'
+							id='password'
+							value={password}
+							placeholder='Enter Your Password'
+							onChange={onChange}
+						/>
+						<ButtonContainer>
+							<Button variant='primary'>Login</Button>
+						</ButtonContainer>
+					</FormGroup>
+				</Form>
+			</Section>
+			<Footer />
+		</>
+	);
 };
 
 export default Login;
