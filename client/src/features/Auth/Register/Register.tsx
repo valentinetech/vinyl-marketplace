@@ -74,16 +74,6 @@ const Register = () => {
 				toast.error(error.message, { toastId: 'toastIdRegisterValidation' });
 			});
 		}
-		// if (password !== passwordConfirm) {
-		//   toast.error('Passwords does not match, please re-enter');
-		// } else {
-		//   const userData = {
-		//     username,
-		//     email,
-		//     password,
-		//   };
-		//   dispatch(register(userData));
-		// }
 	};
 
 	if (isLoading) return <Spinner />;

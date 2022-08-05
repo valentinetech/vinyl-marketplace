@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify';
 import axios from 'axios';
-import { API_USER_URL } from 'config/config';
+import { API_URL } from 'config/config';
 
 export interface RegisterProps {
 	username: string;
@@ -13,8 +13,10 @@ export interface LoginProps {
 	password: string;
 }
 
+const API_USERS_URL = API_URL + '/api/users/';
+
 const register = async (userData: RegisterProps) => {
-	const { data } = await axios.post(API_USER_URL + 'register', userData);
+	const { data } = await axios.post(`${API_USERS_URL}register`, userData);
 
 	if (data) {
 		localStorage.setItem('user', JSON.stringify(data.user));
@@ -22,11 +24,11 @@ const register = async (userData: RegisterProps) => {
 		localStorage.setItem('username', data.user.username);
 		localStorage.setItem('email', data.user.email);
 	}
-	return data.user;
+	return data.token;
 };
 
 const login = async (userData: LoginProps) => {
-	const { data } = await axios.post(API_USER_URL + 'login', userData);
+	const { data } = await axios.post(`${API_USERS_URL}login`, userData);
 
 	if (data) {
 		localStorage.setItem('user', JSON.stringify(data.user));
@@ -36,7 +38,7 @@ const login = async (userData: LoginProps) => {
 		localStorage.setItem('email', data.user.email);
 	}
 
-	return data.user;
+	return data.token;
 };
 
 const logout = () => {

@@ -1,12 +1,7 @@
 import Footer from 'common/layouts/Footer';
 import Header from 'common/layouts/Header';
 import styled from 'styled-components';
-
-const Section = styled.section`
-	display: flex;
-	flex-direction: column;
-	margin: 50px;
-`;
+import { Section, H2Header } from './Profile.styles';
 
 const Profile = () => {
 	const username = localStorage.getItem('username');
@@ -17,9 +12,9 @@ const Profile = () => {
 		<>
 			<Header />
 			<Section>
-				<h3>Your user ID is: {_id}</h3>
-				<h3>Your username is: {username}</h3>
-				<h3>Your email is: {email}</h3>
+				<H2Header>Welcome back {username}!</H2Header>
+				<h4>Your user ID is: {_id}</h4>
+				<h4>Your email is: {email}</h4>
 			</Section>
 			<Footer />
 		</>

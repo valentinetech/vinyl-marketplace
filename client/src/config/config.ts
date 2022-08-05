@@ -1,8 +1,8 @@
-const devEnvUsersUrl = 'http://localhost:9090/api/users/';
+const devEnvUsersUrl = 'http://localhost:9090';
 const prodEnvUrl = 'dont know yet';
 const isDev = process.env.REACT_APP_LIVE;
 
-export const API_USER_URL = isDev ? devEnvUsersUrl : prodEnvUrl;
+export const API_URL = isDev ? devEnvUsersUrl : prodEnvUrl;
 
 export const publicMenu = [
 	{
