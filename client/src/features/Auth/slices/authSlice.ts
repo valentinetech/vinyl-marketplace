@@ -1,10 +1,27 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import authService, { LoginProps, RegisterProps } from './authService';
 
-const userToken = localStorage.getItem('token') ? localStorage.getItem('token') : null;
+// const userToken = localStorage.getItem('token') ? localStorage.getItem('token') : null;
 
-interface AuthState {
+interface UserPayload {
+	userInfo: {
+		_id: string;
+		username: string;
+		email: string;
+	} | null;
+	userToken: string;
+}
+
+interface UserState {
+	userInfo: {
+		_id: string;
+		username: string;
+		email: string;
+	} | null;
 	userToken: string | null;
+}
+
+interface AuthState extends UserState {
 	isLoading: boolean;
 	isSuccess: boolean;
 	isError: boolean;
@@ -12,7 +29,8 @@ interface AuthState {
 }
 
 const initialState: AuthState = {
-	userToken,
+	userToken: null,
+	userInfo: null,
 	isError: false,
 	isSuccess: false,
 	isLoading: false,
@@ -23,7 +41,8 @@ export const register = createAsyncThunk('auth/register', async (user: RegisterP
 	try {
 		return await authService.register(user);
 	} catch (error: any) {
-		return rejectWithValue(error);
+		const message: string = error.response.data.message;
+		return rejectWithValue(message);
 	}
 });
 
@@ -31,7 +50,7 @@ export const login = createAsyncThunk('auth/login', async (user: LoginProps, { r
 	try {
 		return await authService.login(user);
 	} catch (error: any) {
-		const message = error.response.data.message;
+		const message: string = error.response.data.message;
 		return rejectWithValue(message);
 	}
 });
@@ -51,34 +70,38 @@ export const authSlice = createSlice({
 			.addCase(register.pending, (state) => {
 				state.isLoading = true;
 			})
-			.addCase(register.fulfilled, (state, action: PayloadAction<string>) => {
+			.addCase(register.fulfilled, (state, action: PayloadAction<UserPayload>) => {
 				state.isLoading = false;
 				state.isSuccess = true;
-				state.userToken = action.payload;
-				state.userToken = action.payload;
+				state.userToken = action.payload.userToken;
+				state.userInfo = action.payload.userInfo;
 			})
 			.addCase(register.rejected, (state, action) => {
 				state.isLoading = false;
 				state.isError = true;
-				state.message = action.payload as string;
 				state.userToken = null;
+				state.userInfo = null;
+				state.message = action.error?.message || 'Unknown error';
 			})
 			.addCase(login.pending, (state) => {
 				state.isLoading = true;
 			})
-			.addCase(login.fulfilled, (state, action: PayloadAction<string>) => {
+			.addCase(login.fulfilled, (state, action: PayloadAction<UserPayload>) => {
 				state.isLoading = false;
 				state.isSuccess = true;
-				state.userToken = action.payload;
+				state.userToken = action.payload.userToken;
+				state.userInfo = action.payload.userInfo;
 			})
 			.addCase(login.rejected, (state, action) => {
 				state.isLoading = false;
 				state.isError = true;
-				state.message = action.payload as string;
 				state.userToken = null;
+				state.userInfo = null;
+				state.message = action.error?.message || 'Unknown error';
 			})
 			.addCase(logout.fulfilled, (state) => {
 				state.userToken = null;
+				state.userInfo = null;
 			});
 	},
 });

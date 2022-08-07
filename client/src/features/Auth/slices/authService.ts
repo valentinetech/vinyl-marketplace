@@ -19,34 +19,26 @@ const register = async (userData: RegisterProps) => {
 	const { data } = await axios.post(`${API_USERS_URL}register`, userData);
 
 	if (data) {
-		localStorage.setItem('user', JSON.stringify(data.user));
-		localStorage.setItem('token', data.token);
-		localStorage.setItem('username', data.user.username);
-		localStorage.setItem('email', data.user.email);
+		localStorage.setItem('userInfo', JSON.stringify(data.userInfo));
+		localStorage.setItem('userToken', data.userToken);
 	}
-	return data.token;
+	return data;
 };
 
 const login = async (userData: LoginProps) => {
 	const { data } = await axios.post(`${API_USERS_URL}login`, userData);
 
 	if (data) {
-		localStorage.setItem('user', JSON.stringify(data.user));
-		localStorage.setItem('token', data.token);
-		localStorage.setItem('_id', data.user._id);
-		localStorage.setItem('username', data.user.username);
-		localStorage.setItem('email', data.user.email);
+		localStorage.setItem('userInfo', JSON.stringify(data.userInfo));
+		localStorage.setItem('userToken', data.userToken);
 	}
 
-	return data.token;
+	return data;
 };
 
 const logout = () => {
-	localStorage.removeItem('user');
-	localStorage.removeItem('_id');
-	localStorage.removeItem('token');
-	localStorage.removeItem('username');
-	localStorage.removeItem('email');
+	localStorage.removeItem('userInfo');
+	localStorage.removeItem('userToken');
 	toast.success('Goodbye!');
 };
 
