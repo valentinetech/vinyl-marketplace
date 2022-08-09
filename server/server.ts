@@ -65,5 +65,5 @@ router.use((req, res, next) => {
 		message: error.message,
 	});
 });
-
-router.listen(config.server.port || 5000, () => Logging.info(`Server is running on port ${config.server.port}`));
+const port = process.env.PORT || 5000;
+router.listen(port, () => Logging.info(`Server is running on port ${port}`));
