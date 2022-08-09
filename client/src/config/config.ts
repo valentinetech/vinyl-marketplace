@@ -1,6 +1,6 @@
 const devEnvUsersUrl = 'http://localhost:9090';
 const prodEnvUrl = 'dont know yet';
-const isDev = process.env.REACT_APP_LIVE;
+const isDev = process.env.REACT_APP_LIVE === 'dev';
 
 export const API_URL = isDev ? devEnvUsersUrl : prodEnvUrl;
 
