@@ -13,10 +13,10 @@ export interface LoginProps {
 	password: string;
 }
 
-const API_USERS_URL = API_URL + 'api/users/';
+const API_USERS_URL = API_URL + '/api/users/';
 
 const register = async (userData: RegisterProps) => {
-	const { data } = await axios.post(`${API_USERS_URL}register`, userData);
+	const { data } = await axios.post(API_USERS_URL + 'register', userData);
 
 	if (data) {
 		localStorage.setItem('userInfo', JSON.stringify(data.userInfo));
@@ -26,7 +26,7 @@ const register = async (userData: RegisterProps) => {
 };
 
 const login = async (userData: LoginProps) => {
-	const { data } = await axios.post(`${API_USERS_URL}login`, userData);
+	const { data } = await axios.post(API_USERS_URL + 'login', userData);
 
 	if (data) {
 		localStorage.setItem('userInfo', JSON.stringify(data.userInfo));
