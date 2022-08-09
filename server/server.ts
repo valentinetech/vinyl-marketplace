@@ -66,4 +66,4 @@ router.use((req, res, next) => {
 	});
 });
 
-router.listen(config.server.port, () => Logging.info(`Server is running on port ${config.server.port}`));
+router.listen(config.server.port || 5000, () => Logging.info(`Server is running on port ${config.server.port}`));
