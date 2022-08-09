@@ -46,7 +46,7 @@ router.use(express.urlencoded({ extended: false }));
 router.use('/api/auctions', auctionRoutes);
 router.use('/api/users', userRoutes);
 
-// router.get('/ping', (req, res, next) => res.status(200).json({ ping: 'pong' }));
+router.get('/ping', (req, res, next) => res.status(200).json({ ping: 'pong' }));
 
 if (process.env.NODE_ENV === 'prod') {
 	router.use(express.static(path.join(__dirname, '../client/build')));
