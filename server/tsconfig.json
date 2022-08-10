@@ -5,7 +5,7 @@
         "outDir": "./build",
         "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
-        "isolatedModules": true,
+        "isolatedModules": false,
         "forceConsistentCasingInFileNames": true,
         "noImplicitAny": false,
         "skipLibCheck": true
