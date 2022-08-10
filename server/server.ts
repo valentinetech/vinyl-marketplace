@@ -3,8 +3,8 @@ import http from 'http';
 import mongoose from 'mongoose';
 import { config } from './config/config';
 // import logging from './lib/logging';
-// import auctionRoutes from './routes/auction.routes';
-// import userRoutes from './routes/user.routes';
+import auctionRoutes from './routes/auction.routes';
+import userRoutes from './routes/user.routes';
 import path from 'path';
 
 const app = express();
@@ -52,8 +52,8 @@ const StartServer = () => {
 	});
 
 	/** Routes */
-	// app.use('/api/auctions', auctionRoutes);
-	// app.use('/api/users', userRoutes);
+	app.use('/api/auctions', auctionRoutes);
+	app.use('/api/users', userRoutes);
 
 	// if (process.env.NODE_ENV === 'prod') {
 	// 	app.use(express.static(path.join(__dirname, 'public')));
