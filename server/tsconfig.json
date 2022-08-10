@@ -4,11 +4,12 @@
         "module": "commonjs",
         "outDir": "./build",
         "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
         "forceConsistentCasingInFileNames": true,
         "noImplicitAny": false,
         "skipLibCheck": true
     },
-    "include": ["*/**/*"],
+    "include": ["*"],
     "exclude": ["node_modules"]
 }
 
