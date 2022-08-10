@@ -1,20 +1,20 @@
 import { IUser } from '../models/user.model';
-// import { IAuction } from '../models/Auction.model';
+import { IAuction } from '../models/auction.model';
 import Joi, { ObjectSchema } from 'joi';
 import Logging from '../lib/Logging';
 import { NextFunction, Request, Response } from 'express';
 
-interface IAuction {
-	user: string;
-	albumCover: string;
-	album: string;
-	artist: string;
-	buyNowPrice: number;
-	minBid: number;
-	isBought?: boolean;
-	lastBid?: number;
-	timeLeft?: number;
-}
+// interface IAuction {
+// 	user: string;
+// 	albumCover: string;
+// 	album: string;
+// 	artist: string;
+// 	buyNowPrice: number;
+// 	minBid: number;
+// 	isBought?: boolean;
+// 	lastBid?: number;
+// 	timeLeft?: number;
+// }
 
 // interface IUser {
 // 	[x: string]: any;
