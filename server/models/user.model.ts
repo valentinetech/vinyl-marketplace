@@ -7,7 +7,7 @@ export interface IUser {
 	password: string;
 	token?: string;
 }
-
+// sdsd
 export interface IUserModel extends Document, IUser {}
 
 const UserSchema: Schema = new Schema(

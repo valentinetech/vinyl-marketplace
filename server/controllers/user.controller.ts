@@ -1,9 +1,9 @@
-import { IUser } from '../models/User.model';
+import { IUser } from '../models/user.model';
 import { NextFunction, Request, Response } from 'express';
 import mongoose from 'mongoose';
 import bcryptjs from 'bcrypt';
-import Logging from '../lib/Logging';
-import User from '../models/User.model';
+import Logging from '../lib/logging';
+import User from '../models/user.model';
 import signToken from '../utils/signToken';
 
 const validateToken = (req: Request, res: Response, next: NextFunction) => {

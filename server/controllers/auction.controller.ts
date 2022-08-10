@@ -1,7 +1,7 @@
-import { IAuction } from './../models/auction.model';
+import { IAuction } from '../models/auction.model';
 import { NextFunction, Request, Response } from 'express';
 import mongoose from 'mongoose';
-import Auction from '../models/Auction.model';
+import Auction from '../models/auction.model';
 
 const createAuction = (req: Request, res: Response, next: NextFunction) => {
 	const { albumCover, album, artist, buyNowPrice, minBid, lastBid, timeLeft, isBought, user } = req.body as IAuction;

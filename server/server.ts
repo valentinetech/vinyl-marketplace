@@ -2,9 +2,9 @@ import express from 'express';
 import http from 'http';
 import mongoose from 'mongoose';
 import { config } from './config/config';
-import Logging from './lib/Logging';
-import auctionRoutes from './routes/Auction.routes';
-import userRoutes from './routes/User.routes';
+import Logging from './lib/logging';
+import auctionRoutes from './routes/auction.routes';
+import userRoutes from './routes/user.routes';
 import path from 'path';
 
 const app = express();

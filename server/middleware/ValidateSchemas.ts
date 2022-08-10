@@ -1,7 +1,7 @@
 import { IUser } from '../models/user.model';
 import { IAuction } from '../models/auction.model';
 import Joi, { ObjectSchema } from 'joi';
-import Logging from '../lib/Logging';
+import Logging from '../lib/logging';
 import { NextFunction, Request, Response } from 'express';
 
 // interface IAuction {
