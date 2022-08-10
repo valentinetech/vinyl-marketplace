@@ -1,18 +1,16 @@
 {
     "compilerOptions": {
-        "rootDir": "",
-        "baseUrl": "",
-        "module": "commonjs",
-        "esModuleInterop": true,
-        "allowSyntheticDefaultImports": true,
-        "target": "es6",
-        "noImplicitAny": true,
-        "moduleResolution": "node",
-        "sourceMap": true,
-        "outDir": "build",
-        "typeRoots": ["./types", "./node_modules/@types"]
-    },
-    "ts-node": {
-        "esm": true
-    },
+    "rootDir": "",
+    "baseUrl": "",
+    "module": "commonjs",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "target": "es6",
+    "noImplicitAny": true,
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "outDir": "build",
+    "typeRoots": ["./types", "./node_modules/@types"]
+    }
 }
+

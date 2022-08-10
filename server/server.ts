@@ -5,6 +5,7 @@ import { config } from './config/config';
 import Logging from './lib/Logging';
 import auctionRoutes from './routes/Auction.routes';
 import userRoutes from './routes/User.routes';
+import path from 'path';
 
 const app = express();
 
@@ -55,6 +56,7 @@ const StartServer = () => {
 	app.use('/api/users', userRoutes);
 
 	if (process.env.NODE_ENV === 'prod') {
+		app.use(express.static(path.join(__dirname, 'public')));
 		app.get('/', (req, res) => res.send('Server is Working'));
 	}
 
