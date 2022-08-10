@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "node build/server.js",
-    "postinstall": "tsc",
+    "postinstall": "tsc --project tsconfig.json",
     "dev": "nodemon server.ts"
   }, 
   "keywords": [],
