@@ -3,7 +3,7 @@
         "rootDir": "",
         "baseUrl": "",
         "target": "es2016",
-        "module": "commonjs",
+        "module": "NodeNext",
         "moduleResolution": "node",
         "outDir": "./build",
         "esModuleInterop": true,
