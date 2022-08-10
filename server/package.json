@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.ts",
-  "type": "module",
   "engines": {
     "node": "14.17.5",
     "npm": "6.14.14"
   },
   "scripts": {
+    "build": "tsc --build",
+    "clean": "tsc --build --clean",
     "start": "node build/server.js",
     "postinstall": "tsc --project tsconfig.json",
     "dev": "nodemon server.ts"
