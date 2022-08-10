@@ -2,7 +2,7 @@ import express from 'express';
 import http from 'http';
 import mongoose from 'mongoose';
 import { config } from './config/config';
-import Logging from './lib/logging';
+import logging from './lib/logging';
 import auctionRoutes from './routes/auction.routes';
 import userRoutes from './routes/user.routes';
 import path from 'path';
@@ -13,21 +13,21 @@ const app = express();
 mongoose
 	.connect(config.mongo.url, { retryWrites: true, w: 'majority' })
 	.then(() => {
-		Logging.info('Mongo connected successfully.');
+		logging.info('Mongo connected successfully.');
 		StartServer();
 	})
-	.catch((error) => Logging.error(error));
+	.catch((error) => logging.error(error));
 
 /** Only Start Server if Mongoose Connects */
 const StartServer = () => {
 	/** Log the request */
 	app.use((req, res, next) => {
 		/** Log the req */
-		Logging.info(`Incomming - METHOD: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}]`);
+		logging.info(`Incomming - METHOD: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}]`);
 
 		res.on('finish', () => {
 			/** Log the res */
-			Logging.info(
+			logging.info(
 				`Result - METHOD: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}] - STATUS: [${res.statusCode}]`
 			);
 		});
@@ -67,7 +67,7 @@ const StartServer = () => {
 	app.use((req, res, next) => {
 		const error = new Error('Not found');
 
-		Logging.error(error);
+		logging.error(error);
 
 		res.status(404).json({
 			message: error.message,
@@ -76,5 +76,5 @@ const StartServer = () => {
 
 	http
 		.createServer(app)
-		.listen(config.server.port, () => Logging.info(`Server is running on port ${config.server.port}`));
+		.listen(config.server.port, () => logging.info(`Server is running on port ${config.server.port}`));
 };
