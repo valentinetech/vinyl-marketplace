@@ -1,4 +1,4 @@
-import { IAuction } from './../models/Auction.model';
+import { IAuction } from './../models/auction.model';
 import { NextFunction, Request, Response } from 'express';
 import mongoose from 'mongoose';
 import Auction from '../models/Auction.model';

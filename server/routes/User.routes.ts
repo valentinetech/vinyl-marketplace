@@ -1,7 +1,7 @@
-import { ValidateJoi, Schemas } from '../middleware/ValidateSchemas';
+import { ValidateJoi, Schemas } from '../middleware/validateSchemas';
 import express from 'express';
-import Protect from '../middleware/ValidateToken';
-import controller from '../controllers/User.controller';
+import Protect from '../middleware/validateToken';
+import controller from '../controllers/user.controller';
 
 const router = express.Router();
 
