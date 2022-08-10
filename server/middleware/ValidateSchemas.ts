@@ -1,4 +1,4 @@
-// import { IUser } from '../models/User.model';
+import { IUser } from '../models/user.model';
 // import { IAuction } from '../models/Auction.model';
 import Joi, { ObjectSchema } from 'joi';
 import Logging from '../lib/Logging';
@@ -16,13 +16,13 @@ interface IAuction {
 	timeLeft?: number;
 }
 
-interface IUser {
-	[x: string]: any;
-	username: string;
-	email: string;
-	password: string;
-	token?: string;
-}
+// interface IUser {
+// 	[x: string]: any;
+// 	username: string;
+// 	email: string;
+// 	password: string;
+// 	token?: string;
+// }
 
 export const ValidateJoi = (schema: ObjectSchema) => {
 	return async (req: Request, res: Response, next: NextFunction) => {
