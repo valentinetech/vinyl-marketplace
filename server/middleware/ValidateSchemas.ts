@@ -1,8 +1,28 @@
-import { IUser } from '../models/User.model';
-import { IAuction } from '../models/Auction.model';
+// import { IUser } from '../models/User.model';
+// import { IAuction } from '../models/Auction.model';
 import Joi, { ObjectSchema } from 'joi';
 import Logging from '../lib/Logging';
 import { NextFunction, Request, Response } from 'express';
+
+interface IAuction {
+	user: string;
+	albumCover: string;
+	album: string;
+	artist: string;
+	buyNowPrice: number;
+	minBid: number;
+	isBought?: boolean;
+	lastBid?: number;
+	timeLeft?: number;
+}
+
+interface IUser {
+	[x: string]: any;
+	username: string;
+	email: string;
+	password: string;
+	token?: string;
+}
 
 export const ValidateJoi = (schema: ObjectSchema) => {
 	return async (req: Request, res: Response, next: NextFunction) => {
