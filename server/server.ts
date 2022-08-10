@@ -55,17 +55,9 @@ const StartServer = () => {
 	app.use('/api/auctions', auctionRoutes);
 	app.use('/api/users', userRoutes);
 
-	if (process.env.NODE_ENV === 'prod') {
-		app.use(express.static(path.join(__dirname, 'public')));
-		app.get('/', (req, res) => res.send('Server is Working'));
-	}
-
 	// if (process.env.NODE_ENV === 'prod') {
-	// 	app.use(express.static(path.join(__dirname, '../client/build')));
-
-	// 	app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, '../', 'client', 'build', 'index.html')));
-	// } else {
-	// 	app.get('/', (req, res) => res.send('Please set to prod'));
+	// 	app.use(express.static(path.join(__dirname, 'public')));
+	app.get('*', (req, res) => res.send('Server is Working'));
 	// }
 
 	/** Healthcheck */
