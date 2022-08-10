@@ -8,7 +8,8 @@
         "isolatedModules": false,
         "forceConsistentCasingInFileNames": true,
         "noImplicitAny": false,
-        "skipLibCheck": true
+        "skipLibCheck": true,
+        "moduleResolution": "node",
     },
     "include": ["*"],
     "exclude": ["node_modules"]
@@ -23,7 +24,6 @@
 //     "esModuleInterop": true,
 //     "target": "es6",
 //     "noImplicitAny": true,
-//     "moduleResolution": "node",
 //     "sourceMap": true,
 //     "outDir": "build",
 //     "typeRoots": ["./types", "./node_modules/@types"]
