@@ -2,9 +2,9 @@ import express from 'express';
 import http from 'http';
 import mongoose from 'mongoose';
 import { config } from './config/config';
-import logging from './lib/logging';
-import auctionRoutes from './routes/auction.routes';
-import userRoutes from './routes/user.routes';
+// import logging from './lib/logging';
+// import auctionRoutes from './routes/auction.routes';
+// import userRoutes from './routes/user.routes';
 import path from 'path';
 
 const app = express();
@@ -13,27 +13,27 @@ const app = express();
 mongoose
 	.connect(config.mongo.url, { retryWrites: true, w: 'majority' })
 	.then(() => {
-		logging.info('Mongo connected successfully.');
+		console.log('Mongo connected successfully.');
 		StartServer();
 	})
-	.catch((error) => logging.error(error));
+	.catch((error) => console.log(error));
 
 /** Only Start Server if Mongoose Connects */
 const StartServer = () => {
 	/** Log the request */
-	app.use((req, res, next) => {
-		/** Log the req */
-		logging.info(`Incomming - METHOD: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}]`);
+	// app.use((req, res, next) => {
+	// 	/** Log the req */
+	// 	logging.info(`Incomming - METHOD: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}]`);
 
-		res.on('finish', () => {
-			/** Log the res */
-			logging.info(
-				`Result - METHOD: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}] - STATUS: [${res.statusCode}]`
-			);
-		});
+	// 	res.on('finish', () => {
+	// 		/** Log the res */
+	// 		logging.info(
+	// 			`Result - METHOD: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}] - STATUS: [${res.statusCode}]`
+	// 		);
+	// 	});
 
-		next();
-	});
+	// 	next();
+	// });
 
 	app.use(express.urlencoded({ extended: true }));
 	app.use(express.json());
@@ -52,8 +52,8 @@ const StartServer = () => {
 	});
 
 	/** Routes */
-	app.use('/api/auctions', auctionRoutes);
-	app.use('/api/users', userRoutes);
+	// app.use('/api/auctions', auctionRoutes);
+	// app.use('/api/users', userRoutes);
 
 	// if (process.env.NODE_ENV === 'prod') {
 	// 	app.use(express.static(path.join(__dirname, 'public')));
@@ -67,7 +67,7 @@ const StartServer = () => {
 	app.use((req, res, next) => {
 		const error = new Error('Not found');
 
-		logging.error(error);
+		// logging.error(error);
 
 		res.status(404).json({
 			message: error.message,
@@ -76,5 +76,5 @@ const StartServer = () => {
 
 	http
 		.createServer(app)
-		.listen(config.server.port, () => logging.info(`Server is running on port ${config.server.port}`));
+		.listen(config.server.port, () => console.log(`Server is running on port ${config.server.port}`));
 };
