@@ -6,7 +6,7 @@ import Logging from './lib/Logging';
 import auctionRoutes from './routes/Auction.routes';
 import userRoutes from './routes/User.routes';
 
-const path = require('path');
+// const path = require('path');
 const app = express();
 
 /** Connect to Mongo */
