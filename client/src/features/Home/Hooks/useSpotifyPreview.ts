@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import qs from 'qs';
-import { process } from 'common/types/envTypes';
+// import { process } from 'common/types/envTypes';
 const Buffer = require('buffer/').Buffer;
 
 interface TopAlbum {
@@ -40,8 +40,8 @@ export function useSpotifyPreview() {
 	const OFFSET_QUERY: number = 0;
 	const MODIFIERS: string = `?country=${COUNTRY}&limit=${LIMIT}&offset=${OFFSET_QUERY}`;
 
-	const SPOTIFY_ID: string = process.env.REACT_APP_SPOTIFY_ID;
-	const SPOTIFY_SECRET: string = process.env.REACT_APP_SPOTIFY_SECRET;
+	const SPOTIFY_ID: string = process.env.REACT_APP_SPOTIFY_ID ?? '';
+	const SPOTIFY_SECRET: string = process.env.REACT_APP_SPOTIFY_SECRET ?? '';
 	const SPOTIFY_TOKEN: string = Buffer.from(`${SPOTIFY_ID}:${SPOTIFY_SECRET}`).toString('base64');
 	const ACCESS_URL: string = 'https://accounts.spotify.com/api/token';
 	const GRANT_TYPE: string = qs.stringify({ grant_type: 'client_credentials' });
