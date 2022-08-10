@@ -3,13 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.ts",
-  "type": "module",
   "engines": {
     "node": "14.x",
     "npm": "6.14.14"
 },
   "scripts": {
-    "start": "node server.ts",
+    "start": "node build/server.js",
+    "postinstall": "tsc",
     "dev": "nodemon server.ts"
   
   },

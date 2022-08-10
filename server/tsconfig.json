@@ -9,7 +9,10 @@
         "noImplicitAny": true,
         "moduleResolution": "node",
         "sourceMap": true,
-        "outDir": "dist",
+        "outDir": "build",
         "typeRoots": ["./types", "./node_modules/@types"]
-    }
+    },
+    "ts-node": {
+        "esm": true
+    },
 }
