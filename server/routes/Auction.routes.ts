@@ -11,4 +11,4 @@ router.get('/read_all/:userId', Protect, controller.readAllUserAuctions);
 router.patch('/update/:auctionId', Protect, controller.updateAuction);
 router.delete('/delete/:auctionId', Protect, controller.deleteAuction);
 
-export default actionRoutes;
+export default router;
