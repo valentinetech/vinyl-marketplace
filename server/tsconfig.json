@@ -8,7 +8,7 @@
         "noImplicitAny": false,
         "skipLibCheck": true
     },
-    "include": ["./**/*"],
+    "include": ["*/**/*"],
     "exclude": ["node_modules"]
 }
 
