@@ -60,4 +60,6 @@ app.use((req, res, next) => {
 	});
 });
 
-app.listen(config.server.port, () => logging.info(`Server is running on port ${config.server.port}`));
+http
+	.createServer(app)
+	.listen(config.server.port, () => logging.info(`Server is running on port ${config.server.port}`));
