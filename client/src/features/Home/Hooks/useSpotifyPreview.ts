@@ -91,7 +91,7 @@ export function useSpotifyPreview() {
 				const albumArray = resp.data.albums.items.filter((album) => {
 					return album.album_type === 'album';
 				});
-				const albumArrayIds = albumArray.map((item, index) => albumArray[index].artists[0].id);
+				const albumArrayIds = albumArray.map((item) => item.artists[0].id);
 
 				setAlbumIds(albumArrayIds);
 			})
@@ -121,7 +121,7 @@ export function useSpotifyPreview() {
 		)
 			.then((resp) => {
 				const topAlbumArray: TopAlbum[] = resp
-					.map((item, index, array) => array[index].data.tracks[0])
+					.map((item) => item.data.tracks[0])
 					.filter((item) => {
 						return item !== undefined && item.preview_url !== null;
 					})
