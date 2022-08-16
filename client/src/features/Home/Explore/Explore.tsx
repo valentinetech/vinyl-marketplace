@@ -1,6 +1,5 @@
 import Button from 'common/components/Button';
 import Card from 'common/components/Card';
-import Spinner from 'common/components/Spinner';
 import useSpotifyPreview from 'features/Home/Hooks/useSpotifyPreview';
 import { useState, useEffect } from 'react';
 
