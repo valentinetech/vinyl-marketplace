@@ -5,7 +5,6 @@ import { config } from './config/config';
 import logging from './lib/logging';
 import auctionRoutes from './routes/auction.routes';
 import userRoutes from './routes/user.routes';
-import path from 'path';
 
 const app = express();
 
