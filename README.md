@@ -1,15 +1,11 @@
-TODO
-[] Profile UI
-[] Dashborad UI
-[] Cart UI
-[] Prolife logic
-[] Dashboard logic
-[] Spotify search
-[] Cart logic
-[] Stripe
-[] Testing
-[] Form validation server/client
+App is build with create-react-app.
 
+DEMO for Client-side: [Client Demo](https://vinyl-auction.netlify.app/)
+
+API not building correct on Heroku, will be fixing that!
+
+
+# API DOCS
 # EndPoints
 
 ## CREATE
