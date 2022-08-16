@@ -9,55 +9,55 @@ import { SectionContainer, SectionName, ExploreContainer, LoadMore } from './Exp
 const PREVIEW_LENGTH = 30000;
 
 const Explore = () => {
-  const { topAlbums, topAlbumsLoaded } = useSpotifyPreview();
-  const [displayedAlbumCount, setDisplayedAlbumCount] = useState<number>(6);
-  const [previewUrl, setPreviewUrl] = useState<string>();
+	const { topAlbums, topAlbumsLoaded } = useSpotifyPreview();
+	const [displayedAlbumCount, setDisplayedAlbumCount] = useState<number>(6);
+	const [previewUrl, setPreviewUrl] = useState<string>();
 
-  const canLoadMore = topAlbums && topAlbums.length > displayedAlbumCount;
+	const canLoadMore = topAlbums && topAlbums.length > displayedAlbumCount;
 
-  useEffect(() => {
-    const audio = new Audio(previewUrl);
-    audio.play();
-    setTimeout(() => setPreviewUrl(undefined), PREVIEW_LENGTH);
+	useEffect(() => {
+		const audio = new Audio(previewUrl);
+		audio.play();
+		setTimeout(() => setPreviewUrl(undefined), PREVIEW_LENGTH);
 
-    return () => {
-      audio.pause();
-    };
-  }, [previewUrl]);
+		return () => {
+			audio.pause();
+		};
+	}, [previewUrl]);
 
-  return (
-    <>
-      <SectionContainer id='explore'>
-        <SectionName>Explore</SectionName>
-      </SectionContainer>
-      <ExploreContainer>
-        {topAlbumsLoaded ? (
-          topAlbums
-            ?.map(({ album, preview_url }) => {
-              return (
-                <Card
-                  key={album.artists[0].id}
-                  albumName={album.name}
-                  albumCover={album.images[0].url}
-                  artistName={album.artists[0].name}
-                  setPreviewUrl={() => setPreviewUrl(previewUrl === preview_url ? undefined : preview_url)}
-                  spotifyButtonText={previewUrl === preview_url ? '❚❚' : '▶'}
-                />
-              );
-            })
-            .slice(0, displayedAlbumCount)
-        ) : (
-          <Spinner />
-        )}
-      </ExploreContainer>
+	return (
+		<>
+			<SectionContainer id='explore'>
+				<SectionName>Explore</SectionName>
+			</SectionContainer>
+			<ExploreContainer>
+				{topAlbumsLoaded ? (
+					topAlbums
+						?.map(({ album, preview_url }) => {
+							return (
+								<Card
+									key={album.artists[0].id}
+									albumName={album.name}
+									albumCover={album.images[0].url}
+									artistName={album.artists[0].name}
+									setPreviewUrl={() => setPreviewUrl(previewUrl === preview_url ? undefined : preview_url)}
+									spotifyButtonText={previewUrl === preview_url ? '❚❚' : '▶'}
+								/>
+							);
+						})
+						.slice(0, displayedAlbumCount)
+				) : (
+					<h2>Loading...</h2>
+				)}
+			</ExploreContainer>
 
-      {canLoadMore && (
-        <LoadMore>
-          <Button onClick={() => setDisplayedAlbumCount((curr) => curr + 3)}>Load More...</Button>
-        </LoadMore>
-      )}
-    </>
-  );
+			{canLoadMore && (
+				<LoadMore>
+					<Button onClick={() => setDisplayedAlbumCount((curr) => curr + 3)}>Load More...</Button>
+				</LoadMore>
+			)}
+		</>
+	);
 };
 
 export default Explore;
