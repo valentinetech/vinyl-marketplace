@@ -8,7 +8,7 @@ import userRoutes from './routes/user.routes';
 
 const app = express();
 
-/** Connect to Mongo */
+/** Connect to MongoDB */
 mongoose
 	.connect(config.mongo.url, { retryWrites: true, w: 'majority' })
 	.then(() => {
