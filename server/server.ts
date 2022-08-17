@@ -1,16 +1,19 @@
 import express from 'express';
 import http from 'http';
 import mongoose from 'mongoose';
-import { config } from './config/config';
+import { config, MONGO_URL } from './config/config';
 import logging from './lib/logging';
 import auctionRoutes from './routes/auction.routes';
 import userRoutes from './routes/user.routes';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
 
 /** Connect to MongoDB*/
 mongoose
-	.connect(config.mongo.url, { retryWrites: true, w: 'majority' })
+	.connect(MONGO_URL, { retryWrites: true, w: 'majority' })
 	.then(() => {
 		logging.info('Mongo connected successfully.');
 	})
