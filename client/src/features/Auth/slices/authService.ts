@@ -1,5 +1,6 @@
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import { API_URL } from 'config/config';
 
 export interface RegisterProps {
 	username: string;
@@ -12,8 +13,7 @@ export interface LoginProps {
 	password: string;
 }
 
-// const API_USERS_URL = API_URL + '/api/users/';
-const API_USERS_URL = 'https://vinylauction.herokuapp.com/api/users/';
+const API_USERS_URL = API_URL + '/api/users/';
 
 const register = async (userData: RegisterProps) => {
 	const { data } = await axios.post(API_USERS_URL + 'register', userData);
