@@ -29,7 +29,11 @@ app.use((req, res, next) => {
 	next();
 });
 
-app.use(cors());
+app.use(
+	cors({
+		origin: 'https://vinyl-auction.netlify.app/',
+	})
+);
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
