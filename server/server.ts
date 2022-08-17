@@ -5,7 +5,6 @@ import { config } from './config/config';
 import logging from './lib/logging';
 import auctionRoutes from './routes/auction.routes';
 import userRoutes from './routes/user.routes';
-import path from 'path';
 
 const app = express();
 
@@ -46,16 +45,8 @@ app.use((req, res, next) => {
 
 app.use('/api/auctions', auctionRoutes);
 app.use('/api/users', userRoutes);
-// app.get('/ping', (req, res, next) => res.status(200).json({ ping: 'pong' }));
+app.get('/ping', (req, res, next) => res.status(200).json({ ping: 'pong' }));
 
-//** Serve */
-if (process.env.NODE_ENV === 'production') {
-	app.use(express.static(path.join(__dirname, '../client/build')));
-
-	app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, '../', 'client', 'build', 'index.html')));
-} else {
-	app.get('/', (req, res) => res.send('Please set to production'));
-}
 /** Error handling */
 app.use((req, res, next) => {
 	const error = new Error('Not found');
