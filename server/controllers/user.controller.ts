@@ -62,7 +62,7 @@ const register = (req: Request, res: Response, next: NextFunction) => {
 const login = (req: Request, res: Response, next: NextFunction) => {
 	const { username, password } = req.body as IUser;
 
-	User.find({ username })
+	User.findOne({ username })
 		.exec()
 		.then((users) => {
 			if (users.length !== 1) {

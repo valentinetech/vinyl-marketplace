@@ -7,7 +7,7 @@ const MONGO_URL = process.env.MONGO_URL ?? '';
 const PORT = process.env.PORT ?? 6000;
 const SERVER_TOKEN_EXPIRETIME = process.env.SERVER_TOKEN_EXPIRETIME ?? 3700;
 const SERVER_TOKEN_ISSUER = process.env.SERVER_TOKEN_ISSUER ?? 'coolIssuer';
-const SERVER_TOKEN_SECRET = process.env.SERVER_TOKEN_SECRET ?? 'crazySecret';
+export const JWT_TOKEN = process.env.JWT_TOKEN ?? 'crazySecret2';
 
 export const config = {
 	mongo: {
@@ -18,7 +18,7 @@ export const config = {
 		token: {
 			expireTime: SERVER_TOKEN_EXPIRETIME,
 			issuer: SERVER_TOKEN_ISSUER,
-			secret: SERVER_TOKEN_SECRET,
+			secret: JWT_TOKEN,
 		},
 	},
 };
