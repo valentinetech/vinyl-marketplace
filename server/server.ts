@@ -31,7 +31,7 @@ app.use((req, res, next) => {
 
 app.use(
 	cors({
-		origin: 'https://vinyl-auction.netlify.app',
+		origin: '*',
 	})
 );
 
