@@ -1,4 +1,4 @@
-const PORT = 9090;
+const PORT = 2000;
 const devEnvUsersUrl = `http://localhost:${PORT}`;
 const prodEnvUrl = 'https://vinylauction.herokuapp.com';
 const isDev = process.env.REACT_APP_LIVE === 'dev';
