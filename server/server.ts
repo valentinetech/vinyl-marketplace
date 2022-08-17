@@ -1,4 +1,3 @@
-import cors from 'cors';
 import express from 'express';
 import http from 'http';
 import mongoose from 'mongoose';
@@ -6,6 +5,7 @@ import { config } from './config/config';
 import logging from './lib/logging';
 import auctionRoutes from './routes/auction.routes';
 import userRoutes from './routes/user.routes';
+import path from 'path';
 
 const app = express();
 
@@ -29,33 +29,33 @@ app.use((req, res, next) => {
 	next();
 });
 
-app.use(
-	cors({
-		origin: '*',
-		allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
-	})
-);
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// app.use((req, res, next) => {
-// 	res.header('Access-Control-Allow-Origin', '*');
-// 	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+app.use((req, res, next) => {
+	res.header('Access-Control-Allow-Origin', '*');
+	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
 
-// 	if (req.method == 'OPTIONS') {
-// 		res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
-// 		return res.status(200).json({'Good to go'});
-// 	}
+	if (req.method == 'OPTIONS') {
+		res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
+		return res.status(200).json({ Response: 'Good to go' });
+	}
 
-// 	next();
-// });
-// app.get('/', (req, res) => res.send('Hello from Express!'));
+	next();
+});
 
 app.use('/api/auctions', auctionRoutes);
 app.use('/api/users', userRoutes);
+// app.get('/ping', (req, res, next) => res.status(200).json({ ping: 'pong' }));
 
-app.get('/ping', (req, res, next) => res.status(200).json({ ping: 'pong' }));
+//** Serve */
+if (process.env.NODE_ENV === 'production') {
+	app.use(express.static(path.join(__dirname, '../client/build')));
+
+	app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, '../', 'client', 'build', 'index.html')));
+} else {
+	app.get('/', (req, res) => res.send('Please set to production'));
+}
 /** Error handling */
 app.use((req, res, next) => {
 	const error = new Error('Not found');
