@@ -29,9 +29,11 @@ app.use((req, res, next) => {
 	next();
 });
 
+app.use(cors());
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-// app.use(cors());
+
 app.use((req, res, next) => {
 	res.header('Access-Control-Allow-Origin', '*');
 	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
@@ -44,7 +46,7 @@ app.use((req, res, next) => {
 	next();
 });
 // app.get('/', (req, res) => res.send('Hello from Express!'));
-// app.get('/ping', (req, res, next) => res.status(200).json({ ping: 'pong' }));
+app.get('/ping', (req, res, next) => res.status(200).json({ ping: 'pong' }));
 
 app.use('/api/auctions', auctionRoutes);
 app.use('/api/users', userRoutes);
