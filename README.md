@@ -2,7 +2,7 @@ App is build with create-react-app.
 
 DEMO for Client-side: [Client Demo](https://vinyl-auction.netlify.app/)
 
-API not building correct on Heroku, will be fixing that!
+API Working, Login / Sign-UP ETC
 
 
 # API DOCS
