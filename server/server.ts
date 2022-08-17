@@ -31,18 +31,18 @@ app.use((req, res, next) => {
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cors());
-// app.use((req, res, next) => {
-// 	res.header('Access-Control-Allow-Origin', 'https://vinyl-auction.netlify.app/');
-// 	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+// app.use(cors());
+app.use((req, res, next) => {
+	res.header('Access-Control-Allow-Origin', 'https://vinyl-auction.netlify.app/');
+	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
 
-// 	if (req.method == 'OPTIONS') {
-// 		res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
-// 		return res.status(200).json({});
-// 	}
+	if (req.method == 'OPTIONS') {
+		res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
+		return res.status(200).json({});
+	}
 
-// 	next();
-// });
+	next();
+});
 app.use('/api/auctions', auctionRoutes);
 app.use('/api/users', userRoutes);
 
