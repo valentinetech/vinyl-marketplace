@@ -13,7 +13,7 @@
     "start": "node build/server.js",
     "postinstall": "tsc",
     "dev": "nodemon server.ts"
-  }, 
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
