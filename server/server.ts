@@ -43,11 +43,11 @@ app.use((req, res, next) => {
 
 	next();
 });
-app.use('/api/auctions', auctionRoutes);
-app.use('/api/users', userRoutes);
-
 app.get('/', (req, res) => res.send('Hello from Express!'));
 app.get('/ping', (req, res, next) => res.status(200).json({ ping: 'pong' }));
+
+app.use('/api/auctions', auctionRoutes);
+app.use('/api/users', userRoutes);
 
 /** Error handling */
 app.use((req, res, next) => {
