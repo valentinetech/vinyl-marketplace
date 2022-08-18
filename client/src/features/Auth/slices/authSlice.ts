@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import authService, { LoginProps, RegisterProps } from './authService';
 
-// const userToken = localStorage.getItem('token') ? localStorage.getItem('token') : null;
+const userToken = localStorage.getItem('userToken') ? localStorage.getItem('userToken') : null;
 
 interface UserPayload {
 	userInfo: {
@@ -29,7 +29,7 @@ interface AuthState extends UserState {
 }
 
 const initialState: AuthState = {
-	userToken: null,
+	userToken: userToken,
 	userInfo: null,
 	isError: false,
 	isSuccess: false,

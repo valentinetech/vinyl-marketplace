@@ -142,3 +142,6 @@ http://localhost:9090/api/auctions/delete/${auctionId}
 
 Header*
 Bearer 'token'
+
+### HEROKU deploy script 
+git add . && git commit -m "commit msg" && git subtree push --prefix server heroku main
