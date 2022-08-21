@@ -35,11 +35,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use((req, res, next) => {
-	res.header('Access-Control-Allow-Origin', [
-		'https://vinyl-auction.netlify.app',
-		'http://vinyl-auction.netlify.app',
-		'vinyl-auction.netlify.app',
-	]);
+	res.header('Access-Control-Allow-Origin', 'https://vinyl-auction.netlify.app');
 	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
 	res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
 
