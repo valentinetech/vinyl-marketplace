@@ -20,13 +20,12 @@ const Form = styled.form`
 const FormGroup = styled.div`
 	font-family: inherit;
 	display: flex;
-	width: auto;
 	flex-direction: column;
 	align-items: center;
 	border: 1px solid #e6e6e6;
 	border-radius: 5px;
-	margin: 50px;
-	padding: 30px;
+	margin: 50px 0;
+	padding: 30px 20px;
 `;
 
 const LoginHeader = styled.h2`

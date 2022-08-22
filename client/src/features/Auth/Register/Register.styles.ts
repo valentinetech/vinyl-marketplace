@@ -25,8 +25,8 @@ const FormGroup = styled.div`
 	align-items: center;
 	border: 1px solid #e6e6e6;
 	border-radius: 5px;
-	margin: 50px;
-	padding: 30px;
+	margin: 50px 0;
+	padding: 30px 20px;
 `;
 
 const RegisterHeader = styled.h2`
