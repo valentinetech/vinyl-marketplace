@@ -39,6 +39,7 @@ const AlbumName = styled.h3`
 `;
 
 const ArtistName = styled.h4`
+	text-align: center;
 	font-weight: 300;
 `;
 
