@@ -24,7 +24,8 @@ const SectionName = styled.h2`
 `;
 
 const AboutText = styled.div`
-	font-size: 22px;
+	font-size: 20px;
+	font-weight: 300;
 	font-style: italic;
 	margin-top: 50px;
 	text-align: justify;

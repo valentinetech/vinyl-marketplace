@@ -1,4 +1,10 @@
+import Header from 'common/layouts/Header';
+
 const Dashboard = () => {
-  return <div>Dashboard</div>;
+	return;
+	<>
+		<Header />
+		<div>Dashboard</div>;
+	</>;
 };
 export default Dashboard;
