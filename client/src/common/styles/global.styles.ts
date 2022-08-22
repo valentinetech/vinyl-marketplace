@@ -11,6 +11,8 @@ body{
   font-weight: ${theme.fontWeight.regular};
   color: ${theme.colors.textPrimary};
   letter-spacing: 0;
+  position: relative;
+  min-height: 100vh;
 }
 //Default Fonts
 html {
