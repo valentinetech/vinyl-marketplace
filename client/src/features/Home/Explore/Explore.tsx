@@ -2,12 +2,12 @@ import Button from 'common/components/Button';
 import Card from 'common/components/Card';
 import useSpotifyPreview from 'features/Home/Hooks/useSpotifyPreview';
 import { useState, useEffect } from 'react';
+import { dummyData } from './dummyData';
 
 import { SectionContainer, SectionName, ExploreContainer, LoadMore } from './Explore.styles';
 
-const PREVIEW_LENGTH = 30000;
-
 const Explore = () => {
+	const PREVIEW_LENGTH = 30000;
 	const { topAlbums, topAlbumsLoaded } = useSpotifyPreview();
 	const [displayedAlbumCount, setDisplayedAlbumCount] = useState<number>(6);
 	const [previewUrl, setPreviewUrl] = useState<string>();
@@ -30,24 +30,35 @@ const Explore = () => {
 				<SectionName>Explore</SectionName>
 			</SectionContainer>
 			<ExploreContainer>
-				{topAlbumsLoaded ? (
-					topAlbums
-						?.map(({ album, preview_url }) => {
-							return (
-								<Card
-									key={album.artists[0].id}
-									albumName={album.name}
-									albumCover={album.images[0].url}
-									artistName={album.artists[0].name}
-									setPreviewUrl={() => setPreviewUrl(previewUrl === preview_url ? undefined : preview_url)}
-									spotifyButtonText={previewUrl === preview_url ? '❚❚' : '▶'}
-								/>
-							);
-						})
-						.slice(0, displayedAlbumCount)
-				) : (
-					<h2>Loading...</h2>
-				)}
+				{topAlbumsLoaded
+					? topAlbums
+							?.map(({ album, preview_url }) => {
+								return (
+									<Card
+										key={album.artists[0].id}
+										albumName={album.name}
+										albumCover={album.images[0].url}
+										artistName={album.artists[0].name}
+										setPreviewUrl={() => setPreviewUrl(previewUrl === preview_url ? undefined : preview_url)}
+										spotifyButtonText={previewUrl === preview_url ? '❚❚' : '▶'}
+									/>
+								);
+							})
+							.slice(0, displayedAlbumCount)
+					: dummyData
+							?.map(({ album, preview_url }) => {
+								return (
+									<Card
+										key={album.artists[0].id}
+										albumName={album.name}
+										albumCover={album.images[0].url}
+										artistName={album.artists[0].name}
+										setPreviewUrl={() => setPreviewUrl(previewUrl === preview_url ? undefined : preview_url)}
+										spotifyButtonText={previewUrl === preview_url ? '❚❚' : '▶'}
+									/>
+								);
+							})
+							.slice(0, displayedAlbumCount)}
 			</ExploreContainer>
 
 			{canLoadMore && (

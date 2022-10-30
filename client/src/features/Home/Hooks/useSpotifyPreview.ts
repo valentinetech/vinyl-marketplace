@@ -1,37 +1,8 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import qs from 'qs';
+import { GetIds, PostToken, TopAlbum } from '../Models/Home.models';
 const Buffer = require('buffer/').Buffer;
-
-interface TopAlbum {
-	preview_url: string;
-	album: {
-		images: [{ url: string }];
-		name: string;
-		artists: [{ name: string; id: string }];
-	};
-}
-
-interface PostToken {
-	ACCESS_URL: string;
-	GRANT_TYPE: string;
-	access_token: string;
-}
-
-interface GetIds {
-	albums: {
-		items: [
-			{
-				album_type: string;
-				artists: [
-					{
-						id: string;
-					}
-				];
-			}
-		];
-	};
-}
 
 export function useSpotifyPreview() {
 	const COUNTRY: string = 'US';
@@ -49,7 +20,7 @@ export function useSpotifyPreview() {
 	const [topAlbumsLoaded, setTopAlbumsLoaded] = useState<boolean>(false);
 	const [albumIds, setAlbumIds] = useState<string[]>();
 	const [token, setToken] = useState<string | null>(null);
-	const [loaded, setLoaded] = useState(false);
+	const [loaded, setLoaded] = useState<boolean>(false);
 
 	useEffect(() => {
 		const controller = new AbortController();

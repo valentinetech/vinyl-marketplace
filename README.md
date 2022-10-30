@@ -1,3 +1,13 @@
+# TODO
+[x] Create local backup for Spotify API (when loading slow / auth incomplete)
+[] Move backend from heroku
+[] Create Models for auctions
+[] Setup Redux for auction CRUD operations
+[] F Admin Dashboard
+[] F All Sales page
+[] F Cart
+[] F Stripe integration 
+
 App is build with create-react-app.
 
 DEMO for Client-side: [Client Demo](https://vinyl-auction.netlify.app/)
