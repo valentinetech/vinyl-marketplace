@@ -1,6 +1,6 @@
 # TODO
 [x] Create local backup for Spotify API (when loading slow / auth incomplete)
-[] Move backend from heroku
+[x] Move backend from heroku to Railways
 [] Create Models for auctions
 [] Setup Redux for auction CRUD operations
 [] F Admin Dashboard
@@ -152,6 +152,3 @@ http://localhost:9090/api/auctions/delete/${auctionId}
 
 Header*
 Bearer 'token'
-
-### HEROKU deploy script 
-git add . && git commit -m "commit msg" && git subtree push --prefix server heroku main

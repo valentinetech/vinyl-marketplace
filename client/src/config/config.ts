@@ -1,6 +1,6 @@
 const PORT = 2000;
 const devEnvUsersUrl = `http://localhost:${PORT}`;
-const prodEnvUrl = 'https://vinylauction.herokuapp.com';
+const prodEnvUrl = 'https://vinyl-marketplace-production.up.railway.app';
 const isDev = process.env.REACT_APP_LIVE === 'dev';
 
 export const API_URL = isDev ? devEnvUsersUrl : prodEnvUrl;
