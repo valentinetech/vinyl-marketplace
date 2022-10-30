@@ -3,7 +3,8 @@
         "client": "cd client && npm start",
         "server": "cd server && npm run dev",
         "start": "concurrently \"npm run client\" \"npm run server\"",
-        "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client && npm install --prefix server && npm run build --prefix server"
+        "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client && npm install --prefix server && npm run build --prefix server",
+        "build-node": "cd server && npm start"
     },
     "devDependencies": {
         "concurrently": "^7.2.2"
