@@ -43,6 +43,12 @@ const readAllUserAuctions = (req: Request, res: Response, next: NextFunction) =>
 		.catch((error) => res.status(500).json({ error }));
 };
 
+const readAllAuctions = (req: Request, res: Response, next: NextFunction) => {
+	return Auction.find({})
+		.then((auction) => res.status(200).json({ auction }))
+		.catch((error) => res.status(500).json({ error }));
+};
+
 const updateAuction = (req: Request, res: Response, next: NextFunction) => {
 	const auctionId = req.params.auctionId;
 
@@ -78,6 +84,7 @@ export default {
 	createAuction,
 	readAuctionById,
 	readAllUserAuctions,
+	readAllAuctions,
 	updateAuction,
 	deleteAuction,
 };

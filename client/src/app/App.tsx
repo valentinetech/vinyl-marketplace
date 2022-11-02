@@ -5,6 +5,8 @@ import { theme } from 'common/styles/theme';
 //Redux Toolkit
 import { Provider } from 'react-redux';
 import { store } from './store';
+import { ApiProvider } from '@reduxjs/toolkit/query/react';
+import { apiSlice } from 'features/Dashboard/api/apiSlice';
 //Toast
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -12,19 +14,19 @@ import 'react-toastify/dist/ReactToastify.css';
 import AppRoutes from 'routes';
 
 const App = () => {
-  return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyles />
-      <AppRoutes />
-      <ToastContainer newestOnTop position='bottom-right' autoClose={3000} closeOnClick toastClassName='toast' />
-    </ThemeProvider>
-  );
+	return (
+		<ThemeProvider theme={theme}>
+			<GlobalStyles />
+			<AppRoutes />
+			<ToastContainer newestOnTop position='bottom-right' autoClose={3000} closeOnClick toastClassName='toast' />
+		</ThemeProvider>
+	);
 };
 
 const AppWrapper = () => (
-  <Provider store={store}>
-    <App />
-  </Provider>
+	<Provider store={store}>
+		<App />
+	</Provider>
 );
 
 export default AppWrapper;

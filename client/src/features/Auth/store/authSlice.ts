@@ -1,27 +1,29 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import authService, { LoginProps, RegisterProps } from './authService';
+import axios from 'axios';
+import { API_URL } from 'config/config';
+import { toast } from 'react-toastify';
 
 const userToken = localStorage.getItem('userToken') ? localStorage.getItem('userToken') : null;
+const API_USERS_URL = API_URL + '/api/users/';
 
-interface UserPayload {
-	userInfo: {
-		_id: string;
-		username: string;
-		email: string;
-	} | null;
-	userToken: string;
+interface UserInfo {
+	_id: string;
+	username: string;
+	email: string;
 }
 
-interface UserState {
-	userInfo: {
-		_id: string;
-		username: string;
-		email: string;
-	} | null;
+interface User {
+	userInfo: UserInfo | null;
 	userToken: string | null;
 }
 
-interface AuthState extends UserState {
+export interface AuthRequest {
+	username: string;
+	password: string;
+	email?: string;
+}
+
+interface AuthState extends User {
 	isLoading: boolean;
 	isSuccess: boolean;
 	isError: boolean;
@@ -29,7 +31,7 @@ interface AuthState extends UserState {
 }
 
 const initialState: AuthState = {
-	userToken: userToken,
+	userToken: userToken ? userToken : null,
 	userInfo: null,
 	isError: false,
 	isSuccess: false,
@@ -37,26 +39,41 @@ const initialState: AuthState = {
 	message: '',
 };
 
-export const register = createAsyncThunk('auth/register', async (user: RegisterProps, { rejectWithValue }) => {
+export const register = createAsyncThunk('auth/register', async (user: AuthRequest, { rejectWithValue }) => {
 	try {
-		return await authService.register(user);
+		const { data } = await axios.post(API_USERS_URL + 'register', user);
+
+		if (data) {
+			localStorage.setItem('userInfo', JSON.stringify(data.userInfo));
+			localStorage.setItem('userToken', data.userToken);
+		}
+		return data;
 	} catch (error: any) {
 		const message: string = error.response.data.message;
 		return rejectWithValue(message);
 	}
 });
 
-export const login = createAsyncThunk('auth/login', async (user: LoginProps, { rejectWithValue }) => {
+export const login = createAsyncThunk('auth/login', async (user: AuthRequest, { rejectWithValue }) => {
 	try {
-		return await authService.login(user);
+		const { data } = await axios.post(API_USERS_URL + 'login', user);
+
+		if (data) {
+			localStorage.setItem('userInfo', JSON.stringify(data.userInfo));
+			localStorage.setItem('userToken', data.userToken);
+		}
+
+		return data;
 	} catch (error: any) {
-		const message: string = error.response.data.message;
+		const message: string = `This is error ${error.response.data.message}`;
 		return rejectWithValue(message);
 	}
 });
 
 export const logout = createAsyncThunk('auth/logout', async () => {
-	return await authService.logout();
+	localStorage.removeItem('userInfo');
+	localStorage.removeItem('userToken');
+	toast.success('Goodbye!');
 });
 
 export const authSlice = createSlice({
@@ -70,7 +87,7 @@ export const authSlice = createSlice({
 			.addCase(register.pending, (state) => {
 				state.isLoading = true;
 			})
-			.addCase(register.fulfilled, (state, action: PayloadAction<UserPayload>) => {
+			.addCase(register.fulfilled, (state, action: PayloadAction<User>) => {
 				state.isLoading = false;
 				state.isSuccess = true;
 				state.userToken = action.payload.userToken;
@@ -79,14 +96,14 @@ export const authSlice = createSlice({
 			.addCase(register.rejected, (state, action) => {
 				state.isLoading = false;
 				state.isError = true;
-				state.userToken = null;
+				state.userToken = '';
 				state.userInfo = null;
 				state.message = action.error?.message || 'Unknown error';
 			})
 			.addCase(login.pending, (state) => {
 				state.isLoading = true;
 			})
-			.addCase(login.fulfilled, (state, action: PayloadAction<UserPayload>) => {
+			.addCase(login.fulfilled, (state, action: PayloadAction<User>) => {
 				state.isLoading = false;
 				state.isSuccess = true;
 				state.userToken = action.payload.userToken;
@@ -95,12 +112,12 @@ export const authSlice = createSlice({
 			.addCase(login.rejected, (state, action) => {
 				state.isLoading = false;
 				state.isError = true;
-				state.userToken = null;
+				state.userToken = '';
 				state.userInfo = null;
 				state.message = action.error?.message || 'Unknown error';
 			})
 			.addCase(logout.fulfilled, (state) => {
-				state.userToken = null;
+				state.userToken = '';
 				state.userInfo = null;
 			});
 	},

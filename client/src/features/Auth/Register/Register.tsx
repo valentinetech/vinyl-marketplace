@@ -6,7 +6,7 @@ import Header from 'common/layouts/Header';
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import { register, reset } from '../slices/authSlice';
+import { register, reset } from '../store/authSlice';
 import { useAppDispatch, useAppSelector } from 'app/store';
 import { registerSchema } from '../schema/authSchema';
 
@@ -55,7 +55,7 @@ const Register = () => {
 	const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
-		if (isError) toast.error(message, { toastId: 'toastIdRegister' });
+		if (isError) toast.error('User already exists or ' + message, { toastId: 'toastIdRegister' });
 
 		const isFormValid = await registerSchema.isValid(formData, {
 			abortEarly: false,

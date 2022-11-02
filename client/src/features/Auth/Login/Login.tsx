@@ -7,20 +7,15 @@ import { useState, useEffect } from 'react';
 
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import { login, reset } from '../slices/authSlice';
+import { login, reset } from '../store/authSlice';
 import { useAppDispatch, useAppSelector } from 'app/store';
 import Spinner from 'common/components/Spinner';
 
 import { Form, FormGroup, Section, LoginHeader, ButtonContainer } from './Login.styles';
 import { loginSchema } from '../schema/authSchema';
 
-interface LoginProps {
-	username: string;
-	password: string;
-}
-
 const Login = () => {
-	const [formData, setFormData] = useState<LoginProps>({
+	const [formData, setFormData] = useState<{ username: string; password: string }>({
 		username: '',
 		password: '',
 	});
@@ -49,7 +44,7 @@ const Login = () => {
 
 	const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		if (isError) toast.error(message, { toastId: 'toastidPassword' });
+		if (isError) toast.error('Incorrect username or password', { toastId: 'toastidPassword' });
 
 		const isFormValid = await loginSchema.isValid(formData, {
 			abortEarly: false,

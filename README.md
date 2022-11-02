@@ -1,7 +1,8 @@
 # TODO
 [x] Create local backup for Spotify API (when loading slow / auth incomplete)
 [x] Move backend from heroku to Railways
-[] Create Models for auctions
+[x] Create Models for auctions
+[] Setup Routes for specific auction id - page to view auction
 [] Setup Redux for auction CRUD operations
 [] F Admin Dashboard
 [] F All Sales page
