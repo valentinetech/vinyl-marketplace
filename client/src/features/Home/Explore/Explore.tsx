@@ -13,7 +13,6 @@ const Explore = () => {
 	const [previewUrl, setPreviewUrl] = useState<string>();
 
 	const canLoadMore = topAlbums && topAlbums.length > displayedAlbumCount;
-
 	useEffect(() => {
 		const audio = new Audio(previewUrl);
 		audio.play();

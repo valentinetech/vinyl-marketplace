@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import qs from 'qs';
-import { GetIds, PostToken, TopAlbum } from '../Models/Home.models';
+import { GetIds, PostToken, TopAlbum } from '../models/Home.models';
 const Buffer = require('buffer/').Buffer;
 
 export function useSpotifyPreview() {

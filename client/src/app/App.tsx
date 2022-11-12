@@ -5,8 +5,6 @@ import { theme } from 'common/styles/theme';
 //Redux Toolkit
 import { Provider } from 'react-redux';
 import { store } from './store';
-import { ApiProvider } from '@reduxjs/toolkit/query/react';
-import { apiSlice } from 'features/Dashboard/api/apiSlice';
 //Toast
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

@@ -13,7 +13,7 @@ interface UserInfo {
 }
 
 interface User {
-	userInfo: UserInfo | null;
+	userInfo: UserInfo | string | null;
 	userToken: string | null;
 }
 
@@ -32,7 +32,7 @@ interface AuthState extends User {
 
 const initialState: AuthState = {
 	userToken: userToken ? userToken : null,
-	userInfo: null,
+	userInfo: userToken ? userToken : null,
 	isError: false,
 	isSuccess: false,
 	isLoading: false,
@@ -96,7 +96,7 @@ export const authSlice = createSlice({
 			.addCase(register.rejected, (state, action) => {
 				state.isLoading = false;
 				state.isError = true;
-				state.userToken = '';
+				state.userToken = null;
 				state.userInfo = null;
 				state.message = action.error?.message || 'Unknown error';
 			})
@@ -112,12 +112,12 @@ export const authSlice = createSlice({
 			.addCase(login.rejected, (state, action) => {
 				state.isLoading = false;
 				state.isError = true;
-				state.userToken = '';
+				state.userToken = null;
 				state.userInfo = null;
 				state.message = action.error?.message || 'Unknown error';
 			})
 			.addCase(logout.fulfilled, (state) => {
-				state.userToken = '';
+				state.userToken = null;
 				state.userInfo = null;
 			});
 	},

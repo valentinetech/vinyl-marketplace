@@ -12,7 +12,7 @@ export const store = configureStore({
 	},
 	middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware),
 });
-// setupListeners(store.dispatch);
+setupListeners(store.dispatch);
 // Store Types
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
