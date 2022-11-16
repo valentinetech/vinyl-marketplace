@@ -53,7 +53,7 @@ export const Schemas = {
 	},
 	auction: {
 		create: Joi.object<IAuction>({
-			user: Joi.string()
+			userId: Joi.string()
 				.regex(/^[0-9a-fA-F]{24}$/)
 				.required(),
 			albumCover: Joi.string().required(),

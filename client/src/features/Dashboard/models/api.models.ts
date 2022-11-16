@@ -1,17 +1,18 @@
-export interface UserInfo {
+import { createApi } from '@reduxjs/toolkit/query/react';
+export interface IUserInfo {
 	_id: string;
 	username: string;
 	email: string;
 }
 
-interface User {
-	userInfo: UserInfo | null;
+interface IUser {
+	userInfo: IUserInfo | null;
 	userToken: string;
 }
 
-export interface AuctionModel {
-	_id: string;
-	userId: User | null;
+export interface IAuctionRequest {
+	_id?: string;
+	userId: string;
 	albumCover: string;
 	album: string;
 	artist: string;
@@ -22,6 +23,17 @@ export interface AuctionModel {
 	timeLeft?: number;
 }
 
-export interface AuctionSelect {
-	auction: AuctionModel[];
+export interface IAuction {
+	_id?: string;
+	userId: string;
+	albumCover: string;
+	album: string;
+	artist: string;
+	buyNowPrice: number;
+	minBid: number;
+	isBought?: boolean;
+	lastBid?: number;
+	timeLeft?: number;
+	updatedAt: Date;
+	createApi: Date;
 }

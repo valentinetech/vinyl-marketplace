@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { RootState } from 'app/store';
 import { API_URL } from 'config/config';
-import { AuctionModel } from '../models/api.models';
+import { IAuction, IAuctionRequest } from '../models/api.models';
 
 export const apiSlice = createApi({
 	reducerPath: 'api',
@@ -18,30 +18,30 @@ export const apiSlice = createApi({
 
 	tagTypes: ['Auctions'],
 	endpoints: (builder) => ({
-		getAllAuctions: builder.query<AuctionModel[], unknown[]>({
+		getAllAuctions: builder.query<IAuction[], void[]>({
 			query: () => '/read_all',
 			providesTags: ['Auctions'],
-			transformResponse: (response: { auction: AuctionModel[] }) => response.auction,
+			transformResponse: (response: { auction: IAuction[] }) => response.auction,
 		}),
-		getAllAuctionsByUser: builder.query<AuctionModel[], string>({
+		getAllAuctionsByUser: builder.query<IAuction[], string>({
 			query: (userId) => `/read_all/${userId}`,
 			providesTags: ['Auctions'],
-			transformResponse: (response: { auction: AuctionModel[] }) => response.auction,
+			transformResponse: (response: { auction: IAuction[] }) => response.auction,
 		}),
-		getAuction: builder.query<AuctionModel, string>({
+		getAuction: builder.query<IAuction, string>({
 			query: (auctionId) => `/read/${auctionId}`,
 			providesTags: ['Auctions'],
-			transformResponse: (response: { auction: AuctionModel }) => response.auction,
+			transformResponse: (response: { auction: IAuction }) => response.auction,
 		}),
-		createAuction: builder.mutation<AuctionModel, AuctionModel>({
+		createAuction: builder.mutation<void, IAuctionRequest>({
 			query: (auction) => ({
 				url: `/create`,
 				method: 'POST',
-				body: { auction },
+				body: auction,
 			}),
 			invalidatesTags: ['Auctions'],
 		}),
-		updateAuction: builder.mutation<AuctionModel, AuctionModel>({
+		updateAuction: builder.mutation<void, IAuctionRequest>({
 			query: (auction) => ({
 				url: `/update/${auction._id}`,
 				method: 'PATCH',
@@ -49,7 +49,7 @@ export const apiSlice = createApi({
 			}),
 			invalidatesTags: ['Auctions'],
 		}),
-		deleteAuction: builder.mutation<null, string>({
+		deleteAuction: builder.mutation<void, string>({
 			query: (auctionId) => ({
 				url: `/delete/${auctionId}`,
 				method: 'DELETE',

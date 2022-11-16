@@ -1,7 +1,7 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
 export interface IAuction {
-	user: string;
+	userId: string;
 	albumCover: string;
 	album: string;
 	artist: string;
@@ -11,7 +11,7 @@ export interface IAuction {
 	lastBid?: number;
 	timeLeft?: number;
 }
-// dsd
+
 export interface IAuctionModel extends Document, IAuction {}
 
 const TIME_LEFT_15MIN: Number = 60 * 15 * 1000;
@@ -20,7 +20,7 @@ const PRICE_MIN: Number = 5;
 
 const AuctionSchema: Schema = new Schema(
 	{
-		user: {
+		userId: {
 			type: Schema.Types.ObjectId,
 			required: true,
 			ref: 'User',

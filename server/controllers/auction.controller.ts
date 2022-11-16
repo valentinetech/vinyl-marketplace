@@ -4,11 +4,11 @@ import mongoose from 'mongoose';
 import Auction from '../models/auction.model';
 
 const createAuction = (req: Request, res: Response, next: NextFunction) => {
-	const { albumCover, album, artist, buyNowPrice, minBid, lastBid, timeLeft, isBought, user } = req.body as IAuction;
+	const { userId, albumCover, album, artist, buyNowPrice, minBid, lastBid, timeLeft, isBought } = req.body as IAuction;
 
 	const auction = new Auction({
 		_id: new mongoose.Types.ObjectId(),
-		user,
+		userId,
 		albumCover,
 		album,
 		artist,
@@ -22,7 +22,7 @@ const createAuction = (req: Request, res: Response, next: NextFunction) => {
 	return auction
 		.save()
 		.then((auction) => res.status(201).json({ auction: auction }))
-		.catch((error) => res.status(500).json({ error }));
+		.catch((error) => res.status(500).json({ error: 'Please Check auction data' + error }));
 };
 
 const readAuctionById = (req: Request, res: Response, next: NextFunction) => {
@@ -38,7 +38,7 @@ const readAuctionById = (req: Request, res: Response, next: NextFunction) => {
 const readAllUserAuctions = (req: Request, res: Response, next: NextFunction) => {
 	const userId = req.params.userId;
 
-	return Auction.find({ user: userId })
+	return Auction.find({ id: userId })
 		.then((auction) => res.status(200).json({ auction }))
 		.catch((error) => res.status(500).json({ error }));
 };

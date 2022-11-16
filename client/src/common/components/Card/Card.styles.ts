@@ -10,7 +10,7 @@ export {
 	StaticContainer,
 	SpotifyIconButton,
 	CountdownTitle,
-	Countdown,
+	CountdownComponent,
 	BidContainer,
 	BidLast,
 	Bid,
@@ -71,7 +71,7 @@ const CountdownTitle = styled.h6`
 	text-align: center;
 	margin-top: 20px;
 `;
-const Countdown = styled.p`
+const CountdownComponent = styled.p`
 	text-align: center;
 	font-size: 20px;
 	color: ${theme.colors.brand};
