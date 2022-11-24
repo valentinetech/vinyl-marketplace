@@ -1,155 +1,34 @@
-# TODO
-[x] Create local backup for Spotify API (when loading slow / auth incomplete)
-[x] Move backend from heroku to Railways
-[x] Create Models for auctions
-[] Setup Routes for specific auction id - page to view auction
-[] Setup Redux for auction CRUD operations
-[] F Admin Dashboard
-[] F All Sales page
-[] F Cart
-[] F Stripe integration 
+# Intro
+Full-stack auction CRUD application with validation, authorization, Spotify API, connected to Mongo Database and modern application of front end technology.
 
 App is build with create-react-app.
 
 DEMO for Client-side: [Client Demo](https://vinyl-auction.netlify.app/)
+**Server is LIMITED, if you're getting an error when trying to login the limit is reached... :( Please run locally.
 
-API Working, Login / Sign-UP ETC
+# Stack
+- FE:
+-- Typescript
+-- React
+-- Redux Toolkit
+-- RTK Query
+-- Styled Components
+- BE:
+-- Node + Express + mongoose
+-- MongoDB
+- Toling:
+-- Yup / Joi
+-- ESLint + Prettier
+-- Husky
+
+## How to run locally:
+
+npm install
+npm run go (in the root)
 
 
-# API DOCS
-# EndPoints
-
-## CREATE
-
-#### Register User
-POST
-http://localhost:9090/api/users/register
-
-Example JSON Request body:
-
-{
-    "username":"text",
-    "password":"text"
-}
-
-Example JSON Response:
-
-
-{
-  "user": {
-    "username": "username",
-    "password": "ENCODED_PASSWORD",
-    "_id": "_id",
-    "createdAt": "2022-07-18T16:30:22.953Z",
-    "updatedAt": "2022-07-18T16:30:22.953Z"
-  }
-}
-
-#### Login User
-POST
-http://localhost:9090/api/users/login
-
-Example JSON Request body:
-
-{
-    "username":"text",
-    "password":"text"
-}
-
-Example JSON Response:
-
-{
-  "message": "Auth successful",
-  "token": "token",
-  "user": {
-    "_id": "_id",
-    "username": "username",
-    "password": "password",
-    "createdAt": "2022-07-18T16:30:22.953Z",
-    "updatedAt": "2022-07-18T16:30:22.953Z"
-  }
-}
-
-#### Create an Auction with UserId
-POST
-http://localhost:9090/api/auctions/create
-
-Example JSON Request body:
-
-{
-    "user": "userId",
-    "albumCover": "link to album cover",
-    "album": "text",
-    "artist": "text",
-    "buyNowPrice": number,
-    "minBid": number,
-    "lastBid": number,
-    "timeLeft": number,
-}
-
-Example JSON Response:
-{
-  "auction": {
-    "user": "_id", // _id passed from user
-    "albumCover": "link to album cover",
-    "album": "text",
-    "artist": "text",
-    "buyNowPrice": number,
-    "minBid": number,
-    "lastBid": number,
-    "timeLeft": number,
-    "_id": "_id", // _id generated on creation
-    "createdAt": "2022-07-18T19:39:20.131Z", // generated on creation
-    "updatedAt": "2022-07-18T19:39:20.131Z" // generated on creation
-  }
-}
-
-## READ
-
-#### Validate Token
-GET
-http://localhost:9090/api/users/validate
-
-Header*
-Bearer 'token'
-
-#### Get All Users
-GET
-http://localhost:9090/api/users/get_all
-
-Header*
-Bearer 'token'
-
-#### Get Auction by Auction Id
-GET
-http://localhost:9090/api/auctions/read/${auctionId}
-
-Header*
-Bearer 'token'
-
-////////////////////////////////////////////////////
-
-#### Get Auctions by User Id
-GET
-http://localhost:9090/api/auctions/read_all/${userId}
-
-Header*
-Bearer 'token'
-
-## UPDATE
-
-#### Update auction by Auction Id
-PATCH
-http://localhost:9090/api/auctions/update/${auctionId}
-
-Header*
-Bearer 'token'
-
-## DELETE
-
-#### Delete auction by Auction Id
-DELETE
-http://localhost:9090/api/auctions/delete/${auctionId}
-
-Header*
-Bearer 'token'
+# Look & Feel
+![Dashboard](./client/public/dashboard.png)
+![Homepage](./client/public/homepage.png) ![Dashboard](./client/public/dashboard.png)
+![Homepage Logged In](./client/public/homepage-logged-in.png)
+![Profile](./client/public/profile.png)
