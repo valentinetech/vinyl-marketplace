@@ -9,7 +9,6 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { login, reset } from '../store/authSlice';
 import { useAppDispatch, useAppSelector } from 'app/store';
-import Spinner from 'common/components/Spinner';
 
 import { Form, FormGroup, Section, LoginHeader, ButtonContainer } from './Login.styles';
 import { loginSchema } from '../schema/authSchema';
@@ -29,7 +28,7 @@ const Login = () => {
 	useEffect(() => {
 		if (isSuccess || userToken) {
 			toast.success(`Welcome back ${username}!`);
-			navigate('/profile');
+			navigate('/dashboard');
 		}
 
 		dispatch(reset);
@@ -63,7 +62,13 @@ const Login = () => {
 		}
 	};
 
-	if (isLoading) return <Spinner />;
+	useEffect(() => {
+		if (isLoading) {
+			toast.loading('Loging In...', { toastId: 'toastidLoading' });
+		} else {
+			toast.dismiss('toastidLoading');
+		}
+	}, [isLoading]);
 
 	return (
 		<>
@@ -81,7 +86,9 @@ const Login = () => {
 							onChange={onChange}
 						/>
 						<ButtonContainer>
-							<Button variant='primary'>Login</Button>
+							<Button variant='primary' disabled={isLoading}>
+								Login
+							</Button>
 						</ButtonContainer>
 					</FormGroup>
 				</Form>

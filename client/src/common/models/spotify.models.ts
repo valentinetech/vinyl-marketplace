@@ -7,8 +7,13 @@ export interface IAlbums {
 export interface IAlbum {
 	album_type: 'album';
 	artists: IArtist[];
+	images: IImage[];
 }
 export interface IArtist {
 	id: string;
 	name: string;
+}
+
+export interface IImage {
+	url: string;
 }

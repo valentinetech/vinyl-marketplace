@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import spotifyImage from 'assets/spotify.png';
 import { theme } from 'common/styles/theme';
+import { AiFillEdit } from 'react-icons/ai';
+import { FaTimes } from 'react-icons/fa';
 
 export {
 	CardContainer,
@@ -14,6 +16,8 @@ export {
 	BidContainer,
 	BidLast,
 	Bid,
+	DeleteIcon,
+	EditIcon,
 };
 
 const CardContainer = styled.div`
@@ -26,6 +30,8 @@ const CardContainer = styled.div`
 	justify-content: space-between;
 	align-items: center;
 	border-radius: 1%;
+	min-height: 640px;
+	position: relative;
 `;
 
 const CardImg = styled.img`
@@ -97,4 +103,22 @@ const Bid = styled.div`
 	width: 50%;
 	display: flex;
 	justify-content: center;
+`;
+
+const DeleteIcon = styled(FaTimes)`
+	color: ${theme.colors.close};
+	position: absolute;
+	top: 10px;
+	right: 8px;
+	cursor: pointer;
+	outline: none;
+`;
+
+const EditIcon = styled(AiFillEdit)`
+	color: ${theme.colors.white};
+	position: absolute;
+	top: 10px;
+	left: 8px;
+	cursor: pointer;
+	outline: none;
 `;

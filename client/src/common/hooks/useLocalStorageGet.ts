@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 const useLocalStorageGet = () => {
 	const [userId, setUserId] = useState<string>('');
-	const [countdownCurrent, setCountdownCurrent] = useState<number>(0);
+	const [countdownCurrent, setCountdownCurrent] = useState<string>('');
 
 	useEffect(() => {
 		const userInfo = localStorage.getItem('userInfo') || '';
@@ -15,8 +15,8 @@ const useLocalStorageGet = () => {
 
 	useEffect(() => {
 		const getCountdown = localStorage.getItem('countdownCurrent') || '';
-		const getCountdownParsed = getCountdown.length > 0 ? JSON.parse(getCountdown) : 0;
-		const getCountdownSelect = +getCountdownParsed;
+		const getCountdownParsed = getCountdown.length > 0 ? JSON.parse(getCountdown) : '';
+		const getCountdownSelect = getCountdownParsed;
 		if (getCountdownSelect) {
 			setCountdownCurrent(getCountdownSelect);
 		}

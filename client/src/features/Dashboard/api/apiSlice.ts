@@ -20,7 +20,10 @@ export const apiSlice = createApi({
 	endpoints: (builder) => ({
 		getAllAuctions: builder.query<IAuction[], void[]>({
 			query: () => '/read_all',
-			providesTags: ['Auctions'],
+			providesTags: (result) =>
+				result
+					? [...result.map(({ _id }) => ({ type: 'Auctions' as const, _id })), { type: 'Auctions', id: 'LIST' }]
+					: [{ type: 'Auctions', id: 'LIST' }],
 			transformResponse: (response: { auction: IAuction[] }) => response.auction,
 		}),
 		getAllAuctionsByUser: builder.query<IAuction[], string>({

@@ -1,17 +1,33 @@
 import Header from 'common/layouts/Header';
-import { useEffect, useState } from 'react';
-import {
-	useCreateAuctionMutation,
-	// useCreateAuctionMutation,
-	// useGetAllAuctionsByUserQuery,
-	useGetAllAuctionsQuery,
-	// useGetAuctionQuery,
-} from 'features/Dashboard/api/apiSlice';
-import useLocalStorageGet from 'common/hooks/useLocalStorageGet';
-import AuctionForm from './AuctionForm';
+import CreateAuctionForm from './CreateAuctionForm';
 import styled from 'styled-components';
-import useSpotifyToken from 'common/hooks/useSpotifyToken';
-import useSpotifySearch from 'common/hooks/useSpotifySearch';
+import { theme } from 'common/styles/theme';
+import AllAuctions from './AllAuctions';
+import UserAuctions from './UserAuctions';
+
+const Dashboard = () => {
+	return (
+		<DashboardContainer>
+			<Header />
+			<Section>
+				<h2>Create New Auction</h2>
+				<CreateAuctionForm></CreateAuctionForm>
+			</Section>
+			<Section>
+				<h2>My Auctions</h2>
+				<UserAuctions></UserAuctions>
+			</Section>
+			<Section>
+				<h2>My Bids</h2>
+			</Section>
+			<Section>
+				<h2>All Auctions</h2>
+				<AllAuctions></AllAuctions>
+			</Section>
+		</DashboardContainer>
+	);
+};
+export default Dashboard;
 
 export const DashboardContainer = styled.div`
 	display: flex;
@@ -22,49 +38,26 @@ export const DashboardContainer = styled.div`
 	margin-bottom: 50px;
 `;
 
-const Dashboard = () => {
-	const [createAuction] = useCreateAuctionMutation();
-	const addAuction = () => {
-		const auction = {
-			userId: '62dd9bf29ddde089792724be',
-			albumCover: 'albumCover',
-			album: 'album',
-			artist: 'artist',
-			buyNowPrice: 50,
-			minBid: 50,
-			isBought: false,
-			lastBid: 50,
-			timeLeft: 50,
-		};
+const Section = styled.section`
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	max-width: 1100px;
+	margin: 0 auto;
 
-		createAuction(auction);
-	};
-	const [userId] = useLocalStorageGet();
-	const { data: allAuctionsSelect } = useGetAllAuctionsQuery([]);
+	@media ${theme.device.default} {
+		margin: 50px 0px;
+		justify-content: center;
+	}
 
-	const { albumQuery } = useSpotifySearch('damn');
+	h2:first-child {
+		padding: 20px 0;
+	}
+`;
 
-	const [spotifyToken, spotifyTokenLoaded] = useSpotifyToken();
-	return (
-		<DashboardContainer>
-			<Header />
-			<button onClick={addAuction}> Add Dummy </button>
-			<div>Add auction form</div>
-			<AuctionForm></AuctionForm>
-			<div>My Listed Auctions list // edit button // delete</div>
-			<div>My Bid Auctions list // delete</div>
-			<div>All Auctions list</div>
-			<p>{userId}</p>
-			<div>Dashboard</div>;
-			{allAuctionsSelect &&
-				allAuctionsSelect.map((el) => {
-					return (
-						<div>
-							<p key={el.album}>{el.album}</p>
-						</div>
-					);
-				})}
-		</DashboardContainer>
-	);
-};
-export default Dashboard;
+// TODO: [x] Create Auction Form
+// TODO: [x] Create Auction Form Preview on the side
+// TODO: [x] Display All User Auctions if he created / Edit & Delete Button
+// TODO: [] Display All Auctions User put Bid on
+// TODO: [x] Display All Possible Auctions to bid
+// TODO: [x] CreatedAt + timeLeftMil store it in database

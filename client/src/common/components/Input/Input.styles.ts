@@ -8,6 +8,7 @@ const InputStyles = styled.input`
 	background-color: ${theme.colors.body};
 	color: ${theme.colors.white};
 	margin-bottom: 15px;
+	width: 100%;
 `;
 
 export default InputStyles;
