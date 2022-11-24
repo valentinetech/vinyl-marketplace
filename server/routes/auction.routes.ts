@@ -6,6 +6,7 @@ import Protect from '../middleware/validateToken';
 const router = express.Router();
 
 router.post('/create', ValidateJoi(Schemas.auction.create), Protect, controller.createAuction);
+router.get('/read_all', controller.readAllAuctions);
 router.get('/read/:auctionId', Protect, controller.readAuctionById);
 router.get('/read_all/:userId', Protect, controller.readAllUserAuctions);
 router.patch('/update/:auctionId', Protect, controller.updateAuction);

@@ -1,28 +1,9 @@
+import { IUserBids } from './../models/auction.model';
 import { IUser } from '../models/user.model';
 import { IAuction } from '../models/auction.model';
 import Joi, { ObjectSchema } from 'joi';
 import Logging from '../lib/logging';
 import { NextFunction, Request, Response } from 'express';
-
-// interface IAuction {
-// 	user: string;
-// 	albumCover: string;
-// 	album: string;
-// 	artist: string;
-// 	buyNowPrice: number;
-// 	minBid: number;
-// 	isBought?: boolean;
-// 	lastBid?: number;
-// 	timeLeft?: number;
-// }
-
-// interface IUser {
-// 	[x: string]: any;
-// 	username: string;
-// 	email: string;
-// 	password: string;
-// 	token?: string;
-// }
 
 export const ValidateJoi = (schema: ObjectSchema) => {
 	return async (req: Request, res: Response, next: NextFunction) => {
@@ -53,17 +34,22 @@ export const Schemas = {
 	},
 	auction: {
 		create: Joi.object<IAuction>({
-			user: Joi.string()
+			userId: Joi.string()
 				.regex(/^[0-9a-fA-F]{24}$/)
 				.required(),
 			albumCover: Joi.string().required(),
-			album: Joi.string().required(),
-			artist: Joi.string().required(),
+			albumName: Joi.string().required(),
+			artistName: Joi.string().required(),
 			buyNowPrice: Joi.number().required(),
 			minBid: Joi.number().required(),
 			lastBid: Joi.number().optional(),
-			timeLeft: Joi.number().optional(),
+			endDate: Joi.date().optional(),
 			isBought: Joi.boolean().optional(),
+			userBids: Joi.array().optional(),
+		}),
+		bid: Joi.object<IUserBids>({
+			bidderId: Joi.string().required(),
+			userBid: Joi.number().required(),
 		}),
 	},
 };

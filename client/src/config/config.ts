@@ -7,8 +7,8 @@ export const API_URL = isDev ? devEnvUsersUrl : prodEnvUrl;
 
 export const publicMenu = [
 	{
-		title: 'Explore',
-		route: '/#explore',
+		title: 'Featured',
+		route: '/#featured',
 	},
 	{
 		title: 'About',
@@ -17,8 +17,8 @@ export const publicMenu = [
 ];
 export const protectedMenu = [
 	{
-		title: 'Explore',
-		route: '/#explore',
+		title: 'Featured',
+		route: '/#featured',
 	},
 	{
 		title: 'About',

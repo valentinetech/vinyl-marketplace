@@ -7,20 +7,14 @@ import { useState, useEffect } from 'react';
 
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import { login, reset } from '../slices/authSlice';
+import { login, reset } from '../store/authSlice';
 import { useAppDispatch, useAppSelector } from 'app/store';
-import Spinner from 'common/components/Spinner';
 
 import { Form, FormGroup, Section, LoginHeader, ButtonContainer } from './Login.styles';
 import { loginSchema } from '../schema/authSchema';
 
-interface LoginProps {
-	username: string;
-	password: string;
-}
-
 const Login = () => {
-	const [formData, setFormData] = useState<LoginProps>({
+	const [formData, setFormData] = useState<{ username: string; password: string }>({
 		username: '',
 		password: '',
 	});
@@ -34,7 +28,7 @@ const Login = () => {
 	useEffect(() => {
 		if (isSuccess || userToken) {
 			toast.success(`Welcome back ${username}!`);
-			navigate('/profile');
+			navigate('/dashboard');
 		}
 
 		dispatch(reset);
@@ -49,7 +43,7 @@ const Login = () => {
 
 	const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		if (isError) toast.error(message, { toastId: 'toastidPassword' });
+		if (isError) toast.error('Incorrect username or password', { toastId: 'toastidPassword' });
 
 		const isFormValid = await loginSchema.isValid(formData, {
 			abortEarly: false,
@@ -68,7 +62,13 @@ const Login = () => {
 		}
 	};
 
-	if (isLoading) return <Spinner />;
+	useEffect(() => {
+		if (isLoading) {
+			toast.loading('Loging In...', { toastId: 'toastidLoading' });
+		} else {
+			toast.dismiss('toastidLoading');
+		}
+	}, [isLoading]);
 
 	return (
 		<>
@@ -86,7 +86,9 @@ const Login = () => {
 							onChange={onChange}
 						/>
 						<ButtonContainer>
-							<Button variant='primary'>Login</Button>
+							<Button variant='primary' disabled={isLoading}>
+								Login
+							</Button>
 						</ButtonContainer>
 					</FormGroup>
 				</Form>

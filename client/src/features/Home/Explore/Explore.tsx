@@ -1,19 +1,20 @@
 import Button from 'common/components/Button';
 import Card from 'common/components/Card';
-import useSpotifyPreview from 'features/Home/Hooks/useSpotifyPreview';
+import useSpotifyGetAlbums from 'features/Home/Hooks/useSpotifyGetAlbums';
 import { useState, useEffect } from 'react';
 import { dummyData } from './dummyData';
 
-import { SectionContainer, SectionName, ExploreContainer, LoadMore } from './Explore.styles';
+import { SectionContainer, ExploreContainer, LoadMore } from './Explore.styles';
 
 const Explore = () => {
 	const PREVIEW_LENGTH = 30000;
-	const { topAlbums, topAlbumsLoaded } = useSpotifyPreview();
-	const [displayedAlbumCount, setDisplayedAlbumCount] = useState<number>(6);
+	const DISPLAYED_CARDS = 6;
+	const [displayedAlbumCount, setDisplayedAlbumCount] = useState<number>(DISPLAYED_CARDS);
 	const [previewUrl, setPreviewUrl] = useState<string>();
 
-	const canLoadMore = topAlbums && topAlbums.length > displayedAlbumCount;
+	const { topAlbums, topAlbumsLoaded } = useSpotifyGetAlbums();
 
+	const canLoadMore = topAlbums && topAlbums.length > displayedAlbumCount;
 	useEffect(() => {
 		const audio = new Audio(previewUrl);
 		audio.play();
@@ -26,8 +27,8 @@ const Explore = () => {
 
 	return (
 		<>
-			<SectionContainer id='explore'>
-				<SectionName>Explore</SectionName>
+			<SectionContainer id='featured'>
+				<h2>Featured</h2>
 			</SectionContainer>
 			<ExploreContainer>
 				{topAlbumsLoaded

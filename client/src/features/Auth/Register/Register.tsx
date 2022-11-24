@@ -1,12 +1,11 @@
 import Button from 'common/components/Button';
 import Input from 'common/components/Input';
-import Spinner from 'common/components/Spinner';
 import Footer from 'common/layouts/Footer';
 import Header from 'common/layouts/Header';
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import { register, reset } from '../slices/authSlice';
+import { register, reset } from '../store/authSlice';
 import { useAppDispatch, useAppSelector } from 'app/store';
 import { registerSchema } from '../schema/authSchema';
 
@@ -37,7 +36,7 @@ const Register = () => {
 	useEffect(() => {
 		if (isSuccess || userToken) {
 			toast.success(`Welcome ${username}!`);
-			navigate('/profile');
+			navigate('/dashboard');
 		}
 
 		dispatch(reset);
@@ -55,7 +54,7 @@ const Register = () => {
 	const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
-		if (isError) toast.error(message, { toastId: 'toastIdRegister' });
+		if (isError) toast.error('User already exists or ' + message, { toastId: 'toastIdRegister' });
 
 		const isFormValid = await registerSchema.isValid(formData, {
 			abortEarly: false,
@@ -76,7 +75,13 @@ const Register = () => {
 		}
 	};
 
-	if (isLoading) return <Spinner />;
+	useEffect(() => {
+		if (isLoading) {
+			toast.loading('Loging In...', { toastId: 'toastidLoading' });
+		} else {
+			toast.dismiss('toastidLoading');
+		}
+	}, [isLoading]);
 
 	return (
 		<>
@@ -102,7 +107,9 @@ const Register = () => {
 							onChange={onChange}
 						/>
 						<ButtonContainer>
-							<Button variant='primary'>Register</Button>
+							<Button variant='primary' disabled={isLoading}>
+								Register
+							</Button>
 						</ButtonContainer>
 					</FormGroup>
 				</Form>

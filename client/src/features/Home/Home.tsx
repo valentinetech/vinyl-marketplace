@@ -5,15 +5,15 @@ import Explore from 'features/Home/Explore';
 import About from 'features/Home/About';
 
 const Home = () => {
-  return (
-    <>
-      <Header />
-      <Hero />
-      <Explore />
-      <About />
-      <Footer />
-    </>
-  );
+	return (
+		<>
+			<Header />
+			<Hero />
+			<Explore />
+			<About />
+			<Footer />
+		</>
+	);
 };
 
 export default Home;

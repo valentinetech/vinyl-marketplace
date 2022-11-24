@@ -1,26 +1,35 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Schema, Document, Types } from 'mongoose';
+
+export interface IUserBids {
+	bidderId: string;
+	userBid: number;
+}
 
 export interface IAuction {
-	user: string;
+	userId: string;
 	albumCover: string;
-	album: string;
-	artist: string;
+	albumName: string;
+	artistName: string;
 	buyNowPrice: number;
 	minBid: number;
 	isBought?: boolean;
 	lastBid?: number;
-	timeLeft?: number;
+	endDate?: number;
+	createdAt?: string;
+	updatedAt?: string;
+	userBids?: IUserBids[];
 }
-// dsd
+
 export interface IAuctionModel extends Document, IAuction {}
 
-const TIME_LEFT_15MIN: Number = 60 * 15 * 1000;
+const date = Date.now();
+const TIME_LEFT_15MIN: Number = 60 * 15 * 1000 + date;
 const PRICE_STARTING: Number = 0;
 const PRICE_MIN: Number = 5;
 
 const AuctionSchema: Schema = new Schema(
 	{
-		user: {
+		userId: {
 			type: Schema.Types.ObjectId,
 			required: true,
 			ref: 'User',
@@ -29,11 +38,11 @@ const AuctionSchema: Schema = new Schema(
 			type: String,
 			required: [true, 'Please add album Cover'],
 		},
-		album: {
+		albumName: {
 			type: String,
 			required: [true, 'What is name of the Album?'],
 		},
-		artist: {
+		artistName: {
 			type: String,
 			required: [true, 'Who is the Artist for this Album?'],
 		},
@@ -50,13 +59,17 @@ const AuctionSchema: Schema = new Schema(
 			type: Number,
 			default: PRICE_STARTING,
 		},
-		timeLeft: {
-			type: Number,
+		endDate: {
+			type: Date,
 			default: TIME_LEFT_15MIN,
 		},
 		isBought: {
 			type: Boolean,
 			default: false,
+		},
+		userBids: {
+			type: Array,
+			default: [],
 		},
 	},
 	{

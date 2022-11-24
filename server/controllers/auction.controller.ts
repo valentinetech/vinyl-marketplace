@@ -1,28 +1,30 @@
+import { IUserBids } from './../models/auction.model';
 import { IAuction } from '../models/auction.model';
 import { NextFunction, Request, Response } from 'express';
 import mongoose from 'mongoose';
 import Auction from '../models/auction.model';
 
 const createAuction = (req: Request, res: Response, next: NextFunction) => {
-	const { albumCover, album, artist, buyNowPrice, minBid, lastBid, timeLeft, isBought, user } = req.body as IAuction;
+	const { userId, albumCover, albumName, artistName, buyNowPrice, minBid, lastBid, endDate, isBought } =
+		req.body as IAuction;
 
 	const auction = new Auction({
 		_id: new mongoose.Types.ObjectId(),
-		user,
+		userId,
 		albumCover,
-		album,
-		artist,
+		albumName,
+		artistName,
 		buyNowPrice,
 		minBid,
 		lastBid,
-		timeLeft,
+		endDate,
 		isBought,
 	});
 
 	return auction
 		.save()
 		.then((auction) => res.status(201).json({ auction: auction }))
-		.catch((error) => res.status(500).json({ error }));
+		.catch((error) => res.status(500).json({ error: 'Please Check auction data' + error }));
 };
 
 const readAuctionById = (req: Request, res: Response, next: NextFunction) => {
@@ -38,7 +40,13 @@ const readAuctionById = (req: Request, res: Response, next: NextFunction) => {
 const readAllUserAuctions = (req: Request, res: Response, next: NextFunction) => {
 	const userId = req.params.userId;
 
-	return Auction.find({ user: userId })
+	return Auction.find({ userId: userId })
+		.then((auction) => res.status(200).json({ auction }))
+		.catch((error) => res.status(500).json({ error }));
+};
+
+const readAllAuctions = (req: Request, res: Response, next: NextFunction) => {
+	return Auction.find({})
 		.then((auction) => res.status(200).json({ auction }))
 		.catch((error) => res.status(500).json({ error }));
 };
@@ -78,6 +86,7 @@ export default {
 	createAuction,
 	readAuctionById,
 	readAllUserAuctions,
+	readAllAuctions,
 	updateAuction,
 	deleteAuction,
 };
