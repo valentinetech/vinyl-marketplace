@@ -29,6 +29,7 @@ npm run go (in the root)
 
 # Look & Feel
 ![Dashboard](./client/public/dashboard.png)
-![Homepage](./client/public/homepage.png) ![Dashboard](./client/public/dashboard.png)
+![Dashboard Editing](./client/public/dashboard-edit.png)
+![Homepage](./client/public/homepage.png)
 ![Homepage Logged In](./client/public/homepage-logged-in.png)
 ![Profile](./client/public/profile.png)
