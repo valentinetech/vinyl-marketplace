@@ -2,69 +2,20 @@ import Button from 'common/components/Button';
 import Input from 'common/components/Input';
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
-import { IAuction } from './models/api.models';
-import { useCreateAuctionMutation } from './api/apiSlice';
+import { IAuction } from '../api/api.models';
+import { useCreateAuctionMutation } from '../api/apiSlice';
 import useLocalStorageGet from 'common/hooks/useLocalStorageGet';
-import styled from 'styled-components';
 import Card from 'common/components/Card';
-import { theme } from 'common/styles/theme';
 import unknownAlbumCover from 'assets/album-cover-unknown.png';
 import useSpotifySearch from 'common/hooks/useSpotifySearch';
 
-const ButtonContainer = styled.div`
-	position: absolute;
-	bottom: 24px;
-`;
-
-const Form = styled.form`
-	width: 100%;
-	max-width: 1120px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-`;
-const FormGroup = styled.div`
-	position: relative;
-	font-family: inherit;
-	display: flex;
-	width: auto;
-	flex-direction: column;
-	align-items: center;
-	border: 1px solid #e6e6e6;
-	border-radius: 5px;
-	padding: 30px 20px;
-	min-height: 640px;
-	width: 350px;
-	padding-top: 50px;
-
-	label {
-		padding-bottom: 20px;
-	}
-`;
-
-const AuctionCreateContainer = styled.div`
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: center;
-`;
-
-const AuctionCreateChildren = styled.div`
-	display: flex;
-	flex-direction: column;
-	width: 50%;
-	align-items: center;
-	justify-content: flex-end;
-
-	h3:first-child {
-		margin-bottom: 10px;
-		color: ${theme.colors.brand};
-	}
-
-	h5:first-child {
-		margin-bottom: 20px;
-	}
-`;
+import {
+	ButtonContainer,
+	Form,
+	FormGroup,
+	AuctionCreateContainer,
+	AuctionCreateChildren,
+} from './CreateAuctionForm.styles';
 
 const CreateAuctionForm = () => {
 	const [formData, setFormData] = useState<IAuction>({
@@ -73,8 +24,9 @@ const CreateAuctionForm = () => {
 		albumName: '',
 		artistName: '',
 		buyNowPrice: '',
-		minBid: '',
+		minBid: 0,
 		endDate: '',
+		lastBid: 0,
 	});
 	const { albumName, artistName, buyNowPrice, endDate, minBid } = formData;
 
@@ -127,6 +79,7 @@ const CreateAuctionForm = () => {
 			buyNowPrice: buyNowPrice ?? 0,
 			minBid: minBid ?? 0,
 			endDate: endDate ?? 0,
+			lastBid: randomIntFromInterval(minBid, 999),
 		};
 		createAuction(newAuction);
 	};
@@ -173,3 +126,7 @@ const CreateAuctionForm = () => {
 };
 
 export default CreateAuctionForm;
+
+function randomIntFromInterval(min: number, max: number) {
+	return Math.floor(Math.random() * (max - min + 1) + min);
+}

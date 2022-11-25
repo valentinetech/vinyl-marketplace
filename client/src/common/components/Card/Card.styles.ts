@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import spotifyImage from 'assets/spotify.png';
 import { theme } from 'common/styles/theme';
-import { AiFillEdit } from 'react-icons/ai';
+import { AiOutlineSave } from 'react-icons/ai';
 import { FaTimes } from 'react-icons/fa';
+import { FiEdit } from 'react-icons/fi';
 
 export {
 	CardContainer,
@@ -18,6 +19,8 @@ export {
 	Bid,
 	DeleteIcon,
 	EditIcon,
+	EmptyDiv,
+	SaveEditIcon,
 };
 
 const CardContainer = styled.div`
@@ -114,11 +117,24 @@ const DeleteIcon = styled(FaTimes)`
 	outline: none;
 `;
 
-const EditIcon = styled(AiFillEdit)`
+const EditIcon = styled(FiEdit)`
 	color: ${theme.colors.white};
 	position: absolute;
 	top: 10px;
 	left: 8px;
 	cursor: pointer;
 	outline: none;
+`;
+
+const SaveEditIcon = styled(AiOutlineSave)`
+	color: ${theme.colors.white};
+	position: absolute;
+	top: 10px;
+	left: 8px;
+	cursor: pointer;
+	outline: none;
+`;
+
+const EmptyDiv = styled.div`
+	height: 130px;
 `;

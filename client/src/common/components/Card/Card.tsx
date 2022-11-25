@@ -21,9 +21,12 @@ import {
 	Bid,
 	DeleteIcon,
 	EditIcon,
+	EmptyDiv,
+	SaveEditIcon,
 } from './Card.styles';
 import useToggle from '../../hooks/useToggle';
-import { IAuctionEdit } from 'features/Dashboard/models/api.models';
+import { IAuctionEdit } from 'features/Dashboard/api/api.models';
+import useSpotifySearch from 'common/hooks/useSpotifySearch';
 
 const Card = (props: ICard) => {
 	const {
@@ -32,7 +35,7 @@ const Card = (props: ICard) => {
 		artistName = 'Artist Name',
 		setPreviewUrl,
 		endDate = '',
-		bidLast = '50',
+		bidLast = 50,
 		spotifyButtonText = '▮',
 		canDelete = false,
 		canEdit = false,
@@ -42,6 +45,7 @@ const Card = (props: ICard) => {
 
 	const navigate = useNavigate();
 
+	// Countdown
 	const [isSold, setIsSold] = useState<boolean>(false);
 	const renderer = ({ days, hours, minutes, seconds, completed }: ICountdown) => {
 		if (completed) {
@@ -70,95 +74,78 @@ const Card = (props: ICard) => {
 	const endDateMili = endDateFormated.getTime();
 	const randomDateMili = Date.now() + 900000;
 
+	// Delete Action
 	const [deleteAuction] = useDeleteAuctionMutation();
-
 	function onDelete() {
 		deleteAuction(currentId);
 		toast.success('Auction deleted.');
 	}
 
+	// Edit Action
 	const [editAuction] = useUpdateAuctionMutation();
 	const [userId] = useLocalStorageGet();
+	const [isActive, toggle] = useToggle(false);
 
 	const [editedData, setEditedData] = useState<IAuctionEdit>({
 		_id: currentId,
 		albumCoverEdited: albumCover,
-		albumNameEdited: '',
+		albumNameEdited: albumName,
 		artistNameEdited: artistName,
 		endDateEdited: endDate,
 	});
 
 	const { albumNameEdited, artistNameEdited, endDateEdited, albumCoverEdited } = editedData;
-	console.log('albumNameEdited :', albumNameEdited);
 
-	console.log('editedData :', editedData);
+	//Search Cover Image from Spotify
+	const [, , albumCoverQuery] = useSpotifySearch(albumNameEdited && artistNameEdited);
 
-	function onEdit() {
-		console.log('edited');
-		editAuction({
-			_id: currentId,
-			albumCover: albumCoverEdited,
-			albumName: albumNameEdited,
-			artistName: artistNameEdited,
-			endDate: endDateEdited,
-			userId: userId,
-		});
-		toggle();
-	}
 	const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-		setEditedData((prevState) => ({
-			...prevState,
+		setEditedData({
+			_id: currentId,
+			albumCoverEdited: albumCoverQuery,
+			albumNameEdited: albumNameEdited,
+			artistNameEdited: artistNameEdited,
+			endDateEdited: endDateEdited,
 			[e.target.id]: e.target.value,
-		}));
+		});
 	};
 
-	const onSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
+	const onSubmit = (event: { preventDefault: () => void }) => {
 		event.preventDefault();
 
 		const editedAuction = {
 			_id: currentId,
-			albumCover: albumCoverEdited,
+			albumCover: albumCoverQuery,
 			albumName: albumNameEdited,
 			artistName: artistNameEdited,
 			endDate: endDateEdited,
 			userId: userId,
 		};
-		await editAuction(editedAuction);
-
-		await toggle();
+		editAuction(editedAuction);
+		toggle();
+		toast.success('Auction edited successfully');
 	};
 
-	// function onBid() {
-	// 	console.log('edited');
-	// 	editAuction({
-	// 		_id: currentId,
-	// 		userBids: [
-	// 			...currentBids,
-	// 			{
-	// 				userId: userId,
-	// 				userBid: 99,
-	// 			},
-	// 		],
-	// 	});
-	// }
-
-	const [isActive, toggle] = useToggle(false);
-	console.log('isActive :', isActive);
-	// Button for submit edit that send onEdit to server
-	// Edit toggles editable canEdit that toggles inputs
 	return (
 		<CardContainer>
 			{canDelete === true ? <DeleteIcon aria-label='delete auction' onClick={onDelete} size={32} /> : null}
-			{canEdit === true ? <EditIcon aria-label='edit auction' onClick={toggle} size={32} /> : null}
-			<CardImg src={albumCover} alt={albumName}></CardImg>
-			<AlbumName>{albumName}</AlbumName>
-			{isActive ? (
-				<>
-					<input type='text' id='albumNameEdit' placeholder={albumName} onSubmit={onEdit} onChange={onChange} />
-					<button onClick={onSubmit}>Submit</button>
-				</>
+			{canEdit === true && isActive === false ? (
+				<EditIcon aria-label='edit auction' onClick={toggle} size={32} />
 			) : null}
-			<ArtistName>{artistName}</ArtistName>
+			{canEdit === true && isActive === true ? (
+				<SaveEditIcon aria-label='save edit' onClick={onSubmit} size={32} />
+			) : null}
+			<CardImg src={albumCover ? albumCover : albumCoverEdited} alt={albumName ? albumName : albumNameEdited}></CardImg>
+			{isActive ? (
+				<input type='text' id='albumNameEdited' placeholder={albumName} onChange={onChange} />
+			) : (
+				<AlbumName>{albumName}</AlbumName>
+			)}
+			{isActive ? (
+				<input type='text' id='artistNameEdited' placeholder={artistName} onChange={onChange} />
+			) : (
+				<ArtistName>{artistName}</ArtistName>
+			)}
 			<StaticContainer>
 				<>{setPreviewUrl && <SpotifyIconButton onClick={setPreviewUrl}>{spotifyButtonText}</SpotifyIconButton>}</>
 				<CountdownTitle>Time Remaining</CountdownTitle>
@@ -166,7 +153,7 @@ const Card = (props: ICard) => {
 					<Countdown date={endDateMili ? endDateMili : randomDateMili} renderer={renderer}></Countdown>
 				</CountdownComponent>
 				{isSold ? (
-					<div style={{ height: '130px' }}></div>
+					<EmptyDiv></EmptyDiv>
 				) : (
 					<>
 						<BidContainer>

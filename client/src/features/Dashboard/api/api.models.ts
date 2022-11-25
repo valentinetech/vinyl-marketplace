@@ -6,9 +6,9 @@ export interface IAuctionRequest {
 	artistName: string;
 	buyNowPrice?: number | string;
 	endDate: string;
-	minBid?: number | string;
+	minBid?: number;
 	isBought?: boolean;
-	lastBid?: number | string;
+	lastBid?: number;
 	updatedAt?: string;
 	createdAt?: string;
 	userBids?: IUserBids[];
@@ -30,9 +30,9 @@ export interface IAuction {
 	albumName: string;
 	artistName: string;
 	buyNowPrice: number | string;
-	minBid: number | string;
+	minBid: number;
 	isBought?: boolean;
-	lastBid?: number | string;
+	lastBid?: number;
 	endDate: string;
 	updatedAt?: string;
 	createdAt?: string;

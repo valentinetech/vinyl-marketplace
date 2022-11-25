@@ -1,4 +1,4 @@
-import { IUserBids } from 'features/Dashboard/models/api.models';
+import { IUserBids } from 'features/Dashboard/api/api.models';
 
 export interface ICountdown {
 	days: number;
@@ -13,7 +13,7 @@ export interface ICard {
 	albumName: string;
 	artistName: string;
 	endDate?: string;
-	bidLast?: string;
+	bidLast?: number;
 	buttonText?: string;
 	setPreviewUrl?: () => void;
 	spotifyButtonText?: string;

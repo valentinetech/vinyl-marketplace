@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { RootState } from 'app/store';
 import { API_URL } from 'config/config';
-import { IAuction, IAuctionRequest } from '../models/api.models';
+import { IAuction, IAuctionRequest } from './api.models';
 
 export const apiSlice = createApi({
 	reducerPath: 'api',
