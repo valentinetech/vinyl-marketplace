@@ -10,10 +10,11 @@ Refactoring:
  -- [] Client
  -- [] Server
 [] Create ENUMS for hardcoded data / routes 
+[] Accessibility
 
 Server: 
 
-[] Fix deploy
+[x] Fix deploy
 [] Check & Monitor usage for decreases call count
 
 UI:

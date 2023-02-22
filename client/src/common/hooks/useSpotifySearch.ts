@@ -13,7 +13,6 @@ export function useSpotifySearch(albumName: string): [IAlbum, boolean, string] {
 	const [albumQueryLoaded, setAlbumQueryLoaded] = useState<boolean>(false);
 	const [albumQuery, setAlbumQuery] = useState<IAlbum[]>([]);
 	const [albumCoverQuery, setAlbumCoverQuery] = useState<string>('');
-
 	const [spotifyToken, spotifyTokenLoaded] = useSpotifyToken();
 
 	useEffect(() => {
@@ -37,7 +36,7 @@ export function useSpotifySearch(albumName: string): [IAlbum, boolean, string] {
 				setAlbumQuery(albumQuery);
 				setAlbumQueryLoaded(true);
 			})
-			.catch((err: { err: unknown; message: unknown }) => console.log(err.message));
+			.catch((err: { err: string; message: string }) => console.log(err.message));
 
 		return () => {
 			controller.abort();

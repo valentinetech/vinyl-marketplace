@@ -9,20 +9,19 @@ export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
 }
 
 const Button = ({ children, variant = 'primary', disabled, ...props }: ButtonProps) => {
+	if (variant === 'primary') {
+		return (
+			<ButtonPrimary {...props} disabled={disabled}>
+				{' '}
+				{children}
+			</ButtonPrimary>
+		);
+	}
 	return (
-		<>
-			{variant === 'primary' ? (
-				<ButtonPrimary {...props} disabled={disabled}>
-					{' '}
-					{children}
-				</ButtonPrimary>
-			) : (
-				<ButtonSecondary {...props} disabled={disabled}>
-					{' '}
-					{children}
-				</ButtonSecondary>
-			)}
-		</>
+		<ButtonSecondary {...props} disabled={disabled}>
+			{' '}
+			{children}
+		</ButtonSecondary>
 	);
 };
 

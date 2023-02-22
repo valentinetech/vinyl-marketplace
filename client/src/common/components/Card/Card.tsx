@@ -1,11 +1,9 @@
 import Button from 'common/components/Button';
-import Countdown, { zeroPad } from 'react-countdown';
 import unknownAlbumCover from 'assets/album-cover-unknown.png';
 import { useDeleteAuctionMutation, useUpdateAuctionMutation } from 'features/Dashboard/api/apiSlice';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
-import { ICard, ICountdown } from './Card.models';
-import useLocalStorageGet from 'common/hooks/useLocalStorageGet';
+import { ICard } from './Card.models';
 import { useNavigate } from 'react-router-dom';
 import {
 	CardContainer,
@@ -14,8 +12,6 @@ import {
 	ArtistName,
 	StaticContainer,
 	SpotifyIconButton,
-	CountdownTitle,
-	CountdownComponent,
 	BidContainer,
 	BidLast,
 	Bid,
@@ -27,6 +23,8 @@ import {
 import useToggle from '../../hooks/useToggle';
 import { IAuctionEdit } from 'features/Dashboard/api/api.models';
 import useSpotifySearch from 'common/hooks/useSpotifySearch';
+import useLocalStorageGetUserInfo from 'common/hooks/useLocalStorageGetUserInfo';
+import CountdownTimer from '../CountdownTimer/CountdownTimer';
 
 const Card = (props: ICard) => {
 	const {
@@ -47,32 +45,6 @@ const Card = (props: ICard) => {
 
 	// Countdown
 	const [isSold, setIsSold] = useState<boolean>(false);
-	const renderer = ({ days, hours, minutes, seconds, completed }: ICountdown) => {
-		if (completed) {
-			setIsSold(completed);
-
-			return <span style={{ color: '#F45B69', fontWeight: 'bold' }}>Auction closed.</span>;
-		} else {
-			return (
-				<>
-					{days ? (
-						<span>
-							{zeroPad(days)} : {zeroPad(hours)}:{zeroPad(minutes)}:{zeroPad(seconds)}
-						</span>
-					) : (
-						<span>
-							{zeroPad(hours)}:{zeroPad(minutes)}:{zeroPad(seconds)}
-						</span>
-					)}
-				</>
-			);
-		}
-	};
-
-	const dateToString = endDate?.toString();
-	const endDateFormated = new Date(dateToString);
-	const endDateMili = endDateFormated.getTime();
-	const randomDateMili = Date.now() + 900000;
 
 	// Delete Action
 	const [deleteAuction] = useDeleteAuctionMutation();
@@ -83,8 +55,9 @@ const Card = (props: ICard) => {
 
 	// Edit Action
 	const [editAuction] = useUpdateAuctionMutation();
-	const [userId] = useLocalStorageGet();
+	const userId = useLocalStorageGetUserInfo();
 	const [isActive, toggle] = useToggle(false);
+	console.log(toggle);
 
 	const [editedData, setEditedData] = useState<IAuctionEdit>({
 		_id: currentId,
@@ -148,10 +121,7 @@ const Card = (props: ICard) => {
 			)}
 			<StaticContainer>
 				<>{setPreviewUrl && <SpotifyIconButton onClick={setPreviewUrl}>{spotifyButtonText}</SpotifyIconButton>}</>
-				<CountdownTitle>Time Remaining</CountdownTitle>
-				<CountdownComponent>
-					<Countdown date={endDateMili ? endDateMili : randomDateMili} renderer={renderer}></Countdown>
-				</CountdownComponent>
+				<CountdownTimer endDate={endDate} setIsSold={setIsSold} />
 				{isSold ? (
 					<EmptyDiv></EmptyDiv>
 				) : (

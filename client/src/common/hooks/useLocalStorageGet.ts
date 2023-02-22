@@ -1,28 +1,22 @@
 import { useState, useEffect } from 'react';
 
-const useLocalStorageGet = () => {
-	const [userId, setUserId] = useState<string>('');
-	const [countdownCurrent, setCountdownCurrent] = useState<string>('');
+interface useLocalStorageGetProps {
+	itemName: string;
+}
+
+const useLocalStorageGet = ({ itemName }: useLocalStorageGetProps): string => {
+	const [itemCurrent, setItemCurrent] = useState<string>('');
 
 	useEffect(() => {
-		const userInfo = localStorage.getItem('userInfo') || '';
-		const userParsed = userInfo.length > 0 ? JSON.parse(userInfo) : '';
-		const userIdSelect = userParsed._id;
-		if (userIdSelect) {
-			setUserId(userIdSelect);
+		const getItem = localStorage.getItem(itemName) || '';
+		const getItemParsed = getItem.length > 0 ? JSON.parse(getItem) : '';
+		const getItemSelect = getItemParsed;
+		if (getItemSelect) {
+			setItemCurrent(getItemSelect);
 		}
-	}, [userId]);
+	}, [itemCurrent, itemName]);
 
-	useEffect(() => {
-		const getCountdown = localStorage.getItem('countdownCurrent') || '';
-		const getCountdownParsed = getCountdown.length > 0 ? JSON.parse(getCountdown) : '';
-		const getCountdownSelect = getCountdownParsed;
-		if (getCountdownSelect) {
-			setCountdownCurrent(getCountdownSelect);
-		}
-	}, []);
-
-	return [userId, countdownCurrent];
+	return itemCurrent;
 };
 
 export default useLocalStorageGet;

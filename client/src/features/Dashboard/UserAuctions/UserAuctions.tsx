@@ -1,11 +1,11 @@
 import Card from 'common/components/Card';
 import { useGetAllAuctionsByUserQuery } from 'features/Dashboard/api/apiSlice';
 import { IAuction } from '../api/api.models';
-import useLocalStorageGet from 'common/hooks/useLocalStorageGet';
 import { Container } from './UserAuctions.styles';
+import useLocalStorageGetUserInfo from 'common/hooks/useLocalStorageGetUserInfo';
 
 const UserAuctions = () => {
-	const [userId] = useLocalStorageGet();
+	const [userId] = useLocalStorageGetUserInfo();
 	const { data: userAuctions } = useGetAllAuctionsByUserQuery(userId);
 	return (
 		<>

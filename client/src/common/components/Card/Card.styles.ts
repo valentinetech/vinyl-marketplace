@@ -12,8 +12,6 @@ export {
 	ArtistName,
 	StaticContainer,
 	SpotifyIconButton,
-	CountdownTitle,
-	CountdownComponent,
 	BidContainer,
 	BidLast,
 	Bid,
@@ -74,16 +72,6 @@ const SpotifyIconButton = styled.button`
 		font-size: 25px;
 		transition: all 0.5s;
 	}
-`;
-
-const CountdownTitle = styled.h6`
-	text-align: center;
-	margin-top: 20px;
-`;
-const CountdownComponent = styled.p`
-	text-align: center;
-	font-size: 20px;
-	color: ${theme.colors.brand};
 `;
 
 const BidContainer = styled.div`

@@ -2,21 +2,19 @@ import { useNavigate } from 'react-router-dom';
 import { AvatarButtonMobile, AvatarButtonDesktop } from './Avatar.styles';
 
 interface AvatarProps {
-  variant: 'desktop' | 'mobile';
+	variant: 'desktop' | 'mobile';
 }
 
 const Avatar = ({ variant = 'desktop' }: AvatarProps) => {
-  const navigate = useNavigate();
+	function NavigateToProfilePage() {
+		const navigate = useNavigate();
+		navigate('/profile');
+	}
 
-  return (
-    <>
-      {variant === 'desktop' ? (
-        <AvatarButtonDesktop onClick={() => navigate('/profile')}></AvatarButtonDesktop>
-      ) : (
-        <AvatarButtonMobile onClick={() => navigate('/profile')}></AvatarButtonMobile>
-      )}
-    </>
-  );
+	if (variant === 'desktop') {
+		return <AvatarButtonDesktop onClick={NavigateToProfilePage}></AvatarButtonDesktop>;
+	}
+	return <AvatarButtonMobile onClick={NavigateToProfilePage}></AvatarButtonMobile>;
 };
 
 export default Avatar;

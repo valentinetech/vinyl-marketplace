@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import qs from 'qs';
-import { PostToken } from '../../features/Home/models/Home-models';
+import { PostToken } from 'features/Home/models/Home-models';
 const Buffer = require('buffer/').Buffer;
 
 export function useSpotifyToken() {
@@ -27,7 +27,7 @@ export function useSpotifyToken() {
 			.then((resp) => {
 				setSpotifyToken(resp.data.access_token);
 			})
-			.catch((err: { err: unknown; message: unknown }) => console.log(err.message))
+			.catch((err: { err: string; message: string }) => console.log(err.message))
 			.finally(() => {
 				setSpotifyTokenLoaded(true);
 			});

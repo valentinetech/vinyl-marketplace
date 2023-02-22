@@ -28,13 +28,18 @@ export const apiSlice = createApi({
 		}),
 		getAllAuctionsByUser: builder.query<IAuction[], string>({
 			query: (userId) => `/read_all/${userId}`,
-			providesTags: ['Auctions'],
 			transformResponse: (response: { auction: IAuction[] }) => response.auction,
+			providesTags: (result) =>
+				result
+					? [...result.map(({ _id }) => ({ type: 'Auctions' as const, _id })), { type: 'Auctions', id: 'LIST' }]
+					: [{ type: 'Auctions', id: 'LIST' }],
 		}),
 		getAuction: builder.query<IAuction, string>({
 			query: (auctionId) => `/read/${auctionId}`,
-			providesTags: ['Auctions'],
+			// providesTags: ['Auctions'],
 			transformResponse: (response: { auction: IAuction }) => response.auction,
+			// don't update everything, just the one auction
+			providesTags: (result, error, arg) => [{ type: 'Auctions', _id: arg }],
 		}),
 		createAuction: builder.mutation<void, IAuctionRequest>({
 			query: (auction) => ({
