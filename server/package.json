@@ -8,7 +8,6 @@
     "build-railways": "build",
     "clean": "tsc --build --clean",
     "start": "node build/server.js",
-    "preinstall": "tsc",
     "dev": "nodemon server.ts"
   },
   "keywords": [],
