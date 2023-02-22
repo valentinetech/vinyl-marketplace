@@ -4,10 +4,9 @@
   "description": "",
   "main": "server.ts",
   "scripts": {
-    "postbuild": "tsc",
-    "clean": "tsc --build --clean",
     "start": "node build/server.js",
-    "dev": "nodemon server.ts"
+    "dev": "nodemon server.ts",
+    "postinstall": "tsc"
   },
   "keywords": [],
   "author": "",
