@@ -9,6 +9,7 @@
   },
   "scripts": {
     "build": "tsc --build",
+    "build-railways": "build",
     "clean": "tsc --build --clean",
     "start": "node build/server.js",
     "postinstall": "tsc",
