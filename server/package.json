@@ -4,8 +4,7 @@
   "description": "",
   "main": "server.ts",
   "scripts": {
-    "build": "tsc",
-    "build-railways": "build",
+    "postbuild": "tsc",
     "clean": "tsc --build --clean",
     "start": "node build/server.js",
     "dev": "nodemon server.ts"
