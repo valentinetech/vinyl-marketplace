@@ -1,6 +1,6 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response } from 'express';
 
-export const errorHandler = (err: Error, req: Request, res: Response, next: NextFunction) => {
+export const errorHandler = (err: Error, req: Request, res: Response) => {
 	const statusCode = res.statusCode ? res.statusCode : 500;
 	res.status(statusCode);
 
@@ -9,5 +9,3 @@ export const errorHandler = (err: Error, req: Request, res: Response, next: Next
 		stack: process.env.NODE_ENV === 'prod' ? undefined : err.stack,
 	});
 };
-
-//sdsd

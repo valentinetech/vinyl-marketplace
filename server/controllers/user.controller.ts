@@ -1,12 +1,11 @@
-import { IUser } from '../models/user.model';
-import { NextFunction, Request, Response } from 'express';
+import User, { IUser } from '../models/user.model';
+import { Request, Response } from 'express';
 import mongoose from 'mongoose';
 import bcryptjs from 'bcrypt';
 import Logging from '../lib/logging';
-import User from '../models/user.model';
 import signToken from '../utils/signToken';
 
-const validateToken = (req: Request, res: Response, next: NextFunction) => {
+const validateToken = (req: Request, res: Response) => {
 	Logging.info('Token validated, user authorized.');
 
 	return res.status(200).json({
@@ -14,7 +13,7 @@ const validateToken = (req: Request, res: Response, next: NextFunction) => {
 	});
 };
 
-const register = (req: Request, res: Response, next: NextFunction) => {
+const register = (req: Request, res: Response) => {
 	const { username, email, password } = req.body as IUser;
 
 	bcryptjs.hash(password, 10, (hashError, hash) => {
@@ -59,7 +58,7 @@ const register = (req: Request, res: Response, next: NextFunction) => {
 	});
 };
 
-const login = (req: Request, res: Response, next: NextFunction) => {
+const login = (req: Request, res: Response) => {
 	const { username, password } = req.body as IUser;
 
 	User.find({ username })
@@ -109,7 +108,7 @@ const login = (req: Request, res: Response, next: NextFunction) => {
 		});
 };
 
-const getAllUsers = (req: Request, res: Response, next: NextFunction) => {
+const getAllUsers = (req: Request, res: Response) => {
 	User.find()
 		.select('-password')
 		.exec()

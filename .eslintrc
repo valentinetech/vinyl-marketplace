@@ -1,0 +1,132 @@
+// {
+//   "env": {
+//     "browser": true,
+//     "es2021": true,
+//     "jest": true
+//   },
+//   "extends": [
+//     "eslint:recommended",
+//     "plugin:react/recommended",
+//     "plugin:import/recommended",
+//     "plugin:jsx-a11y/recommended",
+//     "plugin:@typescript-eslint/recommended"
+//   ],
+//   "parser": "@typescript-eslint/parser",
+//   "parserOptions": {
+//     "ecmaFeatures": {
+//       "jsx": true
+//     },
+//     "ecmaVersion": "latest",
+//     "sourceType": "module",
+//     "project": ["tsconfig.json"]
+//   },
+
+//   "plugins": ["react", "@typescript-eslint", "prettier"],
+//   "rules": {
+//     "react/jsx-uses-react": ["off"],
+//     "react/react-in-jsx-scope": ["off"],
+//     "react/jsx-props-no-spreading": ["warn"],
+//     "no-shadow": "off"
+//   },
+//   //   "settings": {
+//   //     "react": {
+//   //       "version": "detect"
+//   //     },
+//   //     "import/resolver": {
+//   //       "node": {
+//   //         "paths": ["src"],
+//   //         "extensions": [".js", ".jsx", ".ts", ".tsx"]
+//   //       }
+//   //     }
+//   //   },
+//   "overrides": [
+//     {
+//       "files": ["packages/client/**/*.{js,jsx,ts,tsx}"],
+//       "env": {
+//         "browser": true
+//       },
+//       "extends": ["plugin:react/recommended", "plugin:react-hooks/recommended", "plugin:prettier/recommended"],
+//       "rules": {
+//         // Add any client-specific rules here
+//       }
+//     },
+//     {
+//       "files": ["packages/server/**/*.{js,ts}"],
+//       "env": {
+//         "node": true
+//       },
+//       "extends": ["plugin:prettier/recommended"],
+//       "rules": {
+//         // Add any server-specific rules here
+//       }
+//     }
+//   ],
+//   "settings": {
+//     "react": {
+//       "version": "detect"
+//     }
+//   }
+// }
+{
+	"root": true,
+	"env": {
+		"browser": true,
+		"node": true
+	},
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"ecmaVersion": 2022,
+		"sourceType": "module",
+		"ecmaFeatures": {
+			"jsx": true
+		}
+	},
+	"extends": [
+		"eslint:recommended",
+		"plugin:react/recommended",
+		"plugin:import/recommended",
+		"plugin:jsx-a11y/recommended",
+		"plugin:@typescript-eslint/recommended"
+	],
+	"plugins": ["react", "prettier"],
+	"rules": {
+		"react/react-in-jsx-scope": "off",
+		"import/no-unresolved": "off",
+		"@typescript-eslint/no-explicit-any": "error"
+	},
+	"overrides": [
+		{
+			"files": ["packages/client/**/*.{js,jsx,ts,tsx}"],
+			"env": {
+				"browser": true
+			},
+			"extends": [
+				"eslint:recommended",
+				"plugin:react/recommended",
+				"plugin:import/recommended",
+				"plugin:jsx-a11y/recommended",
+				"plugin:@typescript-eslint/recommended"
+			],
+			"rules": {},
+			"parserOptions": {
+				"project": ["./client/tsconfig.json"]
+			}
+		},
+		{
+			"files": ["packages/server/**/*.{js,ts}"],
+			"env": {
+				"node": true
+			},
+			"extends": ["plugin:prettier/recommended"],
+			"rules": {},
+			"parserOptions": {
+				"project": ["./server/tsconfig.json"]
+			}
+		}
+	],
+	"settings": {
+		"react": {
+			"version": "detect"
+		}
+	}
+}

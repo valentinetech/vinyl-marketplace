@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document, Types } from 'mongoose';
+import mongoose, { Schema, Document } from 'mongoose';
 
 export interface IUserBids {
 	bidderId: string;
@@ -23,9 +23,9 @@ export interface IAuction {
 export interface IAuctionModel extends Document, IAuction {}
 
 const date = Date.now();
-const TIME_LEFT_15MIN: Number = 60 * 15 * 1000 + date;
-const PRICE_STARTING: Number = 0;
-const PRICE_MIN: Number = 5;
+const TIME_LEFT_15MIN = 60 * 15 * 1000 + date;
+const PRICE_STARTING = 0;
+const PRICE_MIN = 5;
 
 const AuctionSchema: Schema = new Schema(
 	{
@@ -75,7 +75,7 @@ const AuctionSchema: Schema = new Schema(
 	{
 		timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' },
 		versionKey: false,
-	}
+	},
 );
 
 export default mongoose.model<IAuctionModel>('Auction', AuctionSchema);

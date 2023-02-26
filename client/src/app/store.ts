@@ -1,4 +1,5 @@
 import { apiSlice } from 'features/Dashboard/api/apiSlice';
+// eslint-disable-next-line import/named
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
@@ -6,11 +7,11 @@ import authReducer from 'features/Auth/store/authSlice';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
 
 export const store = configureStore({
-	reducer: {
-		auth: authReducer,
-		[apiSlice.reducerPath]: apiSlice.reducer,
-	},
-	middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware),
+  reducer: {
+    auth: authReducer,
+    [apiSlice.reducerPath]: apiSlice.reducer,
+  },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware),
 });
 setupListeners(store.dispatch);
 

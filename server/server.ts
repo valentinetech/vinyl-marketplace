@@ -24,7 +24,7 @@ app.use((req, res, next) => {
 
 	res.on('finish', () => {
 		logging.info(
-			`Result - METHOD: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}] - STATUS: [${res.statusCode}]`
+			`Result - METHOD: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}] - STATUS: [${res.statusCode}]`,
 		);
 	});
 
@@ -51,10 +51,10 @@ app.use((req, res, next) => {
 
 app.use('/api/auctions', auctionRoutes);
 app.use('/api/users', userRoutes);
-app.get('/ping', (req, res, next) => res.status(200).json({ ping: 'pong' }));
+app.get('/ping', (req, res) => res.status(200).json({ ping: 'pong' }));
 
 /** Error handling */
-app.use((req, res, next) => {
+app.use((req, res) => {
 	const error = new Error('Not found');
 
 	logging.error(error);

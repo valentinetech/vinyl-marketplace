@@ -1,7 +1,7 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
 export interface IUser {
-	[x: string]: any;
+	[x: string]: unknown;
 	username: string;
 	email: string;
 	password: string;
@@ -30,7 +30,7 @@ const UserSchema: Schema = new Schema(
 	{
 		timestamps: false,
 		versionKey: false,
-	}
+	},
 );
 
 export default mongoose.model<IUserModel>('User', UserSchema);

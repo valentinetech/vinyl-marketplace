@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { IAuction } from '../api/api.models';
 import { useCreateAuctionMutation } from '../api/apiSlice';
-import useLocalStorageGet from 'common/hooks/useLocalStorageGet';
 import Card from 'common/components/Card';
 import unknownAlbumCover from 'assets/album-cover-unknown.png';
 import useSpotifySearch from 'common/hooks/useSpotifySearch';
@@ -16,6 +15,7 @@ import {
 	AuctionCreateContainer,
 	AuctionCreateChildren,
 } from './CreateAuctionForm.styles';
+import useLocalStorageGetUserInfo from 'common/hooks/useLocalStorageGetUserInfo';
 
 const CreateAuctionForm = () => {
 	const [formData, setFormData] = useState<IAuction>({
@@ -31,10 +31,10 @@ const CreateAuctionForm = () => {
 	const { albumName, artistName, buyNowPrice, endDate, minBid } = formData;
 
 	//Queries
-	const [createAuction, { isLoading, isError, error, isSuccess }] = useCreateAuctionMutation();
+	const [createAuction, { isLoading, isError, isSuccess }] = useCreateAuctionMutation();
 
 	//Custom Hooks
-	const [userId] = useLocalStorageGet();
+	const [userId] = useLocalStorageGetUserInfo();
 	const [, , albumCoverQuery] = useSpotifySearch(albumName || artistName);
 	useEffect(() => {
 		if (isSuccess) {
@@ -42,15 +42,8 @@ const CreateAuctionForm = () => {
 		}
 
 		if (isError) {
-			if (Array.isArray((error as any).data.error)) {
-				(error as any).data.error.forEach((el: any) =>
-					toast.error('There is no such album...', { toastId: 'toastidError' })
-				);
-			} else {
-				toast.error('There is no such album...', { toastId: 'toastidError' });
-			}
+			toast.error('There is no such album...', { toastId: 'toastidError' });
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isLoading]);
 
 	useEffect(() => {
@@ -91,20 +84,20 @@ const CreateAuctionForm = () => {
 					<h3>Create Auction</h3>
 					<Form onSubmit={onSubmit}>
 						<FormGroup>
-							<Input type='text' id='albumName' value={albumName} placeholder='Album Name' onChange={onChange} />
-							<Input type='text' id='artistName' value={artistName} placeholder='Artist Name' onChange={onChange} />
-							<Input type='text' id='minBid' value={minBid} placeholder='Starting Bid' onChange={onChange} />
-							<Input type='text' id='buyNowPrice' value={buyNowPrice} placeholder='Buy Now Price' onChange={onChange} />
-							<label>Auction End Date</label>
+							<Input type="text" id="albumName" value={albumName} placeholder="Album Name" onChange={onChange} />
+							<Input type="text" id="artistName" value={artistName} placeholder="Artist Name" onChange={onChange} />
+							<Input type="text" id="minBid" value={minBid} placeholder="Starting Bid" onChange={onChange} />
+							<Input type="text" id="buyNowPrice" value={buyNowPrice} placeholder="Buy Now Price" onChange={onChange} />
+							<h3>Auction End Date</h3>
 							<Input
-								type='datetime-local'
-								id='endDate'
+								type="datetime-local"
+								id="endDate"
 								value={endDate}
-								placeholder='Auction Run Time'
+								placeholder="Auction Run Time"
 								onChange={onChange}
 							/>
 							<ButtonContainer>
-								<Button disabled={isLoading ? true : false} variant='primary'>
+								<Button disabled={isLoading ? true : false} variant="primary">
 									Create Auction
 								</Button>
 							</ButtonContainer>

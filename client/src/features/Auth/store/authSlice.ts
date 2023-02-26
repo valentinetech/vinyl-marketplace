@@ -1,4 +1,5 @@
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { API_URL } from 'config/config';
 import { toast } from 'react-toastify';
@@ -48,9 +49,13 @@ export const register = createAsyncThunk('auth/register', async (user: AuthReque
 			localStorage.setItem('userToken', data.userToken);
 		}
 		return data;
-	} catch (error: any) {
-		const message: string = error.response.data.message;
-		return rejectWithValue(message);
+	} catch (error) {
+		if (error instanceof Error) {
+			const message = `This is error ${error.message}`;
+			return rejectWithValue(message);
+		} else {
+			console.log(error);
+		}
 	}
 });
 
@@ -64,9 +69,13 @@ export const login = createAsyncThunk('auth/login', async (user: AuthRequest, { 
 		}
 
 		return data;
-	} catch (error: any) {
-		const message: string = `This is error ${error.response.data.message}`;
-		return rejectWithValue(message);
+	} catch (error) {
+		if (error instanceof Error) {
+			const message = `This is error ${error.message}`;
+			return rejectWithValue(message);
+		} else {
+			console.log(error);
+		}
 	}
 });
 

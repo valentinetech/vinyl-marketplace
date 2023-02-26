@@ -4,10 +4,9 @@ import { MenuMobileContainer, MenuItemMobile, MenuDesktopContainer, MenuItemDesk
 
 interface MenuProps {
 	variant: 'desktop' | 'mobile';
-	toggleMenu?: () => void;
 }
 
-const Menu = ({ variant = 'desktop', toggleMenu }: MenuProps) => {
+const Menu = ({ variant = 'desktop' }: MenuProps) => {
 	const { userToken } = useAppSelector((state) => state.auth);
 
 	const menuRoutes = userToken ? protectedMenu : publicMenu;

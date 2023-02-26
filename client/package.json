@@ -6,7 +6,7 @@
     "start": "vite",
     "build": "tsc && vite build",
     "serve": "vite preview",
-    "lint": "eslint .",
+    "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "eslint --fix",
     "prepare": "cd .. && husky install .config/husky"
   },
@@ -42,29 +42,10 @@
     "@typescript-eslint/eslint-plugin": "^5.16.0",
     "@typescript-eslint/parser": "^5.16.0",
     "@vitejs/plugin-react": "^3.1.0",
-    "eslint": "^8.11.0",
     "husky": "^8.0.1",
     "vite": "^4.1.4",
     "vite-plugin-svgr": "^2.4.0",
     "vite-tsconfig-paths": "^4.0.5"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ],
-    "overrides": [
-      {
-        "files": [
-          "bin/*.js",
-          "lib/*.js"
-        ],
-        "excludedFiles": "*.test.js",
-        "rules": {
-          "import/no-anonymous-default-export": "off"
-        }
-      }
-    ]
   },
   "browserslist": {
     "production": [

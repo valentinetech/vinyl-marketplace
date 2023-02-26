@@ -4,9 +4,9 @@ import logging from '../lib/logging';
 import { IUser } from '../models/user.model';
 
 const signToken = (user: IUser, callback: (error: Error | null, token: string | null) => void): void => {
-	var timeSinceEpoch = new Date().getTime();
-	var expirationTime = timeSinceEpoch + Number(config.server.token.expireTime) * 100000;
-	var expirationTimeInSeconds = Math.floor(expirationTime / 1000);
+	const timeSinceEpoch = new Date().getTime();
+	const expirationTime = timeSinceEpoch + Number(config.server.token.expireTime) * 100000;
+	const expirationTimeInSeconds = Math.floor(expirationTime / 1000);
 
 	logging.info(`Attempting to sign token for ${user._id}`);
 
@@ -27,11 +27,15 @@ const signToken = (user: IUser, callback: (error: Error | null, token: string | 
 				} else if (token) {
 					callback(null, token);
 				}
-			}
+			},
 		);
-	} catch (error: any) {
-		logging.error(error.message);
-		callback(error, null);
+	} catch (error) {
+		if (error instanceof Error) {
+			logging.error(error.message);
+			callback(error, null);
+		} else {
+			logging.error(error);
+		}
 	}
 };
 

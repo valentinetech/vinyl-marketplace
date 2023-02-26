@@ -1,10 +1,8 @@
-import { IUserBids } from './../models/auction.model';
-import { IAuction } from '../models/auction.model';
-import { NextFunction, Request, Response } from 'express';
+import Auction, { IAuction } from '../models/auction.model';
+import { Request, Response } from 'express';
 import mongoose from 'mongoose';
-import Auction from '../models/auction.model';
 
-const createAuction = (req: Request, res: Response, next: NextFunction) => {
+const createAuction = (req: Request, res: Response) => {
 	const { userId, albumCover, albumName, artistName, buyNowPrice, minBid, lastBid, endDate, isBought } =
 		req.body as IAuction;
 
@@ -27,17 +25,17 @@ const createAuction = (req: Request, res: Response, next: NextFunction) => {
 		.catch((error) => res.status(500).json({ error: 'Please Check auction data' + error }));
 };
 
-const readAuctionById = (req: Request, res: Response, next: NextFunction) => {
+const readAuctionById = (req: Request, res: Response) => {
 	const auctionId = req.params.auctionId;
 
 	return Auction.findById(auctionId)
 		.then((auction) =>
-			auction ? res.status(200).json({ auction: auction }) : res.status(404).json({ message: 'Auction not found' })
+			auction ? res.status(200).json({ auction: auction }) : res.status(404).json({ message: 'Auction not found' }),
 		)
 		.catch((error) => res.status(500).json({ error }));
 };
 
-const readAllUserAuctions = (req: Request, res: Response, next: NextFunction) => {
+const readAllUserAuctions = (req: Request, res: Response) => {
 	const userId = req.params.userId;
 
 	return Auction.find({ userId: userId })
@@ -45,13 +43,13 @@ const readAllUserAuctions = (req: Request, res: Response, next: NextFunction) =>
 		.catch((error) => res.status(500).json({ error }));
 };
 
-const readAllAuctions = (req: Request, res: Response, next: NextFunction) => {
+const readAllAuctions = (req: Request, res: Response) => {
 	return Auction.find({})
 		.then((auction) => res.status(200).json({ auction }))
 		.catch((error) => res.status(500).json({ error }));
 };
 
-const updateAuction = (req: Request, res: Response, next: NextFunction) => {
+const updateAuction = (req: Request, res: Response) => {
 	const auctionId = req.params.auctionId;
 
 	return Auction.findById(auctionId)
@@ -70,14 +68,14 @@ const updateAuction = (req: Request, res: Response, next: NextFunction) => {
 		.catch((error) => res.status(500).json({ error }));
 };
 
-const deleteAuction = (req: Request, res: Response, next: NextFunction) => {
+const deleteAuction = (req: Request, res: Response) => {
 	const auctionId = req.params.auctionId;
 
 	return Auction.findByIdAndDelete(auctionId)
 		.then((auction) =>
 			auction
 				? res.status(201).json({ auction: auction, message: 'Deleted' })
-				: res.status(404).json({ message: 'Auction not found' })
+				: res.status(404).json({ message: 'Auction not found' }),
 		)
 		.catch((error) => res.status(500).json({ error }));
 };
