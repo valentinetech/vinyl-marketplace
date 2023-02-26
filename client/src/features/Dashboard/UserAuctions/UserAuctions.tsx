@@ -5,7 +5,7 @@ import { Container } from './UserAuctions.styles';
 import useLocalStorageGetUserInfo from 'common/hooks/useLocalStorageGetUserInfo';
 
 const UserAuctions = () => {
-	const [userId] = useLocalStorageGetUserInfo();
+	const userId = useLocalStorageGetUserInfo();
 	const { data: userAuctions } = useGetAllAuctionsByUserQuery(userId);
 	return (
 		<>

@@ -34,7 +34,7 @@ const CreateAuctionForm = () => {
 	const [createAuction, { isLoading, isError, isSuccess }] = useCreateAuctionMutation();
 
 	//Custom Hooks
-	const [userId] = useLocalStorageGetUserInfo();
+	const userId = useLocalStorageGetUserInfo();
 	const [, , albumCoverQuery] = useSpotifySearch(albumName || artistName);
 	useEffect(() => {
 		if (isSuccess) {
