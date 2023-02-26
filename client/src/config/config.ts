@@ -1,7 +1,7 @@
 const PORT = 2000;
 const devEnvUsersUrl = `http://localhost:${PORT}`;
 const prodEnvUrl = 'https://vinyl-marketplace-production.up.railway.app';
-const isDev = process.env.REACT_APP_LIVE === 'dev';
+const isDev = import.meta.env.ENV === 'dev';
 
 export const API_URL = isDev ? devEnvUsersUrl : prodEnvUrl;
 

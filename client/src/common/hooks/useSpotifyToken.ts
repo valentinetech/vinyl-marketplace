@@ -2,11 +2,12 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import qs from 'qs';
 import { PostToken } from 'features/Home/models/Home-models';
-const Buffer = require('buffer/').Buffer;
+// const Buffer = require('buffer/').Buffer;
+import { Buffer } from 'buffer';
 
 export function useSpotifyToken() {
-	const SPOTIFY_ID: string = process.env.REACT_APP_SPOTIFY_ID ?? '';
-	const SPOTIFY_SECRET: string = process.env.REACT_APP_SPOTIFY_SECRET ?? '';
+	const SPOTIFY_ID: string = import.meta.env.VITE_SPOTIFY_ID ?? '';
+	const SPOTIFY_SECRET: string = import.meta.env.VITE_SPOTIFY_SECRET ?? '';
 	const SPOTIFY_TOKEN: string = Buffer.from(`${SPOTIFY_ID}:${SPOTIFY_SECRET}`).toString('base64');
 	const ACCESS_URL: string = 'https://accounts.spotify.com/api/token';
 	const GRANT_TYPE: string = qs.stringify({ grant_type: 'client_credentials' });
