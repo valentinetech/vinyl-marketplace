@@ -1,11 +1,11 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
 export interface IUser {
+	// [x: string]: any;
 	username: string;
 	email: string;
 	password: string;
 	token?: string;
-	passwordConfirm?: string;
 }
 
 export interface IUserWithId extends IUser {

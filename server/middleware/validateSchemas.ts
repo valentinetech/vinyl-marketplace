@@ -1,5 +1,5 @@
 import { IUserBids } from './../models/auction.model';
-import { IUser, IUserWithId } from '../models/user.model';
+import { IUser } from '../models/user.model';
 import { IAuction } from '../models/auction.model';
 import Joi, { ObjectSchema } from 'joi';
 import Logging from '../lib/logging';
