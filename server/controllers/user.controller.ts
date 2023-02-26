@@ -1,4 +1,4 @@
-import User, { IUser, IUserWithId } from '../models/user.model';
+import User, { IUser, IUserModel, IUserWithId } from '../models/user.model';
 import { Request, Response } from 'express';
 import mongoose from 'mongoose';
 import bcryptjs from 'bcrypt';
