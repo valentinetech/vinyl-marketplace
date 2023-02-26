@@ -1,13 +1,14 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
 export interface IUser {
-	[x: string]: unknown;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	[x: string]: any;
 	username: string;
 	email: string;
 	password: string;
 	token?: string;
 }
-// sdsd
+
 export interface IUserModel extends Document, IUser {}
 
 const UserSchema: Schema = new Schema(
