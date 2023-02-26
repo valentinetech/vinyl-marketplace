@@ -1,9 +1,9 @@
 import jwt from 'jsonwebtoken';
 import { config } from '../config/config';
 import logging from '../lib/logging';
-import { IUserWithId } from '../models/user.model';
+import { IUser } from '../models/user.model';
 
-const signToken = (user: IUserWithId, callback: (error: Error | null, token: string | null) => void): void => {
+const signToken = (user: IUser, callback: (error: Error | null, token: string | null) => void): void => {
 	const timeSinceEpoch = new Date().getTime();
 	const expirationTime = timeSinceEpoch + Number(config.server.token.expireTime) * 100000;
 	const expirationTimeInSeconds = Math.floor(expirationTime / 1000);

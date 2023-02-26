@@ -1,4 +1,4 @@
-import User, { IUser, IUserModel, IUserWithId } from '../models/user.model';
+import User, { IUser } from '../models/user.model';
 import { Request, Response } from 'express';
 import mongoose from 'mongoose';
 import bcryptjs from 'bcrypt';
@@ -24,7 +24,7 @@ const register = (req: Request, res: Response) => {
 			});
 		}
 
-		const _user = new User<IUserWithId>({
+		const _user: IUser = new User<IUser>({
 			_id: new mongoose.Types.ObjectId(),
 			email,
 			username,
@@ -33,7 +33,7 @@ const register = (req: Request, res: Response) => {
 
 		return _user
 			.save()
-			.then((user: IUserWithId) => {
+			.then((user: IUser) => {
 				signToken(user, (_error, token) => {
 					if (_error) {
 						return res.status(500).json({
@@ -43,7 +43,7 @@ const register = (req: Request, res: Response) => {
 					} else if (token) {
 						return res.status(200).json({
 							message: 'Register successful',
-							userInfo: user._id,
+							userInfo: user.id,
 							userToken: token,
 						});
 					}

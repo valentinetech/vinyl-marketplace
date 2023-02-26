@@ -1,18 +1,13 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
 export interface IUser {
-	// [x: string]: any;
+	[x: string]: unknown;
 	username: string;
 	email: string;
 	password: string;
 	token?: string;
 }
-
-export interface IUserWithId extends IUser {
-	_id?: mongoose.Types.ObjectId;
-	save?: () => IUser;
-}
-
+// sdsd
 export interface IUserModel extends Document, IUser {}
 
 const UserSchema: Schema = new Schema(
@@ -38,4 +33,4 @@ const UserSchema: Schema = new Schema(
 	},
 );
 
-export default mongoose.model<IUserModel & IUserWithId>('User', UserSchema);
+export default mongoose.model<IUserModel>('User', UserSchema);
