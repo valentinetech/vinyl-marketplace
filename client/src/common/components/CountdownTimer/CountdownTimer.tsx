@@ -19,7 +19,6 @@ const CountdownTimer = ({ endDate, setIsSold }: ICountdownTimer) => {
 	const dateToString = endDate?.toString();
 	const endDateFormated = new Date(dateToString);
 	const endDateMili = endDateFormated.getTime();
-	const date15MinMilli = Date.now() + 900000;
 
 	const renderer = ({ days, hours, minutes, seconds, completed }: ICountdown) => {
 		if (completed) {
@@ -44,12 +43,16 @@ const CountdownTimer = ({ endDate, setIsSold }: ICountdownTimer) => {
 	};
 
 	return (
-		<div>
-			<CountdownTitle>Time Remaining</CountdownTitle>
-			<CountdownComponent>
-				<Countdown date={endDateMili ? endDateMili : date15MinMilli} renderer={renderer}></Countdown>
-			</CountdownComponent>
-		</div>
+		<>
+			{endDateMili ? (
+				<div>
+					<CountdownTitle>Time Remaining</CountdownTitle>
+					<CountdownComponent>
+						<Countdown date={endDateMili} renderer={renderer}></Countdown>
+					</CountdownComponent>
+				</div>
+			) : null}
+		</>
 	);
 };
 export default CountdownTimer;

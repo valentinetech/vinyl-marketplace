@@ -1,4 +1,4 @@
-import { btnRoutes } from 'config/config';
+import { btnRoutes } from 'config/routes';
 import Button from 'common/components/Button';
 import Avatar from 'common/components/Avatar';
 
@@ -35,8 +35,8 @@ const AuthButtons = ({ variant = 'desktop' }: AuthButtonsProps) => {
 			<>
 				{userToken !== null ? (
 					<AvatarContainer>
-						<Avatar variant='mobile' />
-						<Button variant='secondary' onClick={onLogout}>
+						<Avatar variant="mobile" />
+						<Button variant="secondary" onClick={onLogout}>
 							Logout
 						</Button>
 					</AvatarContainer>
@@ -57,8 +57,8 @@ const AuthButtons = ({ variant = 'desktop' }: AuthButtonsProps) => {
 			<>
 				{userToken ? (
 					<>
-						<Avatar variant='desktop' />
-						<Button variant='secondary' onClick={onLogout}>
+						<Avatar variant="desktop" />
+						<Button variant="secondary" onClick={onLogout}>
 							Logout
 						</Button>
 					</>
@@ -66,7 +66,7 @@ const AuthButtons = ({ variant = 'desktop' }: AuthButtonsProps) => {
 					<AuthContainerDesktop>
 						<RegisterButtonDesktop to={btnRoutes.register.route}>{btnRoutes.register.title}</RegisterButtonDesktop>
 						<LoginButtonContainerDesktop to={btnRoutes.login.route}>
-							<Button variant='secondary'>{btnRoutes.login.title}</Button>
+							<Button variant="secondary">{btnRoutes.login.title}</Button>
 						</LoginButtonContainerDesktop>
 					</AuthContainerDesktop>
 				)}

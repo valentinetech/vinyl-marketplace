@@ -12,14 +12,12 @@ const Button = ({ children, variant = 'primary', disabled, ...props }: ButtonPro
 	if (variant === 'primary') {
 		return (
 			<ButtonPrimary {...props} disabled={disabled}>
-				{' '}
 				{children}
 			</ButtonPrimary>
 		);
 	}
 	return (
 		<ButtonSecondary {...props} disabled={disabled}>
-			{' '}
 			{children}
 		</ButtonSecondary>
 	);

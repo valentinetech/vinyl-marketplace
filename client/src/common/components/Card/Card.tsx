@@ -41,24 +41,20 @@ const Card = (props: ICard) => {
 		currentId = '',
 	} = props;
 
+	/* Generic */
 	const navigate = useNavigate();
 
-	// Countdown
+	/* Countdown */
 	const [isSold, setIsSold] = useState<boolean>(false);
 
-	// Delete Action
+	/* Delete Action */
 	const [deleteAuction] = useDeleteAuctionMutation();
-	function onDelete() {
+	const onDelete = () => {
 		deleteAuction(currentId);
 		toast.success('Auction deleted.');
-	}
+	};
 
-	// Edit Action
-	const [editAuction] = useUpdateAuctionMutation();
-	const userId = useLocalStorageGetUserInfo();
-	const [isActive, toggle] = useToggle(false);
-	console.log(toggle);
-
+	/* Edit Action */
 	const [editedData, setEditedData] = useState<IAuctionEdit>({
 		_id: currentId,
 		albumCoverEdited: albumCover,
@@ -67,9 +63,10 @@ const Card = (props: ICard) => {
 		endDateEdited: endDate,
 	});
 
+	const userId = useLocalStorageGetUserInfo();
+	const [editAuction] = useUpdateAuctionMutation();
+	const [isActive, toggle] = useToggle(false);
 	const { albumNameEdited, artistNameEdited, endDateEdited, albumCoverEdited } = editedData;
-
-	//Search Cover Image from Spotify
 	const [, , albumCoverQuery] = useSpotifySearch(albumNameEdited && artistNameEdited);
 
 	const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -101,21 +98,21 @@ const Card = (props: ICard) => {
 
 	return (
 		<CardContainer>
-			{canDelete === true ? <DeleteIcon aria-label='delete auction' onClick={onDelete} size={32} /> : null}
+			{canDelete === true ? <DeleteIcon aria-label="delete auction" onClick={onDelete} size={32} /> : null}
 			{canEdit === true && isActive === false ? (
-				<EditIcon aria-label='edit auction' onClick={toggle} size={32} />
+				<EditIcon aria-label="edit auction" onClick={toggle} size={32} />
 			) : null}
 			{canEdit === true && isActive === true ? (
-				<SaveEditIcon aria-label='save edit' onClick={onSubmit} size={32} />
+				<SaveEditIcon aria-label="save edit" onClick={onSubmit} size={32} />
 			) : null}
 			<CardImg src={albumCover ? albumCover : albumCoverEdited} alt={albumName ? albumName : albumNameEdited}></CardImg>
 			{isActive ? (
-				<input type='text' id='albumNameEdited' placeholder={albumName} onChange={onChange} />
+				<input type="text" id="albumNameEdited" placeholder={albumName} onChange={onChange} />
 			) : (
 				<AlbumName>{albumName}</AlbumName>
 			)}
 			{isActive ? (
-				<input type='text' id='artistNameEdited' placeholder={artistName} onChange={onChange} />
+				<input type="text" id="artistNameEdited" placeholder={artistName} onChange={onChange} />
 			) : (
 				<ArtistName>{artistName}</ArtistName>
 			)}
@@ -129,13 +126,13 @@ const Card = (props: ICard) => {
 						<BidContainer>
 							<BidLast>Last Bid ${bidLast}</BidLast>
 							<Bid>
-								<Button variant='secondary' onClick={() => navigate('/login')}>
+								<Button variant="secondary" onClick={() => navigate('/login')}>
 									Place Bid
 								</Button>
 							</Bid>
 						</BidContainer>
 						{canBuyNow ? (
-							<Button style={{ marginTop: '10px' }} variant='primary' onClick={() => navigate('/login')}>
+							<Button style={{ marginTop: '10px' }} variant="primary" onClick={() => navigate('/login')}>
 								Buy Now
 							</Button>
 						) : null}

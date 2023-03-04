@@ -7,8 +7,6 @@ export interface ThemeProps {
 	};
 }
 
-// theme typeof theme
-
 export const theme = {
 	colors: {
 		body: '#2B2B2B',

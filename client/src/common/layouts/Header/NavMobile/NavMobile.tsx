@@ -11,7 +11,7 @@ interface NavProps {
 
 const NavMobile = ({ isOpen, toggleMenu }: NavProps) => {
 	return (
-		<Nav isOpen={isOpen} onClick={toggleMenu}>
+		<Nav isOpen={isOpen} onClick={toggleMenu} role="navigation">
 			<LogoLink to="/#">
 				<Logo src={logo} alt="logo" />
 			</LogoLink>

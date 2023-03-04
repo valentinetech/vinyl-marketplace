@@ -1,5 +1,5 @@
 import { useAppSelector } from 'app/store';
-import { publicMenu, protectedMenu } from 'config/config';
+import { publicMenu, protectedMenu } from 'config/routes';
 import { MenuMobileContainer, MenuItemMobile, MenuDesktopContainer, MenuItemDesktop } from './Menu.styles';
 
 interface MenuProps {
@@ -8,12 +8,11 @@ interface MenuProps {
 
 const Menu = ({ variant = 'desktop' }: MenuProps) => {
 	const { userToken } = useAppSelector((state) => state.auth);
-
 	const menuRoutes = userToken ? protectedMenu : publicMenu;
 
 	const MenuMobile = () => {
 		return (
-			<MenuMobileContainer>
+			<MenuMobileContainer role="menu">
 				{menuRoutes.map((item) => {
 					return (
 						<MenuItemMobile key={item.title} smooth to={item.route}>
@@ -27,7 +26,7 @@ const Menu = ({ variant = 'desktop' }: MenuProps) => {
 
 	const MenuDesktop = () => {
 		return (
-			<MenuDesktopContainer>
+			<MenuDesktopContainer role="menu">
 				{menuRoutes.map((item) => {
 					return (
 						<MenuItemDesktop key={item.title} smooth to={item.route}>

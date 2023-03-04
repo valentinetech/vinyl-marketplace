@@ -36,10 +36,8 @@ export const apiSlice = createApi({
 		}),
 		getAuction: builder.query<IAuction, string>({
 			query: (auctionId) => `/read/${auctionId}`,
-			// providesTags: ['Auctions'],
 			transformResponse: (response: { auction: IAuction }) => response.auction,
-			// don't update everything, just the one auction
-			providesTags: (result, error, arg) => [{ type: 'Auctions', _id: arg }],
+			providesTags: (result) => [{ type: 'Auctions' as const, _id: result?._id }],
 		}),
 		createAuction: builder.mutation<void, IAuctionRequest>({
 			query: (auction) => ({
