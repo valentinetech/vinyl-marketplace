@@ -6,9 +6,6 @@ Refactoring:
 [x] Component refactoring - splitting into Layout components / Elements DUMB
 [] RTK Query cache for fetching from DB
 [] Cache for fetching Spotify API
-[-] Switch to ZOD for validation
--- [] Client
--- [] Server
 [x] Create ENUMS for hardcoded data / routes
 [] Accessibility
 
