@@ -1,21 +1,21 @@
-Refactoring: 
+Refactoring:
 
-[-] Check all types / rewrite if needed 
- -- [] Client
- -- [] Server
-[] Component refactoring - splitting into Layout components / Elements DUMB
+[x] Check all types / rewrite if needed
+-- [x] Client
+-- [x] Server
+[x] Component refactoring - splitting into Layout components / Elements DUMB
 [] RTK Query cache for fetching from DB
 [] Cache for fetching Spotify API
 [-] Switch to ZOD for validation
- -- [] Client
- -- [] Server
-[] Create ENUMS for hardcoded data / routes 
+-- [] Client
+-- [] Server
+[x] Create ENUMS for hardcoded data / routes
 [] Accessibility
 
-Server: 
+Server:
 
 [x] Fix deploy
-[] Check & Monitor usage for decreases call count
+[x] Check & Monitor usage for decreases call count
 
 UI:
 
@@ -26,5 +26,5 @@ Testing:
 [] Write 5 common test
 
 [] Install react-testing-lib
-[] Install Jest 
+[] Install Jest
 [] Write uni tests for 80% of an App / Logic = must / UI = if not included in e2e

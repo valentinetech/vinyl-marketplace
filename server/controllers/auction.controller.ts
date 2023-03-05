@@ -1,8 +1,9 @@
 import Auction, { IAuction } from '../models/auction.model';
 import { Request, Response } from 'express';
+import Logging from '../lib/logging';
 import mongoose from 'mongoose';
 
-const createAuction = (req: Request, res: Response) => {
+const createAuction = async (req: Request, res: Response) => {
 	const { userId, albumCover, albumName, artistName, buyNowPrice, minBid, lastBid, endDate, isBought } =
 		req.body as IAuction;
 
@@ -19,65 +20,78 @@ const createAuction = (req: Request, res: Response) => {
 		isBought,
 	});
 
-	return auction
-		.save()
-		.then((auction) => res.status(201).json({ auction: auction }))
-		.catch((error) => res.status(500).json({ error: 'Please Check auction data' + error }));
+	try {
+		const auctionSaved = await auction.save();
+		return res.status(201).json({ auction: auctionSaved });
+	} catch (error) {
+		return res.status(500).json({ error: 'Please Check auction data' + error });
+	}
 };
 
-const readAuctionById = (req: Request, res: Response) => {
+const readAuctionById = async (req: Request, res: Response) => {
 	const auctionId = req.params.auctionId;
 
-	return Auction.findById(auctionId)
-		.then((auction) =>
-			auction ? res.status(200).json({ auction: auction }) : res.status(404).json({ message: 'Auction not found' }),
-		)
-		.catch((error) => res.status(500).json({ error }));
+	try {
+		const auction = await Auction.findById(auctionId);
+		return auction ? res.status(200).json({ auction }) : res.status(404).json({ message: 'Auction not found' });
+	} catch (error) {
+		Logging.error(error);
+		return res.status(500).json({ error });
+	}
 };
 
-const readAllUserAuctions = (req: Request, res: Response) => {
+const readAllUserAuctions = async (req: Request, res: Response) => {
 	const userId = req.params.userId;
 
-	return Auction.find({ userId: userId })
-		.then((auction) => res.status(200).json({ auction }))
-		.catch((error) => res.status(500).json({ error }));
+	try {
+		const auction = await Auction.find({ userId });
+		return res.status(200).json({ auction });
+	} catch (error) {
+		Logging.error(error);
+		return res.status(500).json({ error });
+	}
 };
 
-const readAllAuctions = (req: Request, res: Response) => {
-	return Auction.find({})
-		.then((auction) => res.status(200).json({ auction }))
-		.catch((error) => res.status(500).json({ error }));
+const readAllAuctions = async (req: Request, res: Response) => {
+	try {
+		const auction = await Auction.find({});
+		return res.status(200).json({ auction });
+	} catch (error) {
+		Logging.error(error);
+		return res.status(500).json({ error });
+	}
 };
 
-const updateAuction = (req: Request, res: Response) => {
+const updateAuction = async (req: Request, res: Response) => {
 	const auctionId = req.params.auctionId;
 
-	return Auction.findById(auctionId)
-		.then((auction) => {
-			if (auction) {
-				auction.set(req.body);
-
-				return auction
-					.save()
-					.then((auction) => res.status(201).json({ auction }))
-					.catch((error) => res.status(500).json({ error }));
-			} else {
-				return res.status(404).json({ message: 'Auction not found' });
-			}
-		})
-		.catch((error) => res.status(500).json({ error }));
+	try {
+		const auctionSelected = await Auction.findById(auctionId);
+		if (auctionSelected) {
+			auctionSelected.set(req.body);
+			const auctionSaved = await auctionSelected.save();
+			return res.status(201).json({ auction: auctionSaved });
+		} else {
+			return res.status(404).json({ message: 'Auction not found' });
+		}
+	} catch (error) {
+		Logging.error(error);
+		return res.status(500).json({ error });
+	}
 };
 
-const deleteAuction = (req: Request, res: Response) => {
+const deleteAuction = async (req: Request, res: Response) => {
 	const auctionId = req.params.auctionId;
 
-	return Auction.findByIdAndDelete(auctionId)
-		.then((auction) =>
-			auction
-				? res.status(201).json({ auction: auction, message: 'Deleted' })
-				: res.status(404).json({ message: 'Auction not found' }),
-		)
-		.catch((error) => res.status(500).json({ error }));
+	try {
+		const auction = await Auction.findByIdAndDelete(auctionId);
+		return auction
+			? res.status(201).json({ auction, message: 'Deleted' })
+			: res.status(404).json({ message: 'Auction not found' });
+	} catch (error) {
+		Logging.error(error);
+		return res.status(500).json({ error });
+	}
 };
 
 export default {

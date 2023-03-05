@@ -18,5 +18,4 @@ export default class Logging {
 			chalk.red(`[${new Date().toLocaleDateString()}][ERROR] `),
 			typeof args === 'string' ? chalk.redBright(args) : args,
 		);
-	//c
 }

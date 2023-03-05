@@ -5,25 +5,24 @@ import bcryptjs from 'bcrypt';
 import Logging from '../lib/logging';
 import signToken from '../utils/signToken';
 
-const validateToken = (req: Request, res: Response) => {
+const validateToken = (res: Response) => {
 	Logging.info('Token validated, user authorized.');
 
 	return res.status(200).json({
 		message: 'Token(s) validated',
 	});
 };
-
 const register = (req: Request, res: Response) => {
 	const { username, email, password } = req.body as IUser;
 
 	bcryptjs.hash(password, 10, (hashError, hash) => {
 		if (hashError) {
+			Logging.error(hashError);
 			return res.status(401).json({
 				message: hashError.message,
 				error: hashError,
 			});
 		}
-
 		const _user: IUser = new User<IUser>({
 			_id: new mongoose.Types.ObjectId(),
 			email,
@@ -34,11 +33,12 @@ const register = (req: Request, res: Response) => {
 		return _user
 			.save()
 			.then((user: IUser) => {
-				signToken(user, (_error, token) => {
-					if (_error) {
+				signToken(user, (error, token) => {
+					if (error) {
+						Logging.error(error);
 						return res.status(500).json({
-							message: _error.message,
-							error: _error,
+							message: error.message,
+							error,
 						});
 					} else if (token) {
 						return res.status(200).json({
@@ -50,6 +50,7 @@ const register = (req: Request, res: Response) => {
 				});
 			})
 			.catch((error: { message: string }) => {
+				Logging.error(error);
 				return res.status(500).json({
 					message: error.message,
 					error,
@@ -74,7 +75,7 @@ const login = (req: Request, res: Response) => {
 
 			bcryptjs.compare(password, user.password, (error, result) => {
 				if (error) {
-					console.log(error);
+					Logging.error(error);
 					return res.status(401).json({
 						message: 'Password Mismatch...',
 					});
@@ -100,15 +101,15 @@ const login = (req: Request, res: Response) => {
 				}
 			});
 		})
-		.catch((err: unknown) => {
-			console.log(err);
+		.catch((error: unknown) => {
+			Logging.error(error);
 			res.status(500).json({
-				error: err,
+				error,
 			});
 		});
 };
 
-const getAllUsers = (req: Request, res: Response) => {
+const getAllUsers = (res: Response) => {
 	User.find()
 		.select('-password')
 		.exec()
@@ -119,6 +120,7 @@ const getAllUsers = (req: Request, res: Response) => {
 			});
 		})
 		.catch((error) => {
+			Logging.error(error);
 			return res.status(500).json({
 				message: error.message,
 				error,
