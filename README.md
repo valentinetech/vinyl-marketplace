@@ -4,7 +4,6 @@ Full-stack auction CRUD application with validation, authorization, Spotify API,
 App is build with create-react-app.
 
 DEMO for Client-side: [Client Demo](https://vinyl-auction.netlify.app/)
-**Server is LIMITED, if you're getting an error when trying to login the limit is reached... :( Please run locally.
 
 # Stack
 - FE:
