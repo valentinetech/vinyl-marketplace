@@ -15,7 +15,7 @@ DEMO for Client-side: [Client Demo](https://vinyl-auction.netlify.app/)
 - BE:
 -- Node + Express + mongoose
 -- MongoDB
-- Toling:
+- Tooling:
 -- Yup / Joi
 -- ESLint + Prettier
 -- Husky
