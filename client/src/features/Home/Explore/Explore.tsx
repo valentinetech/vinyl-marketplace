@@ -10,18 +10,27 @@ const Explore = () => {
 
 	const { topAlbums, topAlbumsLoaded } = useSpotifyGetAlbums();
 	const [displayedAlbumCount, setDisplayedAlbumCount] = useState<number>(DISPLAYED_CARDS);
-	const [previewUrl, setPreviewUrl] = useState<string>();
+	const [audioPlaying, setAudioPlaying] = useState<string>();
 	const canLoadMore = topAlbums && topAlbums.length > displayedAlbumCount;
 
 	useEffect(() => {
-		const audio = new Audio(previewUrl);
-		audio.play();
-		setTimeout(() => setPreviewUrl(undefined), PREVIEW_LENGTH);
+		const audio = new Audio(audioPlaying);
+		const playPromise = audio.play();
+		const timeout = setTimeout(() => setAudioPlaying(undefined), PREVIEW_LENGTH);
+
+		if (playPromise) {
+			playPromise.catch((error) => {
+				if (error.name !== 'AbortError') {
+					console.error(error);
+				}
+			});
+		}
 
 		return () => {
 			audio.pause();
+			clearTimeout(timeout);
 		};
-	}, [previewUrl]);
+	}, [audioPlaying]);
 
 	return (
 		<>
@@ -38,8 +47,8 @@ const Explore = () => {
 									albumName={album.name}
 									albumCover={album.images[0].url}
 									artistName={album.artists[0].name}
-									setPreviewUrl={() => setPreviewUrl(previewUrl === preview_url ? undefined : preview_url)}
-									spotifyButtonText={previewUrl === preview_url ? '❚❚' : '▶'}
+									setPreviewUrl={() => setAudioPlaying(audioPlaying === preview_url ? undefined : preview_url)}
+									spotifyButtonText={audioPlaying === preview_url ? '❚❚' : '▶'}
 								/>
 							);
 						})

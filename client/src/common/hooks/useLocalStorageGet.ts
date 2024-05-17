@@ -1,10 +1,6 @@
 import { useState, useEffect } from 'react';
 
-interface useLocalStorageGetProps {
-	itemName: string;
-}
-
-const useLocalStorageGet = ({ itemName }: useLocalStorageGetProps): string => {
+const useLocalStorageGet = (itemName: string): string => {
 	const [itemCurrent, setItemCurrent] = useState<string>('');
 
 	useEffect(() => {
