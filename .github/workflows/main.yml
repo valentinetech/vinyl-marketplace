@@ -1,4 +1,4 @@
-name: CI
+name: Frontend Code Coverage Pipeline
 
 on:
   push:
@@ -11,7 +11,7 @@ on:
 
 jobs:
   client:
-    name: Client
+    name: Frontend
     runs-on: ubuntu-latest
 
     strategy:
@@ -37,37 +37,6 @@ jobs:
 
       - name: Upload client coverage to Codacy
         env:
-          CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
-        run: bash <(curl -Ls https://coverage.codacy.com/get.sh) report -r coverage/lcov.info --project-token $CODACY_PROJECT_TOKEN
+          CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN_CLIENT }}
+        run: bash <(curl -Ls https://coverage.codacy.com/get.sh) report -r coverage/lcov.info
         working-directory: client
-
-  # server:
-  #   name: Server
-  #   runs-on: ubuntu-latest
-
-  #   strategy:
-  #     matrix:
-  #       node-version: [18.18.0]
-
-  #   steps:
-  #     - name: Checkout repository
-  #       uses: actions/checkout@v3
-
-  #     - name: Set up Node.js ${{ matrix.node-version }}
-  #       uses: actions/setup-node@v3
-  #       with:
-  #         node-version: ${{ matrix.node-version }}
-
-  #     - name: Install server dependencies
-  #       run: npm ci
-  #       working-directory: server
-
-  #     - name: Run server tests with coverage
-  #       run: npm test -- --coverage
-  #       working-directory: server
-
-  #     - name: Upload server coverage to Codacy
-  #       env:
-  #         CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN_SERVER }}
-  #       run: bash <(curl -Ls https://coverage.codacy.com/get.sh) report -r coverage/lcov.info
-  #       working-directory: server
