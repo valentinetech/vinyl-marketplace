@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 
 import { useAppDispatch, useAppSelector } from 'app/store';
 import { useNavigate } from 'react-router-dom';
-import { toast, ToastContent } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { login, reset } from '../store/authSlice';
 
 import { loginSchema } from '../schema/authSchema';
@@ -56,8 +56,8 @@ const Login = () => {
 			};
 			dispatch(login(userData));
 		} else {
-			loginSchema.validate(formData).catch((error: ToastContent<unknown>) => {
-				toast.error(error, { toastId: 'error' });
+			loginSchema.validate(formData).catch((error: unknown) => {
+				toast.error(error instanceof Error ? error.message : 'Unknown error', { toastId: 'error' });
 			});
 		}
 	};

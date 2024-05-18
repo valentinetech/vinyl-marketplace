@@ -5,7 +5,7 @@ import Footer from 'common/layouts/Footer';
 import Header from 'common/layouts/Header';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { toast, ToastContent } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { registerSchema } from '../schema/authSchema';
 import { register, reset } from '../store/authSlice';
 
@@ -69,8 +69,8 @@ const Register = () => {
 			};
 			dispatch(register(userData));
 		} else {
-			registerSchema.validate(formData, { abortEarly: false }).catch((error: ToastContent<unknown>) => {
-				toast.error(error, { toastId: 'toastIdRegisterValidation' });
+			registerSchema.validate(formData, { abortEarly: false }).catch((error: unknown) => {
+				toast.error(error instanceof Error ? error.message : 'Unknown error', { toastId: 'toastIdRegisterValidation' });
 			});
 		}
 	};
