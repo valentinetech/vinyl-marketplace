@@ -19,7 +19,7 @@ const Explore = () => {
 			setAudioPlaying(undefined);
 		}, PREVIEW_LENGTH);
 
-		audio.play();
+		void audio.play();
 
 		return () => {
 			audio.pause();

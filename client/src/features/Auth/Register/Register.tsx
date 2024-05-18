@@ -48,7 +48,7 @@ const Register = () => {
 			[e.target.id]: e.target.value,
 		}));
 
-		registerSchema.validate({});
+		void registerSchema.validate({});
 	};
 
 	const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {

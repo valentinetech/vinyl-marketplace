@@ -9,3 +9,4 @@ exclude_paths:
   - '**.test.ts'
   - '**.styles.ts'
   - 'README.md'
+  - 'client/src/common/utils/reportWebVitals.ts'

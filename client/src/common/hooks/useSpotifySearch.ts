@@ -37,7 +37,9 @@ export function useSpotifySearch(albumName: string): [IAlbum, boolean, string] {
 				setAlbumQueryLoaded(true);
 			})
 			.catch((error: unknown) => {
-				console.error(error);
+				if (error instanceof Error && error.message !== 'canceled') {
+					console.error(error);
+				}
 			});
 
 		return () => {

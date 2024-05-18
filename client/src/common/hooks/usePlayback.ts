@@ -9,7 +9,7 @@ interface usePlaybackProps {
 const usePlayback = ({ previewUrl, previewDuration, setPreviewUrl }: usePlaybackProps) => {
 	useEffect(() => {
 		const audio = new Audio(previewUrl);
-		audio.play();
+		void audio.play();
 		setTimeout(() => {
 			setPreviewUrl(undefined);
 		}, previewDuration);

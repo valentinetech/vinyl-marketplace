@@ -35,7 +35,9 @@ export function useSpotifyGetAlbums() {
 				setAlbumIds(topAlbumIds);
 			})
 			.catch((error: unknown) => {
-				console.error(error);
+				if (error instanceof Error && error.message !== 'canceled') {
+					console.error(error);
+				}
 			});
 
 		return () => {
@@ -70,7 +72,9 @@ export function useSpotifyGetAlbums() {
 				setTopAlbumsLoaded(true);
 			})
 			.catch((error: unknown) => {
-				console.error(error);
+				if (error instanceof Error && error.message !== 'canceled') {
+					console.error(error);
+				}
 			});
 
 		return () => {
