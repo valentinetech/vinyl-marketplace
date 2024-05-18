@@ -37,6 +37,6 @@ jobs:
 
       - name: Upload client coverage to Codacy
         env:
-          CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN_CLIENT }}
-        run: bash <(curl -Ls https://coverage.codacy.com/get.sh) report -r coverage/lcov.info
+          CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
+        run: bash <(curl -Ls https://coverage.codacy.com/get.sh) report -r coverage/lcov.info --project-token $CODACY_PROJECT_TOKEN
         working-directory: client
