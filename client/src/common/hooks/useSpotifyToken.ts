@@ -27,8 +27,8 @@ export function useSpotifyToken() {
 			.then((resp) => {
 				setSpotifyToken(resp.data.access_token);
 			})
-			.catch((error: Error) => {
-				if (error.message !== 'canceled') {
+			.catch((error: unknown) => {
+				if (error instanceof Error && error.message !== 'canceled') {
 					console.error(error.message);
 				}
 			})

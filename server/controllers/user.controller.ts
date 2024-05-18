@@ -101,8 +101,8 @@ const login = (req: Request, res: Response) => {
 				}
 			});
 		})
-		.catch((error: Error) => {
-			Logging.error(error.message);
+		.catch((error: unknown) => {
+			Logging.error(error);
 			res.status(500).json({
 				error,
 			});
