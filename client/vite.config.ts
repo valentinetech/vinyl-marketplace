@@ -23,6 +23,7 @@ export default defineConfig({
 		setupFiles: './src/vitest.setup.ts',
 		coverage: {
 			provider: 'istanbul',
+			reporter: ['text', 'html', 'lcov'],
 		},
 	},
 });
