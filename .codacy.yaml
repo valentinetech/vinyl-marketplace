@@ -1,0 +1,10 @@
+---
+exclude_paths:
+  - '.vscode/**'
+  - '.config/**'
+  - '.husky/**'
+  - '.github/**'
+  - 'server/**'
+  - '**.test.tsx'
+  - '**.test.ts'
+  - '**.styles.ts'
