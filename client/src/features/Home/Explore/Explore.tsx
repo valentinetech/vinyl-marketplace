@@ -17,11 +17,7 @@ const Explore = () => {
 		const audio = new Audio(audioPlaying);
 		const timeout = setTimeout(() => setAudioPlaying(undefined), PREVIEW_LENGTH);
 
-		audio.play().catch((error: Error) => {
-			if (error.name !== 'AbortError') {
-				console.error(error);
-			}
-		});
+		audio.play();
 
 		return () => {
 			audio.pause();
