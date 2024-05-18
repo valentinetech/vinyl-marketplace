@@ -8,3 +8,4 @@ exclude_paths:
   - '**.test.tsx'
   - '**.test.ts'
   - '**.styles.ts'
+  - 'README.md'
