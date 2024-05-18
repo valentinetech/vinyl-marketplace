@@ -10,7 +10,9 @@ const usePlayback = ({ previewUrl, previewDuration, setPreviewUrl }: usePlayback
 	useEffect(() => {
 		const audio = new Audio(previewUrl);
 		audio.play();
-		setTimeout(() => setPreviewUrl(undefined), previewDuration);
+		setTimeout(() => {
+			setPreviewUrl(undefined);
+		}, previewDuration);
 
 		return () => {
 			audio.pause();

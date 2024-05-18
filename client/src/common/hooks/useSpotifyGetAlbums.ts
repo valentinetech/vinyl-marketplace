@@ -34,7 +34,9 @@ export function useSpotifyGetAlbums() {
 
 				setAlbumIds(topAlbumIds);
 			})
-			.catch((error: unknown) => console.error(error));
+			.catch((error: unknown) => {
+				console.error(error);
+			});
 
 		return () => {
 			controller.abort();
@@ -67,7 +69,9 @@ export function useSpotifyGetAlbums() {
 				setTopAlbums(topAlbumArray);
 				setTopAlbumsLoaded(true);
 			})
-			.catch((error: unknown) => console.error(error));
+			.catch((error: unknown) => {
+				console.error(error);
+			});
 
 		return () => {
 			controller.abort();

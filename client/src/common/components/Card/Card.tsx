@@ -122,13 +122,24 @@ const Card = (props: ICard) => {
 						<BidContainer>
 							<BidLast>Last Bid ${bidLast}</BidLast>
 							<Bid>
-								<Button variant="secondary" onClick={() => navigate('/login')}>
+								<Button
+									variant="secondary"
+									onClick={() => {
+										navigate('/login');
+									}}
+								>
 									Place Bid
 								</Button>
 							</Bid>
 						</BidContainer>
 						{canBuyNow ? (
-							<Button style={{ marginTop: '10px' }} variant="primary" onClick={() => navigate('/login')}>
+							<Button
+								style={{ marginTop: '10px' }}
+								variant="primary"
+								onClick={() => {
+									navigate('/login');
+								}}
+							>
 								Buy Now
 							</Button>
 						) : null}

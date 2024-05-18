@@ -15,7 +15,9 @@ const Explore = () => {
 
 	useEffect(() => {
 		const audio = new Audio(audioPlaying);
-		const timeout = setTimeout(() => setAudioPlaying(undefined), PREVIEW_LENGTH);
+		const timeout = setTimeout(() => {
+			setAudioPlaying(undefined);
+		}, PREVIEW_LENGTH);
 
 		audio.play();
 
@@ -40,7 +42,9 @@ const Explore = () => {
 									albumName={album.name}
 									albumCover={album.images[0].url}
 									artistName={album.artists[0].name}
-									setPreviewUrl={() => setAudioPlaying(audioPlaying === preview_url ? undefined : preview_url)}
+									setPreviewUrl={() => {
+										setAudioPlaying(audioPlaying === preview_url ? undefined : preview_url);
+									}}
 									spotifyButtonText={audioPlaying === preview_url ? '❚❚' : '▶'}
 								/>
 							);
@@ -53,7 +57,13 @@ const Explore = () => {
 
 			{canLoadMore && (
 				<LoadMore>
-					<Button onClick={() => setDisplayedAlbumCount((curr) => curr + 3)}>Load More...</Button>
+					<Button
+						onClick={() => {
+							setDisplayedAlbumCount((curr) => curr + 3);
+						}}
+					>
+						Load More...
+					</Button>
 				</LoadMore>
 			)}
 		</>

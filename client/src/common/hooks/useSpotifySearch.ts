@@ -36,7 +36,9 @@ export function useSpotifySearch(albumName: string): [IAlbum, boolean, string] {
 				setAlbumQuery(albumQuery);
 				setAlbumQueryLoaded(true);
 			})
-			.catch((error: unknown) => console.error(error));
+			.catch((error: unknown) => {
+				console.error(error);
+			});
 
 		return () => {
 			controller.abort();
