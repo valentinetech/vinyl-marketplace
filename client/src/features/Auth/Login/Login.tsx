@@ -23,16 +23,17 @@ const Login = () => {
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
 
-	const { userToken, isLoading, isError, isSuccess, message } = useAppSelector((state) => state.auth);
+	const { isLoading, isError, isSuccess } = useAppSelector((state) => state.auth);
 
 	useEffect(() => {
-		if (isSuccess || userToken) {
+		if (isSuccess) {
 			toast.success(`Welcome back ${username}!`);
 			navigate('/dashboard');
+			localStorage.setItem('username', username);
 		}
 
 		dispatch(reset);
-	}, [userToken, isLoading, isError, isSuccess, message, navigate, dispatch, username]);
+	}, [isLoading, isError, isSuccess, navigate, dispatch, username]);
 
 	const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
 		setFormData((prevState) => ({

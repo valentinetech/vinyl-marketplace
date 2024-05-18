@@ -1,6 +1,6 @@
 import unknownAlbumCover from 'assets/album-cover-unknown.png';
 import Button from 'common/components/Button';
-import useLocalStorageGetUserInfo from 'common/hooks/useLocalStorageGetUserInfo';
+import useLocalStorageGetUserId from 'common/hooks/useLocalStorageGetUserId';
 import useSpotifySearch from 'common/hooks/useSpotifySearch';
 import { IAuctionEdit } from 'features/Dashboard/api/api.models';
 import { useDeleteAuctionMutation, useUpdateAuctionMutation } from 'features/Dashboard/api/apiSlice';
@@ -63,7 +63,7 @@ const Card = (props: ICard) => {
 		endDateEdited: endDate,
 	});
 
-	const userId = useLocalStorageGetUserInfo();
+	const userId = useLocalStorageGetUserId();
 	const [editAuction] = useUpdateAuctionMutation();
 	const [isActive, toggle] = useToggle(false);
 	const { albumNameEdited, artistNameEdited, endDateEdited, albumCoverEdited } = editedData;

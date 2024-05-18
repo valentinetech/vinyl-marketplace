@@ -26,21 +26,22 @@ const Register = () => {
 		passwordConfirm: '',
 	});
 
-	const { username, email, password, passwordConfirm } = formData;
+	const { username: username, email, password, passwordConfirm } = formData;
 
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
 
-	const { userToken, isLoading, isError, isSuccess, message } = useAppSelector((state) => state.auth);
+	const { isLoading, isError, isSuccess } = useAppSelector((state) => state.auth);
 
 	useEffect(() => {
-		if (isSuccess || userToken) {
+		if (isSuccess) {
 			toast.success(`Welcome ${username}!`);
 			navigate('/dashboard');
+			localStorage.setItem('username', username);
 		}
 
 		dispatch(reset);
-	}, [userToken, isError, isSuccess, message, navigate, dispatch, username]);
+	}, [isError, isSuccess, navigate, dispatch, username]);
 
 	const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
 		setFormData((prevState) => ({
@@ -54,7 +55,7 @@ const Register = () => {
 	const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
-		if (isError) toast.error('User already exists or ' + message, { toastId: 'toastIdRegister' });
+		if (isError) toast.error('User already exists', { toastId: 'toastIdRegister' });
 
 		const isFormValid = await registerSchema.isValid(formData, {
 			abortEarly: false,
@@ -62,7 +63,7 @@ const Register = () => {
 
 		if (isFormValid) {
 			const userData = {
-				username,
+				username: username,
 				email,
 				password,
 				passwordConfirm,
@@ -76,12 +77,12 @@ const Register = () => {
 	};
 
 	useEffect(() => {
-		if (isLoading) {
+		if (isLoading && (!isSuccess || !isError)) {
 			toast.loading('Loging In...', { toastId: 'toastidLoading' });
 		} else {
 			toast.dismiss('toastidLoading');
 		}
-	}, [isLoading]);
+	}, [isLoading, isSuccess, isError]);
 
 	return (
 		<>

@@ -4,9 +4,9 @@ const useLocalStorageGetCountdown = () => {
 	const [countdownCurrent, setCountdownCurrent] = useState<string>('');
 
 	useEffect(() => {
-		const getCountdown = localStorage.getItem('countdownCurrent') ?? '';
-		const getCountdownParsed = getCountdown.length > 0 ? JSON.parse(getCountdown) : '';
-		const getCountdownSelect = getCountdownParsed;
+		const getCountdown: string = localStorage.getItem('countdownCurrent') ?? '';
+		const getCountdownParsed: string = getCountdown.length > 0 ? JSON.parse(getCountdown) : '';
+		const getCountdownSelect: string = getCountdownParsed;
 		if (getCountdownSelect) {
 			setCountdownCurrent(getCountdownSelect);
 		}

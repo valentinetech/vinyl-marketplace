@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 import { IAuction } from '../api/api.models';
 import { useCreateAuctionMutation } from '../api/apiSlice';
 
-import useLocalStorageGetUserInfo from 'common/hooks/useLocalStorageGetUserInfo';
+import useLocalStorageGetUserId from 'common/hooks/useLocalStorageGetUserId';
 import {
 	AuctionCreateChildren,
 	AuctionCreateContainer,
@@ -34,7 +34,7 @@ const CreateAuctionForm = () => {
 	const [createAuction, { isLoading, isError, isSuccess }] = useCreateAuctionMutation();
 
 	//Custom Hooks
-	const userId = useLocalStorageGetUserInfo();
+	const userId = useLocalStorageGetUserId();
 	const [, , albumCoverQuery] = useSpotifySearch(albumName || artistName);
 	useEffect(() => {
 		if (isSuccess) {

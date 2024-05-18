@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { Buffer } from 'buffer';
 import { PostToken } from 'common/models/home.models';
 import qs from 'qs';
@@ -24,7 +24,7 @@ export function useSpotifyToken() {
 					'Content-Type': 'application/x-www-form-urlencoded',
 				},
 			})
-			.then((resp) => {
+			.then((resp: AxiosResponse<PostToken>) => {
 				setSpotifyToken(resp.data.access_token);
 			})
 			.catch((error: unknown) => {

@@ -1,18 +1,17 @@
 import Footer from 'common/layouts/Footer';
 import Header from 'common/layouts/Header';
-import { Section, H2Header } from './Profile.styles';
+import { H2Header, Section } from './Profile.styles';
 
 const Profile = () => {
-	const userInfo = localStorage.getItem('userInfo');
-	const user = userInfo && JSON.parse(userInfo);
+	const userId: string = localStorage.getItem('userId') ?? '';
+	const userName: string = localStorage.getItem('username') ?? '';
 
 	return (
 		<>
 			<Header />
 			<Section>
-				<H2Header>Welcome back {user.username}!</H2Header>
-				<h4>Your user ID is: {user._id}</h4>
-				<h4>Your email is: {user.email}</h4>
+				<H2Header>Welcome back {userId}!</H2Header>
+				<h4>Your user ID is: {userName}</h4>
 			</Section>
 			<Footer />
 		</>

@@ -42,8 +42,7 @@ const register = (req: Request, res: Response) => {
 						});
 					} else if (token) {
 						return res.status(200).json({
-							message: 'Register successful',
-							userInfo: user.id,
+							userId: user.id,
 							userToken: token,
 						});
 					}
@@ -77,7 +76,7 @@ const login = (req: Request, res: Response) => {
 				if (error) {
 					Logging.error(error);
 					return res.status(401).json({
-						message: 'Password Mismatch...',
+						message: 'Wrong password.',
 					});
 				} else if (result) {
 					signToken(user, (_error, token) => {
@@ -88,15 +87,14 @@ const login = (req: Request, res: Response) => {
 							});
 						} else if (token) {
 							return res.status(200).json({
-								message: 'Auth successful!',
+								userId: user.id,
 								userToken: token,
-								userInfo: user,
 							});
 						}
 					});
 				} else {
 					return res.status(401).json({
-						message: 'Something is wrong...',
+						message: 'Unauthorized.',
 					});
 				}
 			});

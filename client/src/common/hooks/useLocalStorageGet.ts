@@ -4,9 +4,9 @@ const useLocalStorageGet = (itemName: string): string => {
 	const [itemCurrent, setItemCurrent] = useState<string>('');
 
 	useEffect(() => {
-		const getItem = localStorage.getItem(itemName) ?? '';
-		const getItemParsed = getItem.length > 0 ? JSON.parse(getItem) : '';
-		const getItemSelect = getItemParsed;
+		const getItem: string = localStorage.getItem(itemName) ?? '';
+		const getItemParsed: string = getItem.length > 0 ? JSON.parse(getItem) : '';
+		const getItemSelect: string = getItemParsed;
 		if (getItemSelect) {
 			setItemCurrent(getItemSelect);
 		}

@@ -29,8 +29,10 @@ export function useSpotifySearch(albumName: string): [IAlbum, boolean, string] {
 				},
 			})
 			.then((resp) => {
-				const albumQuery = resp.data.albums.items.filter((album) => album.album_type === 'album').map((obj) => obj);
-				const albumCoverQuery = albumQuery[0].images[0].url;
+				const albumQuery: IAlbum[] = resp.data.albums.items
+					.filter((album) => album.album_type === 'album')
+					.map((obj) => obj);
+				const albumCoverQuery: string = albumQuery[0].images[0].url;
 
 				setAlbumCoverQuery(albumCoverQuery);
 				setAlbumQuery(albumQuery);
