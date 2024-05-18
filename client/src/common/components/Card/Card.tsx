@@ -1,30 +1,30 @@
-import Button from 'common/components/Button';
 import unknownAlbumCover from 'assets/album-cover-unknown.png';
+import Button from 'common/components/Button';
+import useLocalStorageGetUserInfo from 'common/hooks/useLocalStorageGetUserInfo';
+import useSpotifySearch from 'common/hooks/useSpotifySearch';
+import { IAuctionEdit } from 'features/Dashboard/api/api.models';
 import { useDeleteAuctionMutation, useUpdateAuctionMutation } from 'features/Dashboard/api/apiSlice';
 import { useState } from 'react';
-import { toast } from 'react-toastify';
-import { ICard } from './Card.models';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import useToggle from '../../hooks/useToggle';
+import CountdownTimer from '../CountdownTimer/CountdownTimer';
+import { ICard } from './Card.models';
 import {
-	CardContainer,
-	CardImg,
 	AlbumName,
 	ArtistName,
-	StaticContainer,
-	SpotifyIconButton,
+	Bid,
 	BidContainer,
 	BidLast,
-	Bid,
+	CardContainer,
+	CardImg,
 	DeleteIcon,
 	EditIcon,
 	EmptyDiv,
 	SaveEditIcon,
+	SpotifyIconButton,
+	StaticContainer,
 } from './Card.styles';
-import useToggle from '../../hooks/useToggle';
-import { IAuctionEdit } from 'features/Dashboard/api/api.models';
-import useSpotifySearch from 'common/hooks/useSpotifySearch';
-import useLocalStorageGetUserInfo from 'common/hooks/useLocalStorageGetUserInfo';
-import CountdownTimer from '../CountdownTimer/CountdownTimer';
 
 const Card = (props: ICard) => {
 	const {
@@ -98,13 +98,9 @@ const Card = (props: ICard) => {
 
 	return (
 		<CardContainer>
-			{canDelete === true ? <DeleteIcon aria-label="delete auction" onClick={onDelete} size={32} /> : null}
-			{canEdit === true && isActive === false ? (
-				<EditIcon aria-label="edit auction" onClick={toggle} size={32} />
-			) : null}
-			{canEdit === true && isActive === true ? (
-				<SaveEditIcon aria-label="save edit" onClick={onSubmit} size={32} />
-			) : null}
+			{canDelete ? <DeleteIcon aria-label="delete auction" onClick={onDelete} size={32} /> : null}
+			{canEdit && !isActive ? <EditIcon aria-label="edit auction" onClick={toggle} size={32} /> : null}
+			{canEdit && isActive ? <SaveEditIcon aria-label="save edit" onClick={onSubmit} size={32} /> : null}
 			<CardImg src={albumCover ? albumCover : albumCoverEdited} alt={albumName ? albumName : albumNameEdited}></CardImg>
 			{isActive ? (
 				<input type="text" id="albumNameEdited" placeholder={albumName} onChange={onChange} />
@@ -117,7 +113,7 @@ const Card = (props: ICard) => {
 				<ArtistName>{artistName}</ArtistName>
 			)}
 			<StaticContainer>
-				<>{setPreviewUrl && <SpotifyIconButton onClick={setPreviewUrl}>{spotifyButtonText}</SpotifyIconButton>}</>
+				<SpotifyIconButton onClick={setPreviewUrl}>{spotifyButtonText}</SpotifyIconButton>
 				<CountdownTimer endDate={endDate} setIsSold={setIsSold} />
 				{isSold ? (
 					<EmptyDiv></EmptyDiv>

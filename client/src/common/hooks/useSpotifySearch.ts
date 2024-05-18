@@ -1,49 +1,49 @@
-import { useState, useEffect } from 'react';
 import axios from 'axios';
-import useSpotifyToken from './useSpotifyToken';
 import { IAlbum, IAlbumQuery } from 'common/models/spotify.models';
+import { useEffect, useState } from 'react';
+import useSpotifyToken from './useSpotifyToken';
 
 export function useSpotifySearch(albumName: string): [IAlbum, boolean, string] {
-  const COUNTRY = 'US';
-  const LIMIT = 50;
-  const OFFSET_QUERY = 0;
-  const SEARCH_TYPE = 'album';
-  const MODIFIERS = `market=${COUNTRY}&limit=${LIMIT}&offset=${OFFSET_QUERY}`;
+	const COUNTRY = 'US';
+	const LIMIT = 50;
+	const OFFSET_QUERY = 0;
+	const SEARCH_TYPE = 'album';
+	const MODIFIERS = `market=${COUNTRY}&limit=${LIMIT}&offset=${OFFSET_QUERY}`;
 
-  const [albumQueryLoaded, setAlbumQueryLoaded] = useState<boolean>(false);
-  const [albumQuery, setAlbumQuery] = useState<IAlbum[]>([]);
-  const [albumCoverQuery, setAlbumCoverQuery] = useState<string>('');
-  const [spotifyToken, spotifyTokenLoaded] = useSpotifyToken();
+	const [albumQueryLoaded, setAlbumQueryLoaded] = useState<boolean>(false);
+	const [albumQuery, setAlbumQuery] = useState<IAlbum[]>([]);
+	const [albumCoverQuery, setAlbumCoverQuery] = useState<string>('');
+	const [spotifyToken, spotifyTokenLoaded] = useSpotifyToken();
 
-  useEffect(() => {
-    const controller = new AbortController();
-    if (spotifyToken === null || spotifyTokenLoaded === false) return;
+	useEffect(() => {
+		const controller = new AbortController();
+		if (spotifyToken === null || spotifyTokenLoaded === false) return;
 
-    axios
-      .get<IAlbumQuery>(`https://api.spotify.com/v1/search?q=${albumName}&type=${SEARCH_TYPE}&${MODIFIERS}`, {
-        signal: controller.signal,
-        headers: {
-          Accept: 'application/json',
-          Authorization: `Bearer ${spotifyToken}`,
-          'Content-Type': 'application/json',
-        },
-      })
-      .then((resp) => {
-        const albumQuery = resp.data.albums.items.filter((album) => album.album_type === 'album').map((obj) => obj);
-        const albumCoverQuery = albumQuery[0].images[0].url;
+		axios
+			.get<IAlbumQuery>(`https://api.spotify.com/v1/search?q=${albumName}&type=${SEARCH_TYPE}&${MODIFIERS}`, {
+				signal: controller.signal,
+				headers: {
+					Accept: 'application/json',
+					Authorization: `Bearer ${spotifyToken}`,
+					'Content-Type': 'application/json',
+				},
+			})
+			.then((resp) => {
+				const albumQuery = resp.data.albums.items.filter((album) => album.album_type === 'album').map((obj) => obj);
+				const albumCoverQuery = albumQuery[0].images[0].url;
 
-        setAlbumCoverQuery(albumCoverQuery);
-        setAlbumQuery(albumQuery);
-        setAlbumQueryLoaded(true);
-      })
-      .catch((err: { err: string; message: string }) => console.log(err.message));
+				setAlbumCoverQuery(albumCoverQuery);
+				setAlbumQuery(albumQuery);
+				setAlbumQueryLoaded(true);
+			})
+			.catch((error: Error) => console.error(error.message));
 
-    return () => {
-      controller.abort();
-    };
-  }, [spotifyToken, spotifyTokenLoaded, MODIFIERS, albumName]);
+		return () => {
+			controller.abort();
+		};
+	}, [spotifyToken, spotifyTokenLoaded, MODIFIERS, albumName]);
 
-  return [albumQuery[0], albumQueryLoaded, albumCoverQuery];
+	return [albumQuery[0], albumQueryLoaded, albumCoverQuery];
 }
 
 export default useSpotifySearch;

@@ -1,8 +1,8 @@
-import User, { IUser } from '../models/user.model';
+import bcryptjs from 'bcrypt';
 import { Request, Response } from 'express';
 import mongoose from 'mongoose';
-import bcryptjs from 'bcrypt';
 import Logging from '../lib/logging';
+import User, { IUser } from '../models/user.model';
 import signToken from '../utils/signToken';
 
 const validateToken = (res: Response) => {
@@ -101,8 +101,8 @@ const login = (req: Request, res: Response) => {
 				}
 			});
 		})
-		.catch((error: unknown) => {
-			Logging.error(error);
+		.catch((error: Error) => {
+			Logging.error(error.message);
 			res.status(500).json({
 				error,
 			});

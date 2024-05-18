@@ -15,7 +15,7 @@ export interface ICard {
 	endDate?: string;
 	bidLast?: number;
 	buttonText?: string;
-	setPreviewUrl: () => void;
+	setPreviewUrl?: () => void;
 	spotifyButtonText?: string;
 	currentId?: string;
 	canDelete?: boolean;

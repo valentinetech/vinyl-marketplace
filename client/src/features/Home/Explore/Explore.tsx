@@ -1,8 +1,8 @@
 import Button from 'common/components/Button';
 import Card from 'common/components/Card';
 import useSpotifyGetAlbums from 'common/hooks/useSpotifyGetAlbums';
-import { useState, useEffect } from 'react';
-import { SectionContainer, ExploreContainer, LoadMore } from './Explore.styles';
+import { useEffect, useState } from 'react';
+import { ExploreContainer, LoadMore, SectionContainer } from './Explore.styles';
 
 const Explore = () => {
 	const PREVIEW_LENGTH = 30000;
@@ -15,16 +15,13 @@ const Explore = () => {
 
 	useEffect(() => {
 		const audio = new Audio(audioPlaying);
-		const playPromise = audio.play();
 		const timeout = setTimeout(() => setAudioPlaying(undefined), PREVIEW_LENGTH);
 
-		if (playPromise) {
-			playPromise.catch((error) => {
-				if (error.name !== 'AbortError') {
-					console.error(error);
-				}
-			});
-		}
+		audio.play().catch((error: Error) => {
+			if (error.name !== 'AbortError') {
+				console.error(error);
+			}
+		});
 
 		return () => {
 			audio.pause();

@@ -3,15 +3,15 @@ import Input from 'common/components/Input';
 import Footer from 'common/layouts/Footer';
 import Header from 'common/layouts/Header';
 
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
-import { login, reset } from '../store/authSlice';
 import { useAppDispatch, useAppSelector } from 'app/store';
+import { useNavigate } from 'react-router-dom';
+import { toast, ToastContent } from 'react-toastify';
+import { login, reset } from '../store/authSlice';
 
-import { Form, FormGroup, Section, LoginHeader, ButtonContainer } from './Login.styles';
 import { loginSchema } from '../schema/authSchema';
+import { ButtonContainer, Form, FormGroup, LoginHeader, Section } from './Login.styles';
 
 const Login = () => {
 	const [formData, setFormData] = useState<{ username: string; password: string }>({
@@ -56,8 +56,8 @@ const Login = () => {
 			};
 			dispatch(login(userData));
 		} else {
-			loginSchema.validate(formData).catch((error) => {
-				toast.error(error.message, { toastId: 'error' });
+			loginSchema.validate(formData).catch((error: ToastContent<unknown>) => {
+				toast.error(error, { toastId: 'error' });
 			});
 		}
 	};
@@ -77,16 +77,16 @@ const Login = () => {
 				<Form onSubmit={onSubmit}>
 					<FormGroup>
 						<LoginHeader>LOGIN</LoginHeader>
-						<Input type='text' id='username' value={username} placeholder='Enter Your Username' onChange={onChange} />
+						<Input type="text" id="username" value={username} placeholder="Enter Your Username" onChange={onChange} />
 						<Input
-							type='password'
-							id='password'
+							type="password"
+							id="password"
 							value={password}
-							placeholder='Enter Your Password'
+							placeholder="Enter Your Password"
 							onChange={onChange}
 						/>
 						<ButtonContainer>
-							<Button variant='primary' disabled={isLoading}>
+							<Button variant="primary" disabled={isLoading}>
 								Login
 							</Button>
 						</ButtonContainer>

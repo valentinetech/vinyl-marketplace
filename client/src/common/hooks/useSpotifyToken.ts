@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
 import axios from 'axios';
-import qs from 'qs';
-import { PostToken } from 'common/models/home.models';
 import { Buffer } from 'buffer';
+import { PostToken } from 'common/models/home.models';
+import qs from 'qs';
+import { useEffect, useState } from 'react';
 
 export function useSpotifyToken() {
 	const SPOTIFY_ID: string = import.meta.env.VITE_SPOTIFY_ID ?? '';
@@ -27,7 +27,11 @@ export function useSpotifyToken() {
 			.then((resp) => {
 				setSpotifyToken(resp.data.access_token);
 			})
-			.catch((err: { err: string; message: string }) => console.log(err.message))
+			.catch((error: Error) => {
+				if (error.message !== 'canceled') {
+					console.error(error.message);
+				}
+			})
 			.finally(() => {
 				setSpotifyTokenLoaded(true);
 			});

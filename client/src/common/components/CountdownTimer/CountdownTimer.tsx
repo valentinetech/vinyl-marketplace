@@ -16,7 +16,7 @@ interface ICountdownTimer {
 }
 
 const CountdownTimer = ({ endDate, setIsSold }: ICountdownTimer) => {
-	const dateToString = endDate?.toString();
+	const dateToString = endDate.toString();
 	const endDateFormated = new Date(dateToString);
 	const endDateMili = endDateFormated.getTime();
 

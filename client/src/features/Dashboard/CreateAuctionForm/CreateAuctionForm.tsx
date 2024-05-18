@@ -1,21 +1,21 @@
+import unknownAlbumCover from 'assets/album-cover-unknown.png';
 import Button from 'common/components/Button';
+import Card from 'common/components/Card';
 import Input from 'common/components/Input';
-import { useState, useEffect } from 'react';
+import useSpotifySearch from 'common/hooks/useSpotifySearch';
+import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { IAuction } from '../api/api.models';
 import { useCreateAuctionMutation } from '../api/apiSlice';
-import Card from 'common/components/Card';
-import unknownAlbumCover from 'assets/album-cover-unknown.png';
-import useSpotifySearch from 'common/hooks/useSpotifySearch';
 
+import useLocalStorageGetUserInfo from 'common/hooks/useLocalStorageGetUserInfo';
 import {
+	AuctionCreateChildren,
+	AuctionCreateContainer,
 	ButtonContainer,
 	Form,
 	FormGroup,
-	AuctionCreateContainer,
-	AuctionCreateChildren,
 } from './CreateAuctionForm.styles';
-import useLocalStorageGetUserInfo from 'common/hooks/useLocalStorageGetUserInfo';
 
 const CreateAuctionForm = () => {
 	const [formData, setFormData] = useState<IAuction>({
@@ -61,7 +61,7 @@ const CreateAuctionForm = () => {
 		}));
 	};
 
-	const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+	const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
 		const newAuction = {
@@ -69,9 +69,9 @@ const CreateAuctionForm = () => {
 			albumCover: albumCoverQuery,
 			albumName: albumName,
 			artistName: artistName,
-			buyNowPrice: buyNowPrice ?? 0,
-			minBid: minBid ?? 0,
-			endDate: endDate ?? 0,
+			buyNowPrice: buyNowPrice,
+			minBid: minBid,
+			endDate: endDate,
 			lastBid: randomIntFromInterval(minBid, 999),
 		};
 		createAuction(newAuction);

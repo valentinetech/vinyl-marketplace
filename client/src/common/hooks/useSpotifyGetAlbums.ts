@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
 import axios from 'axios';
 import useSpotifyToken from 'common/hooks/useSpotifyToken';
+import { useEffect, useState } from 'react';
 import { GetIds, TopAlbum } from '../models/home.models';
 
 export function useSpotifyGetAlbums() {
@@ -34,7 +34,7 @@ export function useSpotifyGetAlbums() {
 
 				setAlbumIds(topAlbumIds);
 			})
-			.catch((err: { err: unknown; message: unknown }) => console.log(err.message));
+			.catch((error: Error) => console.error(error.message));
 
 		return () => {
 			controller.abort();
@@ -43,8 +43,7 @@ export function useSpotifyGetAlbums() {
 
 	useEffect(() => {
 		const controller = new AbortController();
-		if (spotifyToken === null || spotifyTokenLoaded === false) return;
-		if (!albumIds || albumIds === undefined) return;
+		if (spotifyToken === null || spotifyTokenLoaded === false || !albumIds) return;
 
 		Promise.all(
 			albumIds.map((id) =>
@@ -68,7 +67,7 @@ export function useSpotifyGetAlbums() {
 				setTopAlbums(topAlbumArray);
 				setTopAlbumsLoaded(true);
 			})
-			.catch((err: { err: unknown; message: unknown }) => console.log(err.message));
+			.catch((error: Error) => console.error(error.message));
 
 		return () => {
 			controller.abort();

@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const useLocalStorageGetCountdown = () => {
 	const [countdownCurrent, setCountdownCurrent] = useState<string>('');
 
 	useEffect(() => {
-		const getCountdown = localStorage.getItem('countdownCurrent') || '';
+		const getCountdown = localStorage.getItem('countdownCurrent') ?? '';
 		const getCountdownParsed = getCountdown.length > 0 ? JSON.parse(getCountdown) : '';
 		const getCountdownSelect = getCountdownParsed;
 		if (getCountdownSelect) {
