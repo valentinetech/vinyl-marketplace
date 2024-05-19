@@ -1,3 +1,3 @@
-export type AsyncThunkConfig = {
+export interface AsyncThunkConfig {
 	rejectValue: string;
-};
+}

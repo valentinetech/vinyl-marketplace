@@ -1,8 +1,8 @@
 import logo from 'assets/logo.png';
-import { FaBars } from 'react-icons/fa';
 import AuthButtons from 'features/Auth/AuthButtons';
+import { FaBars } from 'react-icons/fa';
 import Menu from '../Menu';
-import { NavContainer, Nav, LogoLink, Logo, MobileIcon, AvatarContainer } from './NavDesktop.styles';
+import { AvatarContainer, Logo, LogoLink, MobileIcon, Nav, NavContainer } from './NavDesktop.styles';
 
 interface NavProps {
 	toggleMenu?: () => void;
@@ -10,7 +10,7 @@ interface NavProps {
 
 const NavDesktop = ({ toggleMenu }: NavProps) => {
 	return (
-		<NavContainer role="navigation">
+		<NavContainer role="navigation" aria-label="desktop navigation">
 			<Nav>
 				<LogoLink to="/#">
 					<Logo src={logo} alt="logo" />

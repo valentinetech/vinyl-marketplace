@@ -35,7 +35,7 @@ export interface IAuction {
 	lastBid?: number;
 	endDate: string;
 	updatedAt?: string;
-	createdAt?: string;
+	createdAt: string;
 	userBids?: IUserBids[];
 }
 

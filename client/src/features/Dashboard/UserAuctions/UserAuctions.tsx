@@ -10,25 +10,26 @@ const UserAuctions = () => {
 	return (
 		<>
 			<Container>
-				{userAuctions
-					?.map((a: IAuction) => {
-						return (
-							<>
-								<Card
-									key={a._id}
-									albumName={a.albumName}
-									albumCover={a.albumCover}
-									artistName={a.artistName}
-									canDelete={true}
-									currentId={a._id}
-									endDate={a.endDate}
-									canEdit={true}
-									bidLast={a.lastBid}
-								/>
-							</>
-						);
-					})
-					.reverse()}
+				{userAuctions &&
+					userAuctions
+						.map((a: IAuction) => {
+							return (
+								<>
+									<Card
+										key={a._id + a.createdAt}
+										albumName={a.albumName}
+										albumCover={a.albumCover}
+										artistName={a.artistName}
+										canDelete={true}
+										currentId={a._id}
+										endDate={a.endDate}
+										canEdit={true}
+										bidLast={a.lastBid}
+									/>
+								</>
+							);
+						})
+						.reverse()}
 			</Container>
 		</>
 	);
