@@ -5,10 +5,10 @@ import Input from 'common/components/Input';
 import useSpotifySearch from 'common/hooks/useSpotifySearch';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { IAuction } from '../api/api.models';
-import { useCreateAuctionMutation } from '../api/apiSlice';
+import { IAuction } from '../../../store/queries/auctionQuery.models';
 
 import useLocalStorageGetUserId from 'common/hooks/useLocalStorageGetUserId';
+import { useCreateAuctionMutation } from 'store/queries/auctionQuery';
 import {
 	AuctionCreateChildren,
 	AuctionCreateContainer,

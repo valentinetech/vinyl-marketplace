@@ -1,15 +1,8 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
-import { API_URL } from 'config/config';
+import { createSlice } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
-import { AuthLoginRequest, AuthRegisterRequest, AuthState, UserResponse } from './auth.models';
-
-const API_USERS_URL = API_URL + '/api/users/';
-
-type AsyncThunkConfig = {
-	rejectValue: string;
-};
+import { login, register } from 'store/thunks/authThunks';
+import { AuthState, UserResponse } from './authSlice.models';
 
 const initialState: AuthState = {
 	userId: '',
@@ -19,49 +12,8 @@ const initialState: AuthState = {
 	isError: false,
 };
 
-export const register = createAsyncThunk<UserResponse, AuthRegisterRequest, AsyncThunkConfig>(
-	'auth/register',
-	async (user, { rejectWithValue }) => {
-		try {
-			const response = await axios.post(API_USERS_URL + 'register', user);
-			const data: UserResponse = response.data;
-			if (data) {
-				localStorage.setItem('userId', data.userId);
-				localStorage.setItem('userToken', data.userToken);
-			}
-			return data;
-		} catch (error: unknown) {
-			if (error instanceof Error) {
-				return rejectWithValue(error.message);
-			} else {
-				return rejectWithValue('An unknown error occurred');
-			}
-		}
-	},
-);
-
-export const login = createAsyncThunk('auth/login', async (user: AuthLoginRequest, { rejectWithValue }) => {
-	try {
-		const response = await axios.post(API_USERS_URL + 'login', user);
-		const data: UserResponse = response.data;
-
-		if (data) {
-			localStorage.setItem('userId', data.userId);
-			localStorage.setItem('userToken', data.userToken);
-		}
-
-		return data;
-	} catch (error) {
-		if (error instanceof Error) {
-			return rejectWithValue(error.message);
-		} else {
-			return rejectWithValue('An unknown error occurred');
-		}
-	}
-});
-
 export const authSlice = createSlice({
-	name: 'auth',
+	name: 'authSlice',
 	initialState,
 	reducers: {
 		reset: () => initialState,

@@ -1,17 +1,16 @@
-import { apiSlice } from 'features/Dashboard/api/apiSlice';
-// eslint-disable-next-line import/named
-import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-import authReducer from 'features/Auth/store/authSlice';
+import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
+import type { TypedUseSelectorHook } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { auctionQuery } from 'store/queries/auctionQuery';
+import authReducer from 'store/slices/authSlice';
 
 export const store = configureStore({
-  reducer: {
-    auth: authReducer,
-    [apiSlice.reducerPath]: apiSlice.reducer,
-  },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware),
+	reducer: {
+		authSlice: authReducer,
+		[auctionQuery.reducerPath]: auctionQuery.reducer,
+	},
+	middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(auctionQuery.middleware),
 });
 setupListeners(store.dispatch);
 

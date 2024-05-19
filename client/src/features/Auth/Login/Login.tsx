@@ -8,8 +8,9 @@ import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'app/store';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { login, reset } from '../store/authSlice';
 
+import { reset } from 'store/slices/authSlice';
+import { login } from 'store/thunks/authThunks';
 import { loginSchema } from '../schema/authSchema';
 import { ButtonContainer, Form, FormGroup, LoginHeader, Section } from './Login.styles';
 
@@ -23,7 +24,7 @@ const Login = () => {
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
 
-	const { isLoading, isError, isSuccess } = useAppSelector((state) => state.auth);
+	const { isLoading, isError, isSuccess } = useAppSelector((state) => state.authSlice);
 
 	useEffect(() => {
 		if (isSuccess) {

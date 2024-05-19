@@ -7,8 +7,9 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { registerSchema } from '../schema/authSchema';
-import { register, reset } from '../store/authSlice';
 
+import { reset } from 'store/slices/authSlice';
+import { register } from 'store/thunks/authThunks';
 import { ButtonContainer, Form, FormGroup, RegisterHeader, Section } from './Register.styles';
 
 interface RegisterProps {
@@ -31,7 +32,7 @@ const Register = () => {
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
 
-	const { isLoading, isError, isSuccess } = useAppSelector((state) => state.auth);
+	const { isLoading, isError, isSuccess } = useAppSelector((state) => state.authSlice);
 
 	useEffect(() => {
 		if (isSuccess) {

@@ -1,18 +1,18 @@
-import { btnRoutes } from 'config/routes';
-import Button from 'common/components/Button';
 import Avatar from 'common/components/Avatar';
+import Button from 'common/components/Button';
+import { btnRoutes } from 'config/routes';
 
-import { useAppSelector, useAppDispatch } from 'app/store';
-import { logout, reset } from 'features/Auth/store/authSlice';
+import { useAppDispatch, useAppSelector } from 'app/store';
 import { useNavigate } from 'react-router-dom';
+import { logout, reset } from 'store/slices/authSlice';
 
 import {
-	LoginButtonContainerMobile,
-	RegisterButtonMobile,
-	LoginButtonContainerDesktop,
-	RegisterButtonDesktop,
 	AuthContainerDesktop,
 	AvatarContainer,
+	LoginButtonContainerDesktop,
+	LoginButtonContainerMobile,
+	RegisterButtonDesktop,
+	RegisterButtonMobile,
 } from './AuthButtons.styles';
 
 interface AuthButtonsProps {
@@ -22,7 +22,7 @@ interface AuthButtonsProps {
 const AuthButtons = ({ variant = 'desktop' }: AuthButtonsProps) => {
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
-	const { userToken } = useAppSelector((state) => state.auth);
+	const { userToken } = useAppSelector((state) => state.authSlice);
 
 	const onLogout = () => {
 		dispatch(logout());

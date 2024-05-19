@@ -1,4 +1,4 @@
-import { IUserBids } from 'features/Dashboard/api/api.models';
+import { IUserBids } from 'features/Dashboard/query/api.models';
 
 export interface ICountdown {
 	days: number;
