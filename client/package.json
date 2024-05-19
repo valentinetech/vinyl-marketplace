@@ -9,8 +9,7 @@
     "test": "vitest",
     "coverage": "vitest run --coverage",
     "lint": "eslint . --ext .ts,.tsx",
-    "lint:fix": "eslint --fix",
-    "prepare": "cd .. && husky install .config/husky"
+    "lint:fix": "eslint --fix"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.3",
@@ -50,7 +49,6 @@
     "@vitejs/plugin-react": "^4.2.1",
     "@vitest/coverage-istanbul": "^1.6.0",
     "@vitest/coverage-v8": "^1.6.0",
-    "husky": "^8.0.1",
     "identity-obj-proxy": "^3.0.0",
     "jsdom": "^24.0.0",
     "react-test-renderer": "^18.3.1",
