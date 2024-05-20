@@ -1,4 +1,3 @@
-import { useAppSelector } from 'app/store';
 import { protectedMenu, publicMenu } from 'config/routes';
 import { MenuDesktopContainer, MenuItemDesktop, MenuItemMobile, MenuMobileContainer } from './Menu.styles';
 
@@ -7,7 +6,7 @@ interface MenuProps {
 }
 
 const Menu = ({ variant = 'desktop' }: MenuProps) => {
-	const { userToken } = useAppSelector((state) => state.authSlice);
+	const userToken = sessionStorage.getItem('userToken');
 	const menuRoutes = userToken ? protectedMenu : publicMenu;
 
 	const MenuMobile = () => {

@@ -1,11 +1,10 @@
 import Card from 'common/components/Card';
-import useLocalStorageGetUserId from 'common/hooks/useLocalStorageGetUserId';
 import { useGetAllAuctionsByUserQuery } from 'store/queries/auctionQuery';
 import { IAuction } from '../../../store/queries/auctionQuery.models';
 import { Container } from './UserAuctions.styles';
 
 const UserAuctions = () => {
-	const userId = useLocalStorageGetUserId();
+	const userId = sessionStorage.getItem('userId') ?? '';
 	const { data: userAuctions } = useGetAllAuctionsByUserQuery(userId);
 	return (
 		<>

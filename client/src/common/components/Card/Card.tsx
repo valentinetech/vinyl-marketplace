@@ -1,6 +1,5 @@
 import unknownAlbumCover from 'assets/album-cover-unknown.png';
 import Button from 'common/components/Button';
-import useLocalStorageGetUserId from 'common/hooks/useLocalStorageGetUserId';
 import useSpotifySearch from 'common/hooks/useSpotifySearch';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -63,7 +62,7 @@ const Card = (props: ICard) => {
 		endDateEdited: endDate,
 	});
 
-	const userId = useLocalStorageGetUserId();
+	const userId = sessionStorage.getItem('userId') ?? '';
 	const [editAuction] = useUpdateAuctionMutation();
 	const [isActive, toggle] = useToggle(false);
 	const { albumNameEdited, artistNameEdited, endDateEdited, albumCoverEdited } = editedData;

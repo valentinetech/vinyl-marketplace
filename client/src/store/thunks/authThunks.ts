@@ -10,9 +10,11 @@ export const register = createAsyncThunk<UserResponse, AuthRegisterRequest, Asyn
 		try {
 			const response = await axios.post(API_USERS_URL + 'register', user);
 			const data: UserResponse = response.data;
+			const userId: string = data.userId;
+			const userToken: string = data.userToken;
 			if (data) {
-				localStorage.setItem('userId', data.userId);
-				localStorage.setItem('userToken', data.userToken);
+				sessionStorage.setItem('userId', userId);
+				sessionStorage.setItem('userToken', userToken);
 			}
 			return data;
 		} catch (error: unknown) {
@@ -29,10 +31,11 @@ export const login = createAsyncThunk('auth/login', async (user: AuthLoginReques
 	try {
 		const response = await axios.post(API_USERS_URL + 'login', user);
 		const data: UserResponse = response.data;
-
+		const userId: string = data.userId;
+		const userToken: string = data.userToken;
 		if (data) {
-			localStorage.setItem('userId', data.userId);
-			localStorage.setItem('userToken', data.userToken);
+			sessionStorage.setItem('userId', userId);
+			sessionStorage.setItem('userToken', userToken);
 		}
 
 		return data;

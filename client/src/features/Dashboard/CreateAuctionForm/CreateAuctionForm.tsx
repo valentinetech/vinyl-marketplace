@@ -7,7 +7,6 @@ import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { IAuction } from '../../../store/queries/auctionQuery.models';
 
-import useLocalStorageGetUserId from 'common/hooks/useLocalStorageGetUserId';
 import { useCreateAuctionMutation } from 'store/queries/auctionQuery';
 import {
 	AuctionCreateChildren,
@@ -27,6 +26,7 @@ const CreateAuctionForm = () => {
 		minBid: 0,
 		endDate: '',
 		lastBid: 0,
+		createdAt: new Date().toDateString(),
 	});
 	const { albumName, artistName, buyNowPrice, endDate, minBid } = formData;
 
@@ -34,7 +34,7 @@ const CreateAuctionForm = () => {
 	const [createAuction, { isLoading, isError, isSuccess }] = useCreateAuctionMutation();
 
 	//Custom Hooks
-	const userId = useLocalStorageGetUserId();
+	const userId = sessionStorage.getItem('userId') ?? '';
 	const [, , albumCoverQuery] = useSpotifySearch(albumName || artistName);
 	useEffect(() => {
 		if (isSuccess) {

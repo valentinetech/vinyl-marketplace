@@ -33,12 +33,13 @@ const Register = () => {
 	const dispatch = useAppDispatch();
 
 	const { isLoading, isError, isSuccess } = useAppSelector((state) => state.authSlice);
+	const userToken = sessionStorage.getItem('userToken');
 
 	useEffect(() => {
-		if (isSuccess) {
+		if (isSuccess || userToken) {
 			toast.success(`Welcome ${username}!`);
 			navigate('/dashboard');
-			localStorage.setItem('username', username);
+			sessionStorage.setItem('username', username);
 		}
 
 		dispatch(reset);

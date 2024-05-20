@@ -22,9 +22,9 @@ export const authSlice = createSlice({
 			state.isLoading = false;
 			state.userToken = '';
 			state.userId = '';
-			localStorage.removeItem('userId');
-			localStorage.removeItem('userToken');
-			localStorage.removeItem('username');
+			sessionStorage.removeItem('userId');
+			sessionStorage.removeItem('userToken');
+			sessionStorage.removeItem('username');
 			toast.success('Goodbye!');
 		},
 	},
