@@ -16,25 +16,34 @@ export function useSpotifyToken() {
 
 	useEffect(() => {
 		const controller = new AbortController();
-		axios
-			.post<PostToken>(ACCESS_URL, GRANT_TYPE, {
-				signal: controller.signal,
-				headers: {
-					Authorization: `Basic ${SPOTIFY_TOKEN}`,
-					'Content-Type': 'application/x-www-form-urlencoded',
-				},
-			})
-			.then((resp: AxiosResponse<PostToken>) => {
-				setSpotifyToken(resp.data.access_token);
-			})
-			.catch((error: unknown) => {
-				if (error instanceof Error && error.message !== 'canceled') {
-					console.error(error.message);
-				}
-			})
-			.finally(() => {
-				setSpotifyTokenLoaded(true);
-			});
+		const spotifyTokenSession = sessionStorage.getItem('spotifyToken');
+
+		if (!spotifyTokenSession || spotifyTokenSession === 'null') {
+			axios
+				.post<PostToken>(ACCESS_URL, GRANT_TYPE, {
+					signal: controller.signal,
+					headers: {
+						Authorization: `Basic ${SPOTIFY_TOKEN}`,
+						'Content-Type': 'application/x-www-form-urlencoded',
+					},
+				})
+				.then((resp: AxiosResponse<PostToken>) => {
+					const spotifyToken: string = resp.data.access_token;
+					sessionStorage.setItem('spotifyToken', spotifyToken);
+					setSpotifyToken(spotifyToken);
+				})
+				.catch((error: unknown) => {
+					if (error instanceof Error && error.message !== 'canceled') {
+						console.error(error.message);
+					}
+				})
+				.finally(() => {
+					setSpotifyTokenLoaded(true);
+				});
+		} else {
+			setSpotifyToken(spotifyTokenSession);
+			setSpotifyTokenLoaded(true);
+		}
 
 		return () => {
 			controller.abort();
