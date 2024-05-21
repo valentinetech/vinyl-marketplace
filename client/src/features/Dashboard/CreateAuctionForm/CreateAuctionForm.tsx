@@ -17,7 +17,7 @@ import {
 } from './CreateAuctionForm.styles';
 
 const CreateAuctionForm = () => {
-	const [formData, setFormData] = useState<IAuction>({
+	const initialFormState: IAuction = {
 		userId: '',
 		albumCover: '',
 		albumName: '',
@@ -27,7 +27,8 @@ const CreateAuctionForm = () => {
 		endDate: '',
 		lastBid: 0,
 		createdAt: new Date().toDateString(),
-	});
+	};
+	const [formData, setFormData] = useState<IAuction>(initialFormState);
 	const { albumName, artistName, buyNowPrice, endDate, minBid } = formData;
 
 	//Queries
@@ -39,6 +40,7 @@ const CreateAuctionForm = () => {
 	useEffect(() => {
 		if (isSuccess) {
 			toast.success('Auction created successfully');
+			setFormData(initialFormState);
 		}
 
 		if (isError) {

@@ -8,6 +8,7 @@ const UserAuctions = () => {
 	const { data: userAuctions } = useGetAllAuctionsByUserQuery(userId);
 	return (
 		<>
+			{userAuctions ? <h2>My Auctions</h2> : <></>}
 			<Container>
 				{userAuctions &&
 					userAuctions
@@ -15,7 +16,7 @@ const UserAuctions = () => {
 							return (
 								<>
 									<Card
-										key={a._id + a.createdAt}
+										key={a._id + a.userId + a.createdAt}
 										albumName={a.albumName}
 										albumCover={a.albumCover}
 										artistName={a.artistName}

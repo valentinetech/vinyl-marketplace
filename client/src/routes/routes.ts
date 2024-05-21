@@ -4,6 +4,10 @@ export const publicMenu = [
 		route: '/#featured',
 	},
 	{
+		title: 'All Auctions',
+		route: '/all-auctions',
+	},
+	{
 		title: 'About',
 		route: '/#about',
 	},
@@ -14,16 +18,20 @@ export const protectedMenu = [
 		route: '/#featured',
 	},
 	{
+		title: 'Auctions',
+		route: '/all-auctions',
+	},
+	{
+		title: 'Dashboard',
+		route: '/dashboard',
+	},
+	{
 		title: 'About',
 		route: '/#about',
 	},
 	{
 		title: 'Profile',
 		route: '/profile',
-	},
-	{
-		title: 'Dashboard',
-		route: '/dashboard',
 	},
 ];
 
