@@ -36,7 +36,7 @@ export function useSpotifyGetAlbums() {
 			})
 			.catch((error: unknown) => {
 				if (error instanceof Error && error.message !== 'canceled') {
-					console.error(error);
+					console.log(error);
 				}
 			});
 
@@ -73,7 +73,7 @@ export function useSpotifyGetAlbums() {
 			})
 			.catch((error: unknown) => {
 				if (error instanceof Error && error.message !== 'canceled') {
-					console.error(error);
+					console.log(error);
 				}
 			});
 

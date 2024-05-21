@@ -34,7 +34,7 @@ export function useSpotifyToken() {
 				})
 				.catch((error: unknown) => {
 					if (error instanceof Error && error.message !== 'canceled') {
-						console.error(error.message);
+						console.log(error.message);
 					}
 				})
 				.finally(() => {

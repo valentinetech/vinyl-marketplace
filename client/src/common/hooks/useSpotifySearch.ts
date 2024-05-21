@@ -17,7 +17,7 @@ export function useSpotifySearch(albumName: string): [IAlbum, boolean, string] {
 
 	useEffect(() => {
 		const controller = new AbortController();
-		if (spotifyToken === null || spotifyTokenLoaded === false) return;
+		if (spotifyToken === null || spotifyTokenLoaded === false || albumName === '') return;
 
 		axios
 			.get<IAlbumQuery>(`https://api.spotify.com/v1/search?q=${albumName}&type=${SEARCH_TYPE}&${MODIFIERS}`, {
@@ -39,8 +39,8 @@ export function useSpotifySearch(albumName: string): [IAlbum, boolean, string] {
 				setAlbumQueryLoaded(true);
 			})
 			.catch((error: unknown) => {
-				if (error instanceof Error && error.message !== 'canceled') {
-					console.error(error);
+				if (error instanceof Error && error.message !== 'canceled' && !error.message.includes('400')) {
+					console.log(error);
 				}
 			});
 
