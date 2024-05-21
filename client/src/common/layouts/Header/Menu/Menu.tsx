@@ -1,4 +1,4 @@
-import { protectedMenu, publicMenu } from 'config/routes';
+import { protectedMenu, publicMenu } from 'routes/routes';
 import { MenuDesktopContainer, MenuItemDesktop, MenuItemMobile, MenuMobileContainer } from './Menu.styles';
 
 interface MenuProps {

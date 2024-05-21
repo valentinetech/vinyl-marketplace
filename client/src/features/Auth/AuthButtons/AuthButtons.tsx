@@ -1,11 +1,11 @@
 import Avatar from 'common/components/Avatar';
 import Button from 'common/components/Button';
-import { btnRoutes } from 'config/routes';
 
 import { useAppDispatch } from 'app/store';
 import { useNavigate } from 'react-router-dom';
 import { logout, reset } from 'store/slices/authSlice';
 
+import { btnRoutes } from 'routes/routes';
 import {
 	AuthContainerDesktop,
 	AvatarContainer,
