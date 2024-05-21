@@ -1,3 +1,4 @@
+import Footer from 'common/layouts/Footer';
 import Header from 'common/layouts/Header';
 import CreateAuctionForm from './CreateAuctionForm';
 import { DashboardContainer, Section } from './Dashboard.styles';
@@ -14,6 +15,7 @@ const Dashboard = () => {
 			<Section>
 				<UserAuctions></UserAuctions>
 			</Section>
+			<Footer />
 		</DashboardContainer>
 	);
 };

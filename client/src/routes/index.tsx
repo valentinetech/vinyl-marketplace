@@ -1,4 +1,5 @@
 import NotFound from 'common/layouts/NotFound';
+import About from 'features/About';
 import AllAuctionsPage from 'features/AllAuctionsPage';
 import Login from 'features/Auth/Login';
 import Register from 'features/Auth/Register';
@@ -17,6 +18,7 @@ const AppRoutes = () => {
 				<Route path="/register" element={<Register />} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/all-auctions" element={<AllAuctionsPage />} />
+				<Route path="/about" element={<About />} />
 				{/* Protected Routes */}
 				<Route element={<RequireAuth />}>
 					<Route path="/profile" element={<Profile />} />

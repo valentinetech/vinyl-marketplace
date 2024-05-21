@@ -1,8 +1,7 @@
-import Header from 'common/layouts/Header';
 import Footer from 'common/layouts/Footer';
-import Hero from 'features/Home/Hero';
+import Header from 'common/layouts/Header';
 import Explore from 'features/Home/Explore';
-import About from 'features/Home/About';
+import Hero from 'features/Home/Hero';
 
 const Home = () => {
 	return (
@@ -10,7 +9,6 @@ const Home = () => {
 			<Header />
 			<Hero />
 			<Explore />
-			<About />
 			<Footer />
 		</>
 	);

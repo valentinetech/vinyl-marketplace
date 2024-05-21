@@ -1,10 +1,9 @@
-import styled from 'styled-components';
 import { theme } from 'common/styles/theme';
+import styled from 'styled-components';
 
-export { SectionContainer, CopyrightText };
+export { CopyrightText, SectionContainer };
 
 const SectionContainer = styled.footer`
-	position: absolute;
 	width: 100%;
 	bottom: 0;
 	margin-left: auto;
@@ -12,6 +11,7 @@ const SectionContainer = styled.footer`
 	left: 0;
 	right: 0;
 	text-align: center;
+	padding-top: 100px;
 `;
 
 const CopyrightText = styled.h6`

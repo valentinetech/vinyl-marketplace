@@ -9,7 +9,7 @@ export const publicMenu = [
 	},
 	{
 		title: 'About',
-		route: '/#about',
+		route: '/about',
 	},
 ];
 export const protectedMenu = [
@@ -27,7 +27,7 @@ export const protectedMenu = [
 	},
 	{
 		title: 'About',
-		route: '/#about',
+		route: '/about',
 	},
 	{
 		title: 'Profile',

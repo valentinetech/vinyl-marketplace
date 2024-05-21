@@ -1,9 +1,9 @@
-import styled from 'styled-components';
 import { theme } from 'common/styles/theme';
+import styled from 'styled-components';
 
-export { SectionContainer, SectionName, AboutText };
+export { AboutText, Section, SectionName };
 
-const SectionContainer = styled.div`
+const Section = styled.div`
 	display: flex;
 	flex-direction: column;
 	width: 100%;
