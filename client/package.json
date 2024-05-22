@@ -7,6 +7,7 @@
     "build": "tsc && vite build",
     "serve": "vite preview",
     "test": "vitest",
+    "test:ui": "vitest --ui --coverage",
     "coverage": "vitest run --coverage",
     "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "eslint --fix"
@@ -49,6 +50,7 @@
     "@vitejs/plugin-react": "^4.2.1",
     "@vitest/coverage-istanbul": "^1.6.0",
     "@vitest/coverage-v8": "^1.6.0",
+    "@vitest/ui": "^1.6.0",
     "identity-obj-proxy": "^3.0.0",
     "jsdom": "^24.0.0",
     "react-test-renderer": "^18.3.1",
