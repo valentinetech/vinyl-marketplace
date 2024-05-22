@@ -3,7 +3,13 @@ import { IAlbum, IAlbumQuery } from 'common/models/spotify.models';
 import { useEffect, useState } from 'react';
 import useSpotifyToken from './useSpotifyToken';
 
-export function useSpotifySearch(albumName: string): [IAlbum, boolean, string] {
+interface SpotifySearchReturn {
+	albumQuery: IAlbum;
+	albumQueryLoaded: boolean;
+	albumCoverQuery: string;
+}
+
+export function useSpotifySearch(albumName: string): SpotifySearchReturn {
 	const COUNTRY = 'US';
 	const LIMIT = 50;
 	const OFFSET_QUERY = 0;
@@ -49,7 +55,7 @@ export function useSpotifySearch(albumName: string): [IAlbum, boolean, string] {
 		};
 	}, [spotifyToken, spotifyTokenLoaded, MODIFIERS, albumName]);
 
-	return [albumQuery[0], albumQueryLoaded, albumCoverQuery];
+	return { albumQuery: albumQuery[0], albumQueryLoaded, albumCoverQuery };
 }
 
 export default useSpotifySearch;

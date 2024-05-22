@@ -4,13 +4,13 @@ import * as router from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
 import Avatar from './Avatar';
 
-describe('App Component', () => {
+describe('Avatar Component', () => {
 	const navigate = vi.fn();
 	const button = userEvent.setup();
 	beforeEach(() => {
 		vi.spyOn(router, 'useNavigate').mockImplementation(() => navigate);
 	});
-	test('It should render desktop version', () => {
+	it('should render desktop version', () => {
 		render(
 			<BrowserRouter>
 				<Avatar variant="desktop" />
@@ -18,7 +18,7 @@ describe('App Component', () => {
 		);
 		expect(screen.getByRole('button')).toHaveClass('sc-gswNZR dXHmgi');
 	});
-	test('It should render mobile version', () => {
+	it('should render mobile version', () => {
 		render(
 			<BrowserRouter>
 				<Avatar variant="mobile" />
@@ -26,7 +26,7 @@ describe('App Component', () => {
 		);
 		expect(screen.getByRole('button')).toHaveClass('sc-bcXHqe ekdDDN');
 	});
-	test('It should navigate to profile desktop', async () => {
+	it('should navigate to profile desktop', async () => {
 		render(
 			<BrowserRouter>
 				<Avatar variant="desktop" />
@@ -36,7 +36,7 @@ describe('App Component', () => {
 		await button.click(screen.getByRole('button'));
 		expect(navigate).toHaveBeenCalledWith('/profile');
 	});
-	test('It should navigate to profile mobile', async () => {
+	it('should navigate to profile mobile', async () => {
 		render(
 			<BrowserRouter>
 				<Avatar variant="mobile" />

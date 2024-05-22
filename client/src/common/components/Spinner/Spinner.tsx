@@ -1,10 +1,10 @@
-import { SpinnerStyles, SpinnerContainer } from './Spinner.styles';
+import { SpinnerContainer, SpinnerStyles } from './Spinner.styles';
 
 const Spinner = () => {
-  return (
-    <SpinnerContainer>
-      <SpinnerStyles />
-    </SpinnerContainer>
-  );
+	return (
+		<SpinnerContainer>
+			<SpinnerStyles data-testid="spinner" />
+		</SpinnerContainer>
+	);
 };
 export default Spinner;

@@ -42,6 +42,7 @@ const Card = (props: ICard) => {
 
 	/* Generic */
 	const navigate = useNavigate();
+	const navigateToLoginPage = () => navigate('/login');
 
 	/* Countdown */
 	const [isSold, setIsSold] = useState<boolean>(false);
@@ -66,7 +67,7 @@ const Card = (props: ICard) => {
 	const [editAuction] = useUpdateAuctionMutation();
 	const [isActive, toggle] = useToggle(false);
 	const { albumNameEdited, artistNameEdited, endDateEdited, albumCoverEdited } = editedData;
-	const [, , albumCoverQuery] = useSpotifySearch(albumNameEdited && artistNameEdited);
+	const { albumCoverQuery } = useSpotifySearch(albumNameEdited && artistNameEdited);
 
 	const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
 		setEditedData({
@@ -84,11 +85,11 @@ const Card = (props: ICard) => {
 
 		const editedAuction = {
 			_id: currentId,
+			userId: userId,
 			albumCover: albumCoverQuery,
 			albumName: albumNameEdited,
 			artistName: artistNameEdited,
 			endDate: endDateEdited,
-			userId: userId,
 		};
 		editAuction(editedAuction);
 		toggle();
@@ -123,9 +124,7 @@ const Card = (props: ICard) => {
 							<Bid>
 								<Button
 									variant="secondary"
-									onClick={() => {
-										navigate('/login');
-									}}
+									onClick={navigateToLoginPage}
 								>
 									Place Bid
 								</Button>
@@ -135,9 +134,7 @@ const Card = (props: ICard) => {
 							<Button
 								style={{ marginTop: '10px' }}
 								variant="primary"
-								onClick={() => {
-									navigate('/login');
-								}}
+								onClick={navigateToLoginPage}
 							>
 								Buy Now
 							</Button>
