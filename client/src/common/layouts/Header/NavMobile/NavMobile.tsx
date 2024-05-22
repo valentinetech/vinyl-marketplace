@@ -1,8 +1,10 @@
+import logo from 'assets/logo.png';
 import AuthButtons from 'features/Auth/AuthButtons';
 import Menu from '../Menu/Menu';
-import logo from 'assets/logo.png';
 
-import { Nav, LogoLink, Logo, NavIcon, CloseIcon, MenuContainer } from './NavMobile.styles';
+import { FaBars } from 'react-icons/fa';
+import { MobileIcon } from '../NavDesktop/NavDesktop.styles';
+import { CloseIcon, Logo, LogoLink, MenuContainer, Nav, NavContainer, NavIcon } from './NavMobile.styles';
 
 interface NavProps {
 	toggleMenu: () => void;
@@ -11,18 +13,23 @@ interface NavProps {
 
 const NavMobile = ({ isOpen, toggleMenu }: NavProps) => {
 	return (
-		<Nav isOpen={isOpen} onClick={toggleMenu} role="navigation">
-			<LogoLink to="/#">
-				<Logo src={logo} alt="logo" />
-			</LogoLink>
-			<NavIcon onClick={toggleMenu} aria-label="Open or Close navigation">
-				<CloseIcon size={32} onClick={toggleMenu} />
-			</NavIcon>
-			<MenuContainer>
-				<Menu variant="mobile" />
-				<AuthButtons variant="mobile" />
-			</MenuContainer>
-		</Nav>
+		<NavContainer role="navigation" aria-label="mobile navigation">
+			<MobileIcon onClick={toggleMenu} aria-label="Open / Close navigation menu">
+				<FaBars size={32} />
+			</MobileIcon>
+			<Nav isOpen={isOpen} onClick={toggleMenu}>
+				<LogoLink to="/#">
+					<Logo src={logo} alt="logo" />
+				</LogoLink>
+				<NavIcon onClick={toggleMenu} aria-label="Open or Close navigation">
+					<CloseIcon size={32} onClick={toggleMenu} />
+				</NavIcon>
+				<MenuContainer>
+					<Menu variant="mobile" />
+					<AuthButtons variant="mobile" />
+				</MenuContainer>
+			</Nav>
+		</NavContainer>
 	);
 };
 

@@ -1,30 +1,29 @@
-import Button from 'common/components/Button';
 import unknownAlbumCover from 'assets/album-cover-unknown.png';
-import { useDeleteAuctionMutation, useUpdateAuctionMutation } from 'features/Dashboard/api/apiSlice';
+import Button from 'common/components/Button';
+import useSpotifySearch from 'common/hooks/useSpotifySearch';
 import { useState } from 'react';
-import { toast } from 'react-toastify';
-import { ICard } from './Card.models';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { useDeleteAuctionMutation, useUpdateAuctionMutation } from 'store/queries/auctionQuery';
+import { IAuctionEdit } from 'store/queries/auctionQuery.models';
+import useToggle from '../../hooks/useToggle';
+import CountdownTimer from '../CountdownTimer/CountdownTimer';
+import { ICard } from './Card.models';
 import {
-	CardContainer,
-	CardImg,
 	AlbumName,
 	ArtistName,
-	StaticContainer,
-	SpotifyIconButton,
+	Bid,
 	BidContainer,
 	BidLast,
-	Bid,
+	CardContainer,
+	CardImg,
 	DeleteIcon,
 	EditIcon,
 	EmptyDiv,
 	SaveEditIcon,
+	SpotifyIconButton,
+	StaticContainer,
 } from './Card.styles';
-import useToggle from '../../hooks/useToggle';
-import { IAuctionEdit } from 'features/Dashboard/api/api.models';
-import useSpotifySearch from 'common/hooks/useSpotifySearch';
-import useLocalStorageGetUserInfo from 'common/hooks/useLocalStorageGetUserInfo';
-import CountdownTimer from '../CountdownTimer/CountdownTimer';
 
 const Card = (props: ICard) => {
 	const {
@@ -63,7 +62,7 @@ const Card = (props: ICard) => {
 		endDateEdited: endDate,
 	});
 
-	const userId = useLocalStorageGetUserInfo();
+	const userId = sessionStorage.getItem('userId') ?? '';
 	const [editAuction] = useUpdateAuctionMutation();
 	const [isActive, toggle] = useToggle(false);
 	const { albumNameEdited, artistNameEdited, endDateEdited, albumCoverEdited } = editedData;
@@ -98,13 +97,9 @@ const Card = (props: ICard) => {
 
 	return (
 		<CardContainer>
-			{canDelete === true ? <DeleteIcon aria-label="delete auction" onClick={onDelete} size={32} /> : null}
-			{canEdit === true && isActive === false ? (
-				<EditIcon aria-label="edit auction" onClick={toggle} size={32} />
-			) : null}
-			{canEdit === true && isActive === true ? (
-				<SaveEditIcon aria-label="save edit" onClick={onSubmit} size={32} />
-			) : null}
+			{canDelete ? <DeleteIcon aria-label="delete auction" onClick={onDelete} size={32} /> : null}
+			{canEdit && !isActive ? <EditIcon aria-label="edit auction" onClick={toggle} size={32} /> : null}
+			{canEdit && isActive ? <SaveEditIcon aria-label="save edit" onClick={onSubmit} size={32} /> : null}
 			<CardImg src={albumCover ? albumCover : albumCoverEdited} alt={albumName ? albumName : albumNameEdited}></CardImg>
 			{isActive ? (
 				<input type="text" id="albumNameEdited" placeholder={albumName} onChange={onChange} />
@@ -117,7 +112,7 @@ const Card = (props: ICard) => {
 				<ArtistName>{artistName}</ArtistName>
 			)}
 			<StaticContainer>
-				<>{setPreviewUrl && <SpotifyIconButton onClick={setPreviewUrl}>{spotifyButtonText}</SpotifyIconButton>}</>
+				<SpotifyIconButton onClick={setPreviewUrl}>{spotifyButtonText}</SpotifyIconButton>
 				<CountdownTimer endDate={endDate} setIsSold={setIsSold} />
 				{isSold ? (
 					<EmptyDiv></EmptyDiv>
@@ -126,13 +121,24 @@ const Card = (props: ICard) => {
 						<BidContainer>
 							<BidLast>Last Bid ${bidLast}</BidLast>
 							<Bid>
-								<Button variant="secondary" onClick={() => navigate('/login')}>
+								<Button
+									variant="secondary"
+									onClick={() => {
+										navigate('/login');
+									}}
+								>
 									Place Bid
 								</Button>
 							</Bid>
 						</BidContainer>
 						{canBuyNow ? (
-							<Button style={{ marginTop: '10px' }} variant="primary" onClick={() => navigate('/login')}>
+							<Button
+								style={{ marginTop: '10px' }}
+								variant="primary"
+								onClick={() => {
+									navigate('/login');
+								}}
+							>
 								Buy Now
 							</Button>
 						) : null}

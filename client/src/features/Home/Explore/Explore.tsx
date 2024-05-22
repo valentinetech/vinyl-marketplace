@@ -1,8 +1,8 @@
 import Button from 'common/components/Button';
 import Card from 'common/components/Card';
 import useSpotifyGetAlbums from 'common/hooks/useSpotifyGetAlbums';
-import { useState, useEffect } from 'react';
-import { SectionContainer, ExploreContainer, LoadMore } from './Explore.styles';
+import { useEffect, useState } from 'react';
+import { ExploreContainer, LoadMore, SectionContainer } from './Explore.styles';
 
 const Explore = () => {
 	const PREVIEW_LENGTH = 30000;
@@ -15,16 +15,11 @@ const Explore = () => {
 
 	useEffect(() => {
 		const audio = new Audio(audioPlaying);
-		const playPromise = audio.play();
-		const timeout = setTimeout(() => setAudioPlaying(undefined), PREVIEW_LENGTH);
+		const timeout = setTimeout(() => {
+			setAudioPlaying(undefined);
+		}, PREVIEW_LENGTH);
 
-		if (playPromise) {
-			playPromise.catch((error) => {
-				if (error.name !== 'AbortError') {
-					console.error(error);
-				}
-			});
-		}
+		void audio.play();
 
 		return () => {
 			audio.pause();
@@ -47,7 +42,9 @@ const Explore = () => {
 									albumName={album.name}
 									albumCover={album.images[0].url}
 									artistName={album.artists[0].name}
-									setPreviewUrl={() => setAudioPlaying(audioPlaying === preview_url ? undefined : preview_url)}
+									setPreviewUrl={() => {
+										setAudioPlaying(audioPlaying === preview_url ? undefined : preview_url);
+									}}
 									spotifyButtonText={audioPlaying === preview_url ? '❚❚' : '▶'}
 								/>
 							);
@@ -60,7 +57,13 @@ const Explore = () => {
 
 			{canLoadMore && (
 				<LoadMore>
-					<Button onClick={() => setDisplayedAlbumCount((curr) => curr + 3)}>Load More...</Button>
+					<Button
+						onClick={() => {
+							setDisplayedAlbumCount((curr) => curr + 3);
+						}}
+					>
+						Load More...
+					</Button>
 				</LoadMore>
 			)}
 		</>

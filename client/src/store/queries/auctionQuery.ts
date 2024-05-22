@@ -1,14 +1,14 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { RootState } from 'app/store';
 import { API_URL } from 'config/config';
-import { IAuction, IAuctionRequest } from './api.models';
+import { IAuction, IAuctionRequest } from './auctionQuery.models';
 
-export const apiSlice = createApi({
-	reducerPath: 'api',
+export const auctionQuery = createApi({
+	reducerPath: 'auctionQuery',
 	baseQuery: fetchBaseQuery({
 		baseUrl: API_URL + '/api/auctions',
 		prepareHeaders: (headers, { getState }) => {
-			const token = (getState() as RootState).auth.userToken;
+			const token = (getState() as RootState).authSlice.userToken;
 			if (token) {
 				headers.set('authorization', `Bearer ${token}`);
 			}
@@ -72,4 +72,4 @@ export const {
 	useUpdateAuctionMutation,
 	useDeleteAuctionMutation,
 	useCreateAuctionMutation,
-} = apiSlice;
+} = auctionQuery;

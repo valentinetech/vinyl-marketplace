@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import qs from 'qs';
-import { PostToken } from 'common/models/home.models';
+import axios, { AxiosResponse } from 'axios';
 import { Buffer } from 'buffer';
+import { PostToken } from 'common/models/home.models';
+import qs from 'qs';
+import { useEffect, useState } from 'react';
 
 export function useSpotifyToken() {
 	const SPOTIFY_ID: string = import.meta.env.VITE_SPOTIFY_ID ?? '';
@@ -16,21 +16,34 @@ export function useSpotifyToken() {
 
 	useEffect(() => {
 		const controller = new AbortController();
-		axios
-			.post<PostToken>(ACCESS_URL, GRANT_TYPE, {
-				signal: controller.signal,
-				headers: {
-					Authorization: `Basic ${SPOTIFY_TOKEN}`,
-					'Content-Type': 'application/x-www-form-urlencoded',
-				},
-			})
-			.then((resp) => {
-				setSpotifyToken(resp.data.access_token);
-			})
-			.catch((err: { err: string; message: string }) => console.log(err.message))
-			.finally(() => {
-				setSpotifyTokenLoaded(true);
-			});
+		const spotifyTokenSession = sessionStorage.getItem('spotifyToken');
+
+		if (!spotifyTokenSession || spotifyTokenSession === 'null') {
+			axios
+				.post<PostToken>(ACCESS_URL, GRANT_TYPE, {
+					signal: controller.signal,
+					headers: {
+						Authorization: `Basic ${SPOTIFY_TOKEN}`,
+						'Content-Type': 'application/x-www-form-urlencoded',
+					},
+				})
+				.then((resp: AxiosResponse<PostToken>) => {
+					const spotifyToken: string = resp.data.access_token;
+					sessionStorage.setItem('spotifyToken', spotifyToken);
+					setSpotifyToken(spotifyToken);
+				})
+				.catch((error: unknown) => {
+					if (error instanceof Error && error.message !== 'canceled') {
+						console.log(error.message);
+					}
+				})
+				.finally(() => {
+					setSpotifyTokenLoaded(true);
+				});
+		} else {
+			setSpotifyToken(spotifyTokenSession);
+			setSpotifyTokenLoaded(true);
+		}
 
 		return () => {
 			controller.abort();

@@ -1,0 +1,13 @@
+---
+exclude_paths:
+  - '.vscode/**'
+  - '.config/**'
+  - '.husky/**'
+  - '.github/**'
+  - 'server/**'
+  - '**.test.tsx'
+  - '**.test.ts'
+  - '**.styles.ts'
+  - 'README.md'
+  - 'client/src/common/utils/reportWebVitals.ts'
+  - 'client/mocks/**'

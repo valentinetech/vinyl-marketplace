@@ -1,15 +1,16 @@
+import { useAppDispatch, useAppSelector } from 'app/store';
 import Button from 'common/components/Button';
 import Input from 'common/components/Input';
 import Footer from 'common/layouts/Footer';
 import Header from 'common/layouts/Header';
-import { useState, useEffect } from 'react';
-import { toast } from 'react-toastify';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { register, reset } from '../store/authSlice';
-import { useAppDispatch, useAppSelector } from 'app/store';
+import { toast } from 'react-toastify';
 import { registerSchema } from '../schema/authSchema';
 
-import { Section, Form, FormGroup, RegisterHeader, ButtonContainer } from './Register.styles';
+import { reset } from 'store/slices/authSlice';
+import { register } from 'store/thunks/authThunks';
+import { ButtonContainer, Form, FormGroup, RegisterHeader, Section } from './Register.styles';
 
 interface RegisterProps {
 	username: string;
@@ -26,21 +27,23 @@ const Register = () => {
 		passwordConfirm: '',
 	});
 
-	const { username, email, password, passwordConfirm } = formData;
+	const { username: username, email, password, passwordConfirm } = formData;
 
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
 
-	const { userToken, isLoading, isError, isSuccess, message } = useAppSelector((state) => state.auth);
+	const { isLoading, isError, isSuccess } = useAppSelector((state) => state.authSlice);
+	const userToken = sessionStorage.getItem('userToken');
 
 	useEffect(() => {
 		if (isSuccess || userToken) {
 			toast.success(`Welcome ${username}!`);
 			navigate('/dashboard');
+			sessionStorage.setItem('username', username);
 		}
 
 		dispatch(reset);
-	}, [userToken, isError, isSuccess, message, navigate, dispatch, username]);
+	}, [isError, isSuccess, navigate, dispatch, username]);
 
 	const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
 		setFormData((prevState) => ({
@@ -48,13 +51,13 @@ const Register = () => {
 			[e.target.id]: e.target.value,
 		}));
 
-		registerSchema.validate({});
+		void registerSchema.validate({});
 	};
 
 	const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
-		if (isError) toast.error('User already exists or ' + message, { toastId: 'toastIdRegister' });
+		if (isError) toast.error('User already exists', { toastId: 'toastIdRegister' });
 
 		const isFormValid = await registerSchema.isValid(formData, {
 			abortEarly: false,
@@ -62,26 +65,26 @@ const Register = () => {
 
 		if (isFormValid) {
 			const userData = {
-				username,
+				username: username,
 				email,
 				password,
 				passwordConfirm,
 			};
 			dispatch(register(userData));
 		} else {
-			registerSchema.validate(formData, { abortEarly: false }).catch((error) => {
-				toast.error(error.message, { toastId: 'toastIdRegisterValidation' });
+			registerSchema.validate(formData, { abortEarly: false }).catch((error: unknown) => {
+				toast.error(error instanceof Error ? error.message : 'Unknown error', { toastId: 'toastIdRegisterValidation' });
 			});
 		}
 	};
 
 	useEffect(() => {
-		if (isLoading) {
+		if (isLoading && (!isSuccess || !isError)) {
 			toast.loading('Loging In...', { toastId: 'toastidLoading' });
 		} else {
 			toast.dismiss('toastidLoading');
 		}
-	}, [isLoading]);
+	}, [isLoading, isSuccess, isError]);
 
 	return (
 		<>
@@ -90,24 +93,24 @@ const Register = () => {
 				<Form onSubmit={onSubmit}>
 					<FormGroup>
 						<RegisterHeader>REGISTER</RegisterHeader>
-						<Input type='text' id='username' value={username} placeholder='Enter Your Name' onChange={onChange} />
-						<Input type='email' id='email' value={email} placeholder='Enter Your Email' onChange={onChange} />
+						<Input type="text" id="username" value={username} placeholder="Enter Your Name" onChange={onChange} />
+						<Input type="email" id="email" value={email} placeholder="Enter Your Email" onChange={onChange} />
 						<Input
-							type='password'
-							id='password'
+							type="password"
+							id="password"
 							value={password}
-							placeholder='Enter Your Password'
+							placeholder="Enter Your Password"
 							onChange={onChange}
 						/>
 						<Input
-							type='password'
-							id='passwordConfirm'
+							type="password"
+							id="passwordConfirm"
 							value={passwordConfirm}
-							placeholder='Confirm Your Password'
+							placeholder="Confirm Your Password"
 							onChange={onChange}
 						/>
 						<ButtonContainer>
-							<Button variant='primary' disabled={isLoading}>
+							<Button variant="primary" disabled={isLoading}>
 								Register
 							</Button>
 						</ButtonContainer>

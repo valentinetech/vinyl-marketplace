@@ -1,6 +1,6 @@
 import Card from 'common/components/Card';
-import { useGetAllAuctionsQuery } from 'features/Dashboard/api/apiSlice';
-import { IAuction } from '../api/api.models';
+import { useGetAllAuctionsQuery } from 'store/queries/auctionQuery';
+import { IAuction } from '../../../store/queries/auctionQuery.models';
 import { Container } from './AllAuctions.styles';
 
 const AllAuctions = () => {

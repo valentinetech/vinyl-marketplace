@@ -4,8 +4,12 @@ export const publicMenu = [
 		route: '/#featured',
 	},
 	{
+		title: 'All Auctions',
+		route: '/all-auctions',
+	},
+	{
 		title: 'About',
-		route: '/#about',
+		route: '/about',
 	},
 ];
 export const protectedMenu = [
@@ -14,16 +18,20 @@ export const protectedMenu = [
 		route: '/#featured',
 	},
 	{
-		title: 'About',
-		route: '/#about',
-	},
-	{
-		title: 'Profile',
-		route: '/profile',
+		title: 'Auctions',
+		route: '/all-auctions',
 	},
 	{
 		title: 'Dashboard',
 		route: '/dashboard',
+	},
+	{
+		title: 'About',
+		route: '/about',
+	},
+	{
+		title: 'Profile',
+		route: '/profile',
 	},
 ];
 
