@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
-import { store } from 'app/store';
 import { Provider } from 'react-redux';
 import * as router from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
+import { store } from 'store/store';
 import Card from './Card';
 import { ICard } from './Card.models';
 

@@ -10,13 +10,13 @@ export const register = createAsyncThunk<UserResponse, AuthRegisterRequest, Asyn
 		try {
 			const response = await axios.post(API_USERS_URL + 'register', user);
 			const data: UserResponse = response.data;
-			const userId: string = data.userId;
-			const userToken: string = data.userToken;
-			if (data) {
-				sessionStorage.setItem('userId', userId);
-				sessionStorage.setItem('userToken', userToken);
+			if (data && data.userId && data.userToken) {
+				sessionStorage.setItem('userId', data.userId);
+				sessionStorage.setItem('userToken', data.userToken);
+				return data;
+			} else {
+				return rejectWithValue('Invalid response data');
 			}
-			return data;
 		} catch (error: unknown) {
 			if (error instanceof Error) {
 				return rejectWithValue(error.message);
@@ -31,14 +31,13 @@ export const login = createAsyncThunk('auth/login', async (user: AuthLoginReques
 	try {
 		const response = await axios.post(API_USERS_URL + 'login', user);
 		const data: UserResponse = response.data;
-		const userId: string = data.userId;
-		const userToken: string = data.userToken;
-		if (data) {
-			sessionStorage.setItem('userId', userId);
-			sessionStorage.setItem('userToken', userToken);
-		}
-
-		return data;
+		if (data && data.userId && data.userToken) {
+				sessionStorage.setItem('userId', data.userId);
+				sessionStorage.setItem('userToken', data.userToken);
+				return data;
+			} else {
+				return rejectWithValue('Invalid response data');
+			}
 	} catch (error) {
 		if (error instanceof Error) {
 			return rejectWithValue(error.message);

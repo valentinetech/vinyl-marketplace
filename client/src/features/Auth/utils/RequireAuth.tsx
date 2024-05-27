@@ -1,4 +1,3 @@
-// import { useAppSelector } from 'app/store';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 
 const RequireAuth = () => {

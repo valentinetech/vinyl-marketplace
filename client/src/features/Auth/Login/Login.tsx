@@ -5,9 +5,9 @@ import Header from 'common/layouts/Header';
 
 import { useEffect, useState } from 'react';
 
-import { useAppDispatch, useAppSelector } from 'app/store';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { useAppDispatch, useAppSelector } from 'store/store';
 
 import { reset } from 'store/slices/authSlice';
 import { login } from 'store/thunks/authThunks';
