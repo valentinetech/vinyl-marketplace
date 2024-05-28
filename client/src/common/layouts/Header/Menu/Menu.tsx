@@ -11,7 +11,7 @@ const Menu = ({ variant = 'desktop' }: MenuProps) => {
 
 	const MenuMobile = () => {
 		return (
-			<MenuMobileContainer role="menu">
+			<MenuMobileContainer role="menu" data-testid="mobile">
 				{menuRoutes.map((item) => {
 					return (
 						<MenuItemMobile key={item.title} smooth to={item.route}>
@@ -25,7 +25,7 @@ const Menu = ({ variant = 'desktop' }: MenuProps) => {
 
 	const MenuDesktop = () => {
 		return (
-			<MenuDesktopContainer role="menu">
+			<MenuDesktopContainer role="menu" data-testid="desktop">
 				{menuRoutes.map((item) => {
 					return (
 						<MenuItemDesktop key={item.title} smooth to={item.route}>

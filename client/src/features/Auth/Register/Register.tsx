@@ -1,4 +1,3 @@
-import { useAppDispatch, useAppSelector } from 'app/store';
 import Button from 'common/components/Button';
 import Input from 'common/components/Input';
 import Footer from 'common/layouts/Footer';
@@ -6,6 +5,7 @@ import Header from 'common/layouts/Header';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { useAppDispatch, useAppSelector } from 'store/store';
 import { registerSchema } from '../schema/authSchema';
 
 import { reset } from 'store/slices/authSlice';

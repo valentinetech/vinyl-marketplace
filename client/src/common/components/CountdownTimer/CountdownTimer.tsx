@@ -24,16 +24,20 @@ const CountdownTimer = ({ endDate, setIsSold }: ICountdownTimer) => {
 		if (completed) {
 			setIsSold(completed);
 
-			return <span style={{ color: '#F45B69', fontWeight: 'bold' }}>Auction closed.</span>;
+			return (
+				<span data-testid="auction-closed" style={{ color: '#F45B69', fontWeight: 'bold' }}>
+					Auction closed.
+				</span>
+			);
 		} else {
 			return (
 				<>
 					{days ? (
-						<span>
+						<span data-testid="auction-remaining-time-days">
 							{zeroPad(days)} : {zeroPad(hours)}:{zeroPad(minutes)}:{zeroPad(seconds)}
 						</span>
 					) : (
-						<span>
+						<span data-testid="auction-remaining-time">
 							{zeroPad(hours)}:{zeroPad(minutes)}:{zeroPad(seconds)}
 						</span>
 					)}

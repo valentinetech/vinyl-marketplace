@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { RootState } from 'app/store';
 import { API_URL } from 'config/config';
+import { RootState } from 'store/store';
 import { IAuction, IAuctionRequest } from './auctionQuery.models';
 
 export const auctionQuery = createApi({

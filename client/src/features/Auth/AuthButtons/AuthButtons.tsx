@@ -1,9 +1,9 @@
 import Avatar from 'common/components/Avatar';
 import Button from 'common/components/Button';
 
-import { useAppDispatch } from 'app/store';
 import { useNavigate } from 'react-router-dom';
 import { logout, reset } from 'store/slices/authSlice';
+import { useAppDispatch } from 'store/store';
 
 import { btnRoutes } from 'routes/routes';
 import {

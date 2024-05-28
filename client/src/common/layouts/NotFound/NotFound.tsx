@@ -14,17 +14,13 @@ const Section = styled.section`
 
 const NotFound = () => {
 	const navigate = useNavigate();
+	const navigateToHomePage = () => navigate('/');
 	return (
 		<>
 			<Header />
 			<Section>
-				<h2>404: This page does&apost exit.</h2>
-				<Button
-					variant="primary"
-					onClick={() => {
-						navigate('/');
-					}}
-				>
+				<h2 data-testid="not-found-h2">404: This page does&apost exit.</h2>
+				<Button data-testid="not-found-button" variant="primary" onClick={navigateToHomePage}>
 					Go to HomePage...
 				</Button>
 			</Section>
