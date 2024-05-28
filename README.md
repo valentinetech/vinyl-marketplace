@@ -1,4 +1,10 @@
-# Intro
+# Code Quality
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/90eeea9ba5c14151ad7da0e7c667804e)](https://app.codacy.com/gh/valentinetech/vinyl-marketplace/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Coverage/90eeea9ba5c14151ad7da0e7c667804e)](https://app.codacy.com/gh/valentinetech/vinyl-marketplace/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_coverage)
+
+*ONLY FRONTEND*
+
+# Description
 Full-stack auction CRUD application with validation, authorization, Spotify API, connected to Mongo Database and modern application of front end technology.
 
 App is build with create-react-app.
