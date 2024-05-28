@@ -14,14 +14,14 @@ interface NavProps {
 const NavMobile = ({ isOpen, toggleMenu }: NavProps) => {
 	return (
 		<NavContainer role="navigation" aria-label="mobile navigation">
-			<MobileIcon onClick={toggleMenu} aria-label="Open / Close navigation menu">
+			<MobileIcon onClick={toggleMenu} aria-label="toggle navigation">
 				<FaBars size={32} />
 			</MobileIcon>
 			<Nav isOpen={isOpen} onClick={toggleMenu}>
 				<LogoLink to="/#">
 					<Logo src={logo} alt="logo" />
 				</LogoLink>
-				<NavIcon onClick={toggleMenu} aria-label="Open or Close navigation">
+				<NavIcon onClick={toggleMenu} aria-label="toggle navigation">
 					<CloseIcon size={32} onClick={toggleMenu} />
 				</NavIcon>
 				<MenuContainer>

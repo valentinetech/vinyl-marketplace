@@ -15,7 +15,7 @@ const NavDesktop = ({ toggleMenu }: NavProps) => {
 				<LogoLink to="/#">
 					<Logo src={logo} alt="logo" />
 				</LogoLink>
-				<MobileIcon onClick={toggleMenu} aria-label="Open / Close navigation menu">
+				<MobileIcon onClick={toggleMenu} aria-label="toggle navigation">
 					<FaBars size={32} />
 				</MobileIcon>
 				<Menu variant="desktop" />
