@@ -56,7 +56,6 @@ const Register = () => {
 
 	const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-
 		if (isError) toast.error('User already exists', { toastId: 'toastIdRegister' });
 
 		const isFormValid = await registerSchema.isValid(formData, {

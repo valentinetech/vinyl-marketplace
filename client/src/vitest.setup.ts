@@ -5,6 +5,10 @@ import { afterEach } from 'vitest';
 
 export let sessionStorageMock: SessionStorageMockTypes;
 beforeEach(() => {
+	vi.clearAllMocks();
+	vi.spyOn(window.HTMLMediaElement.prototype, 'play').mockImplementation(() => Promise.resolve());
+	vi.spyOn(window.HTMLMediaElement.prototype, 'pause').mockImplementation(() => Promise.resolve());
+
 	sessionStorageMock = {
 		getItem: vi.fn(),
 		setItem: vi.fn(),

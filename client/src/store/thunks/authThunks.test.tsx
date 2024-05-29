@@ -1,22 +1,11 @@
 import axios from 'axios';
-import { SessionStorageMockTypes } from 'common/models/test.models';
 import { API_USERS_URL } from 'config/config';
 import { AuthLoginRequest, AuthRegisterRequest, UserResponse } from 'store/slices/authSlice.models';
 import { describe, expect, it, vi } from 'vitest';
+import { sessionStorageMock } from 'vitest.setup';
 import { login, register } from './authThunks';
-vi.mock('axios');
 
 describe('auth thunks', () => {
-	let sessionStorageMock: SessionStorageMockTypes;
-	beforeEach(() => {
-		sessionStorageMock = {
-			getItem: vi.fn(),
-			setItem: vi.fn(),
-			removeItem: vi.fn(),
-			clear: vi.fn(),
-		};
-		Object.defineProperty(window, 'sessionStorage', { value: sessionStorageMock });
-	});
 	afterEach(() => {
 		vi.clearAllMocks();
 	});

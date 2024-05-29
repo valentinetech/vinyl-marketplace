@@ -89,7 +89,7 @@ const Login = () => {
 							onChange={onChange}
 						/>
 						<ButtonContainer>
-							<Button variant="primary" disabled={isLoading}>
+							<Button data-testid="login-button" variant="primary" disabled={isLoading}>
 								Login
 							</Button>
 						</ButtonContainer>

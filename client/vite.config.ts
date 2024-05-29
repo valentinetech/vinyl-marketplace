@@ -24,6 +24,7 @@ export default defineConfig({
 		coverage: {
 			provider: 'istanbul',
 			reporter: ['text', ['html', { subdir: 'coverage' }], 'lcov'],
+			exclude: ['mocks/**', 'src/common/utils/reportWebVitals.ts', 'src/index.tsx'],
 		},
 	},
 });
