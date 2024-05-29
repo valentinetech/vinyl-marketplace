@@ -6,6 +6,8 @@ App is build with create-vite-app with esbuild for compiling.
 
 DEMO for Client-side: [Client Demo](https://vinyl-auction.netlify.app/)
 
+Either create new Account or use username: 4 password: 4
+
 # Code Quality
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/90eeea9ba5c14151ad7da0e7c667804e)](https://app.codacy.com/gh/valentinetech/vinyl-marketplace/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
