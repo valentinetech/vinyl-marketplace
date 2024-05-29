@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import * as router from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
@@ -26,7 +26,7 @@ describe('Card Component', () => {
 				</BrowserRouter>
 			</Provider>,
 		);
-		screen.debug();
+		// screen.debug();
 		// expect(button).toBeInTheDocument();
 		// expect(button).toHaveTextContent('test');
 		// expect(button).not.toBeDisabled();

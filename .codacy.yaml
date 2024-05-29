@@ -11,3 +11,4 @@ exclude_paths:
   - 'README.md'
   - 'client/src/common/utils/reportWebVitals.ts'
   - 'client/mocks/**'
+  - 'client/src/index.tsx'
