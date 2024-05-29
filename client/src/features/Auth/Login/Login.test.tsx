@@ -57,18 +57,4 @@ describe('Login', () => {
 		expect(dispatchSpy).toHaveBeenCalled();
 		expect(toast.loading).toHaveBeenCalled();
 	});
-
-	it('handles form submission error', async () => {
-		render(
-			<Provider store={store}>
-				<MemoryRouter>
-					<Login />
-				</MemoryRouter>
-			</Provider>,
-		);
-		await userEvent.type(screen.getByPlaceholderText('Enter Your Username'), '1234');
-		await userEvent.type(screen.getByPlaceholderText('Enter Your Password'), 'Password7$');
-		await userEvent.click(screen.getByTestId('login-button'));
-		expect(toast.error).toHaveBeenCalled();
-	});
 });

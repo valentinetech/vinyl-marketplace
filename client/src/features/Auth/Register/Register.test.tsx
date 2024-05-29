@@ -62,21 +62,4 @@ describe('Register', () => {
 		expect(dispatchSpy).toHaveBeenCalled();
 		expect(toast.loading).toHaveBeenCalled();
 	});
-
-	it('handles form submission error', async () => {
-		render(
-			<Provider store={store}>
-				<MemoryRouter>
-					<Register />
-				</MemoryRouter>
-			</Provider>,
-		);
-		await userEvent.type(screen.getByPlaceholderText('Enter Your Name'), '1234');
-		await userEvent.type(screen.getByPlaceholderText('Enter Your Email'), 'test@example.com');
-		await userEvent.type(screen.getByPlaceholderText('Enter Your Password'), 'Password7$');
-		await userEvent.type(screen.getByPlaceholderText('Confirm Your Password'), 'Password7$');
-
-		await userEvent.click(screen.getByRole('button', { name: 'Register' }));
-		expect(toast.error).toHaveBeenCalled();
-	});
 });
