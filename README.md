@@ -1,38 +1,45 @@
-# Code Quality
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/90eeea9ba5c14151ad7da0e7c667804e)](https://app.codacy.com/gh/valentinetech/vinyl-marketplace/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
-[![Codacy Badge](https://app.codacy.com/project/badge/Coverage/90eeea9ba5c14151ad7da0e7c667804e)](https://app.codacy.com/gh/valentinetech/vinyl-marketplace/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_coverage)
-
-*ONLY FRONTEND*
-
 # Description
-Full-stack auction CRUD application with validation, authorization, Spotify API, connected to Mongo Database and modern application of front end technology.
 
-App is build with create-react-app.
+Full-stack auction CRUD application written in typescript with validation, authentication, Spotify API, connected to Mongo Database and modern application of front end technology.
+
+App is build with create-vite-app with esbuild for compiling.
 
 DEMO for Client-side: [Client Demo](https://vinyl-auction.netlify.app/)
 
-# Stack
-- FE:
--- Typescript
--- React
--- Redux Toolkit
--- RTK Query
--- Styled Components
-- BE:
--- Node + Express + mongoose
--- MongoDB
-- Tooling:
--- Yup / Joi
--- ESLint + Prettier
--- Husky
+# Code Quality
 
-## How to run locally:
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/90eeea9ba5c14151ad7da0e7c667804e)](https://app.codacy.com/gh/valentinetech/vinyl-marketplace/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Coverage/90eeea9ba5c14151ad7da0e7c667804e)](https://app.codacy.com/gh/valentinetech/vinyl-marketplace/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_coverage)
 
-npm install
-npm run go (in the root)
+# Frontend
 
+- Typescript
+- React
+- Redux Toolkit
+- RTK Query
+- Styled Components
+- ESLint + Prettier
+- Yup Validation
+- Vitest for unitests
+
+# API
+
+- Typescript
+- Node
+- Express
+- Mongoose
+- Joi Validation
+
+# DB
+
+- MongoDB
+
+# How to run locally:
+
+npm ci && npm run go (in the root)
 
 # Look & Feel
+
 ![Dashboard](./client/public/dashboard.png)
 ![Dashboard Editing](./client/public/dashboard-edit.png)
 ![Homepage](./client/public/homepage.png)
