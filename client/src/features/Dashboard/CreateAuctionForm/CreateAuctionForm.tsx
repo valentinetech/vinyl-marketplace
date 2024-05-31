@@ -36,7 +36,7 @@ const CreateAuctionForm = () => {
 
 	//Custom Hooks
 	const userId = sessionStorage.getItem('userId') ?? '';
-	const [, , albumCoverQuery] = useSpotifySearch(albumName || artistName);
+	const { albumCoverQuery } = useSpotifySearch(albumName || artistName);
 	useEffect(() => {
 		if (isSuccess) {
 			toast.success('Auction created successfully');
