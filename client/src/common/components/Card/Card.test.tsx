@@ -8,7 +8,6 @@ import { ICard } from './Card.models';
 
 describe('Card Component', () => {
 	const navigate = vi.fn();
-	// const button = userEvent.setup();
 	beforeEach(() => {
 		vi.spyOn(router, 'useNavigate').mockImplementation(() => navigate);
 	});
@@ -26,9 +25,5 @@ describe('Card Component', () => {
 				</BrowserRouter>
 			</Provider>,
 		);
-		// screen.debug();
-		// expect(button).toBeInTheDocument();
-		// expect(button).toHaveTextContent('test');
-		// expect(button).not.toBeDisabled();
 	});
 });
